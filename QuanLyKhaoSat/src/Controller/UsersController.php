@@ -2,9 +2,6 @@
 
 namespace App\Controller;
 
-use App\Controller\AppController;
-
-
 class UsersController extends AppController
 {
     public function initialize()
@@ -65,5 +62,26 @@ class UsersController extends AppController
         }
 
         return $this->redirect(['action' => 'index']);
+    }
+    public function login()
+    {
+        if ($this->request->is('post')) {
+            $email = $this->request->getData('email');
+            $password = $this->request->getData('password');
+            $data = $this->Users->find()
+                ->select(['email', 'password'])
+                ->where(['email' => $email])
+                ->first();
+            if (isset($data->email)) {
+                if ($password == $data->password) {
+                    $this->Auth->setUser($email);
+                    return $this->redirect(SITE_URL.'users');
+                }
+            }
+        }
+    }
+    public function logout(){
+        $this->Flash->success('You are logged out');
+        return $this->redirect($this->Auth->logout());
     }
 }

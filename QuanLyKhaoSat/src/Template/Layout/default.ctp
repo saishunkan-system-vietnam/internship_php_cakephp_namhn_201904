@@ -45,11 +45,11 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
         }
     </style>
 </nav>
-<!--<li class="active"><a href="--><?//= SITE_URL; ?><!--home">Home</a></li>-->
-<!--<li class="active"><a href="--><?//= SITE_URL; ?><!--survey">Quản lý khảo sát</a></li>-->
-<!--<li class="active"><a href="--><?//= SITE_URL; ?><!--users">Quản lý user</a></li>-->
-<!--<li class="active"><a href="--><?//= SITE_URL; ?><!--">Đăng xuất</a></li>-->
-<!--<div style="clear: both"></div>-->
+<li class="active"><a href="<?= SITE_URL; ?>home">Home</a></li>
+<li class="active"><a href="<?= SITE_URL; ?>survey">Quản lý khảo sát</a></li>
+<li class="active"><a href="<?= SITE_URL; ?>users">Quản lý user</a></li>
+<li class="active"><a href="<?= SITE_URL; ?>users/logout">Đăng xuất</a></li>
+<div style="clear: both"></div>
 <?= $this->Flash->render() ?>
 <div style="margin-top: 50px;" class="container clearfix">
     <?= $this->fetch('content') ?>
