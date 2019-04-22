@@ -1,64 +1,71 @@
-<div class="panel-body">
-    <h5 style="margin-left: 500px;">Form Add Users</h5>
-    <form action="" method="post">
-        <input type="hidden" name="_token" value="{{ csrf_token() }}">
-        <table border="2" style="width: 800px;margin: auto;">
-            <tr>
-                <th style="width: 200px;text-align: center">Email</th>
-                <td><input value="<?php echo $user->email; ?>"
-                           name="email" type="email"></td>
+<fieldset class="col-md-8 col-md-offset-2" style="margin-top: 120px;border: 2px solid #222222">
+    <?php if (isset($error->email)) { ?>
+        <div class="alert alert-danger">
+            Email đã tồn tại, xin vui lòng NHập email khác !
+        </div>
+    <?php } ?>
+    <legend style="text-align: center;background-color: #222222;color: white;border-radius: 7px;height: 50px;line-height: 50px;font-size: 20px;font-weight: bold">
+        Edit Users
+    </legend>
+    <form action="<?= SITE_URL ?>users/edit/<?php echo $data->id ?>" id="formUsers" method="post">
+        <table border="2" class="table"
+               style="background-color: #222222;color: white;font-weight: bold;text-align: center">
+            <tr style="height: 50px;line-height: 45px;">
+                <th style="text-align: center">Email</th>
+                <td><input value="<?php echo $data->email ?>"
+                           type="email" name="email" class="form-control"></td>
             </tr>
-            <tr>
-                <th style="width: 200px;text-align: center">Password</th>
-                <td>
-                    <input placeholder="Nhập password mới nếu bạn cần thay đổi"
-                           name="password" type="password">
-                </td>
+            <tr style="height: 50px;line-height: 45px">
+                <th style="text-align: center">Password</th>
+                <td><input value="<?php echo $data->password ?>"
+                           type="password" name="password" class="form-control"></td>
             </tr>
-            <tr>
-                <th style="width: 200px;text-align: center">Name</th>
-                <td><input value="<?php echo $user->name; ?>"
-                           name="name" type="text"></td>
+            <tr style="height: 50px;line-height: 45px">
+                <th style="text-align: center">Fullname</th>
+                <td><input value="<?php echo $data->fullname ?>"
+                           type="text" name="fullname" class="form-control"></td>
             </tr>
-            <tr>
-                <th style="width: 200px;text-align: center">Year Old</th>
-                <td><input value="<?php echo $user->yearold; ?>"
-                           name="yearold" type="number"></td>
+            <tr style="height: 50px;line-height: 45px">
+                <th style="text-align: center">Address</th>
+                <td><input value="<?php echo $data->address ?>"
+                           type="text" name="address" class="form-control"></td>
             </tr>
-            <tr>
-                <th style="width: 200px;text-align: center">Address</th>
-                <td><input value="<?php echo $user->address; ?>"
-                           name="address" type="text"></td>
+            <tr style="height: 50px;line-height: 45px">
+                <th style="text-align: center">phone</th>
+                <td><input value="<?php echo $data->phone ?>"
+                           type="text" name="phone" class="form-control"></td>
             </tr>
-            <tr>
-                <th style="width: 200px;text-align: center">Telephone</th>
-                <td><input value="<?php echo $user->telephone; ?>"
-                           name="telephone" type="text"></td>
+            <tr style="height: 50px;line-height: 45px">
+                <th style="text-align: center">Birth</th>
+                <td><input value="<?php echo $data->birth ?>"
+                           type="date" name="birth" class="form-control"></td>
             </tr>
-            <tr>
-                <th style="width: 200px;text-align: center">Level</th>
-                <td>
-                    <?php if ($user->level == 'Admin') { ?>
-                        <select name="level">
-                            <option value="<?php echo $user->level;?>"><?php echo $user->level;?></option>
+            <tr style="height: 50px;line-height: 45px">
+                <th style="text-align: center">Level</th>
+                <td><select name="level" class="form-control">
+                        <?php if ($data->level == 'Admin') { ?>
+                            <option value="<?php echo $data->level; ?>"><?php echo $data->level; ?></option>
                             <option value="Member">Member</option>
-                        </select>
-                    <?php } ?>
-                    <?php if ($user->level == 'Member') { ?>
-                        <select name="level">
-                            <option value="<?php echo $user->level;?>"><?php echo $user->level;?></option>
-                            <option value="Admin">Admin</option>
-                        </select>
-                    <?php } ?>
+                        <?php } ?>
+                        <?php if ($data->level == 'Member') { ?>
+                            <option value="<?php echo $data->level; ?>"><?php echo $data->level; ?></option>
+                            <option value="Admin">Manager</option>
+                        <?php } ?>
+                    </select>
                 </td>
             </tr>
-            <tr style="height: 60px;">
-                <th colspan="2">
-                    <input style="margin-left: 200px;height: 35px;" class="btn btn-primary" type="submit"
-                           value="Submit">
-                    <input style="height: 35px;margin-left: 20px;" class="btn btn-danger" type="reset" value="Reset">
-                </th>
+            <tr>
+                <th></th>
+                <td>
+                    <input style="background-color: #222222;border: 2px solid white;color: white" type="submit"
+                           name="submit"
+                           value="Submit" class="btn">
+                    <input style="background-color: #222222;border: 2px solid white;color: white" type="reset"
+                           value="Reset"
+                           class="btn">
+                </td>
             </tr>
         </table>
     </form>
-</div>
+</fieldset>
+<?php echo $this->Html->script('validate'); ?>

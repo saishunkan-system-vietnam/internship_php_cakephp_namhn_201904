@@ -1,48 +1,59 @@
-<div class="panel-body">
-    <h5 style="margin-left: 500px;">Form Add Users</h5>
-    <form action="" method="post">
-        <input type="hidden" name="_token" value="{{ csrf_token() }}">
-        <table border="2" style="width: 800px;margin: auto;">
-            <tr>
-                <th style="width: 200px;text-align: center">Email</th>
-                <td><input name="email" type="email"></td>
+<fieldset class="col-md-8 col-md-offset-2" style="margin-top: 120px;border: 2px solid #222222">
+    <?php if (isset($data->email)) { ?>
+        <div class="alert alert-danger">
+            Email đã tồn tại, xin vui lòng NHập email khác !
+        </div>
+    <?php } ?>
+    <legend style="text-align: center;background-color: #222222;color: white;border-radius: 7px;height: 50px;line-height: 50px;font-size: 20px;font-weight: bold">
+        ADD Users
+    </legend>
+    <form action="" method="post" id="formUsers">
+        <table border="2" class="table"
+               style="background-color: #222222;color: white;font-weight: bold;text-align: center">
+            <tr style="height: 50px;line-height: 45px;">
+                <th style="text-align: center">Email</th>
+                <td><input type="email" name="email" class="form-control"></td>
             </tr>
-            <tr>
-                <th style="width: 200px;text-align: center">Password</th>
+            <tr style="height: 50px;line-height: 45px">
+                <th style="text-align: center">Password</th>
+                <td><input type="password" name="password" class="form-control"></td>
+            </tr>
+            <tr style="height: 50px;line-height: 45px">
+                <th style="text-align: center">Fullname</th>
+                <td><input type="text" name="fullname" class="form-control"></td>
+            </tr>
+            <tr style="height: 50px;line-height: 45px">
+                <th style="text-align: center">Address</th>
+                <td><input type="text" name="address" class="form-control"></td>
+            </tr>
+            <tr style="height: 50px;line-height: 45px">
+                <th style="text-align: center">phone</th>
+                <td><input type="text" name="phone" class="form-control"></td>
+            </tr>
+            <tr style="height: 50px;line-height: 45px">
+                <th style="text-align: center">Birth</th>
+                <td><input type="date" name="birth" class="form-control"></td>
+            </tr>
+            <tr style="height: 50px;line-height: 45px">
+                <th style="text-align: center">Level</th>
                 <td>
-                    <input name="password" type="password">
+                    <select name="level" id="" class="form-control">
+                        <option value="Admin">Admin</option>
+                        <option value="Member">Member</option>
+                    </select>
                 </td>
             </tr>
             <tr>
-                <th style="width: 200px;text-align: center">Name</th>
-                <td><input name="name" type="text"></td>
-            </tr>
-            <tr>
-                <th style="width: 200px;text-align: center">Year Old</th>
-                <td><input name="yearold" type="number"></td>
-            </tr>
-            <tr>
-                <th style="width: 200px;text-align: center">Address</th>
-                <td><input name="address" type="text"></td>
-            </tr>
-            <tr>
-                <th style="width: 200px;text-align: center">Telephone</th>
-                <td><input name="telephone" type="text"></td>
-            </tr>
-            <tr>
-                <th style="width: 200px;text-align: center">Level</th>
-                <td><select name="level" id="">
-                        <option value="1">Admin</option>
-                        <option value="2">Member</option>
-                    </select></td>
-            </tr>
-            <tr style="height: 60px;">
-                <th colspan="2">
-                    <input style="margin-left: 200px;height: 35px;" class="btn btn-primary" type="submit"
-                           value="Submit">
-                    <input style="height: 35px;margin-left: 20px;" class="btn btn-danger" type="reset" value="Reset">
-                </th>
+                <th></th>
+                <td>
+                    <input style="background-color: #222222;border: 2px solid white;color: white" type="submit"
+                           value="Submit" class="btn">
+                    <input style="background-color: #222222;border: 2px solid white;color: white" type="reset"
+                           value="Reset"
+                           class="btn">
+                </td>
             </tr>
         </table>
     </form>
-</div>
+</fieldset>
+<?php echo $this->Html->script('validate'); ?>

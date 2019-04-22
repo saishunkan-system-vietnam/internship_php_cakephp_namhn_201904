@@ -11,60 +11,108 @@ class UsersController extends AppController
         $this->loadComponent('Paginator');
     }
 
-    public function pagelist()
+    public function index()
     {
+        $this->Users->find('all', array(
+            'order' => "FIELD(Users.level, 'Admin','Member') ASC"
+        ));
         $this->paginate = array(
-            'limit' => 4,// mỗi page có 4 record
-            'order' => array('id' => 'asc'),//giảm dần theo id
+            'limit' => 4,
+//            'order' => array('id' => 'asc'),
         );
         $data = $this->paginate("Users");
-        $this->set(compact('data'));
+        $this->set("data", $data);
     }
 
     public function add()
     {
-        $user = $this->Users->newEntity();
         if ($this->request->is('post')) {
-            $user = $this->Users->patchEntity($user, $this->request->getData());
-            if ($this->Users->save($user)) {
-                $this->Flash->success(__('The user has been saved.'));
-                return $this->redirect(['action' => 'pagelist']);
+            $email = $this->request->getData('email');
+            $data = $this->Users->find()
+                ->where(['email' => $email])
+                ->first();
+            if (isset($data->email)) {
+                $this->set("data", $data);
+            } else {
+                $password = $this->request->getData('password');
+                $fullname = $this->request->getData('fullname');
+                $address = $this->request->getData('address');
+                $phone = $this->request->getData('phone');
+                $birth = $this->request->getData('birth');
+                $level = $this->request->getData('level');
+                $query = $this->Users->query();
+                $query->insert(['email', 'password', 'fullname', 'address', 'phone', 'birth', 'level'])
+                    ->values([
+                        'email' => $email,
+                        'password' => $password,
+                        'fullname' => $fullname,
+                        'address' => $address,
+                        'phone' => $phone,
+                        'birth' => $birth,
+                        'level' => $level
+                    ])
+                    ->execute();
+
+                return $this->redirect(SITE_URL . 'users');
             }
-            $this->Flash->error(__('The user could not be saved. Please, try again.'));
         }
-        $this->set(compact('user'));
+
     }
 
-    public function edit($id)
+    public function edit($id = null)
     {
-        $user = $this->Users->get($id, [
-            'contain' => []
-        ]);
-        if ($this->request->is(['patch', 'post', 'put'])) {
-            $user = $this->Users->patchEntity($user, $this->request->getData());
-            if ($this->Users->save($user)) {
-                $this->Flash->success(__('The user has been saved.'));
-                return $this->redirect(['action' => 'index']);
+        $data = $this->Users->find()
+            ->where(['id' => $id])
+            ->first();
+        $this->set("data", $data);
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            $email = $this->request->getData('email');
+            $error = $this->Users->find()
+                ->where(['email' => $email])
+                ->first();
+//            if (isset($error->email) && $error->id != $data->id) {
+//                $this->set("error", $error);
+//            } else {
+            $password = $this->request->getData('password');
+            $fullname = $this->request->getData('fullname');
+            $address = $this->request->getData('address');
+            $phone = $this->request->getData('phone');
+            $birth = $this->request->getData('birth');
+            $level = $this->request->getData('level');
+            if (isset($error->email) && $error->id != $data->id) {
+                $this->set("error", $error);
+            } else {
+                $query = $this->Users->query();
+                $query->update()
+                    ->set([
+                        'email' => $email,
+                        'password' => $password,
+                        'fullname' => $fullname,
+                        'address' => $address,
+                        'phone' => $phone,
+                        'birth' => $birth,
+                        'level' => $level
+                    ])
+                    ->where(['id' => $id])
+                    ->execute();
+                return $this->redirect(SITE_URL . 'users');
             }
-            $this->Flash->error(__('The user could not be saved. Please, try again.'));
         }
-        $this->set(compact('user'));
+
     }
 
-    public function delete($id)
+    public function delete($id = null)
     {
-        $this->request->allowMethod(['post', 'delete']);
-        $user = $this->Users->get($id);
-        if ($this->Users->delete($user)) {
-            $this->Flash->success(__('The user has been deleted.'));
-        } else {
-            $this->Flash->error(__('The user could not be deleted. Please, try again.'));
-        }
-
-        return $this->redirect(['action' => 'index']);
+        $query = $this->Users->query();
+        $query->delete()
+            ->where(['id' => $id])
+            ->execute();
+        return $this->redirect(SITE_URL . 'users');
     }
+
     public function login()
     {
+        $this->viewBuilder()->setLayout('demo');
         if ($this->request->is('post')) {
             $email = $this->request->getData('email');
             $password = $this->request->getData('password');
@@ -75,13 +123,16 @@ class UsersController extends AppController
             if (isset($data->email)) {
                 if ($password == $data->password) {
                     $this->Auth->setUser($email);
-                    return $this->redirect(SITE_URL.'users');
+                    return $this->redirect(SITE_URL . 'users');
                 }
             }
         }
     }
-    public function logout(){
-        $this->Flash->success('You are logged out');
-        return $this->redirect($this->Auth->logout());
+
+    public function logout()
+    {
+        $this->Auth->logout();
+        return $this->redirect(SITE_URL . 'users/login');
     }
+
 }

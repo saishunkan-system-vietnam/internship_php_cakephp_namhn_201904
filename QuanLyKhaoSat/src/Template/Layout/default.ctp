@@ -1,57 +1,33 @@
-<?php
-
-$cakeDescription = 'CakePHP: the rapid development php framework';
-?>
-<!DOCTYPE html>
-<html>
+<!doctype html>
+<html lang="en">
 <head>
-    <?= $this->Html->charset() ?>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dự án quản lý khảo sát</title>
-    <?= $this->Html->meta('icon') ?>
-
-    <?= $this->Html->css('base.css') ?>
-    <?= $this->Html->css('style.css') ?>
-
-    <?= $this->fetch('meta') ?>
-    <?= $this->fetch('css') ?>
-    <?= $this->fetch('script') ?>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+    <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
+    <script type="text/javascript"
+            src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.13.1/jquery.validate.min.js"></script>
+    <title>Document</title>
 </head>
 <body>
-<nav class="top-bar expanded" data-topbar role="navigation">
-    <ul class="title-area large-3 medium-4 columns">
-        <li class="name">
-            <h1><a href="">DỰ ÁN QUẢN LÝ KHẢO SÁT</a></h1>
-        </li>
-    </ul>
-    <style>
-        li {
-            float: left;
-            list-style: none;
-        }
-
-        li a {
-            display: block;
-            color: black;
-            text-align: center;
-            padding: 16px;
-            text-decoration: none;
-            font-weight: bold;
-        }
-
-        li a:hover {
-            background-color: #111111;
-            color: white;
-        }
-    </style>
+<nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="#">Quản Lý Khảo Sát</a>
+        </div>
+        <div id="navbar" class="collapse navbar-collapse">
+            <ul class="nav navbar-nav">
+                <li class="active"><a href="#">Home</a></li>
+                <li><a href="<?= SITE_URL ?>users">Users</a></li>
+                <li><a href="<?= SITE_URL ?>users/logout">Logout</a></li>
+            </ul>
+        </div><!--/.nav-collapse -->
+    </div>
 </nav>
-<li class="active"><a href="<?= SITE_URL; ?>home">Home</a></li>
-<li class="active"><a href="<?= SITE_URL; ?>survey">Quản lý khảo sát</a></li>
-<li class="active"><a href="<?= SITE_URL; ?>users">Quản lý user</a></li>
-<li class="active"><a href="<?= SITE_URL; ?>users/logout">Đăng xuất</a></li>
-<div style="clear: both"></div>
 <?= $this->Flash->render() ?>
-<div style="margin-top: 50px;" class="container clearfix">
+<div class="container clearfix">
     <?= $this->fetch('content') ?>
 </div>
 <footer>
