@@ -87,5 +87,5 @@ define('CAKE_CORE_INCLUDE_PATH', ROOT . DS . 'vendor' . DS . 'cakephp' . DS . 'c
  */
 define('CORE_PATH', CAKE_CORE_INCLUDE_PATH . DS);
 define('CAKE', CORE_PATH . 'src' . DS);
-define('SITE_URL', 'http://nam.com/QuanLyKhaoSat/');
+define('SITE_URL', 'http://nam.com/internship_php_cakephp_namhn_201904/QuanLyKhaoSat/');
 

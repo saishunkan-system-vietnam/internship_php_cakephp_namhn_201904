@@ -11,8 +11,31 @@ class UsersController extends AppController
         $this->loadComponent('Paginator');
     }
 
+    public function login()
+    {
+        $this->viewBuilder()->setLayout('demo');
+        if ($this->request->is('post')) {
+            $email = $this->request->getData('email');
+            $password = $this->request->getData('password');
+            $data = $this->Users->find()
+                ->select(['email', 'password', 'id', 'level'])
+                ->where(['email' => $email])
+                ->first();
+            $level = $data->level;
+            $id = $data->id;
+            $user = array($email, $level, $id);
+            if (isset($data->email)) {
+                if ($password == $data->password) {
+                    $this->Auth->setUser($user);
+                    return $this->redirect(SITE_URL . 'users');
+                }
+            }
+        }
+    }
+
     public function index()
     {
+        $HgNam = ($this->Auth->user());
         $this->Users->find('all', array(
             'order' => "FIELD(Users.level, 'Admin','Member') ASC"
         ));
@@ -22,24 +45,27 @@ class UsersController extends AppController
         );
         $data = $this->paginate("Users");
         $this->set("data", $data);
+        $this->set("HgNam", $HgNam);
     }
 
     public function add()
     {
-        if ($this->request->is('post')) {
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $email = $this->request->getData('email');
-            $data = $this->Users->find()
+            $error = $this->Users->find()
                 ->where(['email' => $email])
                 ->first();
-            if (isset($data->email)) {
-                $this->set("data", $data);
+            $password = $this->request->getData('password');
+            $fullname = $this->request->getData('fullname');
+            $address = $this->request->getData('address');
+            $phone = $this->request->getData('phone');
+            $birth = $this->request->getData('birth');
+            $level = $this->request->getData('level');
+            $result = array($email, $password, $fullname, $address, $password, $birth, $level);
+            if (isset($error->email)) {
+                $this->set("error", $error);
+                $this->set("result", $result);
             } else {
-                $password = $this->request->getData('password');
-                $fullname = $this->request->getData('fullname');
-                $address = $this->request->getData('address');
-                $phone = $this->request->getData('phone');
-                $birth = $this->request->getData('birth');
-                $level = $this->request->getData('level');
                 $query = $this->Users->query();
                 $query->insert(['email', 'password', 'fullname', 'address', 'phone', 'birth', 'level'])
                     ->values([
@@ -70,17 +96,16 @@ class UsersController extends AppController
             $error = $this->Users->find()
                 ->where(['email' => $email])
                 ->first();
-//            if (isset($error->email) && $error->id != $data->id) {
-//                $this->set("error", $error);
-//            } else {
             $password = $this->request->getData('password');
             $fullname = $this->request->getData('fullname');
             $address = $this->request->getData('address');
             $phone = $this->request->getData('phone');
             $birth = $this->request->getData('birth');
             $level = $this->request->getData('level');
+            $result = array($email, $password, $fullname, $address, $password, $birth, $level);
             if (isset($error->email) && $error->id != $data->id) {
                 $this->set("error", $error);
+                $this->set("result", $result);
             } else {
                 $query = $this->Users->query();
                 $query->update()
@@ -108,25 +133,6 @@ class UsersController extends AppController
             ->where(['id' => $id])
             ->execute();
         return $this->redirect(SITE_URL . 'users');
-    }
-
-    public function login()
-    {
-        $this->viewBuilder()->setLayout('demo');
-        if ($this->request->is('post')) {
-            $email = $this->request->getData('email');
-            $password = $this->request->getData('password');
-            $data = $this->Users->find()
-                ->select(['email', 'password'])
-                ->where(['email' => $email])
-                ->first();
-            if (isset($data->email)) {
-                if ($password == $data->password) {
-                    $this->Auth->setUser($email);
-                    return $this->redirect(SITE_URL . 'users');
-                }
-            }
-        }
     }
 
     public function logout()

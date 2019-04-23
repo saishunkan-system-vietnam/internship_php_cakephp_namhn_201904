@@ -12,8 +12,12 @@
             <th>Phone</th>
             <th>Birth</th>
             <th>Level</th>
-            <th><a class="btn" href="<?php SITE_URL ?>users/add"
-                   style="background-color: #222222;border: 2px solid white;color: white">ADD</a></th>
+            <th>
+                <?php if ($HgNam[1] == "Admin") { ?>
+                    <a class="btn add" href="<?php SITE_URL ?>users/add"
+                       style="background-color: #222222;border: 2px solid white;color: white">ADD</a>
+                <?php } ?>
+            </th>
         </tr>
         <tr style="height: 50px;"></tr>
         <?php foreach ($data as $value) { ?>
@@ -27,10 +31,12 @@
                 <td><?php echo $value->birth ?></td>
                 <td><?php echo $value->level ?></td>
                 <td>
-                    <a style="background-color: #222222;border: 2px solid white;color: white" class="btn"
-                       href="<?php SITE_URL ?>users/edit/<?php echo $value->id ?>">Edit</a>
-                    <a style="background-color: #222222;border: 2px solid white;color: white" class="btn"
-                       href="<?php SITE_URL ?>users/delete/<?php echo $value->id ?>">Delete</a>
+                    <?php if (($HgNam[1] == 'Admin' && $value->level == 'Member') || ($HgNam[1] == 'Admin' && $value->id == $HgNam[2]) || ($HgNam[1] == 'Member' && $value->id == $HgNam[2])) { ?>
+                        <a style="background-color: #222222;border: 2px solid white;color: white" class="btn edit"
+                           href="<?php SITE_URL ?>users/edit/<?php echo $value->id ?>">Edit</a>
+                        <a style="background-color: #222222;border: 2px solid white;color: white" class="btn delete"
+                           href="<?php SITE_URL ?>users/delete/<?php echo $value->id ?>">Delete</a>
+                    <?php } ?>
                 </td>
             </tr>
         <?php } ?>
