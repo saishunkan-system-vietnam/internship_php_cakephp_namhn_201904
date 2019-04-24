@@ -15,8 +15,8 @@ class UsersController extends AppController
     {
         $this->viewBuilder()->setLayout('demo');
         if ($this->request->is('post')) {
-            $email = $this->request->getData('email');
-            $password = $this->request->getData('password');
+            $email = htmlentities($this->request->getData('email'));
+            $password = htmlentities($this->request->getData('password'));
             $data = $this->Users->find()
                 ->select(['email', 'password', 'id', 'level'])
                 ->where(['email' => $email])
@@ -51,16 +51,16 @@ class UsersController extends AppController
     public function add()
     {
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-            $email = $this->request->getData('email');
+            $email = htmlentities($this->request->getData('email'));
             $error = $this->Users->find()
                 ->where(['email' => $email])
                 ->first();
-            $password = $this->request->getData('password');
-            $fullname = $this->request->getData('fullname');
-            $address = $this->request->getData('address');
-            $phone = $this->request->getData('phone');
-            $birth = $this->request->getData('birth');
-            $level = $this->request->getData('level');
+            $password = htmlentities($this->request->getData('password'));
+            $fullname = htmlentities($this->request->getData('fullname'));
+            $address = htmlentities($this->request->getData('address'));
+            $phone = htmlentities($this->request->getData('phone'));
+            $birth = htmlentities($this->request->getData('birth'));
+            $level = htmlentities($this->request->getData('level'));
             $result = array($email, $password, $fullname, $address, $password, $birth, $level);
             if (isset($error->email)) {
                 $this->set("error", $error);
@@ -96,12 +96,12 @@ class UsersController extends AppController
             $error = $this->Users->find()
                 ->where(['email' => $email])
                 ->first();
-            $password = $this->request->getData('password');
-            $fullname = $this->request->getData('fullname');
-            $address = $this->request->getData('address');
-            $phone = $this->request->getData('phone');
-            $birth = $this->request->getData('birth');
-            $level = $this->request->getData('level');
+            $password = htmlentities($this->request->getData('password'));
+            $fullname = htmlentities($this->request->getData('fullname'));
+            $address = htmlentities($this->request->getData('address'));
+            $phone = htmlentities($this->request->getData('phone'));
+            $birth = htmlentities($this->request->getData('birth'));
+            $level = htmlentities($this->request->getData('level'));
             $result = array($email, $password, $fullname, $address, $password, $birth, $level);
             if (isset($error->email) && $error->id != $data->id) {
                 $this->set("error", $error);

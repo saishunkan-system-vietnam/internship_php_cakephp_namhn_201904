@@ -1,8 +1,8 @@
 <fieldset class="col-md-12" style="margin-top: 120px;border: 2px solid #222222">
     <legend style="text-align: center;background-color: #222222;color: white;border-radius: 7px;height: 50px;line-height: 50px;font-size: 20px;font-weight: bold">
-        Thông tin Users
+        Danh Sách Users
     </legend>
-    <table border="2" class="table" style="background-color: #222222;color: white;font-weight: bold;text-align: center">
+    <table class="table" style="background-color: #222222;color: white;font-weight: bold;text-align: center">
         <tr style="height: 50px;line-height: 45px">
             <th>ID</th>
             <th>Email</th>
@@ -19,7 +19,6 @@
                 <?php } ?>
             </th>
         </tr>
-        <tr style="height: 50px;"></tr>
         <?php foreach ($data as $value) { ?>
             <tr>
                 <td><?php echo $value->id ?></td>
