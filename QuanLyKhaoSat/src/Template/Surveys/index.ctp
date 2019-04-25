@@ -1,9 +1,10 @@
-<fieldset class="col-md-12" style="margin-top: 120px;border: 2px solid #222222">
-    <legend style="text-align: center;font-weight: bold">
+<?php echo $this->Html->css('HNam'); ?>
+<fieldset class="col-md-12">
+    <legend>
         Danh Sách Khảo Sát
     </legend>
-    <table class="table" style="background-color: #222222;color: white;font-weight: bold;text-align: center">
-        <tr style="height: 50px;line-height: 45px">
+    <table class="table" style=";;font-weight: bold;text-align: center">
+        <tr>
             <th>ID</th>
             <th>Name</th>
             <th>Catalog</th>
@@ -14,10 +15,8 @@
             <th>Created_at</th>
             <th>Modified_at</th>
             <th>
-                <a href="<?= SITE_URL?>surveys/add">
-                    <button style="background-color: #222222;border: 2px solid white;border-radius: 5px;height: 35px;">
-                        ADD
-                    </button>
+                <a href="<?= SITE_URL ?>surveys/add">
+                    <button>ADD</button>
                 </a>
             </th>
         </tr>
@@ -28,24 +27,21 @@
                 <td></td>
                 <td><?php echo $value->start_time ?></td>
                 <td><?php echo $value->end_time ?></td>
-                <td style="text-align: center">
+                <td>
                     <?php if ($value->login_status == 'yes') { ?>
-                        <i class='fas fa-clipboard-check' style='font-size:28px;color:white'></i>
+                        <i class='fas fa-clipboard-check' style='font-size:28px;color:#000055'></i>
                     <?php } ?>
                 </td>
                 <td><?php echo $value->maximum ?></td>
                 <td><?php echo $value->created ?></td>
                 <td><?php echo $value->modified ?></td>
                 <td>
-                    <a href="">
-                        <button style="background-color: #222222;border: 2px solid white;border-radius: 5px;height: 35px;">
-                            Edit
+                    <a href="<?= SITE_URL ?>surveys/edit/<?php echo $value->id?>">
+                        <button>Edit
                         </button>
                     </a>
-                    <a href="">
-                        <button style="background-color: #222222;border: 2px solid white;border-radius: 5px;height: 35px;">
-                            Delete
-                        </button>
+                    <a href="<?= SITE_URL ?>surveys/delete/<?php echo $value->id?>">
+                        <button>Delete</button>
                     </a>
                 </td>
             </tr>

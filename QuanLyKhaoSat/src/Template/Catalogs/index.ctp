@@ -1,32 +1,39 @@
-<fieldset class="col-md-12" style="margin-top: 120px;border: 2px solid #222222">
-    <legend style="text-align: center;background-color: #222222;color: white;border-radius: 7px;height: 50px;line-height: 50px;font-size: 20px;font-weight: bold">
+<?php echo $this->Html->css('HNam'); ?>
+<fieldset class="col-md-12">
+    <legend>
         Danh Sách Catalogs Surveys
     </legend>
-    <table class="table" style="background-color: #222222;color: white;font-weight: bold;text-align: center">
-        <tr style="height: 50px;line-height: 45px">
+    <table class="table">
+        <tr>
             <th>ID</th>
             <th>Name</th>
             <th>Created_at</th>
             <th>Modified_at</th>
             <th>
-                <a style="background-color: #222222;border: 2px solid white;color: white"
-                   href="<?= SITE_URL ?>catalogs/add" class="btn">ADD</a>
+                <a href="<?= SITE_URL ?>catalogs/add">
+                    <button>ADD</button>
+                </a>
             </th>
         </tr>
         <?php foreach ($data as $value) { ?>
             <tr>
-                <td><?php echo $value->id ?></td>
-                <td><a href="<?= SITE_URL ?>catalogs/listsurveys/<?php echo $value->id?>"><button style="height: 40px;border:2px solid white;background-color: #222222"><?php echo $value->name?></button></a></td>
-                <td><?php echo $value->created ?></td>
-                <td><?php echo $value->modified ?></td>
-                <td>
-                    <a style="background-color: #222222;border: 2px solid white;color: white"
-                       href="<?= SITE_URL ?>catalogs/edit/<?php echo $value->id ?>" class="btn">Edit</a>
-                    <a style="background-color: #222222;border: 2px solid white;color: white"
-                       href="<?= SITE_URL ?>catalogs/delete/<?php echo $value->id ?>" class="btn">Delete</a>
-                    <a style="background-color: #222222;border: 2px solid white;color: white"
-                        href="<?= SITE_URL ?>catalogs/listsurveys/<?php echo $value->id?>" class="btn">List</a>
-                </td>
+                <th><?php echo $value->id ?></th>
+                <th><a href="<?= SITE_URL ?>catalogs/listsurveys/<?php echo $value->id ?>">
+                        <button><?php echo $value->name ?></button>
+                    </a></th>
+                <th><?php echo $value->created ?></th>
+                <th><?php echo $value->modified ?></th>
+                <th>
+                    <a href="<?= SITE_URL ?>catalogs/edit/<?php echo $value->id ?>">
+                        <button>Edit</button>
+                    </a>
+                    <a href="<?= SITE_URL ?>catalogs/delete/<?php echo $value->id ?>">
+                        <button>Delete</button>
+                    </a>
+                    <a href="<?= SITE_URL ?>catalogs/listsurveys/<?php echo $value->id ?>">
+                        <button>List</button>
+                    </a>
+                </th>
             </tr>
         <?php } ?>
     </table>
@@ -38,3 +45,4 @@
         ?>
     </ul>
 </fieldset>
+

@@ -16,7 +16,9 @@ class SurveysController extends AppController
     public function beforeFilter(Event $event)
     {
         $this->loadModel('Catalogs');
+        $this->loadModel('Questions');
     }
+
 
     public function index()
     {
@@ -70,32 +72,33 @@ class SurveysController extends AppController
             ->where(['id' => $id])
             ->first();
         $this->set("data", $data);
+        $data2 = $this->Questions->find()
+            ->where(['survey_id' => $id]);
+        $this->set("data2",$data2);
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-            $email = $this->request->getData('email');
+            $name = $this->request->getData('name');
             $error = $this->Surveys->find()
-                ->where(['email' => $email])
+                ->where(['name' => $name])
                 ->first();
-            $password = htmlentities($this->request->getData('password'));
-            $fullname = htmlentities($this->request->getData('fullname'));
-            $address = htmlentities($this->request->getData('address'));
-            $phone = htmlentities($this->request->getData('phone'));
-            $birth = htmlentities($this->request->getData('birth'));
-            $level = htmlentities($this->request->getData('level'));
-            $result = array($email, $password, $fullname, $address, $password, $birth, $level);
-            if (isset($error->email) && $error->id != $data->id) {
+            $catalog_id = htmlentities($this->request->getData('catalog_id'));
+            $start_time = htmlentities($this->request->getData('start_time'));
+            $end_time = htmlentities($this->request->getData('end_time'));
+            $login_status = htmlentities($this->request->getData('login_status'));
+            $maximum = htmlentities($this->request->getData('maximum'));
+            $result = array($name, $catalog_id, $start_time, $end_time, $login_status, $maximum);
+            if (isset($error->name) && $error->id != $data->id) {
                 $this->set("error", $error);
                 $this->set("result", $result);
             } else {
                 $query = $this->Surveys->query();
                 $query->update()
                     ->set([
-                        'email' => $email,
-                        'password' => $password,
-                        'fullname' => $fullname,
-                        'address' => $address,
-                        'phone' => $phone,
-                        'birth' => $birth,
-                        'level' => $level
+                        'name' => $name,
+                        'catalog_id' => $catalog_id,
+                        'start_time' => $start_time,
+                        'end_time' => $end_time,
+                        'login_status' => $login_status,
+                        'maximum' => $maximum,
                     ])
                     ->where(['id' => $id])
                     ->execute();
@@ -114,10 +117,15 @@ class SurveysController extends AppController
         return $this->redirect(SITE_URL . 'Surveys');
     }
 
-    public function logout()
-    {
-        $this->Auth->logout();
-        return $this->redirect(SITE_URL . 'Surveys/login');
-    }
+//    public function ques($id = null)
+//    {
+//        $data = $this->Questions->find()
+//            ->where(['survey_id' => $id]);
+//        $this->set("data",$data);
+//    }
 
+    public function qAdd()
+    {
+
+    }
 }
