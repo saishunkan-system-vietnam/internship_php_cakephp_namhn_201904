@@ -1,4 +1,4 @@
-<?php echo $this->Html->css('HNam'); ?>
+<?php echo $this->Html->css('haizzz'); ?>
 <fieldset class="col-md-8 col-md-offset-2">
     <?php if (isset($error->email)) { ?>
         <div class="alert alert-danger">
@@ -57,12 +57,8 @@
             <tr>
                 <th></th>
                 <td>
-                    <input type="submit"
-                           value="Submit"
-                           class="btn">
-                    <input type="reset"
-                           value="Reset"
-                           class="btn">
+                    <button class="sub" type="submit">Submit</button>
+                    <button class="sub" type="reset">Reset</button>
                 </td>
             </tr>
         </table>

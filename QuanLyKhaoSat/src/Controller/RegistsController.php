@@ -50,7 +50,7 @@ class RegistsController extends AppController
             }
         }
     }
-    public function survey(){
+    public function index(){
         
     }
 }

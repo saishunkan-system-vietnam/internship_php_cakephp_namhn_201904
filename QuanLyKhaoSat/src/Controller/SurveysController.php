@@ -32,6 +32,9 @@ class SurveysController extends AppController
 
     public function add()
     {
+        $catalog = $this->Catalogs->find()
+                    ->select(['id','name']);
+        $this->set("catalog", $catalog);
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $name = htmlentities($this->request->getData('name'));
             $error = $this->Surveys->find()
@@ -49,7 +52,7 @@ class SurveysController extends AppController
                 $this->set("result", $result);
             } else {
                 $query = $this->Surveys->query();
-                $query->insert(['name', 'catalog_id', 'start_time', 'end_time', 'login_status', 'maximun', 'created'])
+                $query->insert(['name','catalog_id','start_time', 'end_time','login_status','maximum', 'created'])
                     ->values([
                         'name' => $name,
                         'catalog_id' => $catalog_id,
@@ -74,7 +77,12 @@ class SurveysController extends AppController
         $this->set("data", $data);
         $data2 = $this->Questions->find()
             ->where(['survey_id' => $id]);
-        $this->set("data2",$data2);
+        $this->set("data2", $data2);
+        //==================================
+        $select = $this->Surveys->find()
+            ->where(['id !=' => $id]);
+        $this->set("select",$select);
+        //==================================
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $name = $this->request->getData('name');
             $error = $this->Surveys->find()
@@ -117,14 +125,8 @@ class SurveysController extends AppController
         return $this->redirect(SITE_URL . 'Surveys');
     }
 
-//    public function ques($id = null)
-//    {
-//        $data = $this->Questions->find()
-//            ->where(['survey_id' => $id]);
-//        $this->set("data",$data);
-//    }
 
-    public function qAdd()
+    public function quesAdd()
     {
 
     }

@@ -1,4 +1,4 @@
-<?php echo $this->Html->css('HNam'); ?>
+<?php echo $this->Html->css('haizzz'); ?>
 <fieldset class="col-lg-12">
     <legend>
         Khởi Tạo Khảo Sát
@@ -8,31 +8,33 @@
             <tr>
                 <th>Danh mục khảo sát</th>
                 <th>
-                    <select class="form-control">
-                        <option value="">1</option>
-                        <option value="">2</option>
+                    <select class="form-control" name="catalog_id">
+                        <option value="<?php echo $data->id; ?>"><?php echo $data->name; ?></option>
+                        <?php foreach ($select as $value) { ?>
+                            <option value="<?php echo $value->id; ?>"><?php echo $value->name; ?></option>
+                        <?php } ?>
                     </select>
                 </th>
             </tr>
             <tr>
                 <th>Tên Khảo Sát</th>
                 <th><input value="<?php echo isset($result[0]) ? $result[0] : $data->name ?>"
-                           type="text" class="form-control"></th>
+                           type="text" name="name" class="form-control"></th>
             </tr>
             <tr>
                 <th>Trạng Thái Đăng Nhập</th>
                 <th>
-                    <?php if ($data->login_status == 'yes') { ?>
+                    <?php if ($data->login_status == 'on') { ?>
                         <label>
-                            <input type="checkbox" checked="checked"/>
-                            <span>Yes</span>
+                            <input name="login_status" type="checkbox" checked="checked"/>
+                            <span></span>
                         </label>
                     <?php } ?>
                     &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
-                    <?php if ($data->login_status == 'no') { ?>
+                    <?php if ($data->login_status == '') { ?>
                         <label>
-                            <input type="checkbox" checked="checked"/>
-                            <span>No</span>
+                            <input name="login_status" type="checkbox"/>
+                            <span></span>
                         </label>
                     <?php } ?>
 
@@ -43,7 +45,7 @@
                     <span>Ngày Bắt Đầu Khảo Sát :</span>
                 </th>
                 <th>
-                    <input type="date" value="<?php echo $data->start_time ?>">
+                    <input type="date" name="start_time" value="<?php echo $data->start_time ?>">
                 </th>
             </tr>
             <tr>
@@ -51,7 +53,7 @@
                     Ngày Kết Thúc Khảo Sát :
                 </th>
                 <th>
-                    <input type="date">
+                    <input name="end_time" value="<?php echo $data->end_time ?>" type="date">
                 </th>
             </tr>
             <tr>
@@ -59,18 +61,16 @@
                     Số Khảo Sát Tối Đa :
                 </th>
                 <th>
-                    <input type="name" class="form-control"
+                    <input type="number" class="form-control" name="maximum"
                            value="<?php echo isset($result[5]) ? $result[5] : $data->maximum ?>">
                 </th>
             </tr>
             <tr>
+                <th></th>
                 <th>
-                    <button class="btn">
-                        <a  href="<?= SITE_URL ?>surveys/qadd">
-                            Thêm Câu Hỏi
-
-                        </a>
-                    </button>
+                    <a href="<?= SITE_URL ?>surveys/qadd">
+                        Thêm Câu Hỏi
+                    </a>
                 </th>
             </tr>
         </table>
@@ -79,7 +79,9 @@
                 Danh Sách Câu Hỏi
             </legend>
             <table>
-                <?php foreach ($data2 as $value) { ?>
+                <?php foreach ($data2
+
+                as $value) { ?>
                 <tr>
                     <th>Câu hỏi Số :</th>
                     <th><?php echo $value->name ?></th>
@@ -95,14 +97,8 @@
                     <?php } ?>
                     <th></th>
                     <td>
-                        <input
-                               type="submit"
-                               name="submit"
-                               value="Submit" class="btn">
-                        <input
-                               type="reset"
-                               value="Reset"
-                               class="btn">
+                        <button class="sub" type="submit">Submit</button>
+                        <button class="sub" type="reset">Reset</button>
                     </td>
                 </tr>
             </table>

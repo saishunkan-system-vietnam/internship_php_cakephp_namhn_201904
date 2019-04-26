@@ -1,4 +1,4 @@
-<?php echo $this->Html->css('HNam'); ?>
+<?php echo $this->Html->css('haizzz'); ?>
 <fieldset class="col-md-8 col-md-offset-2">
     <?php if (isset($data->email)) { ?>
         <div class="alert alert-danger">
@@ -12,32 +12,32 @@
         <table border="2" class="table">
             <tr>
                 <th>Email</th>
-                <td><input type="email" style="background-color: #000055;color: white" name="email" class="form-control"></td>
+                <td><input type="email" class="form-control"></td>
             </tr>
             <tr>
                 <th>Password</th>
-                <td><input type="password" style="background-color: #000055;color: white" name="password" class="form-control"></td>
+                <td><input type="password" class="form-control"></td>
             </tr>
             <tr>
                 <th>Fullname</th>
-                <td><input type="text" style="background-color: #000055;color: white" name="fullname" class="form-control"></td>
+                <td><input type="text" name="fullname" class="form-control"></td>
             </tr>
-            <tr >
+            <tr>
                 <th>Address</th>
-                <td><input type="text" style="background-color: #000055;color: white" name="address" class="form-control"></td>
+                <td><input type="text" name="address" class="form-control"></td>
             </tr>
             <tr>
                 <th>phone</th>
-                <td><input type="text" style="background-color: #000055;color: white" name="phone" class="form-control"></td>
+                <td><input type="text" name="phone" class="form-control"></td>
             </tr>
             <tr>
                 <th>Birth</th>
-                <td><input type="date" style="background-color: #000055;color: white" name="birth" class="form-control"></td>
+                <td><input type="date" name="birth" class="form-control"></td>
             </tr>
             <tr>
                 <th>Level</th>
                 <td>
-                    <select name="level" id="" class="form-control" style="background-color: #000055;color: white">
+                    <select name="level" id="" class="form-control">
                         <option value="Member">Member</option>
                     </select>
                 </td>
@@ -45,14 +45,13 @@
             <tr>
                 <th></th>
                 <td>
-                    <button type="submit">Đăng Nhập</button>
-                    <button type="reset">Nhập Lại</button>
+                    <button class="sub" type="submit">Đăng Ký</button>
                 </td>
             </tr>
         </table>
+        <div style="margin-bottom: 20px;">
+            <a style="text-decoration: none;" href="<?= SITE_URL ?>users/login">Quay Lại Trang Đăng Nhập</a>
+        </div>
     </form>
-    <div>
-        <a href="<?= SITE_URL ?>users/login">Quay Lại Trang "Đăng Nhập"</a>
-    </div>
 </fieldset>
 <?php echo $this->Html->script('validate'); ?>

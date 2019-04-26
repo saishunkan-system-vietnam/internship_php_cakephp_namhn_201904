@@ -1,4 +1,4 @@
-<?php echo $this->Html->css('HNam'); ?>
+<?php echo $this->Html->css('haizzz'); ?>
 <fieldset class="col-md-8 col-md-offset-2">
     <?php if (isset($error->email)) { ?>
         <div class="alert alert-danger">
@@ -9,40 +9,40 @@
         ADD Users
     </legend>
     <form action="<?= SITE_URL ?>users/add" id="formUsers" method="post">
-        <table border="2" class="table">
+        <table class="table">
             <tr>
                 <th>Email</th>
                 <td><input value="<?php echo isset($result[0]) ? $result[0] : '' ?>"
-                           type="email" name="email" class="form-control"></td>
+                            type="email" name="email" class="form-control"></td>
             </tr>
             <tr>
                 <th>Password</th>
                 <td><input value="<?php echo isset($result[1]) ? $result[1] : '' ?>"
-                           type="password" name="password"  class="form-control"></td>
+                           type="password"  name="password"  class="form-control"></td>
             </tr>
             <tr>
                 <th>Fullname</th>
                 <td><input value="<?php echo isset($result[2]) ? $result[2] : '' ?>"
-                           type="text" name="fullname"  class="form-control"></td>
+                           type="text"  name="fullname"  class="form-control"></td>
             </tr>
             <tr>
                 <th>Address</th>
                 <td><input value="<?php echo isset($result[3]) ? $result[3] : '' ?>"
-                           type="text" name="address"  class="form-control"></td>
+                           type="text"  name="address"  class="form-control"></td>
             </tr>
             <tr>
                 <th>phone</th>
                 <td><input value="<?php echo isset($result[4]) ? $result[4] : '' ?>"
-                           type="text" name="phone" class="form-control"></td>
+                           type="text"  name="phone" class="form-control"></td>
             </tr>
             <tr>
                 <th>Birth</th>
                 <td><input value="<?php echo isset($result[5]) ? $result[5] : '' ?>"
-                           type="date" name="birth" style="color: white" class="form-control"></td>
+                           type="date"  name="birth"  class="form-control"></td>
             </tr>
             <tr>
                 <th>Level</th>
-                <td><select name="level" class="form-control" style="background-color: #000055;color: white">
+                <td><select name="level" class="form-control" >
                         <option value="Admin">Admin</option>
                         <option value="Member">Member</option>
                     </select>
@@ -51,12 +51,8 @@
             <tr>
                 <th></th>
                 <td>
-                    <input type="submit"
-                           value="Submit"
-                           class="btn">
-                    <input type="reset"
-                           value="Reset"
-                           class="btn">
+                    <button class="sub" type="submit">Submit</button>
+                    <button class="sub" type="reset">Reset</button>
                 </td>
             </tr>
         </table>

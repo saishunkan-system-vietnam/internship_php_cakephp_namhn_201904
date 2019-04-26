@@ -1,4 +1,4 @@
-<?php echo $this->Html->css('HNam'); ?>
+<?php echo $this->Html->css('haizzz'); ?>
 <fieldset class="col-md-12">
     <legend>
         Danh Sách Khảo Sát
@@ -28,7 +28,7 @@
                 <td><?php echo $value->start_time ?></td>
                 <td><?php echo $value->end_time ?></td>
                 <td>
-                    <?php if ($value->login_status == 'yes') { ?>
+                    <?php if ($value->login_status == 'on') { ?>
                         <i class='fas fa-clipboard-check' style='font-size:28px;color:#000055'></i>
                     <?php } ?>
                 </td>

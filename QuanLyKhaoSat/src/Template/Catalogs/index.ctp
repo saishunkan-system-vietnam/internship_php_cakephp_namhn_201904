@@ -1,4 +1,4 @@
-<?php echo $this->Html->css('HNam'); ?>
+<?php echo $this->Html->css('haizzz'); ?>
 <fieldset class="col-md-12">
     <legend>
         Danh Sách Catalogs Surveys
@@ -18,8 +18,7 @@
         <?php foreach ($data as $value) { ?>
             <tr>
                 <th><?php echo $value->id ?></th>
-                <th><a href="<?= SITE_URL ?>catalogs/listsurveys/<?php echo $value->id ?>">
-                        <button><?php echo $value->name ?></button>
+                <th><a href="<?= SITE_URL ?>catalogs/listsurveys/<?php echo $value->id ?>"><?php echo $value->name ?>
                     </a></th>
                 <th><?php echo $value->created ?></th>
                 <th><?php echo $value->modified ?></th>

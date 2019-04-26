@@ -1,4 +1,4 @@
-<?php echo $this->Html->css('HNam'); ?>
+<?php echo $this->Html->css('haizzz'); ?>
 <fieldset class="col-md-6 col-md-offset-3">
     <legend>
         Danh Mục <?php echo $data->name ?></legend>
@@ -6,7 +6,7 @@
         <?php foreach ($survey as $value) { ?>
             <tr>
                 <th>
-                    <button><?php echo isset($value->name) ? $value->name : '' ?></button>
+                    <?php echo isset($value->name) ? $value->name : '' ?>
                 </th>
                 <td>
                     <a href="">

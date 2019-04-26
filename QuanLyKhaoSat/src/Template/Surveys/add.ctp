@@ -1,37 +1,39 @@
+<?php echo $this->Html->css('haizzz'); ?>
 <fieldset class="col-lg-12" style="margin-top: 130px;">
     <legend>
         Khởi Tạo Khảo Sát
     </legend>
-    <form>
+    <form method="post" action="">
         <table>
             <tr>
                 <th>Danh mục khảo sát</th>
                 <th>
-                    <select class="form-control">
-                        <option value="">1</option>
-                        <option value="">2</option>
+                    <select class="form-control" name="catalog_id">
+                        <?php foreach ($catalog as $value) { ?>
+                            <option value="<?php echo $value->id;?>"><?php echo $value->name; ?></option>
+                        <?php } ?>
                     </select>
                 </th>
             </tr>
             <tr>
                 <th>Tên Khảo Sát</th>
-                <th><input type="text" class="form-control"></th>
+                <th><input type="text" name="name" class="form-control"></th>
             </tr>
             <tr>
                 <th>Trạng Thái Đăng Nhập</th>
-                <th>
+                <td>
                     <label>
-                        <input type="checkbox" checked="checked"/>
-                        <span> </span>
+                        <input type="checkbox" name="login_status" class="filled-in" checked="checked" />
+                        <span></span>
                     </label>
-                </th>
+                </td>
             </tr>
             <tr>
                 <th>
                     <span>Ngày Bắt Đầu Khảo Sát :</span>
                 </th>
                 <th>
-                    <input type="date">
+                    <input type="date" name="start_time">
                 </th>
             </tr>
             <tr>
@@ -39,7 +41,7 @@
                     Ngày Kết Thúc Khảo Sát :
                 </th>
                 <th>
-                    <input type="date">
+                    <input type="date" name="end_time">
                 </th>
             </tr>
             <tr>
@@ -47,14 +49,15 @@
                     Số Khảo Sát Tối Đa :
                 </th>
                 <th>
-                    <input type="name" class="form-control">
+                    <input type="number" name="maximum" class="form-control">
                 </th>
             </tr>
             <tr>
+                <th></th>
                 <th>
-                    <button class="btn">
-                        <a href="<?= SITE_URL ?>surveys/qadd">Thêm Câu Hỏi</a>
-                    </button>
+                    <a href="<?= SITE_URL ?>surveys/quesadd">
+                        Thêm Câu Hỏi
+                    </a>
                 </th>
             </tr>
         </table>
@@ -69,12 +72,8 @@
                 <tr>
                     <th></th>
                     <td>
-                        <input type="submit"
-                               name="submit"
-                               value="Submit" class="btn">
-                        <input type="reset"
-                               value="Reset"
-                               class="btn">
+                        <button class="sub" type="submit">Submit</button>
+                        <button class="sub" type="reset">Reset</button>
                     </td>
                 </tr>
                 </tr>
