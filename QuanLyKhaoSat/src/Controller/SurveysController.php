@@ -33,7 +33,7 @@ class SurveysController extends AppController
     public function add()
     {
         $catalog = $this->Catalogs->find()
-                    ->select(['id','name']);
+            ->select(['id', 'name']);
         $this->set("catalog", $catalog);
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $name = htmlentities($this->request->getData('name'));
@@ -45,14 +45,14 @@ class SurveysController extends AppController
             $end_time = htmlentities($this->request->getData('end_time'));
             $login_status = htmlentities($this->request->getData('login_status'));
             $maximum = htmlentities($this->request->getData('maximum'));
-            $created = htmlentities($this->request->getData('level'));
+            $created = htmlentities($this->request->getData('created'));
             $result = array($name, $catalog_id, $start_time, $end_time, $login_status, $maximum, $created);
             if (isset($error->email)) {
                 $this->set("error", $error);
                 $this->set("result", $result);
             } else {
                 $query = $this->Surveys->query();
-                $query->insert(['name','catalog_id','start_time', 'end_time','login_status','maximum', 'created'])
+                $query->insert(['name', 'catalog_id', 'start_time', 'end_time', 'login_status', 'maximum', 'created'])
                     ->values([
                         'name' => $name,
                         'catalog_id' => $catalog_id,
@@ -63,7 +63,7 @@ class SurveysController extends AppController
                         'created' => $created
                     ])
                     ->execute();
-                return $this->redirect(SITE_URL . 'Surveys');
+                return $this->redirect(URL . 'Surveys');
             }
         }
 
@@ -75,14 +75,20 @@ class SurveysController extends AppController
             ->where(['id' => $id])
             ->first();
         $this->set("data", $data);
+        // Lấy tên danh mục khảo sát
+        $catalog = $this->Catalogs->find()
+            ->where(['id' => $data->catalog_id])
+            ->first();
+        $this->set("catalog", $catalog);
+        //==============================
+        // Lấy tên danh mục khảo sát khác
+        $select = $this->Catalogs->find()
+            ->where(['id !=' => $data->catalog_id]);
+        $this->set("select", $select);
+        //==================================
         $data2 = $this->Questions->find()
             ->where(['survey_id' => $id]);
         $this->set("data2", $data2);
-        //==================================
-        $select = $this->Surveys->find()
-            ->where(['id !=' => $id]);
-        $this->set("select",$select);
-        //==================================
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $name = $this->request->getData('name');
             $error = $this->Surveys->find()
@@ -93,7 +99,8 @@ class SurveysController extends AppController
             $end_time = htmlentities($this->request->getData('end_time'));
             $login_status = htmlentities($this->request->getData('login_status'));
             $maximum = htmlentities($this->request->getData('maximum'));
-            $result = array($name, $catalog_id, $start_time, $end_time, $login_status, $maximum);
+            $created = htmlentities($this->request->getData('created'));
+            $result = array($name, $catalog_id, $start_time, $end_time, $login_status, $maximum , $created);
             if (isset($error->name) && $error->id != $data->id) {
                 $this->set("error", $error);
                 $this->set("result", $result);
@@ -107,10 +114,11 @@ class SurveysController extends AppController
                         'end_time' => $end_time,
                         'login_status' => $login_status,
                         'maximum' => $maximum,
+                        'created' => $created,
                     ])
                     ->where(['id' => $id])
                     ->execute();
-                return $this->redirect(SITE_URL . 'Surveys');
+                return $this->redirect(URL . 'Surveys');
             }
         }
 
@@ -122,12 +130,25 @@ class SurveysController extends AppController
         $query->delete()
             ->where(['id' => $id])
             ->execute();
-        return $this->redirect(SITE_URL . 'Surveys');
+        return $this->redirect(URL . 'Surveys');
     }
 
 
-    public function quesAdd()
+    public function listQ($id = null)
     {
-
+        $dataS = $this->Surveys->find()
+            ->where(['id' => $id])
+            ->first();
+        $this->set("dataS", $dataS);
+        $data = $this->Questions->find()
+            ->where(['survey_id' => $id]);
+        $this->set("data", $data);
+//        foreach ($data as $value) {
+//            if (isset($value->answers)) {
+//                $answers = $value->answers;
+//                $answers = explode(',', $answers);
+//                $this->set("answers", $answers);
+//            }
+//        }
     }
 }

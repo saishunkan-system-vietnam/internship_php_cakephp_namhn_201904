@@ -1,4 +1,3 @@
-<?php echo $this->Html->css('haizzz'); ?>
 <fieldset class="col-md-8 col-md-offset-2">
     <?php if (isset($error->email)) { ?>
         <div class="alert alert-danger">
@@ -8,8 +7,8 @@
     <legend>
         ADD Users
     </legend>
-    <form action="<?= SITE_URL ?>users/add" id="formUsers" method="post">
-        <table class="table">
+    <form action="<?= URL ?>users/add" id="formUsers" method="post">
+        <table class="table table-hover">
             <tr>
                 <th>Email</th>
                 <td><input value="<?php echo isset($result[0]) ? $result[0] : '' ?>"
@@ -31,7 +30,7 @@
                            type="text"  name="address"  class="form-control"></td>
             </tr>
             <tr>
-                <th>phone</th>
+                <th>Phone</th>
                 <td><input value="<?php echo isset($result[4]) ? $result[4] : '' ?>"
                            type="text"  name="phone" class="form-control"></td>
             </tr>
@@ -51,11 +50,11 @@
             <tr>
                 <th></th>
                 <td>
-                    <button class="sub" type="submit">Submit</button>
-                    <button class="sub" type="reset">Reset</button>
+                    <button class="button" type="submit">Submit</button>
+                    <button class="button" type="reset">Reset</button>
                 </td>
             </tr>
         </table>
     </form>
 </fieldset>
-<?php echo $this->Html->script('validate'); ?>
+<?php echo $this->Html->script('validate/admins'); ?>

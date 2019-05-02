@@ -27,7 +27,7 @@ class UsersController extends AppController
             if (isset($data->email)) {
                 if ($password == $data->password) {
                     $this->Auth->setUser($user);
-                    return $this->redirect(SITE_URL . 'users');
+                    return $this->redirect(URL . 'users');
                 }
             }
         }
@@ -79,7 +79,7 @@ class UsersController extends AppController
                     ])
                     ->execute();
 
-                return $this->redirect(SITE_URL . 'users');
+                return $this->redirect(URL . 'users');
             }
         }
 
@@ -120,7 +120,7 @@ class UsersController extends AppController
                     ])
                     ->where(['id' => $id])
                     ->execute();
-                return $this->redirect(SITE_URL . 'users');
+                return $this->redirect(URL . 'users');
             }
         }
 
@@ -132,13 +132,13 @@ class UsersController extends AppController
         $query->delete()
             ->where(['id' => $id])
             ->execute();
-        return $this->redirect(SITE_URL . 'users');
+        return $this->redirect(URL . 'users');
     }
 
     public function logout()
     {
         $this->Auth->logout();
-        return $this->redirect(SITE_URL . 'users/login');
+        return $this->redirect(URL . 'users/login');
     }
 
 }

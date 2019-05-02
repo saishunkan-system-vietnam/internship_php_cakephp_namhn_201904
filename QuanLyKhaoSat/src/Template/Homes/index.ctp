@@ -3,7 +3,7 @@
     <legend>
         Chào mừng bạn đến với trang Quản Lý Khảo Sát ^^!
     </legend>
-    <table class="table" border="2">
+    <table class="table table-hover">
         <tr>
             <th>Người thực hiện :</th>
             <td>Hoàng Ngọc Nam</td>

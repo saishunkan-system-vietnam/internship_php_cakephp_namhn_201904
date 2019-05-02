@@ -1,41 +1,95 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>QUản Lý Khảo Sát</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
-    <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
+          integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script type="text/javascript"
             src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.13.1/jquery.validate.min.js"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-    <link rel='stylesheet' href='https://use.fontawesome.com/releases/v5.7.0/css/all.css' integrity='sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ' crossorigin='anonymous'>
-    <title>Quản Lý Khảo Sát</title>
 </head>
+<style>
+    body {
+        background-color: #222222;
+        font-family: "Times New Roman";
+        color: black;
+        height: 2000px;
+    }
+
+    .header {
+        font-weight: bold;
+        font-size: 16px;
+    }
+    .header ul li a {
+        font-size: 19px;
+    }
+    fieldset {
+        margin-top: 50px;
+        border: 2px solid white;
+        border-radius: 10px;
+        font-size: 16px;
+    }
+
+    legend {
+        color: white;
+        text-align: center;
+        font-size: 28px;
+    }
+
+    table {
+        background-color: #DDDDDD;
+        font-weight: bold;
+        color: black;
+    }
+
+    .button {
+        height: 40px;
+        width: 80px;
+        background: linear-gradient(to right,#050929,white,#5BC8BD);
+        color: black;
+        font-size: 16px;
+        border-radius: 7px;
+        font-weight: bold;
+    }
+
+    button:hover {
+        background: linear-gradient(to right,#5BC8BD,#050929,white);
+        color: white;
+    }
+
+    .col-md-4 {
+        text-align: center;
+        color: white;
+        font-weight: bold;
+        font-size: 17px;
+    }
+
+</style>
 <body>
-<nav class="navbar navbar-inverse navbar-fixed-top">
+
+<nav class="navbar navbar-inverse header" style="position: sticky;top: 0; z-index: 10 ">
     <div class="container-fluid">
         <div class="navbar-header">
-            <a class="navbar-brand" href="" style="font-weight: bold;font-size: 18px;">Quản Lý Khảo Sát</a>
+            <a class="navbar-brand" style="font-size: 19px;"><i class="fas fa-tasks"></i> Quản Lý Khảo Sát</a>
         </div>
-        <div id="navbar" class="collapse navbar-collapse">
-            <ul class="nav navbar-nav">
-                <li><a href="<?= SITE_URL ?>homes" style="font-weight: bold;font-size: 18px;">Home</a></li>
-                <li><a href="<?= SITE_URL ?>catalogs" style="font-weight: bold;font-size: 18px;">Quản Lý Khảo Sát</a></li>
-                <li><a href="<?= SITE_URL ?>surveys" style="font-weight: bold;font-size: 18px;">Khảo Sát</a></li>
-                <li><a href="<?= SITE_URL ?>users" style="font-weight: bold;font-size: 18px;">Users</a></li>
-                <li><a href="<?= SITE_URL ?>users/logout" style="font-weight: bold;font-size: 18px;">Đăng xuất</a></li>
-            </ul>
-        </div>
+        <ul class="nav navbar-nav pull-right">
+            <li><a href="<?= URL ?>homes"><i class="fas fa-house-damage"></i> Home</a></li>
+            <li><a href="<?= URL ?>catalogs"><i class="fas fa-journal-whills"></i> Danh Mục Khảo Sát</a></li>
+            <li><a href="<?= URL ?>surveys"><i class="fas fa-file-signature"></i> Khảo Sát</a></li>
+<!--            <li><a href="--><?//= URL ?><!--questions"><i class="fas fa-comment-dots"></i> Questions</a></li>-->
+            <li><a href="<?= URL ?>users"><i class="fas fa-user-injured"></i> Users</a></li>
+            <li><a href="<?= URL ?>users/logout"><i class="fas fa-sign-out-alt"></i> Đăng xuất</a></li>
+        </ul>
     </div>
 </nav>
-<?= $this->Flash->render() ?>
-<div class="container clearfix">
-    <?= $this->fetch('content') ?>
+
+<div class="container">
+    <?= $this->Fetch('content') ?>
 </div>
-<footer>
-</footer>
+
 </body>
 </html>

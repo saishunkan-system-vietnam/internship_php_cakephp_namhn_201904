@@ -51,7 +51,7 @@ class CatalogsController extends AppController
                     ])
                     ->execute();
 
-                return $this->redirect(SITE_URL . 'catalogs');
+                return $this->redirect(URL . 'catalogs');
             }
         }
 
@@ -79,7 +79,7 @@ class CatalogsController extends AppController
                     ])
                     ->where(['id' => $id])
                     ->execute();
-                return $this->redirect(SITE_URL . 'Catalogs');
+                return $this->redirect(URL . 'Catalogs');
             }
         }
 
@@ -91,7 +91,7 @@ class CatalogsController extends AppController
         $query->delete()
             ->where(['id' => $id])
             ->execute();
-        return $this->redirect(SITE_URL . 'Catalogs');
+        return $this->redirect(URL . 'Catalogs');
     }
 
     public function listsurveys($id = null)

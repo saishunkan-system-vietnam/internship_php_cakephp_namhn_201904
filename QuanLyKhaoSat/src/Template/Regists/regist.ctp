@@ -1,4 +1,51 @@
-<?php echo $this->Html->css('haizzz'); ?>
+<style>
+    body {
+        background-color: #222222;
+        font-family: "Times New Roman";
+        color: black;
+    }
+
+    .header {
+        font-weight: bold;
+        font-size: 16px;
+    }
+    fieldset{
+        margin-top: 50px   ;
+        border: 2px solid white;
+        border-radius: 10px ;
+        font-size: 16px;
+    }
+    legend {
+        color: white;
+        text-align: center;
+        font-size: 28px;
+    }
+    table{
+        background-color: #DDDDDD;
+        font-weight: bold;
+        color: black;
+    }
+    tr {
+        height: 60px ;
+    }
+    tr:nth-child(1){
+        font-size: 18px;
+    }
+    tr th {
+        text-align: center;
+    }
+    .button{
+        height: 40px;width: 80px;
+        background-color: #777777;
+        color: black;
+        font-size: 16px;
+    }
+    button:hover{
+        background-color: #222222;
+        color: white;
+        font-size: 19px;
+    }
+</style>
 <fieldset class="col-md-8 col-md-offset-2">
     <?php if (isset($data->email)) { ?>
         <div class="alert alert-danger">
@@ -8,15 +55,15 @@
     <legend>
         Đăng kí làm thành viên
     </legend>
-    <form action="" method="post" id="formUsers">
-        <table border="2" class="table">
+    <form action="" method="post" id="formRegisters">
+        <table class="table table-hover">
             <tr>
                 <th>Email</th>
-                <td><input type="email" class="form-control"></td>
+                <td><input type="email" name="email" class="form-control"></td>
             </tr>
             <tr>
                 <th>Password</th>
-                <td><input type="password" class="form-control"></td>
+                <td><input type="password" name="password" class="form-control"></td>
             </tr>
             <tr>
                 <th>Fullname</th>
@@ -45,13 +92,13 @@
             <tr>
                 <th></th>
                 <td>
-                    <button class="sub" type="submit">Đăng Ký</button>
+                    <button class="button" type="submit">Đăng Ký</button>
                 </td>
             </tr>
         </table>
-        <div style="margin-bottom: 20px;">
-            <a style="text-decoration: none;" href="<?= SITE_URL ?>users/login">Quay Lại Trang Đăng Nhập</a>
+        <div>
+            <a href="<?= URL ?>users/login">Quay Lại Trang Đăng Nhập</a>
         </div>
     </form>
 </fieldset>
-<?php echo $this->Html->script('validate'); ?>
+<?php echo $this->Html->script('validate/registers'); ?>

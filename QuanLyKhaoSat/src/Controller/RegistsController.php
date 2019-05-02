@@ -46,7 +46,7 @@ class RegistsController extends AppController
                     ])
                     ->execute();
 
-                return $this->redirect(SITE_URL . 'users/login');
+                return $this->redirect(URL . 'users/login');
             }
         }
     }

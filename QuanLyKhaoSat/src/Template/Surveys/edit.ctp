@@ -1,15 +1,14 @@
-<?php echo $this->Html->css('haizzz'); ?>
 <fieldset class="col-lg-12">
     <legend>
-        Khởi Tạo Khảo Sát
+        Chỉnh Sửa Khảo Sát
     </legend>
-    <form action="<?= SITE_URL ?>surveys/edit/<?php echo $data->id ?>" method="post">
+    <form action="<?= URL ?>surveys/edit/<?php echo $data->id ?>" method="post" id="formSurveys">
         <table>
             <tr>
                 <th>Danh mục khảo sát</th>
                 <th>
                     <select class="form-control" name="catalog_id">
-                        <option value="<?php echo $data->id; ?>"><?php echo $data->name; ?></option>
+                        <option value="<?php echo $catalog->id; ?>"><?php echo $catalog->name; ?></option>
                         <?php foreach ($select as $value) { ?>
                             <option value="<?php echo $value->id; ?>"><?php echo $value->name; ?></option>
                         <?php } ?>
@@ -66,42 +65,59 @@
                 </th>
             </tr>
             <tr>
+                <th>
+                    Thời Gian Tạo Khảo Sát :
+                </th>
+                <th>
+                    <input type="date" class="form-control" name="created"
+                           value="<?php echo isset($result[6]) ? $result[6] : $data->created ?>">
+                </th>
+            </tr>
+            <tr>
                 <th></th>
                 <th>
-                    <a href="<?= SITE_URL ?>surveys/qadd">
-                        Thêm Câu Hỏi
+                    <a href="<?= URL ?>questions/add/<?php echo $data->id ?>" class="btn">
+                        Thêm câu hỏi
                     </a>
+                    <a href="<?= URL ?>surveys/listq/<?php echo $data->id ?>" class="btn">Views</a>
                 </th>
             </tr>
         </table>
-        <fieldset class="col-lg-10 col-lg-offset-1">
+        <fieldset class="col-lg-12">
             <legend>
                 Danh Sách Câu Hỏi
             </legend>
             <table>
-                <?php foreach ($data2
-
-                as $value) { ?>
                 <tr>
-                    <th>Câu hỏi Số :</th>
-                    <th><?php echo $value->name ?></th>
-                    <th>
-                        <button>
-                            <a href="">Edit</a>
-                        </button>
-                        <button>
-                            <a href="">Delete</a>
-                        </button>
-                    </th>
+                    <th class="col-lg-4">Question</th>
+                    <th class="col-lg-4">Answers</th>
+                    <th class="col-lg-2" style="text-align: center">Type</th>
+                    <th class="col-lg-2"></th>
+                </tr>
+                <?php foreach ($data2 as $value) { ?>
+                <tr>
+                    <td><?php echo $value->name ?></td>
+                    <td><?php echo $value->answers ?></td>
+                    <td style="text-align: center"><?php echo $value->type_answer ?></td>
+                    <td>
+                        <a class="btn" href="<?= URL ?>questions/edit/<?php echo $value->id ?>">
+                            Edit
+                        </a>
+                        <a class="btn" href="<?= URL ?>questions/delete/<?php echo $value->id ?>">
+                            Delete
+                        </a>
+                    </td>
                 <tr>
                     <?php } ?>
+                <tr>
                     <th></th>
-                    <td>
-                        <button class="sub" type="submit">Submit</button>
-                        <button class="sub" type="reset">Reset</button>
-                    </td>
+                    <th>
+                        <button class="button" type="submit">Submit</button>
+                        <button class="button" type="reset">Reset</button>
+                    </th>
                 </tr>
             </table>
         </fieldset>
     </form>
 </fieldset>
+<?php echo $this->Html->script('validate/surveys'); ?>
