@@ -351,8 +351,8 @@
                 <a style="font-size: 18px" href="<?= URL ?>regists/regist">Register</a>
             </div>
         </form>
-        <div class="button">
-            <a>Hoàng Ngọc Nam</a>
+        <div class="button" style="font-weight: bold;">
+            <a href="<?= URL ?>indexs">Thực Hiện Khảo Sát</a>
         </div>
     </section>
 </div>
