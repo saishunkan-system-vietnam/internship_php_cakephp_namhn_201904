@@ -45,8 +45,7 @@ class SurveysController extends AppController
             $end_time = htmlentities($this->request->getData('end_time'));
             $login_status = htmlentities($this->request->getData('login_status'));
             $maximum = htmlentities($this->request->getData('maximum'));
-            $created = htmlentities($this->request->getData('created'));
-            $result = array($name, $catalog_id, $start_time, $end_time, $login_status, $maximum, $created);
+            $result = array($name, $catalog_id, $start_time, $end_time, $login_status, $maximum);
             if (isset($error->email)) {
                 $this->set("error", $error);
                 $this->set("result", $result);
@@ -60,7 +59,8 @@ class SurveysController extends AppController
                         'end_time' => $end_time,
                         'login_status' => $login_status,
                         'maximum' => $maximum,
-                        'created' => $created
+                        'created' => date('Y-m-d H:i:s'),
+                        'modified' => date('Y-m-d H:i:s')
                     ])
                     ->execute();
                 return $this->redirect(URL . 'Surveys');
@@ -99,8 +99,7 @@ class SurveysController extends AppController
             $end_time = htmlentities($this->request->getData('end_time'));
             $login_status = htmlentities($this->request->getData('login_status'));
             $maximum = htmlentities($this->request->getData('maximum'));
-            $created = htmlentities($this->request->getData('created'));
-            $result = array($name, $catalog_id, $start_time, $end_time, $login_status, $maximum , $created);
+            $result = array($name, $catalog_id, $start_time, $end_time, $login_status, $maximum);
             if (isset($error->name) && $error->id != $data->id) {
                 $this->set("error", $error);
                 $this->set("result", $result);
@@ -114,7 +113,7 @@ class SurveysController extends AppController
                         'end_time' => $end_time,
                         'login_status' => $login_status,
                         'maximum' => $maximum,
-                        'created' => $created,
+                        'modified' => date('Y-m-d H:i:s')
                     ])
                     ->where(['id' => $id])
                     ->execute();
@@ -134,7 +133,7 @@ class SurveysController extends AppController
     }
 
 
-    public function listQ($id = null)
+    public function view($id = null)
     {
         $dataS = $this->Surveys->find()
             ->where(['id' => $id])

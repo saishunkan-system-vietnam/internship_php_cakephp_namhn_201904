@@ -10,6 +10,8 @@
             <th>Phone</th>
             <th>Birth</th>
             <th>Level</th>
+            <th>Created_at</th>
+            <th>Modified_at</th>
             <th>
                 <?php if ($HgNam[1] == "Admin") { ?>
                     <a href="<?php URL ?>users/add"><button class="button">ADD</button></a>
@@ -26,6 +28,8 @@
                 <td><?php echo $value->phone ?></td>
                 <td><?php echo $value->birth ?></td>
                 <td><?php echo $value->level ?></td>
+                <td><?php echo $value->created?></td>
+                <td><?php echo $value->modified?></td>
                 <td>
                     <?php if (($HgNam[1] == 'Admin' && $value->level == 'Member') || ($HgNam[1] == 'Admin' && $value->id == $HgNam[2]) || ($HgNam[1] == 'Member' && $value->id == $HgNam[2])) { ?>
                         <a

@@ -49,14 +49,6 @@
             </div>
         </div>
         <div class="row form-group">
-            <div class="col-md-4">
-                Thời Gian Khởi Tạo Khảo Sát :
-            </div>
-            <div class="col-md-8">
-                <input style="color:white;"  type="date" name="created" class="form-control">
-            </div>
-        </div>
-        <div class="row form-group">
             <div class="col-md-4"></div>
             <div class="col-md-8">
                 <button class="button" type="submit">Submit</button>

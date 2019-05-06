@@ -34,7 +34,7 @@ class RegistsController extends AppController
                 $birth = $this->request->getData('birth');
                 $level = $this->request->getData('level');
                 $query = $this->Users->query();
-                $query->insert(['email', 'password', 'fullname', 'address', 'phone', 'birth', 'level'])
+                $query->insert(['email', 'password', 'fullname', 'address', 'phone', 'birth', 'level','created','modified'])
                     ->values([
                         'email' => $email,
                         'password' => $password,
@@ -42,7 +42,9 @@ class RegistsController extends AppController
                         'address' => $address,
                         'phone' => $phone,
                         'birth' => $birth,
-                        'level' => $level
+                        'level' => $level,
+                        'created' => date('Y-m-d H:i:s'),
+                        'modified' => date('Y-m-d H:i:s')
                     ])
                     ->execute();
 

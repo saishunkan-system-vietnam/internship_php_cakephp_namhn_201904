@@ -44,10 +44,11 @@ class CatalogsController extends AppController
                 $this->set("result", $result);
             } else {
                 $query = $this->Catalogs->query();
-                $query->insert(['name', 'created'])
+                $query->insert(['name', 'created', 'modified'])
                     ->values([
                         'name' => $name,
-                        'created' => $created
+                        'created' => date('Y-m-d H:i:s'),
+                        'modified' => date('Y-m-d H:i:s')
                     ])
                     ->execute();
 
@@ -76,6 +77,7 @@ class CatalogsController extends AppController
                 $query->update()
                     ->set([
                         'name' => $name,
+                        'modified' => date('Y-m-d H:i:s')
                     ])
                     ->where(['id' => $id])
                     ->execute();
@@ -96,12 +98,12 @@ class CatalogsController extends AppController
 
     public function listsurveys($id = null)
     {
-        $data= $this->Catalogs->find()
-                ->where(['id' => $id])
-                ->first();
-        $this->set('data',$data);
+        $data = $this->Catalogs->find()
+            ->where(['id' => $id])
+            ->first();
+        $this->set('data', $data);
         $survey = $this->Surveys->find()
             ->where(['catalog_id' => $data->id]);
-        $this->set('survey',$survey);
+        $this->set('survey', $survey);
     }
 }

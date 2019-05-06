@@ -65,15 +65,6 @@
                 </th>
             </tr>
             <tr>
-                <th>
-                    Thời Gian Tạo Khảo Sát :
-                </th>
-                <th>
-                    <input type="date" class="form-control" name="created"
-                           value="<?php echo isset($result[6]) ? $result[6] : $data->created ?>">
-                </th>
-            </tr>
-            <tr>
                 <th></th>
                 <th>
                     <a href="<?= URL ?>questions/add/<?php echo $data->id ?>" class="btn">
