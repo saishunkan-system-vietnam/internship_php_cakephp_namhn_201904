@@ -70,7 +70,7 @@
                     <a href="<?= URL ?>questions/add/<?php echo $data->id ?>" class="btn">
                         Thêm câu hỏi
                     </a>
-                    <a href="<?= URL ?>surveys/listq/<?php echo $data->id ?>" class="btn">Views</a>
+                    <a href="<?= URL ?>surveys/view/<?php echo $data->id ?>" class="btn">Views</a>
                 </th>
             </tr>
         </table>
@@ -80,14 +80,20 @@
             </legend>
             <table>
                 <tr>
+                    <th class="col-lg-1" style="text-align: center">Type Ques</th>
                     <th class="col-lg-4">Question</th>
                     <th class="col-lg-4">Answers</th>
-                    <th class="col-lg-2" style="text-align: center">Type</th>
+                    <th class="col-lg-1" style="text-align: center">Type Answ</th>
                     <th class="col-lg-2"></th>
                 </tr>
                 <?php foreach ($data2 as $value) { ?>
                 <tr>
-                    <td><?php echo $value->name ?></td>
+                    <td style="text-align: center"><?php echo $value->type_question ?></td>
+                    <?php if ($value->type_answer == 'Images') { ?>
+                        <td><img src="<?= URL ?>img/<?= $value->name ?>" style="width: 150px;height: 100px;"></td>
+                    <?php } else { ?>
+                        <td><?php echo $value->name ?></td>
+                    <?php } ?>
                     <td><?php echo $value->answers ?></td>
                     <td style="text-align: center"><?php echo $value->type_answer ?></td>
                     <td>
@@ -112,3 +118,4 @@
     </form>
 </fieldset>
 <?php echo $this->Html->script('validate/surveys'); ?>
+

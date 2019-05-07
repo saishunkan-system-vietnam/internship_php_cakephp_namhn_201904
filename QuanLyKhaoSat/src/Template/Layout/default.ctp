@@ -12,69 +12,13 @@
     <script type="text/javascript"
             src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.13.1/jquery.validate.min.js"></script>
 </head>
-<style>
-    body {
-        background-color: #222222;
-        font-family: "Times New Roman";
-        color: black;
-        height: 2000px;
-    }
-
-    .header {
-        font-weight: bold;
-        font-size: 16px;
-    }
-    .header ul li a {
-        font-size: 19px;
-    }
-    fieldset {
-        margin-top: 50px;
-        border: 2px solid white;
-        border-radius: 10px;
-        font-size: 16px;
-    }
-
-    legend {
-        color: white;
-        text-align: center;
-        font-size: 28px;
-    }
-
-    table {
-        background-color: #DDDDDD;
-        font-weight: bold;
-        color: black;
-    }
-
-    .button {
-        height: 40px;
-        width: 80px;
-        background: linear-gradient(to right,#050929,white,#5BC8BD);
-        color: black;
-        font-size: 16px;
-        border-radius: 7px;
-        font-weight: bold;
-    }
-
-    button:hover {
-        background: linear-gradient(to right,#5BC8BD,#050929,white);
-        color: white;
-    }
-
-    .col-md-4 {
-        text-align: center;
-        color: white;
-        font-weight: bold;
-        font-size: 17px;
-    }
-
-</style>
+<?= $this->HTML->css('default');?>
 <body>
 
 <nav class="navbar navbar-inverse header" style="position: sticky;top: 0; z-index: 10 ">
     <div class="container-fluid">
         <div class="navbar-header">
-            <a href="<?= URL ?>indexs" class="navbar-brand" style="font-size: 19px;"><i class="fas fa-tasks"></i> Thực Hiện Khảo Sát</a>
+            <a href="<?= URL ?>actions" class="navbar-brand" style="font-size: 19px;"><i class="fas fa-tasks"></i> Thực Hiện Khảo Sát</a>
         </div>
         <ul class="nav navbar-nav pull-right">
             <li><a href="<?= URL ?>homes"><i class="fas fa-house-damage"></i> Home</a></li>
