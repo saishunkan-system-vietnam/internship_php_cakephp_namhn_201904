@@ -3,7 +3,7 @@
         Chỉnh Sửa Khảo Sát
     </legend>
     <form action="<?= URL ?>surveys/edit/<?php echo $data->id ?>" method="post" id="formSurveys">
-        <table>
+        <table class="table">
             <tr>
                 <th>Danh mục khảo sát</th>
                 <th>
@@ -24,17 +24,16 @@
                 <th>Trạng Thái Đăng Nhập</th>
                 <th>
                     <?php if ($data->login_status == 'on') { ?>
-                        <label>
-                            <input name="login_status" type="checkbox" checked="checked"/>
-                            <span></span>
-                        </label>
+                        <span class="button-checkbox">
+                            <button type="button" class="btn" data-color="danger">Check</button>
+                            <input type="checkbox" class="hidden" name="login_status" checked/>
+                        </span>
                     <?php } ?>
-                    &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
                     <?php if ($data->login_status == '') { ?>
-                        <label>
-                            <input name="login_status" type="checkbox"/>
-                            <span></span>
-                        </label>
+                        <span class="button-checkbox">
+                            <button type="button" class="btn" data-color="danger">Check</button>
+                            <input type="checkbox" class="hidden" name="login_status"/>
+                        </span>
                     <?php } ?>
 
                 </th>
@@ -44,7 +43,7 @@
                     <span>Ngày Bắt Đầu Khảo Sát :</span>
                 </th>
                 <th>
-                    <input type="date" name="start_time" value="<?php echo $data->start_time ?>">
+                    <input class="form-control" type="date" name="start_time" value="<?php echo $data->start_time ?>">
                 </th>
             </tr>
             <tr>
@@ -52,7 +51,7 @@
                     Ngày Kết Thúc Khảo Sát :
                 </th>
                 <th>
-                    <input name="end_time" value="<?php echo $data->end_time ?>" type="date">
+                    <input class="form-control" name="end_time" value="<?php echo $data->end_time ?>" type="date">
                 </th>
             </tr>
             <tr>
@@ -67,10 +66,12 @@
             <tr>
                 <th></th>
                 <th>
-                    <a href="<?= URL ?>questions/add/<?php echo $data->id ?>" class="btn">
-                        Thêm câu hỏi
+                    <a href="<?= URL ?>questions/add/<?php echo $data->id ?>" class="btn btn-success">
+                        <i class="fas fa-plus"></i> Thêm Câu Hỏi
                     </a>
-                    <a href="<?= URL ?>surveys/view/<?php echo $data->id ?>" class="btn">Views</a>
+                    <a href="<?= URL ?>surveys/view/<?php echo $data->id ?>" class="btn btn-warning">
+                        <i class="far fa-eye"></i></i> View
+                    </a>
                 </th>
             </tr>
         </table>
@@ -78,44 +79,44 @@
             <legend>
                 Danh Sách Câu Hỏi
             </legend>
-            <table>
+            <table class="table">
                 <tr>
-                    <th class="col-lg-1" style="text-align: center">Type Ques</th>
-                    <th class="col-lg-4">Question</th>
-                    <th class="col-lg-4">Answers</th>
-                    <th class="col-lg-1" style="text-align: center">Type Answ</th>
-                    <th class="col-lg-2"></th>
+                    <th>Type Ques</th>
+                    <th>Question</th>
+                    <th>Answers</th>
+                    <th>Type Answ</th>
+                    <th style="width: 180px;"></th>
                 </tr>
                 <?php foreach ($data2 as $value) { ?>
                 <tr>
-                    <td style="text-align: center"><?php echo $value->type_question ?></td>
-                    <?php if ($value->type_answer == 'Images') { ?>
-                        <td><img src="<?= URL ?>img/<?= $value->name ?>" style="width: 150px;height: 100px;"></td>
+                    <td><?php echo $value->type_question ?></td>
+                    <?php if ($value->type_question == 'Images') { ?>
+                        <td><img style="height: 100px;width: 200px;" src="<?= URL ?>img/<?= $value->name ?>"></td>
                     <?php } else { ?>
                         <td><?php echo $value->name ?></td>
                     <?php } ?>
                     <td><?php echo $value->answers ?></td>
-                    <td style="text-align: center"><?php echo $value->type_answer ?></td>
+                    <td><?php echo $value->type_answer ?></td>
                     <td>
-                        <a class="btn" href="<?= URL ?>questions/edit/<?php echo $value->id ?>">
-                            Edit
+                        <a class="btn btn-primary" href="<?= URL ?>questions/edit/<?php echo $value->id ?>">
+                            <i class="fas fa-edit"></i> Write
                         </a>
-                        <a class="btn" href="<?= URL ?>questions/delete/<?php echo $value->id ?>">
-                            Delete
+                        <a class="btn btn-danger" href="<?= URL ?>questions/delete/<?php echo $value->id ?>">
+                            <i class="far fa-trash-alt"></i> Delete</a>
                         </a>
                     </td>
                 <tr>
                     <?php } ?>
-                <tr>
-                    <th></th>
-                    <th>
-                        <button class="button" type="submit">Submit</button>
-                        <button class="button" type="reset">Reset</button>
-                    </th>
-                </tr>
             </table>
         </fieldset>
+        <div class="pull-right" style="margin: 20px;">
+            <button style="width: 120px;height: 40px;font-size: 18px;" class="btn btn-primary" type="submit"><i class="far fa-thumbs-up"></i> Submit</button>
+            <button style="width: 120px;height: 40px;font-size: 18px;margin-right: 400px;" class="btn btn-danger" type="reset"><i class="fas fa-sync-alt"></i> Reset</button>
+        </div>
     </form>
 </fieldset>
 <?php echo $this->Html->script('validate/surveys'); ?>
+
+<?php echo $this->Html->script('checkbox.js'); ?>
+
 

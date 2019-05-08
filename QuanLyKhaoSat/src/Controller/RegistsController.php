@@ -18,7 +18,7 @@ class RegistsController extends AppController
 
     public function regist()
     {
-        $this->viewBuilder()->setLayout('demo');
+        $this->viewBuilder()->setLayout('view');
         if ($this->request->is('post')) {
             $email = $this->request->getData('email');
             $data = $this->Users->find()

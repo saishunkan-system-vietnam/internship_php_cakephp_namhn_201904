@@ -50,8 +50,8 @@
             <tr>
                 <th></th>
                 <td>
-                    <button class="button" type="submit">Submit</button>
-                    <button class="button" type="reset">Reset</button>
+                    <button class="btn btn-primary" type="submit"><i class="far fa-thumbs-up"></i> Submit</button>
+                    <button class="btn btn-danger" type="reset"><i class="fas fa-sync-alt"></i> Reset</button>
                 </td>
             </tr>
         </table>

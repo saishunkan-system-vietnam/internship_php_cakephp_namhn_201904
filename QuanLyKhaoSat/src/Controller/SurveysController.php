@@ -51,7 +51,7 @@ class SurveysController extends AppController
                 $this->set("result", $result);
             } else {
                 $query = $this->Surveys->query();
-                $query->insert(['name', 'catalog_id', 'start_time', 'end_time', 'login_status', 'maximum', 'created'])
+                $query->insert(['name', 'catalog_id', 'start_time', 'end_time', 'login_status', 'maximum', 'created','modified'])
                     ->values([
                         'name' => $name,
                         'catalog_id' => $catalog_id,
@@ -135,6 +135,7 @@ class SurveysController extends AppController
 
     public function view($id = null)
     {
+        $this->viewBuilder()->setLayout('view');
         $dataS = $this->Surveys->find()
             ->where(['id' => $id])
             ->first();

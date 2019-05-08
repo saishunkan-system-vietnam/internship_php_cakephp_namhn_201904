@@ -16,7 +16,7 @@ class UsersController extends AppController
 
     public function login()
     {
-        $this->viewBuilder()->setLayout('demo');
+        $this->viewBuilder()->setLayout('view');
         if ($this->request->is('post')) {
             $email = htmlentities($this->request->getData('email'));
             $password = htmlentities($this->request->getData('password'));
@@ -24,9 +24,11 @@ class UsersController extends AppController
                 ->select(['email', 'password', 'id', 'level'])
                 ->where(['email' => $email])
                 ->first();
-            $level = $data->level;
-            $id = $data->id;
-            $user = array($email, $level, $id);
+            if (isset($data)) {
+                $level = $data->level;
+                $id = $data->id;
+                $user = array($email, $level, $id);
+            }
             if (isset($data->email)) {
                 if ($password == $data->password) {
                     $this->Auth->setUser($user);

@@ -12,8 +12,8 @@
             <th>Created_at</th>
             <th>Modified_at</th>
             <th>
-                <a href="<?= URL ?>surveys/add">
-                    <button class="button">ADD</button>
+                <a href="<?= URL ?>surveys/add" class="btn btn-success">
+                    <i class="fas fa-plus"></i> ADD
                 </a>
             </th>
         </tr>
@@ -26,21 +26,21 @@
                 <td><?php echo $value->end_time ?></td>
                 <td style="text-align: center">
                     <?php if ($value->login_status == 'on') { ?>
-                        <i class='fas fa-check-double' style='font-size:25px;color:#222222'></i>
+                        <i class="fas fa-check" style="font-size: 25px;"></i>
                     <?php } ?>
                 </td>
                 <td><?php echo $value->maximum ?></td>
                 <td><?php echo $value->created ?></td>
                 <td><?php echo $value->modified ?></td>
                 <td style="width: 270px;text-align: center">
-                    <a href="<?= URL ?>surveys/edit/<?php echo $value->id ?>">
-                        <button class="button">Edit</button>
+                    <a href="<?= URL ?>surveys/edit/<?php echo $value->id ?>" class="btn btn-primary">
+                        <i class="fas fa-edit"></i> Write
                     </a>
-                    <a href="<?= URL ?>surveys/delete/<?php echo $value->id ?>">
-                        <button class="button">Delete</button>
+                    <a href="<?= URL ?>surveys/delete/<?php echo $value->id ?>" class="btn btn-danger">
+                        <i class="far fa-trash-alt"></i> Delete</a>
                     </a>
-                    <a href="<?= URL ?>surveys/listq/<?php echo $value->id ?>">
-                        <button class="button">Views</button>
+                    <a href="<?= URL ?>surveys/view/<?php echo $value->id ?>" class="btn btn-warning">
+                        <i class="far fa-eye"></i></i> View</a>
                     </a>
                 </td>
             </tr>

@@ -9,8 +9,8 @@
             <th>Created_at</th>
             <th>Modified_at</th>
             <th style="text-align: center">
-                <a href="<?= URL ?>catalogs/add">
-                    <button class="button">ADD</button>
+                <a href="<?= URL ?>catalogs/add" class="btn btn-success">
+                    <i class="fas fa-plus"></i> ADD
                 </a>
             </th>
         </tr>
@@ -21,14 +21,14 @@
                 <th><?php echo $value->created ?></th>
                 <th><?php echo $value->modified ?></th>
                 <th style="text-align: center">
-                    <a href="<?= URL ?>catalogs/edit/<?php echo $value->id ?>">
-                        <button class="button">Edit</button>
+                    <a href="<?= URL ?>catalogs/edit/<?php echo $value->id ?>" class="btn btn-primary">
+                        <i class="fas fa-edit"></i> Write
                     </a>
-                    <a href="<?= URL ?>catalogs/delete/<?php echo $value->id ?>">
-                        <button class="button">Delete</button>
+                    <a href="<?= URL ?>catalogs/delete/<?php echo $value->id ?>" class="btn btn-danger">
+                        <i class="far fa-trash-alt"></i> Delete</a>
                     </a>
-                    <a href="<?= URL ?>catalogs/listsurveys/<?php echo $value->id ?>">
-                        <button class="button">List</button>
+                    <a href="<?= URL ?>catalogs/listsurveys/<?php echo $value->id ?>" class="btn btn-warning">
+                        <i class="far fa-eye"></i></i> View</a>
                     </a>
                 </th>
             </tr>

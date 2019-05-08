@@ -13,15 +13,15 @@
         </div>
         <div class="row form-group">
             <div class="col-md-4">Tên Khảo Sát</div>
-            <div class="col-md-8"><input style="color: white" type="text" name="name" class="form-control"></div>
+            <div class="col-md-8"><input type="text" name="name" class="form-control"></div>
         </div>
-        <div class="row">
+        <div class="row form-group">
             <div class="col-md-4">Trạng Thái Đăng Nhập</div>
             <div class="col-md-8">
-                <label>
-                    <input type="checkbox" name="login_status" class="filled-in" checked="checked"/>
-                    <span class="checkmark"></span>
-                </label>
+                <span class="button-checkbox">
+                    <button type="button" class="btn" data-color="danger">Check</button>
+                    <input type="checkbox" class="hidden" name="login_status"/>
+                </span>
             </div>
         </div>
         <div class="row form-group">
@@ -29,7 +29,7 @@
                 <span>Ngày Bắt Đầu Khảo Sát :</span>
             </div>
             <div class="col-md-8">
-                <input type="date" style="color: white" class="form-control" name="start_time">
+                <input type="date"  class="form-control" name="start_time">
             </div>
         </div>
         <div class="row form-group">
@@ -37,7 +37,7 @@
                 Ngày Kết Thúc Khảo Sát :
             </div>
             <div class="col-md-8">
-                <input type="date" style="color: white" class="form-control" name="end_time">
+                <input type="date"  class="form-control" name="end_time">
             </div>
         </div>
         <div class="row form-group">
@@ -45,14 +45,14 @@
                 Số Khảo Sát Tối Đa :
             </div>
             <div class="col-md-8">
-                <input style="color:white;"  type="number" name="maximum" class="form-control">
+                <input ="color:white;" type="number" name="maximum" class="form-control">
             </div>
         </div>
         <div class="row form-group">
             <div class="col-md-4"></div>
             <div class="col-md-8">
-                <button class="button" type="submit">Submit</button>
-                <button class="button" type="reset">Reset</button>
+                <button class="btn btn-primary" type="submit"><i class="far fa-thumbs-up"></i> Submit</button>
+                <button class="btn btn-danger" type="reset"><i class="fas fa-sync-alt"></i> Reset</button>
             </div>
         </div>
     </form>

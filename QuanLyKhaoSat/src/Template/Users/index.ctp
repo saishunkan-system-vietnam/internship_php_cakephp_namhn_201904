@@ -1,7 +1,7 @@
 <fieldset class="col-md-12">
     <legend>Danh Sách Users</legend>
     <table class="table table-hover">
-        <tr >
+        <tr>
             <th>ID</th>
             <th>Email</th>
             <th>Password</th>
@@ -12,9 +12,11 @@
             <th>Level</th>
             <th>Created_at</th>
             <th>Modified_at</th>
-            <th>
+            <th style="width: 190px;">
                 <?php if ($HgNam[1] == "Admin") { ?>
-                    <a href="<?php URL ?>users/add"><button class="button">ADD</button></a>
+                    <a href="<?php URL ?>users/add" class="btn btn-success">
+                        <i class="fas fa-plus"></i> ADD
+                    </a>
                 <?php } ?>
             </th>
         </tr>
@@ -28,14 +30,15 @@
                 <td><?php echo $value->phone ?></td>
                 <td><?php echo $value->birth ?></td>
                 <td><?php echo $value->level ?></td>
-                <td><?php echo $value->created?></td>
-                <td><?php echo $value->modified?></td>
+                <td><?php echo $value->created ?></td>
+                <td><?php echo $value->modified ?></td>
                 <td>
                     <?php if (($HgNam[1] == 'Admin' && $value->level == 'Member') || ($HgNam[1] == 'Admin' && $value->id == $HgNam[2]) || ($HgNam[1] == 'Member' && $value->id == $HgNam[2])) { ?>
-                        <a
-                            href="<?php URL ?>users/edit/<?php echo $value->id ?>"><button class="button">Edit</button></a>
-                        <a
-                           href="<?php URL ?>users/delete/<?php echo $value->id ?>"><button class="button">Delete</button></a>
+                        <a href="<?php URL ?>users/edit/<?php echo $value->id ?>" class="btn btn-primary">
+                            <i class="fas fa-edit"></i> Write
+                        </a>
+                        <a class="btn btn-danger" href="<?php URL ?>users/delete/<?php echo $value->id ?>">
+                            <i class="far fa-trash-alt"></i> Delete</a>
                     <?php } ?>
                 </td>
             </tr>
