@@ -63,21 +63,14 @@
                            value="<?php echo isset($result[5]) ? $result[5] : $data->maximum ?>">
                 </th>
             </tr>
-            <tr>
-                <th></th>
-                <th>
-                    <a href="<?= URL ?>questions/add/<?php echo $data->id ?>" class="btn btn-success">
-                        <i class="fas fa-plus"></i> Thêm Câu Hỏi
-                    </a>
-                    <a href="<?= URL ?>surveys/view/<?php echo $data->id ?>" class="btn btn-warning">
-                        <i class="far fa-eye"></i></i> View
-                    </a>
-                </th>
-            </tr>
         </table>
         <fieldset class="col-lg-12">
             <legend>
                 Danh Sách Câu Hỏi
+                <a href="<?= URL ?>questions/add/<?php echo $data->id ?>" class="btn btn-success">
+                    <i class="fas fa-plus"></i> Thêm Câu Hỏi</a>
+                <a href="<?= URL ?>surveys/view/<?php echo $data->id ?>" class="btn btn-warning">
+                    <i class="far fa-eye"></i></i> View</a>
             </legend>
             <table class="table">
                 <tr>
@@ -87,7 +80,9 @@
                     <th>Type Answ</th>
                     <th style="width: 180px;"></th>
                 </tr>
-                <?php foreach ($data2 as $value) { ?>
+                <?php foreach ($data2
+
+                as $value) { ?>
                 <tr>
                     <td><?php echo $value->type_question ?></td>
                     <?php if ($value->type_question == 'Images') { ?>
@@ -110,8 +105,12 @@
             </table>
         </fieldset>
         <div class="pull-right" style="margin: 20px;">
-            <button style="width: 120px;height: 40px;font-size: 18px;" class="btn btn-primary" type="submit"><i class="far fa-thumbs-up"></i> Submit</button>
-            <button style="width: 120px;height: 40px;font-size: 18px;margin-right: 400px;" class="btn btn-danger" type="reset"><i class="fas fa-sync-alt"></i> Reset</button>
+            <button style="width: 120px;height: 40px;font-size: 18px;" class="btn btn-primary" type="submit"><i
+                        class="far fa-thumbs-up"></i> Submit
+            </button>
+            <button style="width: 120px;height: 40px;font-size: 18px;margin-right: 400px;" class="btn btn-danger"
+                    type="reset"><i class="fas fa-sync-alt"></i> Reset
+            </button>
         </div>
     </form>
 </fieldset>

@@ -11,7 +11,7 @@
             <th>Maximum</th>
             <th>Created_at</th>
             <th>Modified_at</th>
-            <th>
+            <th style="text-align: center">
                 <a href="<?= URL ?>surveys/add" class="btn btn-success">
                     <i class="fas fa-plus"></i> ADD
                 </a>
@@ -26,7 +26,7 @@
                 <td><?php echo $value->end_time ?></td>
                 <td style="text-align: center">
                     <?php if ($value->login_status == 'on') { ?>
-                        <i class="fas fa-check" style="font-size: 25px;"></i>
+                        <i class="glyphicon glyphicon-check" style="font-size: 25px;"></i>
                     <?php } ?>
                 </td>
                 <td><?php echo $value->maximum ?></td>
@@ -38,9 +38,12 @@
                     </a>
                     <a href="<?= URL ?>surveys/delete/<?php echo $value->id ?>" class="btn btn-danger">
                         <i class="far fa-trash-alt"></i> Delete</a>
+                    </a> <br>
+                    <a style="margin-top: 10px;" href="<?= URL ?>surveys/view/<?php echo $value->id ?>" class="btn btn-warning">
+                        <i class="far fa-eye"></i></i> Views</a>
                     </a>
-                    <a href="<?= URL ?>surveys/view/<?php echo $value->id ?>" class="btn btn-warning">
-                        <i class="far fa-eye"></i></i> View</a>
+                    <a style="margin-top: 10px;" href="<?= URL ?>surveys/statist/<?php echo $value->id ?>" class="btn btn-info">
+                        <i class="fas fa-torah"></i> Statist</a>
                     </a>
                 </td>
             </tr>

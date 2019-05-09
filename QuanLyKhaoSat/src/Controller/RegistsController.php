@@ -3,20 +3,22 @@
 namespace App\Controller;
 
 use Cake\Event\Event;
+use Cake\Cache\Cache;
+
 
 class RegistsController extends AppController
 {
     public function initialize()
     {
-//        parent::initialize();
-//        $this->loadComponent('Paginator');
+
     }
+
     public function beforeFilter(Event $event)
     {
         $this->loadModel('Users');
     }
 
-    public function regist()
+    public function index()
     {
         $this->viewBuilder()->setLayout('view');
         if ($this->request->is('post')) {
@@ -34,7 +36,7 @@ class RegistsController extends AppController
                 $birth = $this->request->getData('birth');
                 $level = $this->request->getData('level');
                 $query = $this->Users->query();
-                $query->insert(['email', 'password', 'fullname', 'address', 'phone', 'birth', 'level','created','modified'])
+                $query->insert(['email', 'password', 'fullname', 'address', 'phone', 'birth', 'level', 'created', 'modified'])
                     ->values([
                         'email' => $email,
                         'password' => $password,
@@ -42,17 +44,19 @@ class RegistsController extends AppController
                         'address' => $address,
                         'phone' => $phone,
                         'birth' => $birth,
-                        'level' => $level,
+                        'level' => "Member",
                         'created' => date('Y-m-d H:i:s'),
                         'modified' => date('Y-m-d H:i:s')
                     ])
                     ->execute();
-
-                return $this->redirect(URL . 'users/login');
+                $link = Cache::read('link');
+                if (!empty($link)) {
+                    Cache::delete('link');
+                    return $this->redirect(URL . $link);
+                }  else {
+                    return $this->redirect(URL . 'users/login');
+                }
             }
         }
-    }
-    public function index(){
-        
     }
 }

@@ -16,7 +16,7 @@ class UsersController extends AppController
 
     public function login()
     {
-        $this->viewBuilder()->setLayout('view');
+        $this->viewBuilder()->setLayout('login');
         if ($this->request->is('post')) {
             $email = htmlentities($this->request->getData('email'));
             $password = htmlentities($this->request->getData('password'));

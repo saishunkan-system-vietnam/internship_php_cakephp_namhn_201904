@@ -25,7 +25,6 @@
     }
 
     fieldset {
-        width: 800px;
         margin: auto;
         border: 2px solid #222222;
         border-radius: 10px;
@@ -58,7 +57,7 @@
             <li><a href="<?= URL ?>catalogs"><i class="fas fa-journal-whills"></i> Danh Mục</a></li>
             <li><a href="<?= URL ?>surveys"><i class="fas fa-file-signature"></i> Khảo Sát</a></li>
 <!--            <li><a href="--><?//= URL ?><!--questions"><i class="fas fa-comment-dots"></i> Questions</a></li>-->
-            <li><a href="<?= URL ?>answers"><i class="fas fa-file-signature"></i> Thống Kê</a></li>
+<!--            <li><a href="--><?//= URL ?><!--answers"><i class="fas fa-file-signature"></i> Thống Kê</a></li>-->
             <li><a href="<?= URL ?>users"><i class="fas fa-user-graduate"></i> Users</a></li>
             <li><a href="<?= URL ?>users/logout"><i class="fas fa-power-off"></i> Đăng xuất</a></li>
         </ul>

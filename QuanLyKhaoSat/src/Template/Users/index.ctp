@@ -1,4 +1,4 @@
-<fieldset class="col-md-12">
+<fieldset>
     <legend>Danh Sách Users</legend>
     <table class="table table-hover">
         <tr>
@@ -12,7 +12,7 @@
             <th>Level</th>
             <th>Created_at</th>
             <th>Modified_at</th>
-            <th style="width: 190px;">
+            <th>
                 <?php if ($HgNam[1] == "Admin") { ?>
                     <a href="<?php URL ?>users/add" class="btn btn-success">
                         <i class="fas fa-plus"></i> ADD
