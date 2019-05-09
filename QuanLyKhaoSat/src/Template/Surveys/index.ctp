@@ -27,7 +27,9 @@
                 <td style="text-align: center">
                     <?php if ($value->login_status == 'on') { ?>
                         <i class="glyphicon glyphicon-check" style="font-size: 25px;"></i>
-                    <?php } ?>
+                    <?php } else { ?>
+                        <i class="glyphicon glyphicon-unchecked" style="font-size: 25px;"></i>
+                    <?php }?>
                 </td>
                 <td><?php echo $value->maximum ?></td>
                 <td><?php echo $value->created ?></td>
