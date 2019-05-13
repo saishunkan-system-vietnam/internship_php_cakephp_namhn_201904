@@ -1,11 +1,16 @@
-<fieldset class="col-lg-12">
+<fieldset class="col-lg-8 col-lg-offset-2">
+    <?php if (isset($error->name)) { ?>
+        <div class="alert alert-danger">
+            Khảo Sát đã tồn tại, xin vui lòng nhập Khảo Sát khác ^^! Nhớ nha :))
+        </div>
+    <?php } ?>
     <legend>
         Chỉnh Sửa Khảo Sát
     </legend>
     <form action="<?= URL ?>surveys/edit/<?php echo $data->id ?>" method="post" id="formSurveys">
-        <table class="table">
+        <table class="table table-hover table-bordered">
             <tr>
-                <th>Danh mục khảo sát</th>
+                <th class="col-md-6">Danh mục khảo sát</th>
                 <th>
                     <select class="form-control" name="catalog_id">
                         <option value="<?php echo $catalog->id; ?>"><?php echo $catalog->name; ?></option>
@@ -22,7 +27,7 @@
             </tr>
             <tr>
                 <th>Trạng Thái Đăng Nhập</th>
-                <th>
+                <th style="text-align: left">
                     <?php if ($data->login_status == 'on') { ?>
                         <span class="button-checkbox">
                             <button type="button" class="btn" data-color="danger">Check</button>
@@ -63,22 +68,33 @@
                            value="<?php echo isset($result[5]) ? $result[5] : $data->maximum ?>">
                 </th>
             </tr>
+            <tr>
+                <th>Link Khảo Sát</th>
+                <th><input style="width: 550px;float: left" type="text" class="form-control" id="myInput"
+                           value="http://nam.com/internship_php_cakephp_namhn_201904/QuanLyKhaoSat/actions/survey/<?= $data->id?>">
+                    <i onclick="myFunction()" style="font-size: 18px;color: white;width: 50px;height: 40px;" class="fas fa-copy btn btn-primary"></i>
+                    <div style="clear: both"></div>
+                </th>
+            </tr>
         </table>
-        <fieldset class="col-lg-12">
+        <fieldset class="col-lg-10 col-lg-offset-1">
             <legend>
                 Danh Sách Câu Hỏi
-                <a href="<?= URL ?>questions/add/<?php echo $data->id ?>" class="btn btn-success">
-                    <i class="fas fa-plus"></i> Thêm Câu Hỏi</a>
-                <a href="<?= URL ?>surveys/view/<?php echo $data->id ?>" class="btn btn-warning">
+                <a style="width: 100px" href="<?= URL ?>surveys/view/<?php echo $data->id ?>" class="btn btn-warning">
                     <i class="far fa-eye"></i></i> View</a>
             </legend>
-            <table class="table">
+            <table class="table table-bordered table-hover">
                 <tr>
                     <th>Type Ques</th>
                     <th>Question</th>
                     <th>Answers</th>
                     <th>Type Answ</th>
-                    <th style="width: 180px;"></th>
+                    <th style="width: 200px;">
+                        <a style="width: 130px"
+                                                 href="<?= URL ?>questions/add/<?php echo $data->id ?>"
+                                                 class="btn btn-success">
+                            <i class="fas fa-plus"></i> Thêm Câu Hỏi</a>
+                    </th>
                 </tr>
                 <?php foreach ($data2
 
@@ -117,5 +133,20 @@
 <?php echo $this->Html->script('validate/surveys'); ?>
 
 <?php echo $this->Html->script('checkbox.js'); ?>
+<script>
+    function myFunction() {
+        /* Get the text field */
+        var copyText = document.getElementById("myInput");
+
+        /* Select the text field */
+        copyText.select();
+
+        /* Copy the text inside the text field */
+        document.execCommand("copy");
+
+        // /* Alert the copied text */
+        // alert("Copied the text: " + copyText.value);
+    }
+</script>
 
 

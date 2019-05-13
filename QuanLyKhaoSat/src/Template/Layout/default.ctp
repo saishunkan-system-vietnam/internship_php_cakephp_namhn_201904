@@ -22,10 +22,11 @@
 
     .btn {
         font-weight: bold;
+        height: 35px;
+        width: 80px ;
     }
 
     fieldset {
-        margin: auto;
         border: 2px solid #222222;
         border-radius: 10px;
         font-family: "Times New Roman";
@@ -44,6 +45,16 @@
         border-radius: 10px;
         border-bottom: none;
         border-top: none;
+    }
+    th {
+        text-align: center;
+    }
+    td {
+        text-align: center;
+    }
+    .alert-danger {
+        text-align: center;
+        font-weight: bold;
     }
 </style>
 <nav class="navbar navbar-inverse header" style="position: sticky;top: 0; z-index: 10 ">
@@ -64,7 +75,7 @@
     </div>
 </nav>
 
-<div class="container">
+<div class="container-fluid">
     <?= $this->Fetch('content') ?>
 </div>
 <?php echo $this->Html->script('checkbox.js'); ?>

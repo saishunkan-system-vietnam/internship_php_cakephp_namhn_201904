@@ -1,8 +1,8 @@
-<fieldset class="col-md-10 col-md-offset-1">
+<fieldset class="col-md-8 col-md-offset-2">
     <legend>
         Danh Sách Catalogs Surveys
     </legend>
-    <table class="table table-hover">
+    <table class="table table-hover table-bordered">
         <tr>
             <th>ID</th>
             <th>Name</th>
@@ -22,7 +22,7 @@
                 <th><?php echo $value->modified ?></th>
                 <th style="text-align: center">
                     <a href="<?= URL ?>catalogs/edit/<?php echo $value->id ?>" class="btn btn-primary">
-                        <i class="fas fa-edit"></i> Write
+                        <i class="fas fa-edit"></i> Edit
                     </a>
                     <a href="<?= URL ?>catalogs/delete/<?php echo $value->id ?>" class="btn btn-danger">
                         <i class="far fa-trash-alt"></i> Delete</a>

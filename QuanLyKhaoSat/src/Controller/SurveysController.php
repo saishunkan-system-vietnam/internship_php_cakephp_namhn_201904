@@ -17,17 +17,33 @@ class SurveysController extends AppController
     {
         $this->loadModel('Catalogs');
         $this->loadModel('Questions');
+        $this->loadModel('Statists');
+        $this->loadModel('Surveys');
     }
 
 
     public function index()
     {
-        $this->paginate = array(
-            'limit' => 4,
-            'order' => array('id' => 'asc'),
-        );
-        $data = $this->paginate("Surveys");
-        $this->set("data", $data);
+        $details = $this->Surveys->find('all')
+            ->select([
+                'id',
+                'name',
+                'Catalogs.name',
+                'start_time',
+                'end_time',
+                'login_status',
+                'maximum',
+                'count',
+                'created',
+                'modified'
+            ])
+            ->join([
+                    'table' => 'catalogs',
+                    'alias' => 'Catalogs',
+                    'type' => 'INNER',
+                    'conditions' => 'Surveys.catalog_id = Catalogs.id'
+            ]);
+       $this->set("data",$this->paginate($details));
     }
 
     public function add()
@@ -35,10 +51,10 @@ class SurveysController extends AppController
         $catalog = $this->Catalogs->find()
             ->select(['id', 'name']);
         $this->set("catalog", $catalog);
-        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-            $name = htmlentities($this->request->getData('name'));
+        if ($this->request->is('post')) {
+            $name = $this->request->getData('name');
             $error = $this->Surveys->find()
-                ->where(['name' => $name])
+                ->where(["name" => $name])
                 ->first();
             $catalog_id = htmlentities($this->request->getData('catalog_id'));
             $start_time = htmlentities($this->request->getData('start_time'));
@@ -46,7 +62,7 @@ class SurveysController extends AppController
             $login_status = htmlentities($this->request->getData('login_status'));
             $maximum = htmlentities($this->request->getData('maximum'));
             $result = array($name, $catalog_id, $start_time, $end_time, $login_status, $maximum);
-            if (isset($error->email)) {
+            if (isset($error->name)) {
                 $this->set("error", $error);
                 $this->set("result", $result);
             } else {
@@ -89,7 +105,7 @@ class SurveysController extends AppController
         $data2 = $this->Questions->find()
             ->where(['survey_id' => $id]);
         $this->set("data2", $data2);
-        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+        if ($this->request->is('post')) {
             $name = $this->request->getData('name');
             $error = $this->Surveys->find()
                 ->where(['name' => $name])
@@ -160,5 +176,14 @@ class SurveysController extends AppController
         $dataQ = $this->Questions->find()
             ->where(['survey_id' => $id]);
         $this->set("dataQ", $dataQ);
+        //== Lấy dữ liệu để thống kê khảo sát ==
+        $dataText = $this->Statists->find()
+            ->where(['survey_id' =>  $id,
+            'type_answer' => 'Text',]);
+        $this->set("dataText", $dataText);
+        $dataTextA = $this->Statists->find()
+            ->where(['survey_id' =>  $id,
+                'type_answer' => 'TextArea',]);
+        $this->set("dataTextA", $dataTextA);
     }
 }

@@ -1,7 +1,7 @@
-<fieldset class="col-md-8 col-md-offset-2">
+<fieldset class="col-md-6 col-md-offset-3">
     <legend>
         <?php echo $data->name ?></legend>
-    <table class="table">
+    <table class="table table-hover table-bordered">
         <tr>
             <th class="col-md-8" ="text-align: center">Danh Sách Khảo Sát</th>
             <th class="col-md-4" ="text-align: center">

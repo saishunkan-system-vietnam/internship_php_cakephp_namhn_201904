@@ -1,4 +1,9 @@
-<fieldset class="col-md-10 col-md-offset-1">
+<fieldset class="col-md-8 col-md-offset-2">
+    <?php if (isset($error->name)) { ?>
+        <div class="alert alert-danger">
+            Khảo Sát đã tồn tại, xin vui lòng nhập Khảo Sát khác ^^! Nhớ nha :))
+        </div>
+    <?php } ?>
     <legend>Khởi Tạo Khảo Sát</legend>
     <form method="post" action="" id="formSurveys">
         <div class="row form-group">
@@ -13,14 +18,16 @@
         </div>
         <div class="row form-group">
             <div class="col-md-4">Tên Khảo Sát</div>
-            <div class="col-md-8"><input type="text" name="name" class="form-control"></div>
+            <div class="col-md-8"><input value="<?php echo isset($result[0]) ? $result[0] : '' ?>"
+                        type="text" name="name" class="form-control"></div>
         </div>
         <div class="row form-group">
             <div class="col-md-4">Trạng Thái Đăng Nhập</div>
             <div class="col-md-8">
                 <span class="button-checkbox">
                     <button type="button" class="btn" data-color="danger">Check</button>
-                    <input type="checkbox" class="hidden" name="login_status"/>
+                    <input value="<?php echo isset($result[4]) ? $result[4] : '' ?>"
+                            type="checkbox" class="hidden" name="login_status"/>
                 </span>
             </div>
         </div>
@@ -29,7 +36,8 @@
                 <span>Ngày Bắt Đầu Khảo Sát :</span>
             </div>
             <div class="col-md-8">
-                <input type="date"  class="form-control" name="start_time">
+                <input value="<?php echo isset($result[2]) ? $result[2] : '' ?>"
+                        type="date"  class="form-control" name="start_time">
             </div>
         </div>
         <div class="row form-group">
@@ -37,7 +45,8 @@
                 Ngày Kết Thúc Khảo Sát :
             </div>
             <div class="col-md-8">
-                <input type="date"  class="form-control" name="end_time">
+                <input value="<?php echo isset($result[3]) ? $result[3] : '' ?>"
+                        type="date"  class="form-control" name="end_time">
             </div>
         </div>
         <div class="row form-group">
@@ -45,7 +54,8 @@
                 Số Khảo Sát Tối Đa :
             </div>
             <div class="col-md-8">
-                <input ="color:white;" type="number" name="maximum" class="form-control">
+                <input value="<?php echo isset($result[5]) ? $result[5] : '' ?>"
+                        type="number" name="maximum" class="form-control">
             </div>
         </div>
         <div class="row form-group">

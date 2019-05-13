@@ -1,16 +1,17 @@
-<fieldset class="col-md-12 container-fluid">
+<fieldset class="col-md-12">
     <legend>Danh Sách Khảo Sát</legend>
-    <table class="table table-hover">
+    <table class="table table-hover table-bordered">
         <tr>
             <th>ID</th>
-            <th>Name</th>
-            <th>Catalog</th>
-            <th>Start_time</th>
-            <th>End_time</th>
-            <th>Login_status</th>
-            <th>Maximum</th>
-            <th>Created_at</th>
-            <th>Modified_at</th>
+            <th>Khảo Sát</th>
+            <th>Danh Mục</th>
+            <th>Bắt Đầu</th>
+            <th>Kết Thúc</th>
+            <th>Đăng Nhập</th>
+            <th>Số Lượng</th>
+            <th>Trạng Thái</th>
+            <th>Khởi Tạo</th>
+            <th>Chỉnh Sửa</th>
             <th style="text-align: center">
                 <a href="<?= URL ?>surveys/add" class="btn btn-success">
                     <i class="fas fa-plus"></i> ADD
@@ -21,7 +22,7 @@
             <tr>
                 <td><?php echo $value->id ?></td>
                 <td><?php echo $value->name ?></td>
-                <td><?php echo $value->catalog_id ?></td>
+                <td><?php echo $value['Catalogs']['name'] ?></td>
                 <td><?php echo $value->start_time ?></td>
                 <td><?php echo $value->end_time ?></td>
                 <td style="text-align: center">
@@ -31,12 +32,19 @@
                         <i class="glyphicon glyphicon-unchecked" style="font-size: 25px;"></i>
                     <?php }?>
                 </td>
-                <td><?php echo $value->maximum ?></td>
+                <td><?php echo $value->count ?> | <?php echo $value->maximum ?></td>
+                <!--      Trạng Thái        -->
+                    <?php if (strtotime($value->end_time) > strtotime(date('Y-m-d H:i:s')) && ($value->count < $value->maximum)) { ?>
+                <td>Sẵn Sàng</td>
+                <?php } else { ?>
+                    <td>Kết Thúc</td>
+                <?php } ?>
+                <!--      End        -->
                 <td><?php echo $value->created ?></td>
                 <td><?php echo $value->modified ?></td>
                 <td style="width: 270px;text-align: center">
                     <a href="<?= URL ?>surveys/edit/<?php echo $value->id ?>" class="btn btn-primary">
-                        <i class="fas fa-edit"></i> Write
+                        <i class="fas fa-edit"></i> Edit
                     </a>
                     <a href="<?= URL ?>surveys/delete/<?php echo $value->id ?>" class="btn btn-danger">
                         <i class="far fa-trash-alt"></i> Delete</a>

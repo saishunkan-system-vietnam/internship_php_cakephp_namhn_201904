@@ -61,7 +61,7 @@ class UsersController extends AppController
 
     public function add()
     {
-        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+        if ($this->request->is('post')) {
             $email = htmlentities($this->request->getData('email'));
             $error = $this->Users->find()
                 ->where(['email' => $email])
@@ -104,7 +104,7 @@ class UsersController extends AppController
             ->where(['id' => $id])
             ->first();
         $this->set("data", $data);
-        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+        if ($this->request->is('post')) {
             $email = $this->request->getData('email');
             $error = $this->Users->find()
                 ->where(['email' => $email])

@@ -1,17 +1,17 @@
-<fieldset>
+<fieldset class="col-md-10 col-md-offset-1 ">
     <legend>Danh Sách Users</legend>
-    <table class="table table-hover">
+    <table class="table table-hover table-bordered">
         <tr>
             <th>ID</th>
-            <th>Email</th>
-            <th>Password</th>
-            <th>Full Name</th>
-            <th>Address</th>
-            <th>Phone</th>
-            <th>Birth</th>
-            <th>Level</th>
-            <th>Created_at</th>
-            <th>Modified_at</th>
+            <th>Tài Khoản</th>
+            <th>Mật Khẩu</th>
+            <th>Họ và Tên</th>
+            <th>Địa Chỉ</th>
+            <th>Số Điện Thoại</th>
+            <th>Ngày Sinh</th>
+            <th>Chức Vụ</th>
+            <th>Khởi Tạo</th>
+            <th>Chỉnh Sửa</th>
             <th>
                 <?php if ($HgNam[1] == "Admin") { ?>
                     <a href="<?php URL ?>users/add" class="btn btn-success">
@@ -35,7 +35,7 @@
                 <td>
                     <?php if (($HgNam[1] == 'Admin' && $value->level == 'Member') || ($HgNam[1] == 'Admin' && $value->id == $HgNam[2]) || ($HgNam[1] == 'Member' && $value->id == $HgNam[2])) { ?>
                         <a href="<?php URL ?>users/edit/<?php echo $value->id ?>" class="btn btn-primary">
-                            <i class="fas fa-edit"></i> Write
+                            <i class="fas fa-edit"></i> Edit
                         </a>
                         <a class="btn btn-danger" href="<?php URL ?>users/delete/<?php echo $value->id ?>">
                             <i class="far fa-trash-alt"></i> Delete</a>
