@@ -154,5 +154,9 @@ class UsersController extends AppController
         $this->Auth->logout();
         return $this->redirect(URL . 'users/login');
     }
+    public function logins(){
+        $this->viewBuilder()->setLayout('login');
+
+    }
 
 }

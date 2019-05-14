@@ -38,12 +38,12 @@ class SurveysController extends AppController
                 'modified'
             ])
             ->join([
-                    'table' => 'catalogs',
-                    'alias' => 'Catalogs',
-                    'type' => 'INNER',
-                    'conditions' => 'Surveys.catalog_id = Catalogs.id'
+                'table' => 'catalogs',
+                'alias' => 'Catalogs',
+                'type' => 'INNER',
+                'conditions' => 'Surveys.catalog_id = Catalogs.id'
             ]);
-       $this->set("data",$this->paginate($details));
+        $this->set("data", $this->paginate($details));
     }
 
     public function add()
@@ -169,21 +169,35 @@ class SurveysController extends AppController
 
     public function statist($id = null)
     {
+        // Lấy tên Khảo Sát dựa theo ID khảo sát
         $dataS = $this->Surveys->find()
             ->where(['id' => $id])
             ->first();
         $this->set("dataS", $dataS);
+        //======================================
+        // Lấy danh sách câu hỏi thuộc khảo Sát
         $dataQ = $this->Questions->find()
             ->where(['survey_id' => $id]);
         $this->set("dataQ", $dataQ);
+        //======================================
         //== Lấy dữ liệu để thống kê khảo sát ==
-        $dataText = $this->Statists->find()
-            ->where(['survey_id' =>  $id,
-            'type_answer' => 'Text',]);
-        $this->set("dataText", $dataText);
-        $dataTextA = $this->Statists->find()
-            ->where(['survey_id' =>  $id,
-                'type_answer' => 'TextArea',]);
-        $this->set("dataTextA", $dataTextA);
+        //== Lấy dữ liệu dạng Text và TextArea
+        $query = $this->Statists->find();
+        $data = $query->select([
+            'question_id',
+            'survey_id',
+            'Questions.name',
+            'Questions.type_question',
+            'Questions.answers',
+            'answer' => 'group_concat(answer)',
+            'type_answer'])->join([
+            'table' => 'questions',
+            'alias' => 'Questions',
+            'type' => 'INNER',
+            'conditions' => 'Statists.question_id = Questions.id',
+        ])->group('question_id')->toArray();
+//        dd($Text);
+        $this->set("data", $data);
+
     }
 }
