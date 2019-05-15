@@ -38,8 +38,8 @@
         text-align: center;
         font-size: 20px;
         font-weight: bold;
-        width: 600px;
-        height: 60px;
+        width: 500px;
+        height: 50px;
         line-height: 60px;
         border: 2px solid #222222;
         border-radius: 10px;

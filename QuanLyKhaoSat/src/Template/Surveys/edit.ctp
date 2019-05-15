@@ -10,7 +10,7 @@
     <form action="<?= URL ?>surveys/edit/<?php echo $data->id ?>" method="post" id="formSurveys">
         <table class="table table-hover table-bordered">
             <tr>
-                <th class="col-md-6">Danh mục khảo sát</th>
+                <th class="col-md-4">Danh mục khảo sát</th>
                 <th>
                     <select class="form-control" name="catalog_id">
                         <option value="<?php echo $catalog->id; ?>"><?php echo $catalog->name; ?></option>
@@ -70,7 +70,7 @@
             </tr>
             <tr>
                 <th>Link Khảo Sát</th>
-                <th><input style="width: 550px;float: left" type="text" class="form-control" id="myInput"
+                <th><input style="width: 500px;float: left" type="text" class="form-control" id="myInput"
                            value="http://nam.com/internship_php_cakephp_namhn_201904/QuanLyKhaoSat/actions/survey/<?= $data->id?>">
                     <i onclick="myFunction()" style="font-size: 18px;color: white;width: 50px;height: 40px;" class="fas fa-copy btn btn-primary"></i>
                     <div style="clear: both"></div>

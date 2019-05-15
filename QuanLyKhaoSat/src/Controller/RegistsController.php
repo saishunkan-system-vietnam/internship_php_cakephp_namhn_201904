@@ -20,7 +20,7 @@ class RegistsController extends AppController
 
     public function index()
     {
-        $this->viewBuilder()->setLayout('view');
+        $this->viewBuilder()->setLayout('regists');
         if ($this->request->is('post')) {
             $email = $this->request->getData('email');
             $data = $this->Users->find()

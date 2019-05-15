@@ -21,13 +21,14 @@ class UsersController extends AppController
             $email = htmlentities($this->request->getData('email'));
             $password = htmlentities($this->request->getData('password'));
             $data = $this->Users->find()
-                ->select(['email', 'password', 'id', 'level'])
+                ->select(['email', 'password', 'id', 'level','fullname'])
                 ->where(['email' => $email])
                 ->first();
             if (isset($data)) {
                 $level = $data->level;
                 $id = $data->id;
-                $user = array($email, $level, $id);
+                $name = $data->fullname;
+                $user = array($email, $level, $id,$name);
             }
             if (isset($data->email)) {
                 if ($password == $data->password) {
@@ -154,9 +155,4 @@ class UsersController extends AppController
         $this->Auth->logout();
         return $this->redirect(URL . 'users/login');
     }
-    public function logins(){
-        $this->viewBuilder()->setLayout('login');
-
-    }
-
 }

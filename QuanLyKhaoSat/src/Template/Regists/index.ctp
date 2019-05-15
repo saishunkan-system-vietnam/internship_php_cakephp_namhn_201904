@@ -43,7 +43,6 @@
     button:hover{
         background-color: #222222;
         color: white;
-        font-size: 19px;
     }
 </style>
 <fieldset class="col-md-8 col-md-offset-2">

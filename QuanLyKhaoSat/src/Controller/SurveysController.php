@@ -158,13 +158,6 @@ class SurveysController extends AppController
         $data = $this->Questions->find()
             ->where(['survey_id' => $id]);
         $this->set("data", $data);
-//        foreach ($data as $value) {
-//            if (isset($value->answers)) {
-//                $answers = $value->answers;
-//                $answers = explode(',', $answers);
-//                $this->set("answers", $answers);
-//            }
-//        }
     }
 
     public function statist($id = null)
@@ -190,14 +183,17 @@ class SurveysController extends AppController
             'Questions.type_question',
             'Questions.answers',
             'answer' => 'group_concat(answer)',
+            'user_answer' => 'group_concat(user_answer)',
             'type_answer'])->join([
             'table' => 'questions',
             'alias' => 'Questions',
             'type' => 'INNER',
             'conditions' => 'Statists.question_id = Questions.id',
-        ])->group('question_id')->toArray();
-//        dd($Text);
+        ])->group('question_id')->where(['Statists.survey_id' => $id])->toArray();
         $this->set("data", $data);
-
+        //===========================================
+        //== Lấy Số Người Chọn Đáp Án Checkbox - Radio - Select
+        
+        //=====================================================
     }
 }
