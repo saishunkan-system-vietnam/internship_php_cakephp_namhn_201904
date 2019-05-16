@@ -4,6 +4,9 @@ namespace App\Controller;
 
 use Cake\Event\Event;
 
+use Cake\Datasource\ConnectionManager;
+
+
 class SurveysController extends AppController
 {
     public function initialize()
@@ -159,7 +162,19 @@ class SurveysController extends AppController
             ->where(['survey_id' => $id]);
         $this->set("data", $data);
     }
-
+    public function viewdetail()
+    {
+        $quest_id = $_GET['qid'];
+        $answer = $_GET['asr'];
+//        $data['qid'] = $quest_id;
+//        echo json_encode($data);die;
+        $conn = ConnectionManager::get('default');
+        $data = $conn->execute("SELECT * FROM statists WHERE question_id = $quest_id HAVING answer LIKE '%$answer%'")->fetchAll('obj');
+        foreach ($data as $value) {
+            $dataUsers = $value->user_answer;
+            echo ($dataUsers); echo "<br>";
+        }
+    }
     public function statist($id = null)
     {
         // Lấy tên Khảo Sát dựa theo ID khảo sát
@@ -192,8 +207,7 @@ class SurveysController extends AppController
         ])->group('question_id')->where(['Statists.survey_id' => $id])->toArray();
         $this->set("data", $data);
         //===========================================
-        //== Lấy Số Người Chọn Đáp Án Checkbox - Radio - Select
-        
-        //=====================================================
+        $conn = ConnectionManager::get('default');
+        $this->set('conn',$conn);
     }
 }
