@@ -60,8 +60,7 @@
 <nav class="navbar navbar-inverse header" style="position: sticky;top: 0; z-index: 10 ">
     <div class="container-fluid">
         <div class="navbar-header">
-            <a href="<?= URL ?>actions" class="navbar-brand" style="font-size: 19px;"><i class="fas fa-tasks"></i> Thực
-                Hiện Khảo Sát</a>
+            <a href="<?= URL ?>actions" class="navbar-brand" style="font-size: 19px;"><i class="fas fa-tasks"></i> Trang Khảo Sát</a>
         </div>
         <ul class="nav navbar-nav pull-right">
             <li><a href="<?= URL ?>homes"><i class="fas fa-house-damage"></i> Home</a></li>

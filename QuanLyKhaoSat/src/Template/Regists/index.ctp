@@ -96,7 +96,8 @@
             </tr>
         </table>
         <div>
-            <a href="<?= URL ?>users/login">Quay Lại Trang Đăng Nhập</a>
+            <a href="<?= URL ?>users/login" class="btn btn-danger pull-right" style="font-weight: bold;">Tới Trang Đăng Nhập</a>
+            <a href="<?= URL ?>actions" class="btn btn-primary pull-right" style="font-weight: bold;">Tới Trang Khảo Sát</a>
         </div>
     </form>
 </fieldset>

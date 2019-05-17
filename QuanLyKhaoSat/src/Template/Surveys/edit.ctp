@@ -1,3 +1,4 @@
+<?php echo $this->Html->css('radio'); ?>
 <fieldset class="col-lg-8 col-lg-offset-2">
     <?php if (isset($error->name)) { ?>
         <div class="alert alert-danger">
@@ -69,11 +70,24 @@
                 </th>
             </tr>
             <tr>
-                <th>Link Khảo Sát</th>
+                <th>Link Khảo Sát :</th>
                 <th><input style="width: 500px;float: left" type="text" class="form-control" id="myInput"
                            value="http://nam.com/internship_php_cakephp_namhn_201904/QuanLyKhaoSat/actions/survey/<?= $data->id?>">
                     <i onclick="myFunction()" style="font-size: 18px;color: white;width: 50px;height: 40px;" class="fas fa-copy btn btn-primary"></i>
                     <div style="clear: both"></div>
+                </th>
+            </tr>
+            <tr>
+                <th>Trạng Thái :</th>
+                <th style="text-align: left">
+                    <label class="radio">Mở Khảo Sát
+                        <input type="radio" <?php if ($data->status == "open") {echo 'checked';}?> value="open" name="status">
+                        <span class="checkmark"></span>
+                    </label>
+                    <label class="radio">Đóng Khảo Sát
+                        <input type="radio" <?php if ($data->status == "closed") {echo 'checked';}?> value="closed" name="status">
+                        <span class="checkmark"></span>
+                    </label>
                 </th>
             </tr>
         </table>

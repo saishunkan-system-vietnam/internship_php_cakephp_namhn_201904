@@ -31,6 +31,7 @@ class SurveysController extends AppController
             ->select([
                 'id',
                 'name',
+                'status',
                 'Catalogs.name',
                 'start_time',
                 'end_time',
@@ -55,7 +56,7 @@ class SurveysController extends AppController
             ->select(['id', 'name']);
         $this->set("catalog", $catalog);
         if ($this->request->is('post')) {
-            $name = $this->request->getData('name');
+            $name = htmlentities($this->request->getData('name'));
             $error = $this->Surveys->find()
                 ->where(["name" => $name])
                 ->first();
@@ -109,7 +110,7 @@ class SurveysController extends AppController
             ->where(['survey_id' => $id]);
         $this->set("data2", $data2);
         if ($this->request->is('post')) {
-            $name = $this->request->getData('name');
+            $name = htmlentities($this->request->getData('name'));
             $error = $this->Surveys->find()
                 ->where(['name' => $name])
                 ->first();
@@ -118,6 +119,7 @@ class SurveysController extends AppController
             $end_time = htmlentities($this->request->getData('end_time'));
             $login_status = htmlentities($this->request->getData('login_status'));
             $maximum = htmlentities($this->request->getData('maximum'));
+            $status = htmlentities($this->request->getData('status'));
             $result = array($name, $catalog_id, $start_time, $end_time, $login_status, $maximum);
             if (isset($error->name) && $error->id != $data->id) {
                 $this->set("error", $error);
@@ -132,6 +134,7 @@ class SurveysController extends AppController
                         'end_time' => $end_time,
                         'login_status' => $login_status,
                         'maximum' => $maximum,
+                        'status' => $status,
                         'modified' => date('Y-m-d H:i:s')
                     ])
                     ->where(['id' => $id])
@@ -166,8 +169,6 @@ class SurveysController extends AppController
     {
         $quest_id = $_GET['qid'];
         $answer = $_GET['asr'];
-//        $data['qid'] = $quest_id;
-//        echo json_encode($data);die;
         $conn = ConnectionManager::get('default');
         $data = $conn->execute("SELECT * FROM statists WHERE question_id = $quest_id HAVING answer LIKE '%$answer%'")->fetchAll('obj');
         foreach ($data as $value) {

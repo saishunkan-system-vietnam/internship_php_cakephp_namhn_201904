@@ -65,7 +65,7 @@ class CatalogsController extends AppController
             ->first();
         $this->set("data", $data);
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-            $name = $this->request->getData('name');
+            $name = htmlentities($this->request->getData('name'));
             $error = $this->Catalogs->find()
                 ->where(['name' => $name])
                 ->first();

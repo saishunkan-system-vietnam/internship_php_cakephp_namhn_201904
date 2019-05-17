@@ -9,7 +9,8 @@
             <th>Kết Thúc</th>
             <th>Đăng Nhập</th>
             <th>Số Lượng</th>
-            <th>Trạng Thái</th>
+            <!--            <th>Trạng Thái</th>-->
+            <th>Đóng/Mở<br>Khảo Sát</th>
             <th>Khởi Tạo</th>
             <th>Chỉnh Sửa</th>
             <th style="text-align: center">
@@ -27,19 +28,25 @@
                 <td><?php echo $value->end_time ?></td>
                 <td style="text-align: center">
                     <?php if ($value->login_status == 'on') { ?>
-                        <i class="glyphicon glyphicon-check" style="font-size: 25px;"></i>
+                        <i class="glyphicon glyphicon-check" style="font-size: 30px;"></i>
                     <?php } else { ?>
-                        <i class="glyphicon glyphicon-unchecked" style="font-size: 25px;"></i>
-                    <?php }?>
+                        <i class="glyphicon glyphicon-unchecked" style="font-size: 30px;"></i>
+                    <?php } ?>
                 </td>
                 <td><?php echo $value->count ?> | <?php echo $value->maximum ?></td>
-                <!--      Trạng Thái        -->
-                    <?php if (strtotime($value->end_time) > strtotime(date('Y-m-d H:i:s')) && ($value->count < $value->maximum)) { ?>
-                <td>Sẵn Sàng</td>
-                <?php } else { ?>
-                    <td>Kết Thúc</td>
+<!--                                      Trạng Thái        -->
+<!--                                    --><?php //if (strtotime($value->end_time) > strtotime(date('Y-m-d H:i:s')) && ($value->count < $value->maximum)) { ?>
+<!--                                <td>Sẵn Sàng</td>-->
+<!--                                --><?php //} else { ?>
+<!--                                    <td>Kết Thúc</td>-->
+<!--                                --><?php //} ?>
+<!--                                    End        -->
+                <?php if ($value->status == "open") { ?>
+                    <td><i style="font-size: 30px;" class="fas fa-door-open"></i></td>
                 <?php } ?>
-                <!--      End        -->
+                <?php if ($value->status == "closed") { ?>
+                    <td><i style="font-size: 30px;" class="fas fa-door-closed"></i></td>
+                <?php } ?>
                 <td><?php echo $value->created ?></td>
                 <td><?php echo $value->modified ?></td>
                 <td style="width: 270px;text-align: center">
@@ -49,10 +56,12 @@
                     <a href="<?= URL ?>surveys/delete/<?php echo $value->id ?>" class="btn btn-danger">
                         <i class="far fa-trash-alt"></i> Delete</a>
                     </a> <br>
-                    <a style="margin-top: 10px;" href="<?= URL ?>surveys/view/<?php echo $value->id ?>" class="btn btn-warning">
+                    <a style="margin-top: 10px;" href="<?= URL ?>surveys/view/<?php echo $value->id ?>"
+                       class="btn btn-warning">
                         <i class="far fa-eye"></i></i> Views</a>
                     </a>
-                    <a style="margin-top: 10px;" href="<?= URL ?>surveys/statist/<?php echo $value->id ?>" class="btn btn-info">
+                    <a style="margin-top: 10px;" href="<?= URL ?>surveys/statist/<?php echo $value->id ?>"
+                       class="btn btn-info">
                         <i class="fas fa-torah"></i> Statist</a>
                     </a>
                 </td>

@@ -21,14 +21,14 @@ class UsersController extends AppController
             $email = htmlentities($this->request->getData('email'));
             $password = htmlentities($this->request->getData('password'));
             $data = $this->Users->find()
-                ->select(['email', 'password', 'id', 'level','fullname'])
+                ->select(['email', 'password', 'id', 'level', 'fullname'])
                 ->where(['email' => $email])
                 ->first();
             if (isset($data)) {
                 $level = $data->level;
                 $id = $data->id;
                 $name = $data->fullname;
-                $user = array($email, $level, $id,$name);
+                $user = array($email, $level, $id, $name);
             }
             if (isset($data->email)) {
                 if ($password == $data->password) {
@@ -154,5 +154,28 @@ class UsersController extends AppController
     {
         $this->Auth->logout();
         return $this->redirect(URL . 'users/login');
+    }
+
+    public function check()
+    {
+        $email = $_GET['email'];
+        if (isset($id)) {
+            $id = $_GET['id'];
+            $checkUserId = $this->Users->find()
+                ->where(['id' => $id, 'email' => $email])->toArray();
+        }
+        $checkUser = $this->Users->find()
+            ->where(['email' => $email])->toArray();
+        // Nếu để object thì !empty vẫn có giá trị
+        if (!empty($checkUserId)) {
+            echo("Tài Khoản Này Đã Là Của Bạn ^^!");
+            die;
+        } else if (!empty($checkUser)) {
+            echo("Tài Khoản Này Đã Tồn Tại ^^!");
+            die;
+        } else {
+            echo "Tài Khoản Này Sẵn Sàng ^^!";
+            die;
+        }
     }
 }
