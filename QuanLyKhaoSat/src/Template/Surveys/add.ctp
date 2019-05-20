@@ -1,3 +1,10 @@
+<style>
+    .col-md-4 {
+        text-align: center;
+        font-weight: bold;
+    }
+</style>
+<?php echo $this->Html->css('radio'); ?>
 <fieldset class="col-md-8 col-md-offset-2">
     <?php if (isset($error->name)) { ?>
         <div class="alert alert-danger">
@@ -5,7 +12,7 @@
         </div>
     <?php } ?>
     <legend>Khởi Tạo Khảo Sát</legend>
-    <form method="post" action="" id="formSurveys">
+    <form method="post" action="" id="formSurveys"  enctype="multipart/form-data">
         <div class="row form-group">
             <div class="col-md-4">Danh mục khảo sát</div>
             <div class="col-md-8">
@@ -14,6 +21,12 @@
                         <option value="<?php echo $value->id; ?>"><?php echo $value->name; ?></option>
                     <?php } ?>
                 </select>
+            </div>
+        </div>
+        <div class="row form-group">
+            <div class="col-md-4">Ảnh Khảo Sát</div>
+            <div class="col-md-8">
+                <input type="file" name="img" required>
             </div>
         </div>
         <div class="row form-group">
@@ -56,6 +69,34 @@
             <div class="col-md-8">
                 <input value="<?php echo isset($result[5]) ? $result[5] : '' ?>"
                         type="number" name="maximum" class="form-control">
+            </div>
+        </div>
+        <div class="row form-group">
+            <div class="col-md-4">Trạng Thái :</div>
+            <div class="col-md-8" style="text-align: left">
+                <label class="radio" style="float: left">Mở Khảo Sát
+                    <input type="radio" checked  value="open" name="status">
+                    <span class="checkmark"></span>
+                </label>
+                <label class="radio" style="float: left;margin-top: 10px;margin-left: 50px;">Đóng Khảo Sát
+                    <input type="radio"  value="closed" name="status">
+                    <span class="checkmark"></span>
+                </label>
+                <div style="clear: both"></div>
+            </div>
+        </div>
+        <div class="row form-group">
+            <div class="col-md-4">Hiển Thị :</div>
+            <div class="col-md-8" style="text-align: left">
+                <label class="radio" style="float: left">Hiển Thị
+                    <input type="radio" checked  value="1" name="hot">
+                    <span class="checkmark"></span>
+                </label>
+                <label class="radio" style="float: left;margin-top: 10px;margin-left: 50px;">Không Hiển Thị
+                    <input type="radio"  value="0" name="hot">
+                    <span class="checkmark"></span>
+                </label>
+                <div style="clear: both"></div>
             </div>
         </div>
         <div class="row form-group">

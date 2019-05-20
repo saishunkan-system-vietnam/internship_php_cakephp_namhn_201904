@@ -1,15 +1,16 @@
-<fieldset class="col-md-10 col-md-offset-1 ">
+<fieldset class="col-md-12">
     <legend>Danh Sách Users</legend>
     <table class="table table-hover table-bordered">
         <tr>
             <th>ID</th>
             <th>Tài Khoản</th>
-            <th>Mật Khẩu</th>
             <th>Họ và Tên</th>
             <th>Địa Chỉ</th>
             <th>Số Điện Thoại</th>
             <th>Ngày Sinh</th>
             <th>Chức Vụ</th>
+            <th>Câu Hỏi Bí Mật</th>
+            <th>Câu Trả Lời</th>
             <th>Khởi Tạo</th>
             <th>Chỉnh Sửa</th>
             <th>
@@ -24,12 +25,13 @@
             <tr>
                 <td><?php echo $value->id ?></td>
                 <td><?php echo $value->email ?></td>
-                <td><?php echo $value->password ?></td>
                 <td><?php echo $value->fullname ?></td>
                 <td><?php echo $value->address ?></td>
                 <td><?php echo $value->phone ?></td>
                 <td><?php echo $value->birth ?></td>
                 <td><?php echo $value->level ?></td>
+                <td><?php echo $value->secret_q ?></td>
+                <td><?php echo $value->secret_a ?></td>
                 <td><?php echo $value->created ?></td>
                 <td><?php echo $value->modified ?></td>
                 <td>

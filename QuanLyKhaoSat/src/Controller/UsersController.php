@@ -5,6 +5,7 @@ namespace App\Controller;
 use Cake\Cache\Cache;
 
 
+
 class UsersController extends AppController
 {
     public function initialize()
@@ -20,6 +21,7 @@ class UsersController extends AppController
         if ($this->request->is('post')) {
             $email = htmlentities($this->request->getData('email'));
             $password = htmlentities($this->request->getData('password'));
+            $password = md5($password);
             $data = $this->Users->find()
                 ->select(['email', 'password', 'id', 'level', 'fullname'])
                 ->where(['email' => $email])
@@ -40,7 +42,13 @@ class UsersController extends AppController
                     } else {
                         return $this->redirect(URL . 'users');
                     }
+                } else {
+                    $error = 1;
+                    $this->set('error', $error);
                 }
+            } else {
+                $error = 1;
+                $this->set('error', $error);
             }
         }
     }
@@ -53,7 +61,7 @@ class UsersController extends AppController
         ));
         $this->paginate = array(
             'limit' => 4,
-//            'order' => array('id' => 'asc'),
+            'order' => array('id' => 'asc'),
         );
         $data = $this->paginate("Users");
         $this->set("data", $data);
@@ -68,18 +76,21 @@ class UsersController extends AppController
                 ->where(['email' => $email])
                 ->first();
             $password = htmlentities($this->request->getData('password'));
+            $password = md5($password);
             $fullname = htmlentities($this->request->getData('fullname'));
             $address = htmlentities($this->request->getData('address'));
             $phone = htmlentities($this->request->getData('phone'));
             $birth = htmlentities($this->request->getData('birth'));
             $level = htmlentities($this->request->getData('level'));
-            $result = array($email, $password, $fullname, $address, $password, $birth, $level);
+            $secret_q = htmlentities($this->request->getData('secret_q'));
+            $secret_a = htmlentities($this->request->getData('secret_a'));
+            $result = array($email, $password, $fullname, $address, $password, $birth, $level, $secret_q, $secret_a);
             if (isset($error->email)) {
                 $this->set("error", $error);
                 $this->set("result", $result);
             } else {
                 $query = $this->Users->query();
-                $query->insert(['email', 'password', 'fullname', 'address', 'phone', 'birth', 'level', 'created', 'modified'])
+                $query->insert(['email', 'password', 'fullname', 'address', 'phone', 'birth', 'level', 'created', 'secret_q', 'secret_a', 'modified'])
                     ->values([
                         'email' => $email,
                         'password' => $password,
@@ -88,6 +99,8 @@ class UsersController extends AppController
                         'phone' => $phone,
                         'birth' => $birth,
                         'level' => $level,
+                        'secret_q' => $secret_q,
+                        'secret_a' => $secret_a,
                         'created' => date('Y-m-d H:i:s'),
                         'modified' => date('Y-m-d H:i:s')
                     ])
@@ -116,11 +129,14 @@ class UsersController extends AppController
             $phone = htmlentities($this->request->getData('phone'));
             $birth = htmlentities($this->request->getData('birth'));
             $level = htmlentities($this->request->getData('level'));
-            $result = array($email, $password, $fullname, $address, $password, $birth, $level);
+            $secret_q = htmlentities($this->request->getData('secret_q'));
+            $secret_a = htmlentities($this->request->getData('secret_a'));
+            $result = array($email, $password, $fullname, $address, $password, $birth, $level, $secret_q, $secret_a);
             if (isset($error->email) && $error->id != $data->id) {
                 $this->set("error", $error);
                 $this->set("result", $result);
             } else {
+                $password = md5($password);
                 $query = $this->Users->query();
                 $query->update()
                     ->set([
@@ -131,6 +147,8 @@ class UsersController extends AppController
                         'phone' => $phone,
                         'birth' => $birth,
                         'level' => $level,
+                        'secret_q' => $secret_q,
+                        'secret_a' => $secret_a,
                         'modified' => date('Y-m-d H:i:s')
                     ])
                     ->where(['id' => $id])

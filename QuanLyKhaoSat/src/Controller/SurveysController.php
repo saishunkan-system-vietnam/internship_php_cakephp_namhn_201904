@@ -30,6 +30,8 @@ class SurveysController extends AppController
         $details = $this->Surveys->find('all')
             ->select([
                 'id',
+                'img_survey',
+                'hot',
                 'name',
                 'status',
                 'Catalogs.name',
@@ -47,6 +49,10 @@ class SurveysController extends AppController
                 'type' => 'INNER',
                 'conditions' => 'Surveys.catalog_id = Catalogs.id'
             ]);
+        $this->paginate = array(
+            'limit' => 4,
+            'order' => array('id' => 'asc'),
+        );
         $this->set("data", $this->paginate($details));
     }
 
@@ -57,6 +63,8 @@ class SurveysController extends AppController
         $this->set("catalog", $catalog);
         if ($this->request->is('post')) {
             $name = htmlentities($this->request->getData('name'));
+            $img = $this->request->getData('img')['name'];
+            move_uploaded_file($_FILES["img"]["tmp_name"], WWW_ROOT . 'img/survey' . DS . $img);
             $error = $this->Surveys->find()
                 ->where(["name" => $name])
                 ->first();
@@ -65,20 +73,25 @@ class SurveysController extends AppController
             $end_time = htmlentities($this->request->getData('end_time'));
             $login_status = htmlentities($this->request->getData('login_status'));
             $maximum = htmlentities($this->request->getData('maximum'));
-            $result = array($name, $catalog_id, $start_time, $end_time, $login_status, $maximum);
+            $status = htmlentities($this->request->getData('status'));
+            $hot = htmlentities($this->request->getData('hot'));
+            $result = array($name, $catalog_id, $start_time, $end_time, $login_status, $maximum,$hot);
             if (isset($error->name)) {
                 $this->set("error", $error);
                 $this->set("result", $result);
             } else {
                 $query = $this->Surveys->query();
-                $query->insert(['name', 'catalog_id', 'start_time', 'end_time', 'login_status', 'maximum', 'created', 'modified'])
+                $query->insert(['name', 'img_survey','hot' ,'catalog_id', 'start_time', 'end_time', 'login_status', 'maximum', 'status', 'created', 'modified'])
                     ->values([
                         'name' => $name,
+                        'img_survey' => $img,
                         'catalog_id' => $catalog_id,
                         'start_time' => $start_time,
                         'end_time' => $end_time,
                         'login_status' => $login_status,
                         'maximum' => $maximum,
+                        'status' => $status,
+                        'hot' => $hot,
                         'created' => date('Y-m-d H:i:s'),
                         'modified' => date('Y-m-d H:i:s')
                     ])
@@ -111,6 +124,20 @@ class SurveysController extends AppController
         $this->set("data2", $data2);
         if ($this->request->is('post')) {
             $name = htmlentities($this->request->getData('name'));
+            // Ảnh
+            $img = $this->request->getData('img')['name'];
+            if ($img != '') {
+                @unlink(WWW_ROOT . "img" . DS . $data->name);
+                move_uploaded_file($_FILES["img"]["tmp_name"], WWW_ROOT . 'img/survey' . DS . $img);
+                $query = $this->Surveys->query();
+                $query->update()
+                    ->set([
+                        'img_survey' => $img,
+                    ])
+                    ->where(['id' => $id])
+                    ->execute();
+            }
+            // End Ảnh
             $error = $this->Surveys->find()
                 ->where(['name' => $name])
                 ->first();
@@ -120,7 +147,8 @@ class SurveysController extends AppController
             $login_status = htmlentities($this->request->getData('login_status'));
             $maximum = htmlentities($this->request->getData('maximum'));
             $status = htmlentities($this->request->getData('status'));
-            $result = array($name, $catalog_id, $start_time, $end_time, $login_status, $maximum);
+            $hot = htmlentities($this->request->getData('hot'));
+            $result = array($name, $catalog_id, $start_time, $end_time, $login_status, $maximum,$hot);
             if (isset($error->name) && $error->id != $data->id) {
                 $this->set("error", $error);
                 $this->set("result", $result);
@@ -135,6 +163,7 @@ class SurveysController extends AppController
                         'login_status' => $login_status,
                         'maximum' => $maximum,
                         'status' => $status,
+                        'hot' => $hot,
                         'modified' => date('Y-m-d H:i:s')
                     ])
                     ->where(['id' => $id])
@@ -147,6 +176,8 @@ class SurveysController extends AppController
 
     public function delete($id = null)
     {
+        $survey = $this->Surveys->find()->where(['id' => $id])->first();
+        unlink(WWW_ROOT . "img/survey" . DS . $survey->img_survey);
         $query = $this->Surveys->query();
         $query->delete()
             ->where(['id' => $id])
@@ -165,6 +196,7 @@ class SurveysController extends AppController
             ->where(['survey_id' => $id]);
         $this->set("data", $data);
     }
+
     public function viewdetail()
     {
         $quest_id = $_GET['qid'];
@@ -173,9 +205,11 @@ class SurveysController extends AppController
         $data = $conn->execute("SELECT * FROM statists WHERE question_id = $quest_id HAVING answer LIKE '%$answer%'")->fetchAll('obj');
         foreach ($data as $value) {
             $dataUsers = $value->user_answer;
-            echo ($dataUsers); echo "<br>";
+            echo($dataUsers);
+            echo "<br>";
         }
     }
+
     public function statist($id = null)
     {
         // Lấy tên Khảo Sát dựa theo ID khảo sát
@@ -209,6 +243,6 @@ class SurveysController extends AppController
         $this->set("data", $data);
         //===========================================
         $conn = ConnectionManager::get('default');
-        $this->set('conn',$conn);
+        $this->set('conn', $conn);
     }
 }

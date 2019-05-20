@@ -4,8 +4,18 @@ namespace App\Controller;
 
 use Cake\Event\Event;
 use Cake\Cache\Cache;
+use Cake\Mailer\Email;
+use Cake\Mailer\Mailer;
 
-
+class UserMailer extends Mailer {
+    public function resetPassword($user)
+    {
+        $this
+            ->subject('Reset Password')
+            ->to($user->email)
+            ->set(['token' => $user->token]);
+    }
+}
 class RegistsController extends AppController
 {
     public function initialize()
@@ -30,6 +40,7 @@ class RegistsController extends AppController
                 $this->set("data", $data);
             } else {
                 $password = $this->request->getData('password');
+                $password = md5($password);
                 $fullname = $this->request->getData('fullname');
                 $address = $this->request->getData('address');
                 $phone = $this->request->getData('phone');
@@ -58,5 +69,57 @@ class RegistsController extends AppController
                 }
             }
         }
+    }
+    public function forgotpass()
+    {
+        $this->viewBuilder()->setLayout('regists');
+        if ($this->request->is('post')) {
+            $users = $this->request->getData('email');
+            $secret_q = htmlentities($this->request->getData('secret_q'));
+            $secret_a = htmlentities($this->request->getData('secret_a'));
+            $forgot = $this->Users->find()
+                ->where(['email' => $users])->first();
+            if (!empty($forgot) && $secret_q == $forgot->secret_q && $secret_a == $forgot->secret_a) {
+//                $email = new Email('default');
+//                $email->setFrom(['HoagNgNam@gmail.com' => 'Nam HN'])
+//                    ->setTo($users)
+//                    ->setSubject('Lấy Lại Mật Khẩu')
+//                    ->send( 'Mời Bạn Click đường link để lấy lại mật khẩu : ' .URL . 'regists/updatepass/'.$users)
+//                    ->set(['token' => $users->token]) ;
+                $mailer = new UserMailer();
+                $mailer->send('resetPassword','HgNgocNam@gmail.com');
+            } else {
+                $error = "error";
+                $this->set('error',$error);
+            }
+        }
+    }
+    public function updatepass($email = null)
+    {
+        $this->viewBuilder()->setLayout('regists');
+        if ($this->request->is('post')) {
+            $password1 =  htmlentities($this->request->getData('password1'));
+            $password2 =  htmlentities($this->request->getData('password2'));
+            if ($password1 == $password2) {
+                $password = md5($password1);
+                $query = $this->Users->query();
+                $query->update()
+                    ->set([
+                        'password' => $password,
+                        'modified' => date('Y-m-d H:i:s')
+                    ])
+                    ->where(['email' => $email])
+                    ->execute();
+                $success = "success";
+                $this->set('success', $success);
+                return $this->redirect(URL . "regists/success");
+            }else {
+                $password_error = "password_error";
+                $this->set('passwrod_error',$password_error);
+            }
+        }
+    }
+    public function success(){
+        $this->viewBuilder()->setLayout('regists');
     }
 }

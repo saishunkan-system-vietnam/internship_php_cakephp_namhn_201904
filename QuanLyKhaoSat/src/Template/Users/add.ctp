@@ -10,7 +10,7 @@
     <form action="<?= URL ?>users/add" id="formUsers" method="post">
         <table class="table table-hover">
             <tr>
-                <th>Email</th>
+                <th class="col-md-4     ">Email</th>
                 <td><input value="<?php echo isset($result[0]) ? $result[0] : '' ?>"
                            type="email" name="email" class="form-control email"></td>
                 <td style="border-bottom: 1px solid #DDDDDD">
@@ -52,6 +52,22 @@
                         <option value="Member">Member</option>
                     </select>
                 </td>
+            </tr>
+            <tr>
+                <th>Secret_Q</th>
+                <td colspan="2">
+                    <select value="<?php echo isset($result[7]) ? $result[7] : '' ?>" style="height: 40px;" name="secret_q" class="form-control">
+                        <option value="Trường Đại Học Của Bạn Là Gì ?">Trường Đại Học Của Bạn Là Gì ?</option>
+                        <option value="Môn Học Bạn Thích Nhất Là Gì ?">Môn Học Bạn Thích Nhất Là Gì ?</option>
+                        <option value="Người Yêu Đầu Tiên Của Bạn Là Ai ?">Người Yêu Đầu Tiên Của Bạn Là Ai ?</option>
+                        <option value="Vì Sao Bạn Học Lập Trình ?">Vì Sao Bạn Học Lập Trình ?</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <th>Secret_A</th>
+                <td colspan="2"><input value="<?php echo isset($result[8]) ? $result[8] : '' ?>"
+                                       type="text" name="secret_a" class="form-control"></td>
             </tr>
             <tr>
                 <th></th>

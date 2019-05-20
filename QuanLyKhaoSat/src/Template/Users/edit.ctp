@@ -10,7 +10,7 @@
     <form action="<?= URL ?>users/edit/<?php echo $data->id ?>" id="formUsers" method="post">
         <table class="table table-hover">
             <tr>
-                <th>Email</th>
+                <th class="col-md-4">Email</th>
                 <td><input value="<?php echo isset($result[0]) ? $result[0] : $data->email ?>"
                            type="email" name="email" onchange="checkEmail()" class="form-control email"></td>
 
@@ -59,6 +59,22 @@
                         <?php } ?>
                     </select>
                 </td>
+            </tr>
+            <tr>
+                <th>Secret_Q</th>
+                <td colspan="2">
+                    <select name="secret_q" class="form-control">
+                        <option value="<?php echo isset($result[7]) ? $result[7] : $data->secret_q ?>"><?php echo isset($result[7]) ? $result[7] : $data->secret_q ?></option>
+                        <option value="Trường Đại Học Của Bạn Là Gì ?">Trường Đại Học Của Bạn Là Gì ?</option>
+                        <option value="Môn Học Bạn Thích Nhất Là Gì ?">Môn Học Bạn Thích Nhất Là Gì ?</option>
+                        <option value="Người Yêu Đầu Tiên Của Bạn Là Ai ?">Người Yêu Đầu Tiên Của Bạn Là Ai ?</option>
+                        <option value="Vì Sao Bạn Học Lập Trình ?">Vì Sao Bạn Học Lập Trình ?</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <th>Secret_A</th>
+                <td colspan="2"><input class="form-control" name="secret_a" type="text" value="<?php echo isset($result[8]) ? $result[8] : $data->secret_a ?>"></td>
             </tr>
             <tr>
                 <th></th>

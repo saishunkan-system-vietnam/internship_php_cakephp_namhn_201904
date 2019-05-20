@@ -8,7 +8,7 @@
     <legend>
         Chỉnh Sửa Khảo Sát
     </legend>
-    <form action="<?= URL ?>surveys/edit/<?php echo $data->id ?>" method="post" id="formSurveys">
+    <form action="<?= URL ?>surveys/edit/<?php echo $data->id ?>" method="post" id="formSurveys" enctype="multipart/form-data">
         <table class="table table-hover table-bordered">
             <tr>
                 <th class="col-md-4">Danh mục khảo sát</th>
@@ -19,6 +19,13 @@
                             <option value="<?php echo $value->id; ?>"><?php echo $value->name; ?></option>
                         <?php } ?>
                     </select>
+                </th>
+            </tr>
+            <tr>
+                <th class="col-md-4">Ảnh Khảo Sát</th>
+                <th>
+                    <input type="file" name="img">
+                    <img src="<?= URL ?>img/survey/<?= $data->img_survey ?>" style="height: 120px;width: 150px;">
                 </th>
             </tr>
             <tr>
@@ -80,12 +87,25 @@
             <tr>
                 <th>Trạng Thái :</th>
                 <th style="text-align: left">
-                    <label class="radio">Mở Khảo Sát
+                    <label class="radio" style="float: left;">Mở Khảo Sát
                         <input type="radio" <?php if ($data->status == "open") {echo 'checked';}?> value="open" name="status">
                         <span class="checkmark"></span>
                     </label>
-                    <label class="radio">Đóng Khảo Sát
+                    <label class="radio" style="float: left;margin-top: 10px;margin-left: 50px">Đóng Khảo Sát
                         <input type="radio" <?php if ($data->status == "closed") {echo 'checked';}?> value="closed" name="status">
+                        <span class="checkmark"></span>
+                    </label>
+                </th>
+            </tr>
+            <tr>
+                <th>Hiển Thị :</th>
+                <th style="text-align: left">
+                    <label class="radio" style="float: left;">Hiển Thị
+                        <input type="radio" <?php if ($data->hot == 1) {echo 'checked';}?> value="1" name="hot">
+                        <span class="checkmark"></span>
+                    </label>
+                    <label class="radio" style="float: left;margin-top: 10px;margin-left: 50px">Không Hiển Thị
+                        <input type="radio" <?php if ($data->hot == 0) {echo 'checked';}?> value="0" name="hot">
                         <span class="checkmark"></span>
                     </label>
                 </th>

@@ -3,14 +3,15 @@
     <table class="table table-hover table-bordered">
         <tr>
             <th>ID</th>
+            <th>Ảnh</th>
             <th>Khảo Sát</th>
             <th>Danh Mục</th>
             <th>Bắt Đầu</th>
             <th>Kết Thúc</th>
             <th>Đăng Nhập</th>
             <th>Số Lượng</th>
-            <!--            <th>Trạng Thái</th>-->
             <th>Đóng/Mở<br>Khảo Sát</th>
+            <th>Hiển Thị</th>
             <th>Khởi Tạo</th>
             <th>Chỉnh Sửa</th>
             <th style="text-align: center">
@@ -22,6 +23,9 @@
         <?php foreach ($data as $value) { ?>
             <tr>
                 <td><?php echo $value->id ?></td>
+                <td>
+                    <img style="width: 150px;height: 100px;" src="<?= URL ?>img/survey/<?= $value->img_survey?>" alt="">
+                </td>
                 <td><?php echo $value->name ?></td>
                 <td><?php echo $value['Catalogs']['name'] ?></td>
                 <td><?php echo $value->start_time ?></td>
@@ -34,19 +38,17 @@
                     <?php } ?>
                 </td>
                 <td><?php echo $value->count ?> | <?php echo $value->maximum ?></td>
-<!--                                      Trạng Thái        -->
-<!--                                    --><?php //if (strtotime($value->end_time) > strtotime(date('Y-m-d H:i:s')) && ($value->count < $value->maximum)) { ?>
-<!--                                <td>Sẵn Sàng</td>-->
-<!--                                --><?php //} else { ?>
-<!--                                    <td>Kết Thúc</td>-->
-<!--                                --><?php //} ?>
-<!--                                    End        -->
                 <?php if ($value->status == "open") { ?>
                     <td><i style="font-size: 30px;" class="fas fa-door-open"></i></td>
                 <?php } ?>
                 <?php if ($value->status == "closed") { ?>
                     <td><i style="font-size: 30px;" class="fas fa-door-closed"></i></td>
                 <?php } ?>
+                <td>
+                    <?php if ($value->hot == 1) {?>
+                        <i style="font-size: 30px;" class="fas fa-check"></i>
+                    <?php } ?>
+                </td>
                 <td><?php echo $value->created ?></td>
                 <td><?php echo $value->modified ?></td>
                 <td style="width: 270px;text-align: center">
