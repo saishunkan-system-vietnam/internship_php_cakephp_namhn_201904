@@ -70,6 +70,8 @@ class UsersController extends AppController
 
     public function add()
     {
+        $HgNam = ($this->Auth->user());
+        $this->set("HgNam", $HgNam);
         if ($this->request->is('post')) {
             $email = htmlentities($this->request->getData('email'));
             $error = $this->Users->find()
@@ -114,6 +116,8 @@ class UsersController extends AppController
 
     public function edit($id = null)
     {
+        $HgNam = ($this->Auth->user());
+        $this->set("HgNam", $HgNam);
         $data = $this->Users->find()
             ->where(['id' => $id])
             ->first();

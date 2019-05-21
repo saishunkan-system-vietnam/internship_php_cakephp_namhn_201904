@@ -32,6 +32,8 @@ class CatalogsController extends AppController
 
     public function add()
     {
+        $HgNam = ($this->Auth->user());
+        $this->set("HgNam", $HgNam);
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $name = htmlentities($this->request->getData('name'));
             $error = $this->Catalogs->find()
@@ -60,6 +62,8 @@ class CatalogsController extends AppController
 
     public function edit($id = null)
     {
+        $HgNam = ($this->Auth->user());
+        $this->set("HgNam", $HgNam);
         $data = $this->Catalogs->find()
             ->where(['id' => $id])
             ->first();
@@ -98,6 +102,8 @@ class CatalogsController extends AppController
 
     public function listsurveys($id = null)
     {
+        $HgNam = ($this->Auth->user());
+        $this->set("HgNam", $HgNam);
         $data = $this->Catalogs->find()
             ->where(['id' => $id])
             ->first();

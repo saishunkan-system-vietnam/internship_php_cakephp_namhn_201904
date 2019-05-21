@@ -27,12 +27,14 @@ class SurveysController extends AppController
 
     public function index()
     {
+        $HgNam = ($this->Auth->user());
         $details = $this->Surveys->find('all')
             ->select([
                 'id',
                 'img_survey',
                 'hot',
                 'name',
+                'admin_create',
                 'status',
                 'Catalogs.name',
                 'start_time',
@@ -42,7 +44,7 @@ class SurveysController extends AppController
                 'count',
                 'created',
                 'modified'
-            ])
+            ])->where(['admin_create' => $HgNam[0]])
             ->join([
                 'table' => 'catalogs',
                 'alias' => 'Catalogs',
@@ -54,10 +56,13 @@ class SurveysController extends AppController
             'order' => array('id' => 'asc'),
         );
         $this->set("data", $this->paginate($details));
+        $this->set("HgNam",$HgNam);
     }
 
     public function add()
     {
+        $HgNam = ($this->Auth->user());
+        $this->set("HgNam", $HgNam);
         $catalog = $this->Catalogs->find()
             ->select(['id', 'name']);
         $this->set("catalog", $catalog);
@@ -81,9 +86,10 @@ class SurveysController extends AppController
                 $this->set("result", $result);
             } else {
                 $query = $this->Surveys->query();
-                $query->insert(['name', 'img_survey','hot' ,'catalog_id', 'start_time', 'end_time', 'login_status', 'maximum', 'status', 'created', 'modified'])
+                $query->insert(['name','admin_create', 'img_survey','hot' ,'catalog_id', 'start_time', 'end_time', 'login_status', 'maximum', 'status', 'created', 'modified'])
                     ->values([
                         'name' => $name,
+                        'admin_create' => $HgNam[0],
                         'img_survey' => $img,
                         'catalog_id' => $catalog_id,
                         'start_time' => $start_time,
@@ -104,6 +110,8 @@ class SurveysController extends AppController
 
     public function edit($id = null)
     {
+        $HgNam = ($this->Auth->user());
+        $this->set("HgNam", $HgNam);
         $data = $this->Surveys->find()
             ->where(['id' => $id])
             ->first();
@@ -188,6 +196,8 @@ class SurveysController extends AppController
 
     public function view($id = null)
     {
+        $HgNam = ($this->Auth->user());
+        $this->set("HgNam", $HgNam);
         $dataS = $this->Surveys->find()
             ->where(['id' => $id])
             ->first();
@@ -212,6 +222,8 @@ class SurveysController extends AppController
 
     public function statist($id = null)
     {
+        $HgNam = ($this->Auth->user());
+        $this->set("HgNam", $HgNam);
         // Lấy tên Khảo Sát dựa theo ID khảo sát
         $dataS = $this->Surveys->find()
             ->where(['id' => $id])

@@ -5,17 +5,17 @@ namespace App\Controller;
 use Cake\Event\Event;
 use Cake\Cache\Cache;
 use Cake\Mailer\Email;
-use Cake\Mailer\Mailer;
-
-class UserMailer extends Mailer {
-    public function resetPassword($user)
-    {
-        $this
-            ->subject('Reset Password')
-            ->to($user->email)
-            ->set(['token' => $user->token]);
-    }
-}
+//use Cake\Mailer\Mailer;
+//
+//class UserMailer extends Mailer {
+//    public function resetPassword($user)
+//    {
+//        $this
+//            ->subject('Reset Password')
+//            ->to($user->email)
+//            ->set(['token' => $user->token]);
+//    }
+//}
 class RegistsController extends AppController
 {
     public function initialize()
@@ -80,14 +80,13 @@ class RegistsController extends AppController
             $forgot = $this->Users->find()
                 ->where(['email' => $users])->first();
             if (!empty($forgot) && $secret_q == $forgot->secret_q && $secret_a == $forgot->secret_a) {
-//                $email = new Email('default');
-//                $email->setFrom(['HoagNgNam@gmail.com' => 'Nam HN'])
-//                    ->setTo($users)
-//                    ->setSubject('Lấy Lại Mật Khẩu')
-//                    ->send( 'Mời Bạn Click đường link để lấy lại mật khẩu : ' .URL . 'regists/updatepass/'.$users)
-//                    ->set(['token' => $users->token]) ;
-                $mailer = new UserMailer();
-                $mailer->send('resetPassword','HgNgocNam@gmail.com');
+                $email = new Email('default');
+                $email->setFrom(['HoagNgNam@gmail.com' => 'Nam HN'])
+                    ->setTo($users)
+                    ->setSubject('Lấy Lại Mật Khẩu')
+                    ->send( 'Mời Bạn Click đường link để lấy lại mật khẩu : ' .URL . 'regists/updatepass/'.$users);
+//                $mailer = new UserMailer();
+//                $mailer->send('resetPassword','HgNgocNam@gmail.com');
             } else {
                 $error = "error";
                 $this->set('error',$error);

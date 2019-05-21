@@ -104,7 +104,7 @@
                         <input type="radio" <?php if ($data->hot == 1) {echo 'checked';}?> value="1" name="hot">
                         <span class="checkmark"></span>
                     </label>
-                    <label class="radio" style="float: left;margin-top: 10px;margin-left: 50px">Không Hiển Thị
+                    <label class="radio" style="float: left;margin-top: 10px;margin-left: 85px">Không Hiển Thị
                         <input type="radio" <?php if ($data->hot == 0) {echo 'checked';}?> value="0" name="hot">
                         <span class="checkmark"></span>
                     </label>
