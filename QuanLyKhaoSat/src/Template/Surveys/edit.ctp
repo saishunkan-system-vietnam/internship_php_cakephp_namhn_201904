@@ -144,9 +144,9 @@
                     <td><?php echo $value->type_answer ?></td>
                     <td>
                         <a class="btn btn-primary" href="<?= URL ?>questions/edit/<?php echo $value->id ?>">
-                            <i class="fas fa-edit"></i> Write
+                            <i class="fas fa-edit"></i> Edit
                         </a>
-                        <a class="btn btn-danger" href="<?= URL ?>questions/delete/<?php echo $value->id ?>">
+                        <a onClick="return confirm('Bạn Thật Sự Muốn Xóa Câu Hỏi <?= $value->name ?>?')" class="btn btn-danger" href="<?= URL ?>questions/delete/<?php echo $value->id ?>">
                             <i class="far fa-trash-alt"></i> Delete</a>
                         </a>
                     </td>

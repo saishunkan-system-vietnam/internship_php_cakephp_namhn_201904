@@ -5,6 +5,7 @@ namespace App\Controller;
 use Cake\Event\Event;
 use Cake\Cache\Cache;
 use Cake\Mailer\Email;
+
 //use Cake\Mailer\Mailer;
 //
 //class UserMailer extends Mailer {
@@ -32,22 +33,23 @@ class RegistsController extends AppController
     {
         $this->viewBuilder()->setLayout('regists');
         if ($this->request->is('post')) {
-            $email = $this->request->getData('email');
+            $email = htmlentities($this->request->getData('email'));
             $data = $this->Users->find()
                 ->where(['email' => $email])
                 ->first();
             if (isset($data->email)) {
                 $this->set("data", $data);
             } else {
-                $password = $this->request->getData('password');
+                $password = htmlentities($this->request->getData('password'));
                 $password = md5($password);
-                $fullname = $this->request->getData('fullname');
-                $address = $this->request->getData('address');
-                $phone = $this->request->getData('phone');
-                $birth = $this->request->getData('birth');
-                $level = $this->request->getData('level');
+                $fullname = htmlentities($this->request->getData('fullname'));
+                $address = htmlentities($this->request->getData('address'));
+                $phone = htmlentities($this->request->getData('phone'));
+                $birth = htmlentities($this->request->getData('birth'));
+                $secret_q = htmlentities($this->request->getData('secret_q'));
+                $secret_a = htmlentities($this->request->getData('secret_a'));
                 $query = $this->Users->query();
-                $query->insert(['email', 'password', 'fullname', 'address', 'phone', 'birth', 'level', 'created', 'modified'])
+                $query->insert(['email', 'password', 'fullname', 'address', 'phone', 'birth', 'level', 'secret_q', 'secret_a', 'created', 'modified'])
                     ->values([
                         'email' => $email,
                         'password' => $password,
@@ -56,6 +58,8 @@ class RegistsController extends AppController
                         'phone' => $phone,
                         'birth' => $birth,
                         'level' => "Member",
+                        'secret_q' => $secret_q,
+                        'secret_a' => $secret_a,
                         'created' => date('Y-m-d H:i:s'),
                         'modified' => date('Y-m-d H:i:s')
                     ])
@@ -64,12 +68,13 @@ class RegistsController extends AppController
                 if (!empty($link)) {
                     Cache::delete('link');
                     return $this->redirect(URL . $link);
-                }  else {
+                } else {
                     return $this->redirect(URL . 'users/login');
                 }
             }
         }
     }
+
     public function forgotpass()
     {
         $this->viewBuilder()->setLayout('regists');
@@ -84,21 +89,23 @@ class RegistsController extends AppController
                 $email->setFrom(['HoagNgNam@gmail.com' => 'Nam HN'])
                     ->setTo($users)
                     ->setSubject('Lấy Lại Mật Khẩu')
-                    ->send( 'Mời Bạn Click đường link để lấy lại mật khẩu : ' .URL . 'regists/updatepass/'.$users);
-//                $mailer = new UserMailer();
-//                $mailer->send('resetPassword','HgNgocNam@gmail.com');
+                    ->send('Mời Bạn Click đường link để lấy lại mật khẩu : ' . URL . 'regists/updatepass/' . $users);
+                $success = "success";
+                $this->set('success', $success);
+
             } else {
                 $error = "error";
-                $this->set('error',$error);
+                $this->set('error', $error);
             }
         }
     }
+
     public function updatepass($email = null)
     {
         $this->viewBuilder()->setLayout('regists');
         if ($this->request->is('post')) {
-            $password1 =  htmlentities($this->request->getData('password1'));
-            $password2 =  htmlentities($this->request->getData('password2'));
+            $password1 = htmlentities($this->request->getData('password1'));
+            $password2 = htmlentities($this->request->getData('password2'));
             if ($password1 == $password2) {
                 $password = md5($password1);
                 $query = $this->Users->query();
@@ -112,13 +119,15 @@ class RegistsController extends AppController
                 $success = "success";
                 $this->set('success', $success);
                 return $this->redirect(URL . "regists/success");
-            }else {
+            } else {
                 $password_error = "password_error";
-                $this->set('passwrod_error',$password_error);
+                $this->set('passwrod_error', $password_error);
             }
         }
     }
-    public function success(){
+
+    public function success()
+    {
         $this->viewBuilder()->setLayout('regists');
     }
 }

@@ -57,36 +57,43 @@
     <form action="" method="post" id="formRegisters">
         <table class="table table-hover">
             <tr>
-                <th>Email</th>
+                <th>Tài Khoản</th>
                 <td><input type="email" name="email" class="form-control"></td>
             </tr>
             <tr>
-                <th>Password</th>
+                <th>Mật Khẩu</th>
                 <td><input type="password" name="password" class="form-control"></td>
             </tr>
             <tr>
-                <th>Fullname</th>
+                <th>Họ và Tên</th>
                 <td><input type="text" name="fullname" class="form-control"></td>
             </tr>
             <tr>
-                <th>Address</th>
+                <th>Địa Chỉ</th>
                 <td><input type="text" name="address" class="form-control"></td>
             </tr>
             <tr>
-                <th>phone</th>
+                <th>Điện Thoại</th>
                 <td><input type="text" name="phone" class="form-control"></td>
             </tr>
             <tr>
-                <th>Birth</th>
+                <th>Ngày Sinh</th>
                 <td><input type="date" name="birth" class="form-control"></td>
             </tr>
             <tr>
-                <th>Level</th>
-                <td>
-                    <select name="level" id="" class="form-control">
-                        <option value="Member">Member</option>
-                    </select>
-                </td>
+                <th style="line-height: 50px;">Câu Hỏi Bí Mật</th>
+                <td><select name="secret_q" class="form-control">
+                        <option value="Trường Đại Học Của Bạn Là Gì ?">Trường Đại Học Của Bạn Là Gì ?</option>
+                        <option value="Môn Học Bạn Thích Nhất Là Gì ?">Môn Học Bạn Thích Nhất Là Gì ?</option>
+                        <option value="Người Yêu Đầu Tiên Của Bạn Là Ai ?">Người Yêu Đầu Tiên Của Bạn Là Ai ?</option>
+                        <option value="Vì Sao Bạn Học Lập Trình ?">Vì Sao Bạn Học Lập Trình ?</option>
+                    </select></td>
+            </tr>
+            <tr>
+                <th>Nhập Đáp Án</th>
+                <th>
+                    <input name="secret_a" type="text" class="form-control">
+                </th>
             </tr>
             <tr>
                 <th></th>

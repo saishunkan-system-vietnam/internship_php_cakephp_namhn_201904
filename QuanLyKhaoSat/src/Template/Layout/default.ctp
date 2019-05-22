@@ -75,8 +75,10 @@
 </nav>
 
 <div class="container-fluid">
-    <div style="font-weight: bold;background-color: #222222;color: white;font-size: 25px;border-radius: 10px;width: 350px;height: 50px;line-height: 50px;text-align: center">
-        Xin Chào <?= $HgNam[3] ?></div>
+    <div style="font-weight: bold;background-color: #222222;color: white;font-size: 25px;border-radius: 10px;width: 450px;height: 50px;line-height: 50px;text-align: center">
+        Xin Chào <?= $HgNam[3] ?> <?php if ($HgNam[1] == "Member") { ?>
+            : Bạn Là Member
+        <?php } ?></div>
     <?= $this->Fetch('content') ?>
 </div>
 <?php echo $this->Html->script('checkbox.js'); ?>

@@ -55,7 +55,7 @@
                         <?php } ?>
                         <?php if ($data->level == 'Member') { ?>
                             <option value="<?php echo $data->level; ?>"><?php echo $data->level; ?></option>
-                            <option value="Admin">Manager</option>
+                            <option value="Admin">Admin</option>
                         <?php } ?>
                     </select>
                 </td>

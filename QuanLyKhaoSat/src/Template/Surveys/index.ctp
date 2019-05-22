@@ -1,3 +1,4 @@
+<?php if ($HgNam[1] == "Admin") { ?>
 <fieldset class="col-md-12">
     <legend>Danh Sách Khảo Sát</legend>
     <table class="table table-hover table-bordered">
@@ -55,7 +56,7 @@
                     <a href="<?= URL ?>surveys/edit/<?php echo $value->id ?>" class="btn btn-primary">
                         <i class="fas fa-edit"></i> Edit
                     </a>
-                    <a href="<?= URL ?>surveys/delete/<?php echo $value->id ?>" class="btn btn-danger">
+                    <a onClick="return confirm('Bạn Thật Sự Muốn <?= $value->name ?>?')" href="<?= URL ?>surveys/delete/<?php echo $value->id ?>" class="btn btn-danger">
                         <i class="far fa-trash-alt"></i> Delete</a>
                     </a> <br>
                     <a style="margin-top: 10px;" href="<?= URL ?>surveys/view/<?php echo $value->id ?>"
@@ -78,3 +79,4 @@
         ?>
     </ul>
 </fieldset>
+<?php }?>

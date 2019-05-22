@@ -1,3 +1,4 @@
+<?php if ($HgNam[1] == "Admin") { ?>
 <fieldset class="col-md-8 col-md-offset-2">
     <legend>
         Danh Sách Catalogs Surveys
@@ -24,7 +25,7 @@
                     <a href="<?= URL ?>catalogs/edit/<?php echo $value->id ?>" class="btn btn-primary">
                         <i class="fas fa-edit"></i> Edit
                     </a>
-                    <a href="<?= URL ?>catalogs/delete/<?php echo $value->id ?>" class="btn btn-danger">
+                    <a onClick="return confirm('Bạn Thật Sự Muốn Xóa <?= $value->name ?>?')" href="<?= URL ?>catalogs/delete/<?php echo $value->id ?>" class="btn btn-danger">
                         <i class="far fa-trash-alt"></i> Delete</a>
                     </a>
                     <a href="<?= URL ?>catalogs/listsurveys/<?php echo $value->id ?>" class="btn btn-warning">
@@ -42,4 +43,4 @@
         ?>
     </ul>
 </fieldset>
-
+<?php }?>

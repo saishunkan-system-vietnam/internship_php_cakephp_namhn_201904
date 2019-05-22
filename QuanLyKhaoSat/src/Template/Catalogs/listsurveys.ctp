@@ -19,7 +19,7 @@
                     <a href="<?= URL ?>surveys/edit/<?php echo $value->id?>" class="btn btn-primary">
                         <i class="fas fa-edit"></i> Write
                     </a>
-                    <a href="<?= URL ?>surveys/delete/<?php echo $value->id?>" class="btn btn-danger">
+                    <a onClick="return confirm('Bạn Thật Sự Muốn Xóa <?= $value->name ?>?')" href="<?= URL ?>surveys/delete/<?php echo $value->id?>" class="btn btn-danger">
                         <i class="far fa-trash-alt"></i> Delete</a>
                     </a>
                 </td>

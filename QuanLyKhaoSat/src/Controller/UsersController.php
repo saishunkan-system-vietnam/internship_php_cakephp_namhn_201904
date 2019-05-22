@@ -4,8 +4,6 @@ namespace App\Controller;
 
 use Cake\Cache\Cache;
 
-
-
 class UsersController extends AppController
 {
     public function initialize()
@@ -26,13 +24,11 @@ class UsersController extends AppController
                 ->select(['email', 'password', 'id', 'level', 'fullname'])
                 ->where(['email' => $email])
                 ->first();
-            if (isset($data)) {
+            if (isset($data->email)) {
                 $level = $data->level;
                 $id = $data->id;
                 $name = $data->fullname;
                 $user = array($email, $level, $id, $name);
-            }
-            if (isset($data->email)) {
                 if ($password == $data->password) {
                     $this->Auth->setUser($user);
                     $link = Cache::read('link');
