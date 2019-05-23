@@ -1,7 +1,6 @@
 <style>
-    .col-md-4 {
-        text-align: center;
-        font-weight: bold;
+    th {
+        text-align: left;
     }
 </style>
 <?php echo $this->Html->css('radio'); ?>
@@ -12,100 +11,108 @@
         </div>
     <?php } ?>
     <legend>Khởi Tạo Khảo Sát</legend>
-    <form method="post" action="" id="formSurveys"  enctype="multipart/form-data">
-        <div class="row form-group">
-            <div class="col-md-4">Danh mục khảo sát</div>
-            <div class="col-md-8">
-                <select class="form-control" name="catalog_id">
-                    <?php foreach ($catalog as $value) { ?>
-                        <option value="<?php echo $value->id; ?>"><?php echo $value->name; ?></option>
-                    <?php } ?>
-                </select>
-            </div>
-        </div>
-        <div class="row form-group">
-            <div class="col-md-4">Ảnh Khảo Sát</div>
-            <div class="col-md-8">
-                <input type="file" name="img" required>
-            </div>
-        </div>
-        <div class="row form-group">
-            <div class="col-md-4">Tên Khảo Sát</div>
-            <div class="col-md-8"><input value="<?php echo isset($result[0]) ? $result[0] : '' ?>"
-                        type="text" name="name" class="form-control"></div>
-        </div>
-        <div class="row form-group">
-            <div class="col-md-4">Trạng Thái Đăng Nhập</div>
-            <div class="col-md-8">
-                <span class="button-checkbox">
-                    <button type="button" class="btn" data-color="danger">Check</button>
-                    <input value="<?php echo isset($result[4]) ? $result[4] : '' ?>"
-                            type="checkbox" class="hidden" name="login_status"/>
-                </span>
-            </div>
-        </div>
-        <div class="row form-group">
-            <div class="col-md-4">
-                <span>Ngày Bắt Đầu Khảo Sát :</span>
-            </div>
-            <div class="col-md-8">
-                <input value="<?php echo isset($result[2]) ? $result[2] : '' ?>"
-                        type="date"  class="form-control" name="start_time">
-            </div>
-        </div>
-        <div class="row form-group">
-            <div class="col-md-4">
-                Ngày Kết Thúc Khảo Sát :
-            </div>
-            <div class="col-md-8">
-                <input value="<?php echo isset($result[3]) ? $result[3] : '' ?>"
-                        type="date"  class="form-control" name="end_time">
-            </div>
-        </div>
-        <div class="row form-group">
-            <div class="col-md-4">
-                Số Khảo Sát Tối Đa :
-            </div>
-            <div class="col-md-8">
-                <input value="<?php echo isset($result[5]) ? $result[5] : '' ?>"
-                        type="number" name="maximum" class="form-control">
-            </div>
-        </div>
-        <div class="row form-group">
-            <div class="col-md-4">Trạng Thái :</div>
-            <div class="col-md-8" style="text-align: left">
-                <label class="radio" style="float: left">Mở Khảo Sát
-                    <input type="radio" checked  value="open" name="status">
-                    <span class="checkmark"></span>
-                </label>
-                <label class="radio" style="float: left;margin-top: 10px;margin-left: 50px;">Đóng Khảo Sát
-                    <input type="radio"  value="closed" name="status">
-                    <span class="checkmark"></span>
-                </label>
-                <div style="clear: both"></div>
-            </div>
-        </div>
-        <div class="row form-group">
-            <div class="col-md-4">Hiển Thị :</div>
-            <div class="col-md-8" style="text-align: left">
-                <label class="radio" style="float: left">Hiển Thị
-                    <input type="radio" checked  value="1" name="hot">
-                    <span class="checkmark"></span>
-                </label>
-                <label class="radio" style="float: left;margin-top: 10px;margin-left: 85px;">Không Hiển Thị
-                    <input type="radio"  value="0" name="hot">
-                    <span class="checkmark"></span>
-                </label>
-                <div style="clear: both"></div>
-            </div>
-        </div>
-        <div class="row form-group">
-            <div class="col-md-4"></div>
-            <div class="col-md-8">
-                <button class="btn btn-primary" type="submit"><i class="far fa-thumbs-up"></i> Submit</button>
-                <button class="btn btn-danger" type="reset"><i class="fas fa-sync-alt"></i> Reset</button>
-            </div>
-        </div>
-    </form>
+    <table class="table table-hover table-bordered">
+        <form method="post" action="" id="formSurveys" enctype="multipart/form-data">
+        <?php if (isset($catalogID)) { ?>
+                <tr>
+                    <th>Danh mục khảo sát</th>
+                    <th><?php echo $catalogID->name; ?></th>
+                </tr>
+            <?php } else { ?>
+                <tr>
+                    <th>Danh mục khảo sát</th>
+                    <th>
+                        <select class="form-control" name="catalog_id">
+                            <?php foreach ($catalog as $value) { ?>
+                                <option value="<?php echo $value->id; ?>"><?php echo $value->name; ?></option>
+                            <?php } ?>
+                        </select>
+                    </th>
+                </tr>
+            <?php } ?>
+            <tr>
+                <th>Ảnh Khảo Sát</th>
+                <th>
+                    <input type="file" name="img" required>
+                </th>
+            </tr>
+            <tr>
+                <th>Tên Khảo Sát</th>
+                <th><input value="<?php echo isset($result[0]) ? $result[0] : '' ?>"
+                           type="text" name="name" class="form-control"></th>
+            </tr>
+            <tr>
+                <th>Trạng Thái Đăng Nhập</th>
+                <th>
+                     <span class="button-checkbox">
+                            <button type="button" class="btn" data-color="danger">Login</button>
+                            <input type="checkbox" <?php echo isset($result[4]) && $result[4] == 'on' ? "checked" : '' ?> class="hidden" name="login_status"/>
+                     </span>
+                </th>
+            </tr>
+            <tr>
+                <th>
+                    <span>Ngày Bắt Đầu Khảo Sát :</span>
+                </th>
+                <th>
+                    <input value="<?php echo isset($result[2]) ? $result[2] : '' ?>"
+                           type="date" class="form-control" name="start_time">
+                </th>
+            </tr>
+            <tr>
+                <th>
+                    Ngày Kết Thúc Khảo Sát :
+                </th>
+                <th>
+                    <input value="<?php echo isset($result[3]) ? $result[3] : '' ?>"
+                           type="date" class="form-control" name="end_time">
+                </th>
+            </tr>
+            <tr>
+                <th>
+                    Số Khảo Sát Tối Đa :
+                </th>
+                <th>
+                    <input value="<?php echo isset($result[5]) ? $result[5] : '' ?>"
+                           type="number" name="maximum" class="form-control">
+                </th>
+            </tr>
+            <tr>
+                <th>Trạng Thái :</th>
+                <th style="text-align: left">
+                    <label class="radio" style="float: left">Mở Khảo Sát
+                        <input type="radio" checked value="open" name="status">
+                        <span class="checkmark"></span>
+                    </label>
+                    <label class="radio" style="float: left;margin-top: 10px;margin-left: 50px;">Đóng Khảo Sát
+                        <input type="radio" value="closed" name="status">
+                        <span class="checkmark"></span>
+                    </label>
+                    <div style="clear: both"></div>
+                </th>
+            </tr>
+            <tr>
+                <th>Hiển Thị :</th>
+                <th style="text-align: left">
+                    <label class="radio" style="float: left">Hiển Thị
+                        <input type="radio" checked value="1" name="hot">
+                        <span class="checkmark"></span>
+                    </label>
+                    <label class="radio" style="float: left;margin-top: 10px;margin-left: 85px;">Không Hiển Thị
+                        <input type="radio" value="0" name="hot">
+                        <span class="checkmark"></span>
+                    </label>
+                    <div style="clear: both"></div>
+                </th>
+            </tr>
+            <tr>
+                <th></th>
+                <th>
+                    <button class="btn btn-primary" type="submit"><i class="far fa-thumbs-up"></i> Submit</button>
+                    <button class="btn btn-danger" type="reset"><i class="fas fa-sync-alt"></i> Reset</button>
+                </th>
+            </tr>
+        </form>
 </fieldset>
+</table>
 <?php echo $this->Html->script('validate/surveys'); ?>

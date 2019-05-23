@@ -56,13 +56,18 @@ class SurveysController extends AppController
             'order' => array('id' => 'asc'),
         );
         $this->set("data", $this->paginate($details));
-        $this->set("HgNam",$HgNam);
+        $this->set("HgNam", $HgNam);
     }
 
-    public function add()
+    public function add($id = null)
     {
         $HgNam = ($this->Auth->user());
         $this->set("HgNam", $HgNam);
+        //================================
+        $catalogID = $this->Catalogs->find()
+            ->select(['id', 'name'])->where(['id' => $id])->first();
+        $this->set("catalogID", $catalogID);
+        //================================
         $catalog = $this->Catalogs->find()
             ->select(['id', 'name']);
         $this->set("catalog", $catalog);
@@ -76,22 +81,22 @@ class SurveysController extends AppController
             $catalog_id = htmlentities($this->request->getData('catalog_id'));
             $start_time = htmlentities($this->request->getData('start_time'));
             $end_time = htmlentities($this->request->getData('end_time'));
-            $login_status = htmlentities($this->request->getData('login_status'));
+            $login_status = $this->request->getData('login_status');
             $maximum = htmlentities($this->request->getData('maximum'));
             $status = htmlentities($this->request->getData('status'));
             $hot = htmlentities($this->request->getData('hot'));
-            $result = array($name, $catalog_id, $start_time, $end_time, $login_status, $maximum,$hot);
+            $result = array($name, $catalog_id, $start_time, $end_time, $login_status, $maximum, $hot);
             if (isset($error->name)) {
                 $this->set("error", $error);
                 $this->set("result", $result);
             } else {
                 $query = $this->Surveys->query();
-                $query->insert(['name','admin_create', 'img_survey','hot' ,'catalog_id', 'start_time', 'end_time', 'login_status', 'maximum', 'status', 'created', 'modified'])
+                $query->insert(['name', 'admin_create', 'img_survey', 'hot', 'catalog_id', 'start_time', 'end_time', 'login_status', 'maximum', 'status', 'created', 'modified'])
                     ->values([
                         'name' => $name,
                         'admin_create' => $HgNam[0],
                         'img_survey' => $img,
-                        'catalog_id' => $catalog_id,
+                        'catalog_id' => isset($id) ? $id : $catalog_id,
                         'start_time' => $start_time,
                         'end_time' => $end_time,
                         'login_status' => $login_status,
@@ -102,7 +107,11 @@ class SurveysController extends AppController
                         'modified' => date('Y-m-d H:i:s')
                     ])
                     ->execute();
-                return $this->redirect(URL . 'Surveys');
+                if (isset($id)) {
+                    return $this->redirect(URL . 'catalogs/lists/' . $id);
+                } else {
+                    return $this->redirect(URL . 'Surveys');
+                }
             }
         }
 
@@ -156,7 +165,7 @@ class SurveysController extends AppController
             $maximum = htmlentities($this->request->getData('maximum'));
             $status = htmlentities($this->request->getData('status'));
             $hot = htmlentities($this->request->getData('hot'));
-            $result = array($name, $catalog_id, $start_time, $end_time, $login_status, $maximum,$hot);
+            $result = array($name, $catalog_id, $start_time, $end_time, $login_status, $maximum, $hot);
             if (isset($error->name) && $error->id != $data->id) {
                 $this->set("error", $error);
                 $this->set("result", $result);

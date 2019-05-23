@@ -1,14 +1,14 @@
 <?php if ($HgNam[1] == "Admin") { ?>
-<fieldset class="col-md-8 col-md-offset-2">
+<fieldset class="col-md-10 col-md-offset-1">
     <legend>
-        Danh Sách Catalogs Surveys
+        Danh Sách Danh Mục Khảo Sát
     </legend>
     <table class="table table-hover table-bordered">
         <tr>
             <th>ID</th>
-            <th>Name</th>
-            <th>Created_at</th>
-            <th>Modified_at</th>
+            <th>Tên Danh Mục</th>
+            <th>Thời Gian Khởi Tạo</th>
+            <th>Thời Gian Thay Đổi</th>
             <th style="text-align: center">
                 <a href="<?= URL ?>catalogs/add" class="btn btn-success">
                     <i class="fas fa-plus"></i> ADD
@@ -28,8 +28,8 @@
                     <a onClick="return confirm('Bạn Thật Sự Muốn Xóa <?= $value->name ?>?')" href="<?= URL ?>catalogs/delete/<?php echo $value->id ?>" class="btn btn-danger">
                         <i class="far fa-trash-alt"></i> Delete</a>
                     </a>
-                    <a href="<?= URL ?>catalogs/listsurveys/<?php echo $value->id ?>" class="btn btn-warning">
-                        <i class="far fa-eye"></i></i> View</a>
+                    <a href="<?= URL ?>catalogs/lists/<?php echo $value->id ?>" class="btn btn-warning">
+                        <i class="fas fa-list-ul"></i> List</a>
                     </a>
                 </th>
             </tr>
@@ -44,3 +44,4 @@
     </ul>
 </fieldset>
 <?php }?>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>

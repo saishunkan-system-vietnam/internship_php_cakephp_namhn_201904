@@ -5,9 +5,7 @@
             Khảo Sát đã tồn tại, xin vui lòng nhập Khảo Sát khác ^^! Nhớ nha :))
         </div>
     <?php } ?>
-    <legend>
-        Chỉnh Sửa Khảo Sát
-    </legend>
+    <legend>Chỉnh Sửa Khảo Sát</legend>
     <form action="<?= URL ?>surveys/edit/<?php echo $data->id ?>" method="post" id="formSurveys" enctype="multipart/form-data">
         <table class="table table-hover table-bordered">
             <tr>
@@ -130,9 +128,7 @@
                             <i class="fas fa-plus"></i> Thêm Câu Hỏi</a>
                     </th>
                 </tr>
-                <?php foreach ($data2
-
-                as $value) { ?>
+                <?php foreach ($data2 as $value) { ?>
                 <tr>
                     <td><?php echo $value->type_question ?></td>
                     <?php if ($value->type_question == 'Images') { ?>

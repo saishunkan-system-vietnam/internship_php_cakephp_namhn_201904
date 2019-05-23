@@ -100,7 +100,7 @@ class CatalogsController extends AppController
         return $this->redirect(URL . 'Catalogs');
     }
 
-    public function listsurveys($id = null)
+    public function lists($id = null)
     {
         $HgNam = ($this->Auth->user());
         $this->set("HgNam", $HgNam);
