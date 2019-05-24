@@ -81,7 +81,11 @@ class SurveysController extends AppController
             $catalog_id = htmlentities($this->request->getData('catalog_id'));
             $start_time = htmlentities($this->request->getData('start_time'));
             $end_time = htmlentities($this->request->getData('end_time'));
-            $login_status = $this->request->getData('login_status');
+            if ($this->request->getData('login_status') != null) {
+                $login_status = $this->request->getData('login_status');
+            } else {
+                $login_status = '';
+            }
             $maximum = htmlentities($this->request->getData('maximum'));
             $status = htmlentities($this->request->getData('status'));
             $hot = htmlentities($this->request->getData('hot'));
@@ -220,13 +224,15 @@ class SurveysController extends AppController
     {
         $quest_id = $_GET['qid'];
         $answer = $_GET['asr'];
+        $answer = htmlentities($answer);
         $conn = ConnectionManager::get('default');
         $data = $conn->execute("SELECT * FROM statists WHERE question_id = $quest_id HAVING answer LIKE '%$answer%'")->fetchAll('obj');
         foreach ($data as $value) {
             $dataUsers = $value->user_answer;
-            echo($dataUsers);
+            echo $dataUsers;
             echo "<br>";
         }
+        die;
     }
 
     public function statist($id = null)
@@ -265,5 +271,19 @@ class SurveysController extends AppController
         //===========================================
         $conn = ConnectionManager::get('default');
         $this->set('conn', $conn);
+    }
+
+    public function clickDelete()
+    {
+        $id = $_GET['id'];
+        $survey = $this->Surveys->find()->where(['id' => $id])->first();
+        unlink(WWW_ROOT . "img/survey" . DS . $survey->img_survey);
+        $query = $this->Surveys->query();
+        $query->delete()
+            ->where(['id' => $id])
+            ->execute();
+        echo "ok";
+        die;
+
     }
 }

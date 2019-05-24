@@ -36,13 +36,13 @@
                 <th style="text-align: left">
                     <?php if ($data->login_status == 'on') { ?>
                         <span class="button-checkbox">
-                            <button type="button" class="btn" data-color="danger">Check</button>
+                            <button type="button" class="btn" data-color="danger">Login</button>
                             <input type="checkbox" class="hidden" name="login_status" checked/>
                         </span>
                     <?php } ?>
                     <?php if ($data->login_status == '') { ?>
                         <span class="button-checkbox">
-                            <button type="button" class="btn" data-color="danger">Check</button>
+                            <button type="button" class="btn" data-color="danger">Login</button>
                             <input type="checkbox" class="hidden" name="login_status"/>
                         </span>
                     <?php } ?>
@@ -121,9 +121,10 @@
                     <th>Question</th>
                     <th>Answers</th>
                     <th>Type Answ</th>
+                    <th>Status</th>
                     <th style="width: 200px;">
                         <a style="width: 130px"
-                                                 href="<?= URL ?>questions/add/<?php echo $data->id ?>"
+                           href="<?= URL ?>questions/add/<?php echo $data->id ?>"
                                                  class="btn btn-success">
                             <i class="fas fa-plus"></i> Thêm Câu Hỏi</a>
                     </th>
@@ -132,19 +133,20 @@
                 <tr>
                     <td><?php echo $value->type_question ?></td>
                     <?php if ($value->type_question == 'Images') { ?>
-                        <td><img style="height: 100px;width: 200px;" src="<?= URL ?>img/<?= $value->name ?>"></td>
+                        <td class="rows<?= $value->id ?>"><img style="height: 100px;width: 200px;" src="<?= URL ?>img/<?= $value->name ?>"></td>
                     <?php } else { ?>
                         <td><?php echo $value->name ?></td>
                     <?php } ?>
                     <td><?php echo $value->answers ?></td>
                     <td><?php echo $value->type_answer ?></td>
-                    <td>
+                    <td><?php echo $value->status ?></td>
+                    <td class="rows<?= $value->id ?>">
                         <a class="btn btn-primary" href="<?= URL ?>questions/edit/<?php echo $value->id ?>">
                             <i class="fas fa-edit"></i> Edit
                         </a>
-                        <a onClick="return confirm('Bạn Thật Sự Muốn Xóa Câu Hỏi <?= $value->name ?>?')" class="btn btn-danger" href="<?= URL ?>questions/delete/<?php echo $value->id ?>">
-                            <i class="far fa-trash-alt"></i> Delete</a>
-                        </a>
+                       <button type="button" id="<?= $value->id ?>" class="btn btn-danger click">
+                           <i class="far fa-trash-alt"></i> Delete</a>
+                       </button>
                     </td>
                 <tr>
                     <?php } ?>
@@ -160,23 +162,46 @@
         </div>
     </form>
 </fieldset>
-<?php echo $this->Html->script('validate/surveys'); ?>
+<?php echo $this->Html->script('validate/survey/survey'); ?>
 
 <?php echo $this->Html->script('checkbox.js'); ?>
 <script>
     function myFunction() {
-        /* Get the text field */
         var copyText = document.getElementById("myInput");
-
-        /* Select the text field */
         copyText.select();
-
-        /* Copy the text inside the text field */
         document.execCommand("copy");
-
-        // /* Alert the copied text */
-        // alert("Copied the text: " + copyText.value);
     }
 </script>
-
+<script type="text/javascript">
+    $(document).ready(function () {
+        $(".click").click(function () {
+            let id = $(this).attr("id");
+            swal({
+                title: "Bạn Có Chắc Muốn Xóa Không?",
+                text: "Sau khi xóa dữ liệu sẽ không được khôi phục lại!",
+                icon: "warning",
+                buttons: true,
+                dangerMode: true,
+            })
+                .then((willDelete) => {
+                    if (willDelete) {
+                        $.ajax({
+                            url: '<?= URL ?>questions/clickDelete?id=' + id,
+                            type: 'GET',
+                            success: function (res) {
+                                if (res == 'ok') {
+                                    swal(" Đã Xóa Thành Công !", {
+                                        icon: "success",
+                                    });
+                                }
+                            }
+                        });
+                        $(".rows" + id).remove();
+                    } else {
+                        swal("Hủy Xóa Thành Công !");
+                    }
+                });
+        });
+    });
+</script>
 

@@ -94,6 +94,10 @@ class UsersController extends AppController
                 if (isset($error->email)) {
                     $this->set("error", $error);
                     $this->set("result", $result);
+                } else if (strtotime($birth) >= strtotime(date('Y-m-d H:i:s'))) {
+                    $errorBirth = "erroBirth";
+                    $this->set("errorBirth", $errorBirth);
+                    $this->set("result", $result);
                 } else {
                     if ($password1 == $password2) {
                         $password1 = md5($password1);
@@ -219,5 +223,17 @@ class UsersController extends AppController
     {
         $this->Auth->logout();
         return $this->redirect(URL . 'users/login');
+    }
+
+    public function clickDelete()
+    {
+        $id = $_GET['id'];
+        $query = $this->Users->query();
+        $query->delete()
+            ->where(['id' => $id])
+            ->execute();
+        echo "ok";
+        die;
+
     }
 }

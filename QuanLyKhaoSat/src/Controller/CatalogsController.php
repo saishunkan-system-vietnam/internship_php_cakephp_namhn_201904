@@ -39,8 +39,7 @@ class CatalogsController extends AppController
             $error = $this->Catalogs->find()
                 ->where(['name' => $name])
                 ->first();
-            $created = htmlentities($this->request->getData('created'));
-            $result = array($name, $created);
+            $result = array($name);
             if (isset($error->name)) {
                 $this->set("error", $error);
                 $this->set("result", $result);
@@ -109,8 +108,19 @@ class CatalogsController extends AppController
             ->first();
         $this->set('data', $data);
         $survey = $this->Surveys->find()
-            ->where(['catalog_id' => $data->id ,
-            'admin_create' => $HgNam[0]]);
+            ->where(['catalog_id' => $data->id,
+                'admin_create' => $HgNam[0]]);
         $this->set('survey', $survey);
+    }
+
+    public function clickDelete()
+    {
+        $id = $_GET['id'];
+        $query = $this->Catalogs->query();
+        $query->delete()
+            ->where(['id' => $id])
+            ->execute();
+        echo "ok";die;
+
     }
 }

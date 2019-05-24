@@ -12,7 +12,7 @@
     <?php } ?>
     <legend>Khởi Tạo Khảo Sát</legend>
     <table class="table table-hover table-bordered">
-        <form method="post" action="" id="formSurveys" enctype="multipart/form-data">
+        <form method="post" action="<?= URL ?>surveys/add/<?php echo isset($id) ? $id : ''?>" id="formSurveys" enctype="multipart/form-data">
         <?php if (isset($catalogID)) { ?>
                 <tr>
                     <th>Danh mục khảo sát</th>
@@ -33,12 +33,13 @@
             <tr>
                 <th>Ảnh Khảo Sát</th>
                 <th>
-                    <input type="file" name="img" required>
+                    <input type="file" id="i_file" name="img" required>
                 </th>
             </tr>
             <tr>
                 <th>Tên Khảo Sát</th>
-                <th><input value="<?php echo isset($result[0]) ? $result[0] : '' ?>"
+                <th><input placeholder="Nhập tên khảo sát"
+                            required value="<?php echo isset($result[0]) ? $result[0] : '' ?>"
                            type="text" name="name" class="form-control"></th>
             </tr>
             <tr>
@@ -73,7 +74,8 @@
                     Số Khảo Sát Tối Đa :
                 </th>
                 <th>
-                    <input value="<?php echo isset($result[5]) ? $result[5] : '' ?>"
+                    <input placeholder="Nhập số khảo sát tối đa"
+                            value="<?php echo isset($result[5]) ? $result[5] : '' ?>"
                            type="number" name="maximum" class="form-control">
                 </th>
             </tr>
@@ -108,11 +110,10 @@
             <tr>
                 <th></th>
                 <th>
-                    <button class="btn btn-primary" type="submit"><i class="far fa-thumbs-up"></i> Submit</button>
+                    <button class="btn btn-primary" id="i_submit" type="submit"><i class="far fa-thumbs-up"></i> Submit</button>
                     <button class="btn btn-danger" type="reset"><i class="fas fa-sync-alt"></i> Reset</button>
                 </th>
             </tr>
         </form>
 </fieldset>
 </table>
-<?php echo $this->Html->script('validate/surveys'); ?>

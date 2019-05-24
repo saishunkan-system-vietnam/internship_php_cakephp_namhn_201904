@@ -9,6 +9,11 @@
             Mật Khẩu Nhập Lại Không Trùng Khớp ^^!
         </div>
     <?php } ?>
+    <?php if (isset($errorBirth)) { ?>
+        <div class="alert alert-danger">
+           Ngày Sinh Nhập Đã Lỗi ^^!
+        </div>
+    <?php } ?>
     <legend>
         ADD Users
     </legend>
@@ -16,7 +21,8 @@
         <table class="table table-hover">
             <tr>
                 <th class="col-md-4">Tài Khoản</th>
-                <td><input value="<?php echo isset($result[0]) ? $result[0] : '' ?>"
+                <td><input placeholder="Nhập tài khoản"
+                            value="<?php echo isset($result[0]) ? $result[0] : '' ?>"
                            type="email" name="email" id="email" class="form-control email"></td>
             </tr>
             <tr id="show">
@@ -25,32 +31,38 @@
             </tr>
             <tr>
                 <th>Mật Khẩu</th>
-                <td><input value="<?php echo isset($result[1]) ? $result[1] : '' ?>"
+                <td><input placeholder="Nhập mật khẩu"
+                            value="<?php echo isset($result[1]) ? $result[1] : '' ?>"
                            type="password" id="pass1" name="password1" class="form-control"></td>
             </tr>
             <tr id="pass2">
                 <th>Nhập Lại Mật Khẩu</th>
-                <td><input value="<?php echo isset($result[2]) ? $result[2] : '' ?>"
+                <td><input placeholder="Nhập lại mật khẩu"
+                            value="<?php echo isset($result[2]) ? $result[2] : '' ?>"
                            type="password" name="password2" class="form-control"></td>
             </tr>
             <tr>
                 <th>Họ và Tên</th>
-                <td><input value="<?php echo isset($result[3]) ? $result[3] : '' ?>"
-                           type="text" name="fullname" class="form-control"></td>
+                <td><input placeholder="Nhập họ và tên của bạn"
+                            value="<?php echo isset($result[3]) ? $result[3] : '' ?>"
+                           type="number" name="fullname" class="form-control"></td>
             </tr>
             <tr>
                 <th>Địa Chỉ</th>
-                <td><input value="<?php echo isset($result[4]) ? $result[4] : '' ?>"
+                <td><input placeholder="Nhập địa chỉ"
+                            value="<?php echo isset($result[4]) ? $result[4] : '' ?>"
                            type="text" name="address" class="form-control"></td>
             </tr>
             <tr>
                 <th>Số Điện Thoại</th>
-                <td><input value="<?php echo isset($result[5]) ? $result[5] : '' ?>"
+                <td><input placeholder="Nhập số điện thoại"
+                            value="<?php echo isset($result[5]) ? $result[5] : '' ?>"
                            type="text" name="phone" class="form-control"></td>
             </tr>
             <tr>
                 <th>Ngày/Tháng/Năm Sinh</th>
-                <td><input value="<?php echo isset($result[6]) ? $result[6] : '' ?>"
+                <td><input placeholder="Nhập Ngày / Tháng / Năm Sinh"
+                            value="<?php echo isset($result[6]) ? $result[6] : '' ?>"
                            type="date" name="birth" class="form-control"></td>
             </tr>
             <tr>
@@ -93,7 +105,8 @@
             </tr>
             <tr>
                 <th>Câu Trả Lời</th>
-                <td><input value="<?php echo isset($result[9]) ? $result[9] : '' ?>"
+                <td><input placeholder="Nhập câu trả lời cho câu hỏi bí mật"
+                            value="<?php echo isset($result[9]) ? $result[9] : '' ?>"
                            type="text" name="secret_a" class="form-control"></td>
             </tr>
             <tr>

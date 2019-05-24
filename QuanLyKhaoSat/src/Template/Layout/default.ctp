@@ -11,6 +11,7 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
     <script type="text/javascript"
             src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.13.1/jquery.validate.min.js"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 </head>
 <body style="height: 1500px;">
 <style>
@@ -60,10 +61,10 @@
 <nav class="navbar navbar-inverse header" style="position: sticky;top: 0; z-index: 10 ">
     <div class="container-fluid">
         <div class="navbar-header">
-            <a href="<?= URL ?>actions" class="navbar-brand" style="font-size: 19px;"><i class="fas fa-tasks"></i> Trang Khảo Sát</a>
+            <a href="<?= URL ?>homes" class="navbar-brand" style="font-size: 19px;"><i class="fas fa-tasks"></i> Trang Khảo Sát</a>
         </div>
         <ul class="nav navbar-nav pull-right">
-            <li><a href="<?= URL ?>homes"><i class="fas fa-house-damage"></i> Home</a></li>
+            <li><a href="<?= URL ?>actions"><i class="fas fa-house-damage"></i> Home</a></li>
             <li><a href="<?= URL ?>catalogs"><i class="fas fa-journal-whills"></i> Danh Mục</a></li>
             <li><a href="<?= URL ?>surveys"><i class="fas fa-file-signature"></i> Khảo Sát</a></li>
 <!--            <li><a href="--><?//= URL ?><!--questions"><i class="fas fa-comment-dots"></i> Questions</a></li>-->

@@ -54,7 +54,9 @@ Router::scope('/', function (RouteBuilder $routes) {
 
     //$routes->applyMiddleware('csrf');
 
-    $routes->connect('/', ['controller' => 'Pages', 'action' => 'display', 'home']);
+    $routes->connect('/', ['controller' => 'Users', 'action' => 'index']);
+
+    $routes->connect('', ['controller' => 'Actions' , 'action' => 'index']);
 
     $routes->connect('/pages/*', ['controller' => 'Pages', 'action' => 'display']);
 

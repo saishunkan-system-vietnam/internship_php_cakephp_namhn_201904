@@ -39,10 +39,8 @@
                         <a href="<?php URL ?>users/edit/<?php echo $value->id ?>" class="btn btn-primary">
                             <i class="fas fa-edit"></i> Edit
                         </a>
-                        <a onClick="return confirm('Bạn Thật Sự Muốn Xóa Tài Khoản <?= $value->email ?>?')"
-                           class="btn btn-danger"
-                           href="<?php URL ?>users/delete/<?php echo $value->id ?>">
-                            <i class="far fa-trash-alt"></i> Delete</a>
+                        <button type="button" id="<?= $value->id ?>" class="btn btn-danger click">
+                            <i class="far fa-trash-alt"></i> Delete</button>
                     <?php } ?>
                 </td>
             </tr>
@@ -56,3 +54,37 @@
         ?>
     </ul>
 </fieldset>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $(".click").click(function () {
+            let id = $(this).attr("id");
+            swal({
+                title: "Bạn Có Chắc Muốn Xóa Không?",
+                text: "Sau khi xóa dữ liệu sẽ không được khôi phục lại!",
+                icon: "warning",
+                buttons: true,
+                dangerMode: true,
+            })
+                .then((willDelete) => {
+                    if (willDelete) {
+                        $.ajax({
+                            url: '<?= URL ?>users/clickDelete?id=' + id,
+                            type: 'GET',
+                            success: function (res) {
+                                if (res == 'ok') {
+                                    swal(" Đã Xóa Thành Công !", {
+                                        icon: "success",
+                                    }).then(function(){
+                                        window.location.replace("<?= URL ?>catalogs");
+                                    });
+                                }
+                            }
+                        });
+                    } else {
+                        swal("Hủy Xóa Thành Công !");
+                    }
+                });
+        });
+    });
+</script>
+
