@@ -10,6 +10,11 @@
             Khảo Sát đã tồn tại, xin vui lòng nhập Khảo Sát khác ^^! Nhớ nha :))
         </div>
     <?php } ?>
+    <?php if (isset($checkImg)) { ?>
+        <div class="alert alert-danger">
+            File bạn vừa đăng tải không phải file Ảnh , Xin vui lòng chọn File "jpg" hoặc "png"
+        </div>
+    <?php } ?>
     <legend>Khởi Tạo Khảo Sát</legend>
     <table class="table table-hover table-bordered">
         <form method="post" action="<?= URL ?>surveys/add/<?php echo isset($id) ? $id : ''?>" id="formSurveys" enctype="multipart/form-data">
@@ -33,7 +38,7 @@
             <tr>
                 <th>Ảnh Khảo Sát</th>
                 <th>
-                    <input type="file" id="i_file" name="img" required>
+                    <input type="file" id="i_file" name="img">
                 </th>
             </tr>
             <tr>
@@ -117,3 +122,13 @@
         </form>
 </fieldset>
 </table>
+<script>
+    $(document).ready(function () {
+        $('#i_file').mouseout(function () {
+            var regExp = /[^0-9]/;
+            if ($('#tel').val().match(regExp)) {
+                swal("Số điện thoại bạn nhập không hợp lệ ^^!");
+            }
+        });
+    });
+</script>

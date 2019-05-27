@@ -55,16 +55,21 @@ class UsersController extends AppController
         if ($HgNam[1] == "Member") {
             return $this->redirect(URL . "actions");
         } else {
-            $this->Users->find('all', array(
-                'order' => "FIELD(Users.level, 'Admin','Member') ASC"
-            ));
             $this->paginate = array(
-                'limit' => 4,
+                'limit' => 8,
                 'order' => array('id' => 'asc'),
             );
-            $data = $this->paginate("Users");
+            $data = $this->Users->find()
+                ->where(['restore' => 1]);
+            $data = $this->paginate($data);
             $this->set("data", $data);
             $this->set("HgNam", $HgNam);
+            $recycleBin = $this->Users->find()
+                ->where(['restore' => 0])->toArray();
+            $this->set("recycleBin", $recycleBin);
+            $dem = $this->Users->find()
+                ->where(['restore' => 1])->count();
+            $this->set("dem", $dem);
         }
     }
 
@@ -102,7 +107,7 @@ class UsersController extends AppController
                     if ($password1 == $password2) {
                         $password1 = md5($password1);
                         $query = $this->Users->query();
-                        $query->insert(['email', 'password', 'fullname', 'address', 'phone', 'birth', 'level', 'created', 'secret_q', 'secret_a', 'modified'])
+                        $query->insert(['email', 'password', 'restore', 'fullname', 'address', 'phone', 'birth', 'level', 'created', 'secret_q', 'secret_a', 'modified'])
                             ->values([
                                 'email' => $email,
                                 'password' => $password1,
@@ -111,8 +116,10 @@ class UsersController extends AppController
                                 'phone' => $phone,
                                 'birth' => $birth,
                                 'level' => $level,
+                                'restore' => 1,
                                 'secret_q' => $secret_q,
                                 'secret_a' => $secret_a,
+
                                 'created' => date('Y-m-d H:i:s'),
                                 'modified' => date('Y-m-d H:i:s')
                             ])
@@ -125,7 +132,6 @@ class UsersController extends AppController
                     }
                 }
             }
-
         }
     }
 
@@ -210,15 +216,6 @@ class UsersController extends AppController
         }
     }
 
-    public function delete($id = null)
-    {
-        $query = $this->Users->query();
-        $query->delete()
-            ->where(['id' => $id])
-            ->execute();
-        return $this->redirect(URL . 'users');
-    }
-
     public function logout()
     {
         $this->Auth->logout();
@@ -229,11 +226,73 @@ class UsersController extends AppController
     {
         $id = $_GET['id'];
         $query = $this->Users->query();
+        $query->update()
+            ->set([
+                'restore' => 0,
+                'modified' => date('Y-m-d H:i:s')
+            ])
+            ->where(['id' => $id])
+            ->execute();
+        echo "ok";
+        die;
+    }
+
+    public function delete()
+    {
+        $id = $_GET['id'];
+        $query = $this->Users->query();
         $query->delete()
             ->where(['id' => $id])
             ->execute();
         echo "ok";
         die;
+    }
 
+    public function restore()
+    {
+        $id = $_GET['id'];
+        $query = $this->Users->query();
+        $query->update()
+            ->set([
+                'restore' => 1,
+                'modified' => date('Y-m-d H:i:s')
+            ])
+            ->where(['id' => $id])
+            ->execute();
+        echo "ok";
+        die;
+    }
+
+    public function addrestore()
+    {
+        $this->loadComponent('Auth');
+        $HgNam = $this->Auth->user();
+        $id = $_GET['id'];
+        $data = $this->Users->find()
+            ->where(['id' => $id]);
+        foreach ($data as $value) { ?>
+            <td><?php echo $value->id ?></td>
+            <td><?php echo $value->email ?></td>
+            <td><?php echo $value->fullname ?></td>
+            <td><?php echo $value->address ?></td>
+            <td><?php echo $value->phone ?></td>
+            <td><?php echo $value->birth ?></td>
+            <td><?php echo $value->level ?></td>
+            <td><?php echo $value->secret_q ?></td>
+            <td><?php echo $value->secret_a ?></td>
+            <td><?php echo $value->created ?></td>
+            <td><?php echo $value->modified ?></td>
+            <?php if (($value->level == 'Member') || ($value->id == $HgNam[2])) { ?>
+                <td>
+                <a href="<?php URL ?>users/edit/<?php echo $value->id ?>" class="btn btn-primary">
+                    <i class="fas fa-edit"></i> Edit
+                </a>
+                <button type="button" id="<?= $value->id ?>" class="btn btn-danger click">
+                    <i class="far fa-trash-alt"></i> Delete
+                </button>
+                </td>
+            <?php } ?>
+        <?php }
+        die;
     }
 }

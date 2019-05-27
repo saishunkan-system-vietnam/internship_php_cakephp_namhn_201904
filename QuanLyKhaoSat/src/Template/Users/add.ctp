@@ -17,8 +17,8 @@
     <legend>
         ADD Users
     </legend>
-    <form action="<?= URL ?>users/add" id="usersAdd" method="post">
-        <table class="table table-hover">
+    <form onsubmit="validate_tel()" action="<?= URL ?>users/add" id="usersAdd" method="post">
+        <table class="table table-hover table-bordered ">
             <tr>
                 <th class="col-md-4">Tài Khoản</th>
                 <td><input placeholder="Nhập tài khoản"
@@ -45,7 +45,7 @@
                 <th>Họ và Tên</th>
                 <td><input placeholder="Nhập họ và tên của bạn"
                             value="<?php echo isset($result[3]) ? $result[3] : '' ?>"
-                           type="number" name="fullname" class="form-control"></td>
+                           type="text" name="fullname" class="form-control"></td>
             </tr>
             <tr>
                 <th>Địa Chỉ</th>
@@ -57,7 +57,7 @@
                 <th>Số Điện Thoại</th>
                 <td><input placeholder="Nhập số điện thoại"
                             value="<?php echo isset($result[5]) ? $result[5] : '' ?>"
-                           type="text" name="phone" class="form-control"></td>
+                           type="text" id="tel" name="phone" class="form-control"></td>
             </tr>
             <tr>
                 <th>Ngày/Tháng/Năm Sinh</th>
@@ -112,14 +112,14 @@
             <tr>
                 <th></th>
                 <td>
-                    <button class="btn btn-primary" type="submit"><i class="far fa-thumbs-up"></i> Submit</button>
+                    <button class="btn btn-primary" id="submit" type="submit"><i class="far fa-thumbs-up"></i> Submit</button>
                     <button class="btn btn-danger" type="reset"><i class="fas fa-sync-alt"></i> Reset</button>
                 </td>
             </tr>
         </table>
     </form>
 </fieldset>
-<?php echo $this->Html->script('validate/users/add'); ?>
+<?php //echo $this->Html->script('validate/users/add'); ?>
 <script>
     $(document).ready(function () {
         $("#pass2").hide();
@@ -134,5 +134,52 @@
         if ($("#pass1").val() != '') {
             $("#pass2").show();
         }
+        //====== Validate số điên thoại
+        $('#tel').mouseout(function () {
+            var regExp = /[^0-9]/;
+            if ($('#tel').val().match(regExp)) {
+                swal("Số điện thoại bạn nhập không hợp lệ ^^!");
+            }
+        });
     })
+</script>
+<script>
+    $(document).ready(function () {
+        jQuery.validator.addMethod("phone", function(value, element) {
+            if (element.value == /[^0-9]/)  {
+                return false;
+            else return true;
+            }
+        }, "Số điện thoại bạn nhập chưa chính xác");
+        $("#usersAdd").validate({
+            rules: {
+                email: "required",
+                password1: "required",
+                password2: "required",
+                address: "required",
+                phone: "required",
+                birth: "required",
+                secret_q : "required",
+                secret_a : "required",
+                fullname: {
+                    required: true,
+                    minlength: 5,
+                }
+            },
+            messages: {
+                email: "Bạn chưa nhập Email hoặc Email bạn nhập chưa chính xác",
+                password1 : "Bạn quên nhập password rồi ^^!",
+                password2 : "Bạn quên nhập lại password rồi ^^!",
+                address: "Bạn quên nhập địa chỉ kìa ^^!",
+                phone: "Hãy cho tôi biết số điện thoại của bạn ^^!",
+                birth: "Ngày tháng năm sinh của bạn là chi ? ^^",
+                secret_q : "Hãy chọn câu hỏi để tăng tính bảo mật",
+                secret_a : "Bạn quên trả lời câu hỏi kìa ^^",
+                fullname: {
+                    required: "Bạn ơi Nhập họ tên đầy đủ của mình đi",
+                    minlength: "Họ tên của bạn có vẻ hơi ngắn rồi ^^! ?"
+                }
+            }
+        });
+    });
 </script>

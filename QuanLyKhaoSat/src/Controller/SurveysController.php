@@ -28,35 +28,45 @@ class SurveysController extends AppController
     public function index()
     {
         $HgNam = ($this->Auth->user());
-        $details = $this->Surveys->find('all')
-            ->select([
-                'id',
-                'img_survey',
-                'hot',
-                'name',
-                'admin_create',
-                'status',
-                'Catalogs.name',
-                'start_time',
-                'end_time',
-                'login_status',
-                'maximum',
-                'count',
-                'created',
-                'modified'
-            ])->where(['admin_create' => $HgNam[0]])
-            ->join([
-                'table' => 'catalogs',
-                'alias' => 'Catalogs',
-                'type' => 'INNER',
-                'conditions' => 'Surveys.catalog_id = Catalogs.id'
-            ]);
-        $this->paginate = array(
-            'limit' => 4,
-            'order' => array('id' => 'asc'),
-        );
-        $this->set("data", $this->paginate($details));
-        $this->set("HgNam", $HgNam);
+        if ($HgNam[1] == "Member") {
+            return $this->redirect(URL . "actions");
+        } else {
+            $details = $this->Surveys->find('all')
+                ->select([
+                    'id',
+                    'img_survey',
+                    'hot',
+                    'name',
+                    'admin_create',
+                    'status',
+                    'Catalogs.name',
+                    'start_time',
+                    'end_time',
+                    'login_status',
+                    'maximum',
+                    'count',
+                    'created',
+                    'modified'
+                ])->where(['admin_create' => $HgNam[0], 'Surveys.restore' => 1,])
+                ->join([
+                    'table' => 'catalogs',
+                    'alias' => 'Catalogs',
+                    'type' => 'INNER',
+                    'conditions' => 'Surveys.catalog_id = Catalogs.id'
+                ]);
+            $this->paginate = array(
+                'limit' => 8,
+                'order' => array('id' => 'asc'),
+            );
+            $this->set("data", $this->paginate($details));
+            $this->set("HgNam", $HgNam);
+            $recycleBin = $this->Surveys->find()
+                ->where(['restore' => 0,'admin_create' => $HgNam[0]])->toArray();
+            $this->set("recycleBin", $recycleBin);
+            $dem = $this->Surveys->find()
+                ->where(['restore' => 1,'admin_create' => $HgNam[0]])->count();
+            $this->set("dem", $dem);
+        }
     }
 
     public function add($id = null)
@@ -74,6 +84,7 @@ class SurveysController extends AppController
         if ($this->request->is('post')) {
             $name = htmlentities($this->request->getData('name'));
             $img = $this->request->getData('img')['name'];
+            $checkImg= explode(".", $img);
             move_uploaded_file($_FILES["img"]["tmp_name"], WWW_ROOT . 'img/survey' . DS . $img);
             $error = $this->Surveys->find()
                 ->where(["name" => $name])
@@ -93,9 +104,12 @@ class SurveysController extends AppController
             if (isset($error->name)) {
                 $this->set("error", $error);
                 $this->set("result", $result);
+            }elseif (isset($checkImg) && $checkImg[1] != 'jpg' && $checkImg[1] != 'png' && $checkImg[1] != 'PNG' && $checkImg[1] != 'JPG') {
+                $this->set("checkImg", $checkImg);
+                $this->set("result", $result);
             } else {
                 $query = $this->Surveys->query();
-                $query->insert(['name', 'admin_create', 'img_survey', 'hot', 'catalog_id', 'start_time', 'end_time', 'login_status', 'maximum', 'status', 'created', 'modified'])
+                $query->insert(['name', 'admin_create', 'restore', 'img_survey', 'hot', 'catalog_id', 'start_time', 'end_time', 'login_status', 'maximum', 'status', 'created', 'modified'])
                     ->values([
                         'name' => $name,
                         'admin_create' => $HgNam[0],
@@ -107,6 +121,7 @@ class SurveysController extends AppController
                         'maximum' => $maximum,
                         'status' => $status,
                         'hot' => $hot,
+                        'restore' => 1,
                         'created' => date('Y-m-d H:i:s'),
                         'modified' => date('Y-m-d H:i:s')
                     ])
@@ -195,18 +210,6 @@ class SurveysController extends AppController
 
     }
 
-    public function delete($id = null)
-    {
-        $survey = $this->Surveys->find()->where(['id' => $id])->first();
-        unlink(WWW_ROOT . "img/survey" . DS . $survey->img_survey);
-        $query = $this->Surveys->query();
-        $query->delete()
-            ->where(['id' => $id])
-            ->execute();
-        return $this->redirect(URL . 'Surveys');
-    }
-
-
     public function view($id = null)
     {
         $HgNam = ($this->Auth->user());
@@ -273,17 +276,58 @@ class SurveysController extends AppController
         $this->set('conn', $conn);
     }
 
+//    public function delete($id = null)
+//    {
+//        $survey = $this->Surveys->find()->where(['id' => $id])->first();
+//        unlink(WWW_ROOT . "img/survey" . DS . $survey->img_survey);
+//        $query = $this->Surveys->query();
+//        $query->delete()
+//            ->where(['id' => $id])
+//            ->execute();
+//        return $this->redirect(URL . 'Surveys');
+//    }
+
     public function clickDelete()
+    {
+        $id = $_GET['id'];
+        $query = $this->Surveys->query();
+        $query->update()
+            ->set([
+                'restore' => 0,
+                'modified' => date('Y-m-d H:i:s')
+            ])
+            ->where(['id' => $id])
+            ->execute();
+        echo "ok";
+        die;
+    }
+
+    public function delete()
     {
         $id = $_GET['id'];
         $survey = $this->Surveys->find()->where(['id' => $id])->first();
         unlink(WWW_ROOT . "img/survey" . DS . $survey->img_survey);
-        $query = $this->Surveys->query();
+        $query = $this->Catalogs->query();
         $query->delete()
             ->where(['id' => $id])
             ->execute();
         echo "ok";
         die;
-
     }
+
+    public function restore()
+    {
+        $id = $_GET['id'];
+        $query = $this->Surveys->query();
+        $query->update()
+            ->set([
+                'restore' => 1,
+                'modified' => date('Y-m-d H:i:s')
+            ])
+            ->where(['id' => $id])
+            ->execute();
+        echo "ok";
+        die;
+    }
+
 }

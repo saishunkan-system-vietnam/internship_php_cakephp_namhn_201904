@@ -116,7 +116,7 @@
                     <i class="far fa-eye"></i></i> View</a>
             </legend>
             <table class="table table-bordered table-hover">
-                <tr>
+                <tr  style="background-color: #333333;color: white">
                     <th>Type Ques</th>
                     <th>Question</th>
                     <th>Answers</th>

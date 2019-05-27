@@ -46,7 +46,7 @@
             <tr>
                 <th>Số Điện Thoại</th>
                 <td><input value="<?php echo isset($result[5]) ? $result[5] : $data->phone ?>"
-                           type="text" name="phone" class="form-control"></td>
+                           type="text" id="tel" name="phone" class="form-control"></td>
             </tr>
             <tr>
                 <th>Ngày/Tháng/Năm Sinh</th>
@@ -127,7 +127,13 @@
                 $("#pass2").hide();
             }
         });
-        //===============================
+        //====== Validate số điên thoại
+        $('#tel').mouseout(function () {
+            var regExp = /[^0-9]/;
+            if ($('#tel').val().match(regExp)) {
+                swal("Số điện thoại bạn nhập không hợp lệ ^^!");
+            }
+        });
     })
 </script>
 
