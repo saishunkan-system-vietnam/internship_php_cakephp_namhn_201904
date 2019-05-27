@@ -21,13 +21,25 @@ class CatalogsController extends AppController
     public function index()
     {
         $HgNam = ($this->Auth->user());
-        $this->paginate = array(
-            'limit' => 4,
-            'order' => array('id' => 'asc'),
-        );
-        $data = $this->paginate("Catalogs");
-        $this->set("data", $data);
-        $this->set("HgNam", $HgNam);
+        if ($HgNam[1] == "Member") {
+            return $this->redirect(URL . "actions");
+        } else {
+            $this->paginate = array(
+                'limit' => 8,
+                'order' => array('id' => 'asc'),
+            );
+            $data = $this->Catalogs->find()
+                ->where(['restore' => 1]);
+            $data = $this->paginate($data);
+            $this->set("data", $data);
+            $this->set("HgNam", $HgNam);
+            $recycleBin = $this->Catalogs->find()
+                ->where(['restore' => 0])->toArray();
+            $this->set("recycleBin", $recycleBin);
+            $dem = $this->Catalogs->find()
+                ->where(['restore' => 1])->count();
+            $this->set("dem", $dem);
+        }
     }
 
     public function add()
@@ -45,9 +57,10 @@ class CatalogsController extends AppController
                 $this->set("result", $result);
             } else {
                 $query = $this->Catalogs->query();
-                $query->insert(['name', 'created', 'modified'])
+                $query->insert(['name', 'restore', 'created', 'modified'])
                     ->values([
                         'name' => $name,
+                        'restore' => 1,
                         'created' => date('Y-m-d H:i:s'),
                         'modified' => date('Y-m-d H:i:s')
                     ])
@@ -90,14 +103,6 @@ class CatalogsController extends AppController
 
     }
 
-    public function delete($id = null)
-    {
-        $query = $this->Catalogs->query();
-        $query->delete()
-            ->where(['id' => $id])
-            ->execute();
-        return $this->redirect(URL . 'Catalogs');
-    }
 
     public function lists($id = null)
     {
@@ -117,10 +122,40 @@ class CatalogsController extends AppController
     {
         $id = $_GET['id'];
         $query = $this->Catalogs->query();
+        $query->update()
+            ->set([
+                'restore' => 0,
+                'modified' => date('Y-m-d H:i:s')
+            ])
+            ->where(['id' => $id])
+            ->execute();
+        echo "ok";
+        die;
+    }
+
+    public function delete()
+    {
+        $id = $_GET['id'];
+        $query = $this->Catalogs->query();
         $query->delete()
             ->where(['id' => $id])
             ->execute();
-        echo "ok";die;
+        echo "ok";
+        die;
+    }
 
+    public function restore()
+    {
+        $id = $_GET['id'];
+        $query = $this->Catalogs->query();
+        $query->update()
+            ->set([
+                'restore' => 1,
+                'modified' => date('Y-m-d H:i:s')
+            ])
+            ->where(['id' => $id])
+            ->execute();
+        echo "ok";
+        die;
     }
 }

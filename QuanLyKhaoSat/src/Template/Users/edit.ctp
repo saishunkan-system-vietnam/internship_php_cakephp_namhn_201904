@@ -12,7 +12,7 @@
     <legend>
         Edit Users
     </legend>
-    <form action="<?= URL ?>users/edit/<?php echo $data->id ?>" id="usersEdit" method="post">
+    <form action="<?= URL ?>users/edit/<?php echo $data->id ?>" id="Users" method="post">
         <table class="table table-hover">
             <tr>
                 <th class="col-md-4">Tài Khoản</th>
@@ -46,7 +46,7 @@
             <tr>
                 <th>Số Điện Thoại</th>
                 <td><input value="<?php echo isset($result[5]) ? $result[5] : $data->phone ?>"
-                           type="text" name="phone" class="form-control"></td>
+                           type="text" id="tel" name="phone" class="form-control"></td>
             </tr>
             <tr>
                 <th>Ngày/Tháng/Năm Sinh</th>
@@ -114,20 +114,5 @@
         </table>
     </form>
 </fieldset>
-<?php echo $this->Html->script('validate/users/edits'); ?>
-<script>
-    $(document).ready(function () {
-        //====== Pass và Câu Trả Lời Bí Mật
-        $("#pass2").hide();
-        $("#show").hide();
-        $("#pass1").keyup(function () {
-            if ($("#pass1").val() != '') {
-                $("#pass2").show();
-            } else {
-                $("#pass2").hide();
-            }
-        });
-        //===============================
-    })
-</script>
+<?= $this->Html->script('validate/validateUsers'); ?>
 

@@ -10,9 +10,19 @@
             Khảo Sát đã tồn tại, xin vui lòng nhập Khảo Sát khác ^^! Nhớ nha :))
         </div>
     <?php } ?>
+    <?php if (isset($checkImg)) { ?>
+        <div class="alert alert-danger">
+            File bạn vừa đăng tải không phải file Ảnh , Xin vui lòng chọn File "jpg" hoặc "png"
+        </div>
+    <?php } ?>
+    <?php if (isset($errorTime)) { ?>
+        <div class="alert alert-danger">
+           Thời gian khảo sát không hợp lệ
+        </div>
+    <?php } ?>
     <legend>Khởi Tạo Khảo Sát</legend>
     <table class="table table-hover table-bordered">
-        <form method="post" action="<?= URL ?>surveys/add/<?php echo isset($id) ? $id : ''?>" id="formSurveys" enctype="multipart/form-data">
+        <form id="Surveys" method="post" action="<?= URL ?>surveys/add/<?php echo isset($id) ? $id : ''?>" enctype="multipart/form-data">
         <?php if (isset($catalogID)) { ?>
                 <tr>
                     <th>Danh mục khảo sát</th>
@@ -33,13 +43,13 @@
             <tr>
                 <th>Ảnh Khảo Sát</th>
                 <th>
-                    <input type="file" id="i_file" name="img" required>
+                    <input type="file" id="i_file" name="img">
                 </th>
             </tr>
             <tr>
                 <th>Tên Khảo Sát</th>
                 <th><input placeholder="Nhập tên khảo sát"
-                            required value="<?php echo isset($result[0]) ? $result[0] : '' ?>"
+                           value="<?php echo isset($result[0]) ? $result[0] : '' ?>"
                            type="text" name="name" class="form-control"></th>
             </tr>
             <tr>
@@ -114,6 +124,22 @@
                     <button class="btn btn-danger" type="reset"><i class="fas fa-sync-alt"></i> Reset</button>
                 </th>
             </tr>
-        </form>
+    </form>
+    </table>
 </fieldset>
-</table>
+<script>
+    $(document).ready(function () {
+        $("#Surveys").validate({
+            rules: {
+                name : {
+                    required: true,
+                },
+            },
+            messages: {
+                name: {
+                    required: "Bạn quên nhập tên Danh Mục rồi ^^!",
+                }
+            }
+        });
+    });
+</script>

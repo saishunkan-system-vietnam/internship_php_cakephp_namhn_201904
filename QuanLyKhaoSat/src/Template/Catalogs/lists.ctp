@@ -1,8 +1,8 @@
 <fieldset class="col-md-8 col-md-offset-2">
     <legend>
         <?php echo $data->name ?></legend>
-    <table class="table table-hover table-bordered">
-        <tr>
+    <table class="table table-striped table-bordered">
+        <tr  style="background-color: #333333;color: white">
             <th>Ảnh</th>
             <th class="col-md-8" ="text-align: center">Danh Sách Khảo Sát</th>
             <th class="col-md-4" ="text-align: center">
@@ -14,7 +14,11 @@
         <?php foreach ($survey as $value) { ?>
             <tr>
                 <th class="rows<?= $value->id ?>">
-                    <img style="width: 150px;height: 120px;" src="<?= URL ?>img/survey/<?= $value->img_survey ?>" alt="">
+                    <?php if ($value->img_survey != '') {?>
+                        <img style="width: 150px;height: 120px;" src="<?= URL ?>img/survey/<?= $value->img_survey ?>" alt="">
+                    <?php }else {?>
+                        <img style="width: 150px;height: 120px;" src="<?= URL ?>img/survey/no_images.jpg" alt="">
+                    <?php }?>
                 </th>
                 <th  class="col-md-8 rows<?= $value->id ?>" style="text-align: center">
                     <p><?php echo isset($value->name) ? $value->name : '' ?></p>

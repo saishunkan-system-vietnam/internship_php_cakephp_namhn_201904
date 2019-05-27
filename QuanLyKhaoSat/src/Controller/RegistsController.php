@@ -6,17 +6,6 @@ use Cake\Event\Event;
 use Cake\Cache\Cache;
 use Cake\Mailer\Email;
 
-//use Cake\Mailer\Mailer;
-//
-//class UserMailer extends Mailer {
-//    public function resetPassword($user)
-//    {
-//        $this
-//            ->subject('Reset Password')
-//            ->to($user->email)
-//            ->set(['token' => $user->token]);
-//    }
-//}
 class RegistsController extends AppController
 {
     public function initialize()
@@ -34,45 +23,60 @@ class RegistsController extends AppController
         $this->viewBuilder()->setLayout('regists');
         if ($this->request->is('post')) {
             $email = htmlentities($this->request->getData('email'));
-            $data = $this->Users->find()
+            $error = $this->Users->find()
                 ->where(['email' => $email])
                 ->first();
-            if (isset($data->email)) {
-                $this->set("data", $data);
+            $password1 = htmlentities($this->request->getData('password1'));
+            $password2 = htmlentities($this->request->getData('password2'));
+            $fullname = htmlentities($this->request->getData('fullname'));
+            $address = htmlentities($this->request->getData('address'));
+            $phone = htmlentities($this->request->getData('phone'));
+            $birth = htmlentities($this->request->getData('birth'));
+            $secret_q = $this->request->getData('secret_q');
+            $secret_a = htmlentities($this->request->getData('secret_a'));
+            $result = array($email, $password1, $password2, $fullname, $address, $phone, $birth, $secret_q, $secret_a);
+            if (isset($error->email)) {
+                $this->set("error", $error);
+                $this->set("result", $result);
+            } else if (strtotime($birth) >= strtotime(date('Y-m-d H:i:s'))) {
+                $errorBirth = "erroBirth";
+                $this->set("errorBirth", $errorBirth);
+                $this->set("result", $result);
             } else {
-                $password = htmlentities($this->request->getData('password'));
-                $password = md5($password);
-                $fullname = htmlentities($this->request->getData('fullname'));
-                $address = htmlentities($this->request->getData('address'));
-                $phone = htmlentities($this->request->getData('phone'));
-                $birth = htmlentities($this->request->getData('birth'));
-                $secret_q = htmlentities($this->request->getData('secret_q'));
-                $secret_a = htmlentities($this->request->getData('secret_a'));
-                $query = $this->Users->query();
-                $query->insert(['email', 'password', 'fullname', 'address', 'phone', 'birth', 'level', 'secret_q', 'secret_a', 'created', 'modified'])
-                    ->values([
-                        'email' => $email,
-                        'password' => $password,
-                        'fullname' => $fullname,
-                        'address' => $address,
-                        'phone' => $phone,
-                        'birth' => $birth,
-                        'level' => "Member",
-                        'secret_q' => $secret_q,
-                        'secret_a' => $secret_a,
-                        'created' => date('Y-m-d H:i:s'),
-                        'modified' => date('Y-m-d H:i:s')
-                    ])
-                    ->execute();
-                $link = Cache::read('link');
-                if (!empty($link)) {
-                    Cache::delete('link');
-                    return $this->redirect(URL . $link);
+                if ($password1 == $password2) {
+                    $password1 = md5($password1);
+                    $query = $this->Users->query();
+                    $query->insert(['email', 'password', 'restore', 'fullname', 'address', 'phone', 'birth', 'level', 'created', 'secret_q', 'secret_a', 'modified'])
+                        ->values([
+                            'email' => $email,
+                            'password' => $password1,
+                            'fullname' => $fullname,
+                            'address' => $address,
+                            'phone' => $phone,
+                            'birth' => $birth,
+                            'level' => 'Member',
+                            'restore' => 1,
+                            'secret_q' => $secret_q,
+                            'secret_a' => $secret_a,
+
+                            'created' => date('Y-m-d H:i:s'),
+                            'modified' => date('Y-m-d H:i:s')
+                        ])
+                        ->execute();
+                    $linkR = Cache::read('linkRegist');
+                    if (!empty($linkRegist)) {
+                        return $this->redirect(URL . 'users');
+                    }else {
+                        return $this->redirect($linkR);
+                    }
                 } else {
-                    return $this->redirect(URL . 'users/login');
+                    $errorPass = "errorPass";
+                    $this->set("errorPass", $errorPass);
+                    $this->set("result", $result);
                 }
             }
         }
+
     }
 
     public function forgotpass()

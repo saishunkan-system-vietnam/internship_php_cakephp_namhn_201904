@@ -18,13 +18,12 @@
     .header {
         font-weight: bold;
         font-size: 18px;
-        height: 55px;
     }
 
     .btn {
         font-weight: bold;
         height: 35px;
-        width: 80px ;
+        width: 80px;
     }
 
     fieldset {
@@ -47,12 +46,15 @@
         border-bottom: none;
         border-top: none;
     }
+
     th {
         text-align: center;
     }
+
     td {
         text-align: center;
     }
+
     .alert-danger {
         text-align: center;
         font-weight: bold;
@@ -60,18 +62,19 @@
 </style>
 <nav class="navbar navbar-inverse header" style="position: sticky;top: 0; z-index: 10 ">
     <div class="container-fluid">
-        <div class="navbar-header">
-            <a href="<?= URL ?>homes" class="navbar-brand" style="font-size: 19px;"><i class="fas fa-tasks"></i> Trang Khảo Sát</a>
+        <div class="pull-left" style="height: 55px;">
+            <a href="<?= URL ?>homes" class="navbar-brand" style="font-size: 19px;"><i class="fas fa-tasks"></i> Trang
+                Khảo Sát</a>
         </div>
-        <ul class="nav navbar-nav pull-right">
-            <li><a href="<?= URL ?>actions"><i class="fas fa-house-damage"></i> Home</a></li>
-            <li><a href="<?= URL ?>catalogs"><i class="fas fa-journal-whills"></i> Danh Mục</a></li>
-            <li><a href="<?= URL ?>surveys"><i class="fas fa-file-signature"></i> Khảo Sát</a></li>
-<!--            <li><a href="--><?//= URL ?><!--questions"><i class="fas fa-comment-dots"></i> Questions</a></li>-->
-<!--            <li><a href="--><?//= URL ?><!--answers"><i class="fas fa-file-signature"></i> Thống Kê</a></li>-->
-            <li><a href="<?= URL ?>users"><i class="fas fa-user-graduate"></i> Users</a></li>
-            <li><a href="<?= URL ?>users/logout"><i class="fas fa-power-off"></i> Đăng xuất</a></li>
-        </ul>
+        <div class="pull-right">
+            <ul class="nav navbar-nav">
+                <li><a href="<?= URL ?>actions"><i class="fas fa-house-damage"></i> Home</a></li>
+                <li><a href="<?= URL ?>catalogs"><i class="fas fa-journal-whills"></i> Danh Mục</a></li>
+                <li><a href="<?= URL ?>surveys"><i class="fas fa-file-signature"></i> Khảo Sát</a></li>
+                <li><a href="<?= URL ?>users"><i class="fas fa-user-graduate"></i> Users</a></li>
+                <li><a href="<?= URL ?>users/logout"><i class="fas fa-power-off"></i> Đăng xuất</a></li>
+            </ul>
+        </div>
     </div>
 </nav>
 
