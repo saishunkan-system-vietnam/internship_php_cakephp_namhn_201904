@@ -61,10 +61,10 @@ class SurveysController extends AppController
             $this->set("data", $this->paginate($details));
             $this->set("HgNam", $HgNam);
             $recycleBin = $this->Surveys->find()
-                ->where(['restore' => 0, 'admin_create' => $HgNam[0]])->toArray();
+                ->where(['restore' => 0,'admin_create' => $HgNam[0]])->toArray();
             $this->set("recycleBin", $recycleBin);
             $dem = $this->Surveys->find()
-                ->where(['restore' => 1, 'admin_create' => $HgNam[0]])->count();
+                ->where(['restore' => 1,'admin_create' => $HgNam[0]])->count();
             $this->set("dem", $dem);
         }
     }
@@ -84,7 +84,8 @@ class SurveysController extends AppController
         if ($this->request->is('post')) {
             $name = htmlentities($this->request->getData('name'));
             $img = $this->request->getData('img')['name'];
-            $checkImg = explode(".", $img);
+            $checkImg= explode(".", $img);
+            move_uploaded_file($_FILES["img"]["tmp_name"], WWW_ROOT . 'img/survey' . DS . $img);
             $error = $this->Surveys->find()
                 ->where(["name" => $name])
                 ->first();
@@ -103,11 +104,7 @@ class SurveysController extends AppController
             if (isset($error->name)) {
                 $this->set("error", $error);
                 $this->set("result", $result);
-            } elseif (strtotime($end_time) < strtotime($start_time)) {
-                $errorTime = "error";
-                $this->set("errorTime", $errorTime);
-                $this->set("result", $result);
-            } elseif (!empty($img) && $checkImg[1] != 'jpg' && $checkImg[1] != 'png' && $checkImg[1] != 'PNG' && $checkImg[1] != 'JPG') {
+            }elseif (isset($checkImg) && $checkImg[1] != 'jpg' && $checkImg[1] != 'png' && $checkImg[1] != 'PNG' && $checkImg[1] != 'JPG') {
                 $this->set("checkImg", $checkImg);
                 $this->set("result", $result);
             } else {
@@ -190,10 +187,6 @@ class SurveysController extends AppController
             $result = array($name, $catalog_id, $start_time, $end_time, $login_status, $maximum, $hot);
             if (isset($error->name) && $error->id != $data->id) {
                 $this->set("error", $error);
-                $this->set("result", $result);
-            }elseif (strtotime($end_time) < strtotime($start_time)) {
-                $errorTime = "error";
-                $this->set("errorTime", $errorTime);
                 $this->set("result", $result);
             } else {
                 $query = $this->Surveys->query();

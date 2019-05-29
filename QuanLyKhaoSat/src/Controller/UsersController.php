@@ -15,44 +15,36 @@ class UsersController extends AppController
 
     public function login()
     {
-        $this->loadComponent('Auth');
-        $HgNam = $this->Auth->user();
-        if (isset($HgNam) && $HgNam[1] == "Admin") {
-            return $this->redirect(URL . 'users');
-        } elseif (isset($HgNam) && $HgNam[1] == "Member") {
-            return $this->redirect(URL . 'actions');
-        } else {
-            $this->viewBuilder()->setLayout('login');
-            if ($this->request->is('post')) {
-                $email = htmlentities($this->request->getData('email'));
-                $password = htmlentities($this->request->getData('password'));
-                $password = md5($password);
-                $data = $this->Users->find()
-                    ->select(['email', 'password', 'id', 'level', 'fullname'])
-                    ->where(['email' => $email])
-                    ->first();
-                if (isset($data->email)) {
-                    $level = $data->level;
-                    $id = $data->id;
-                    $name = $data->fullname;
-                    $user = array($email, $level, $id, $name);
-                    if ($password == $data->password) {
-                        $this->Auth->setUser($user);
-                        $link = Cache::read('link');
-                        if (!empty($link)) {
-                            Cache::delete('link');
-                            return $this->redirect(URL . $link);
-                        } else {
-                            return $this->redirect(URL . 'users');
-                        }
+        $this->viewBuilder()->setLayout('login');
+        if ($this->request->is('post')) {
+            $email = htmlentities($this->request->getData('email'));
+            $password = htmlentities($this->request->getData('password'));
+            $password = md5($password);
+            $data = $this->Users->find()
+                ->select(['email', 'password', 'id', 'level', 'fullname'])
+                ->where(['email' => $email])
+                ->first();
+            if (isset($data->email)) {
+                $level = $data->level;
+                $id = $data->id;
+                $name = $data->fullname;
+                $user = array($email, $level, $id, $name);
+                if ($password == $data->password) {
+                    $this->Auth->setUser($user);
+                    $link = Cache::read('link');
+                    if (!empty($link)) {
+                        Cache::delete('link');
+                        return $this->redirect(URL . $link);
                     } else {
-                        $error = 1;
-                        $this->set('error', $error);
+                        return $this->redirect(URL . 'users');
                     }
                 } else {
                     $error = 1;
                     $this->set('error', $error);
                 }
+            } else {
+                $error = 1;
+                $this->set('error', $error);
             }
         }
     }
@@ -292,12 +284,12 @@ class UsersController extends AppController
             <td><?php echo $value->modified ?></td>
             <?php if (($value->level == 'Member') || ($value->id == $HgNam[2])) { ?>
                 <td>
-                    <a href="<?php URL ?>users/edit/<?php echo $value->id ?>" class="btn btn-primary">
-                        <i class="fas fa-edit"></i> Edit
-                    </a>
-                    <button type="button" id="<?= $value->id ?>" class="btn btn-danger click">
-                        <i class="far fa-trash-alt"></i> Delete
-                    </button>
+                <a href="<?php URL ?>users/edit/<?php echo $value->id ?>" class="btn btn-primary">
+                    <i class="fas fa-edit"></i> Edit
+                </a>
+                <button type="button" id="<?= $value->id ?>" class="btn btn-danger click">
+                    <i class="far fa-trash-alt"></i> Delete
+                </button>
                 </td>
             <?php } ?>
         <?php }

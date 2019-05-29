@@ -1,7 +1,7 @@
 <fieldset class="col-md-12">
     <legend>Danh Sách Users</legend>
     <table class="table table-bordered table-striped">
-        <tr style="background-color: #333333;color: white;font-size: 20px;height: 70px;">
+        <tr style="background-color: #333333;color: white">
             <th>ID</th>
             <th>Tài Khoản</th>
             <th>Họ và Tên</th>
@@ -22,7 +22,7 @@
             </th>
         </tr>
         <?php foreach ($data as $value) { ?>
-            <tr class="rows<?= $value->id ?> recycleBin<?= $value->id ?>" style="height: 80px;">
+            <tr class="rows<?= $value->id ?> recycleBin<?= $value->id ?>">
                 <td><?php echo $value->id ?></td>
                 <td><?php echo $value->email ?></td>
                 <td><?php echo $value->fullname ?></td>
@@ -39,7 +39,7 @@
                         <a href="<?php URL ?>users/edit/<?php echo $value->id ?>" class="btn btn-primary">
                             <i class="fas fa-edit"></i> Edit
                         </a>
-                        <button type="button" id="<?= $value->id ?>" class="btn btn-warning click">
+                        <button type="button" id="<?= $value->id ?>" class="btn btn-danger click">
                             <i class="far fa-trash-alt"></i> Delete
                         </button><br>
                         <button style="margin-top: 5px;width: 160px" type="button" id="<?= $value->id ?>" class="btn btn-danger clickDelete">

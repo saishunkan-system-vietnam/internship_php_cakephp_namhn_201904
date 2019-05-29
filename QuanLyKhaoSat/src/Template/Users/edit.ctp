@@ -12,7 +12,7 @@
     <legend>
         Edit Users
     </legend>
-    <form action="<?= URL ?>users/edit/<?php echo $data->id ?>" id="Users" method="post">
+    <form action="<?= URL ?>users/edit/<?php echo $data->id ?>" id="usersEdit" method="post">
         <table class="table table-hover">
             <tr>
                 <th class="col-md-4">Tài Khoản</th>
@@ -114,5 +114,26 @@
         </table>
     </form>
 </fieldset>
-<?= $this->Html->script('validate/validateUsers'); ?>
+<?php echo $this->Html->script('validate/users/edits'); ?>
+<script>
+    $(document).ready(function () {
+        //====== Pass và Câu Trả Lời Bí Mật
+        $("#pass2").hide();
+        $("#show").hide();
+        $("#pass1").keyup(function () {
+            if ($("#pass1").val() != '') {
+                $("#pass2").show();
+            } else {
+                $("#pass2").hide();
+            }
+        });
+        //====== Validate số điên thoại
+        $('#tel').mouseout(function () {
+            var regExp = /[^0-9]/;
+            if ($('#tel').val().match(regExp)) {
+                swal("Số điện thoại bạn nhập không hợp lệ ^^!");
+            }
+        });
+    })
+</script>
 

@@ -15,14 +15,9 @@
             File bạn vừa đăng tải không phải file Ảnh , Xin vui lòng chọn File "jpg" hoặc "png"
         </div>
     <?php } ?>
-    <?php if (isset($errorTime)) { ?>
-        <div class="alert alert-danger">
-           Thời gian khảo sát không hợp lệ
-        </div>
-    <?php } ?>
     <legend>Khởi Tạo Khảo Sát</legend>
     <table class="table table-hover table-bordered">
-        <form id="Surveys" method="post" action="<?= URL ?>surveys/add/<?php echo isset($id) ? $id : ''?>" enctype="multipart/form-data">
+        <form method="post" action="<?= URL ?>surveys/add/<?php echo isset($id) ? $id : ''?>" id="formSurveys" enctype="multipart/form-data">
         <?php if (isset($catalogID)) { ?>
                 <tr>
                     <th>Danh mục khảo sát</th>
@@ -49,7 +44,7 @@
             <tr>
                 <th>Tên Khảo Sát</th>
                 <th><input placeholder="Nhập tên khảo sát"
-                           value="<?php echo isset($result[0]) ? $result[0] : '' ?>"
+                            required value="<?php echo isset($result[0]) ? $result[0] : '' ?>"
                            type="text" name="name" class="form-control"></th>
             </tr>
             <tr>
@@ -124,21 +119,15 @@
                     <button class="btn btn-danger" type="reset"><i class="fas fa-sync-alt"></i> Reset</button>
                 </th>
             </tr>
-    </form>
-    </table>
+        </form>
 </fieldset>
+</table>
 <script>
     $(document).ready(function () {
-        $("#Surveys").validate({
-            rules: {
-                name : {
-                    required: true,
-                },
-            },
-            messages: {
-                name: {
-                    required: "Bạn quên nhập tên Danh Mục rồi ^^!",
-                }
+        $('#i_file').mouseout(function () {
+            var regExp = /[^0-9]/;
+            if ($('#tel').val().match(regExp)) {
+                swal("Số điện thoại bạn nhập không hợp lệ ^^!");
             }
         });
     });

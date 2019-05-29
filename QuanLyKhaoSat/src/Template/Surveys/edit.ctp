@@ -5,14 +5,8 @@
             Khảo Sát đã tồn tại, xin vui lòng nhập Khảo Sát khác ^^! Nhớ nha :))
         </div>
     <?php } ?>
-    <?php if (isset($errorTime)) { ?>
-        <div class="alert alert-danger">
-            Thời gian khảo sát không hợp lệ
-        </div>
-    <?php } ?>
     <legend>Chỉnh Sửa Khảo Sát</legend>
-    <form action="<?= URL ?>surveys/edit/<?php echo $data->id ?>" method="post" id="Surveys"
-          enctype="multipart/form-data">
+    <form action="<?= URL ?>surveys/edit/<?php echo $data->id ?>" method="post" id="formSurveys" enctype="multipart/form-data">
         <table class="table table-hover table-bordered">
             <tr>
                 <th class="col-md-4">Danh mục khảo sát</th>
@@ -29,11 +23,7 @@
                 <th class="col-md-4">Ảnh Khảo Sát</th>
                 <th>
                     <input type="file" name="img">
-                    <?php if ($data->img_survey == '') { ?>
-                        <img src="<?= URL ?>img/survey/no_images.jpg ?>" style="height: 120px;width: 150px;">
-                    <?php } else { ?>
-                        <img src="<?= URL ?>img/survey/<?= $data->img_survey ?>" style="height: 120px;width: 150px;">
-                    <?php } ?>
+                    <img src="<?= URL ?>img/survey/<?= $data->img_survey ?>" style="height: 120px;width: 150px;">
                 </th>
             </tr>
             <tr>
@@ -87,9 +77,8 @@
             <tr>
                 <th>Link Khảo Sát :</th>
                 <th><input style="width: 500px;float: left" type="text" class="form-control" id="myInput"
-                           value="http://nam.com/internship_php_cakephp_namhn_201904/QuanLyKhaoSat/actions/survey/<?= $data->id ?>">
-                    <i onclick="myFunction()" style="font-size: 18px;color: white;width: 50px;height: 40px;"
-                       class="fas fa-copy btn btn-primary"></i>
+                           value="http://nam.com/internship_php_cakephp_namhn_201904/QuanLyKhaoSat/actions/survey/<?= $data->id?>">
+                    <i onclick="myFunction()" style="font-size: 18px;color: white;width: 50px;height: 40px;" class="fas fa-copy btn btn-primary"></i>
                     <div style="clear: both"></div>
                 </th>
             </tr>
@@ -97,15 +86,11 @@
                 <th>Trạng Thái :</th>
                 <th style="text-align: left">
                     <label class="radio" style="float: left;">Mở Khảo Sát
-                        <input type="radio" <?php if ($data->status == "open") {
-                            echo 'checked';
-                        } ?> value="open" name="status">
+                        <input type="radio" <?php if ($data->status == "open") {echo 'checked';}?> value="open" name="status">
                         <span class="checkmark"></span>
                     </label>
                     <label class="radio" style="float: left;margin-top: 10px;margin-left: 50px">Đóng Khảo Sát
-                        <input type="radio" <?php if ($data->status == "closed") {
-                            echo 'checked';
-                        } ?> value="closed" name="status">
+                        <input type="radio" <?php if ($data->status == "closed") {echo 'checked';}?> value="closed" name="status">
                         <span class="checkmark"></span>
                     </label>
                 </th>
@@ -114,15 +99,11 @@
                 <th>Hiển Thị :</th>
                 <th style="text-align: left">
                     <label class="radio" style="float: left;">Hiển Thị
-                        <input type="radio" <?php if ($data->hot == 1) {
-                            echo 'checked';
-                        } ?> value="1" name="hot">
+                        <input type="radio" <?php if ($data->hot == 1) {echo 'checked';}?> value="1" name="hot">
                         <span class="checkmark"></span>
                     </label>
                     <label class="radio" style="float: left;margin-top: 10px;margin-left: 85px">Không Hiển Thị
-                        <input type="radio" <?php if ($data->hot == 0) {
-                            echo 'checked';
-                        } ?> value="0" name="hot">
+                        <input type="radio" <?php if ($data->hot == 0) {echo 'checked';}?> value="0" name="hot">
                         <span class="checkmark"></span>
                     </label>
                 </th>
@@ -135,7 +116,7 @@
                     <i class="far fa-eye"></i></i> View</a>
             </legend>
             <table class="table table-bordered table-hover">
-                <tr style="background-color: #333333;color: white">
+                <tr  style="background-color: #333333;color: white">
                     <th>Type Ques</th>
                     <th>Question</th>
                     <th>Answers</th>
@@ -144,18 +125,15 @@
                     <th style="width: 200px;">
                         <a style="width: 130px"
                            href="<?= URL ?>questions/add/<?php echo $data->id ?>"
-                           class="btn btn-success">
+                                                 class="btn btn-success">
                             <i class="fas fa-plus"></i> Thêm Câu Hỏi</a>
                     </th>
                 </tr>
-                <?php foreach ($data2
-
-                as $value) { ?>
+                <?php foreach ($data2 as $value) { ?>
                 <tr>
                     <td><?php echo $value->type_question ?></td>
                     <?php if ($value->type_question == 'Images') { ?>
-                        <td class="rows<?= $value->id ?>"><img style="height: 100px;width: 200px;"
-                                                               src="<?= URL ?>img/<?= $value->name ?>"></td>
+                        <td class="rows<?= $value->id ?>"><img style="height: 100px;width: 200px;" src="<?= URL ?>img/<?= $value->name ?>"></td>
                     <?php } else { ?>
                         <td><?php echo $value->name ?></td>
                     <?php } ?>
@@ -166,9 +144,9 @@
                         <a class="btn btn-primary" href="<?= URL ?>questions/edit/<?php echo $value->id ?>">
                             <i class="fas fa-edit"></i> Edit
                         </a>
-                        <button type="button" id="<?= $value->id ?>" class="btn btn-danger click">
-                            <i class="far fa-trash-alt"></i> Delete</a>
-                        </button>
+                       <button type="button" id="<?= $value->id ?>" class="btn btn-danger click">
+                           <i class="far fa-trash-alt"></i> Delete</a>
+                       </button>
                     </td>
                 <tr>
                     <?php } ?>
@@ -184,22 +162,8 @@
         </div>
     </form>
 </fieldset>
-<script>
-    $(document).ready(function () {
-        $("#Surveys").validate({
-            rules: {
-                name : {
-                    required: true,
-                },
-            },
-            messages: {
-                name: {
-                    required: "Bạn quên nhập tên Danh Mục rồi ^^!",
-                }
-            }
-        });
-    });
-</script>
+<?php echo $this->Html->script('validate/survey/survey'); ?>
+
 <?php echo $this->Html->script('checkbox.js'); ?>
 <script>
     function myFunction() {

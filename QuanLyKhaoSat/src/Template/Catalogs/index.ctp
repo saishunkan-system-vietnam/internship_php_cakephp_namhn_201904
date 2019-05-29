@@ -185,6 +185,16 @@
                                         window.location.replace("<?= URL ?>catalogs");
                                     })
                                 }
+                                // Mình đang xây dựng theo hướng dùng ajax thêm bản ghi vào dòng cuối nhưng sẽ k hợp lý vì nó vướng với phân trang
+                                // $('.recycleBin' + id).remove();
+                                //$.ajax({
+                                //    url: '<?//= URL ?>//users/addrestore?id=' + id,
+                                //    type: 'GET',
+                                //    success: function (res) {
+                                //        $('.addRestore').html(res);
+                                //        console.log(res);
+                                //    }
+                                //});
                             }
                         });
                     }
