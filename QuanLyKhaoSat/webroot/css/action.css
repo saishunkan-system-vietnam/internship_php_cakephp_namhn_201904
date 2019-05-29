@@ -1,0 +1,92 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+.main {
+    margin-top: 30px;
+    color: black;
+}
+
+.header {
+    height: 300px;
+    background-image: url("../img/index/header.jpg");
+    font-family: "Times New Roman";
+    font-size: 35px;
+    line-height: 300px;
+    font-weight: bold;
+    border: 1px solid #222222;
+    color: white;
+    text-align: center;
+}
+
+.line {
+    height: 50px;
+    background-color: #222222;
+}
+
+.body {
+    border: 1px solid #7E7E7E;
+    border-top: none;
+    border-bottom: none;
+}
+
+.menu-left {
+    margin-bottom: 10px;
+    margin-top: 30px;
+}
+
+.menu-left .menu-header {
+    text-align: center;
+    font-size: 18px;
+}
+
+.menu-left .menu-body {
+    font-size: 17px;
+}
+
+.content {
+    margin-top: 30px;
+}
+
+button {
+    background-color: #222222;
+    color: white;
+    height: 40px;
+    width: 180px;
+    color: white;
+}
+
+button:hover {
+    background-color: #0071BC;
+}
+
+.news {
+}
+
+.news tr {
+    height: 45px;
+}
+
+.news tr th a {
+    margin-left: 10px;
+    text-decoration: none;
+}
+
+.fie {
+    /*border: 1px solid #DDDDDD;*/
+    width: 400px;
+    margin-top: 40px;
+}
+.fie legend {
+    color: black;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 30px;
+}
+.footer {
+    border: 1px solid #7E7E7E;
+    background-color: #333333;
+    height: 250px;
+    color: white;
+    font-size: 25px;
+}
