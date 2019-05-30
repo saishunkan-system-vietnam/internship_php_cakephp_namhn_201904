@@ -69,8 +69,9 @@
         <div class="pull-right">
             <ul class="nav navbar-nav">
                 <li><a href="<?= URL ?>actions"><i class="fas fa-house-damage"></i> Home</a></li>
-                <li><a href="<?= URL ?>catalogs"><i class="fas fa-journal-whills"></i> Danh Mục</a></li>
-                <li><a href="<?= URL ?>surveys"><i class="fas fa-file-signature"></i> Khảo Sát</a></li>
+                <li><a href="<?= URL ?>catalogs"><i class="fas fa-journal-whills"></i> Catalogs</a></li>
+                <li><a href="<?= URL ?>surveys"><i class="fas fa-file-signature"></i> Surveys</a></li>
+                <li><a href="<?= URL ?>groups"><i style="font-size: 22px;" class="far fa-object-group"></i> Groups</a></li>
                 <li><a href="<?= URL ?>users"><i class="fas fa-user-graduate"></i> Users</a></li>
                 <li><a href="<?= URL ?>users/logout"><i class="fas fa-power-off"></i> Đăng xuất</a></li>
             </ul>

@@ -61,10 +61,10 @@ class SurveysController extends AppController
             $this->set("data", $this->paginate($details));
             $this->set("HgNam", $HgNam);
             $recycleBin = $this->Surveys->find()
-                ->where(['restore' => 0,'admin_create' => $HgNam[0]])->toArray();
+                ->where(['restore' => 0, 'admin_create' => $HgNam[0]])->toArray();
             $this->set("recycleBin", $recycleBin);
             $dem = $this->Surveys->find()
-                ->where(['restore' => 1,'admin_create' => $HgNam[0]])->count();
+                ->where(['restore' => 1, 'admin_create' => $HgNam[0]])->count();
             $this->set("dem", $dem);
         }
     }
@@ -84,7 +84,6 @@ class SurveysController extends AppController
         if ($this->request->is('post')) {
             $name = htmlentities($this->request->getData('name'));
             $img = $this->request->getData('img')['name'];
-            $checkImg= explode(".", $img);
             move_uploaded_file($_FILES["img"]["tmp_name"], WWW_ROOT . 'img/survey' . DS . $img);
             $error = $this->Surveys->find()
                 ->where(["name" => $name])
@@ -104,8 +103,9 @@ class SurveysController extends AppController
             if (isset($error->name)) {
                 $this->set("error", $error);
                 $this->set("result", $result);
-            }elseif (isset($checkImg) && $checkImg[1] != 'jpg' && $checkImg[1] != 'png' && $checkImg[1] != 'PNG' && $checkImg[1] != 'JPG') {
-                $this->set("checkImg", $checkImg);
+            }else if(strtotime($end_time) < strtotime($start_time)){
+                $errorTime = "ErrorTime";
+                $this->set("errorTime", $errorTime);
                 $this->set("result", $result);
             } else {
                 $query = $this->Surveys->query();
@@ -163,7 +163,7 @@ class SurveysController extends AppController
             // Ảnh
             $img = $this->request->getData('img')['name'];
             if ($img != '') {
-                @unlink(WWW_ROOT . "img" . DS . $data->name);
+                @unlink(WWW_ROOT . "img/survey" . DS . $data->img_survey);
                 move_uploaded_file($_FILES["img"]["tmp_name"], WWW_ROOT . 'img/survey' . DS . $img);
                 $query = $this->Surveys->query();
                 $query->update()
@@ -187,6 +187,10 @@ class SurveysController extends AppController
             $result = array($name, $catalog_id, $start_time, $end_time, $login_status, $maximum, $hot);
             if (isset($error->name) && $error->id != $data->id) {
                 $this->set("error", $error);
+                $this->set("result", $result);
+            }else if(strtotime($end_time) < strtotime($start_time)){
+                $errorTime = "ErrorTime";
+                $this->set("errorTime", $errorTime);
                 $this->set("result", $result);
             } else {
                 $query = $this->Surveys->query();
@@ -259,11 +263,13 @@ class SurveysController extends AppController
         $data = $query->select([
             'question_id',
             'survey_id',
+            'Statists.dem',
             'Questions.name',
             'Questions.type_question',
             'Questions.answers',
             'answer' => 'group_concat(answer)',
             'user_answer' => 'group_concat(user_answer)',
+             'dem2'=>"group_concat(Statists.dem)",
             'type_answer'])->join([
             'table' => 'questions',
             'alias' => 'Questions',
@@ -275,17 +281,6 @@ class SurveysController extends AppController
         $conn = ConnectionManager::get('default');
         $this->set('conn', $conn);
     }
-
-//    public function delete($id = null)
-//    {
-//        $survey = $this->Surveys->find()->where(['id' => $id])->first();
-//        unlink(WWW_ROOT . "img/survey" . DS . $survey->img_survey);
-//        $query = $this->Surveys->query();
-//        $query->delete()
-//            ->where(['id' => $id])
-//            ->execute();
-//        return $this->redirect(URL . 'Surveys');
-//    }
 
     public function clickDelete()
     {
@@ -307,7 +302,7 @@ class SurveysController extends AppController
         $id = $_GET['id'];
         $survey = $this->Surveys->find()->where(['id' => $id])->first();
         unlink(WWW_ROOT . "img/survey" . DS . $survey->img_survey);
-        $query = $this->Catalogs->query();
+        $query = $this->Surveys->query();
         $query->delete()
             ->where(['id' => $id])
             ->execute();

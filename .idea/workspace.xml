@@ -1,8 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="960a0695-7d1f-48df-917d-7ddfce920d08" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/QuanLyKhaoSat/resources/views/backend/add_edit_user.blade.php" afterDir="false" />
+    <list default="true" id="cd5c3869-ea47-44bd-a8b6-800c1abd381c" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/QuanLyKhaoSat/config/paths.php" beforeDir="false" afterPath="$PROJECT_DIR$/QuanLyKhaoSat/config/paths.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/QuanLyKhaoSat/src/Controller/CatalogsController.php" beforeDir="false" afterPath="$PROJECT_DIR$/QuanLyKhaoSat/src/Controller/CatalogsController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/QuanLyKhaoSat/src/Controller/RegistsController.php" beforeDir="false" afterPath="$PROJECT_DIR$/QuanLyKhaoSat/src/Controller/RegistsController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/QuanLyKhaoSat/src/Controller/SurveysController.php" beforeDir="false" afterPath="$PROJECT_DIR$/QuanLyKhaoSat/src/Controller/SurveysController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/QuanLyKhaoSat/src/Controller/UsersController.php" beforeDir="false" afterPath="$PROJECT_DIR$/QuanLyKhaoSat/src/Controller/UsersController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/QuanLyKhaoSat/src/Template/Catalogs/index.ctp" beforeDir="false" afterPath="$PROJECT_DIR$/QuanLyKhaoSat/src/Template/Catalogs/index.ctp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/QuanLyKhaoSat/src/Template/Catalogs/listsurveys.ctp" beforeDir="false" afterPath="$PROJECT_DIR$/QuanLyKhaoSat/src/Template/Catalogs/listsurveys.ctp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/QuanLyKhaoSat/src/Template/Homes/index.ctp" beforeDir="false" afterPath="$PROJECT_DIR$/QuanLyKhaoSat/src/Template/Homes/index.ctp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/QuanLyKhaoSat/src/Template/Layout/default.ctp" beforeDir="false" afterPath="$PROJECT_DIR$/QuanLyKhaoSat/src/Template/Layout/default.ctp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/QuanLyKhaoSat/src/Template/Regists/regist.ctp" beforeDir="false" afterPath="$PROJECT_DIR$/QuanLyKhaoSat/src/Template/Regists/regist.ctp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/QuanLyKhaoSat/src/Template/Surveys/add.ctp" beforeDir="false" afterPath="$PROJECT_DIR$/QuanLyKhaoSat/src/Template/Surveys/add.ctp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/QuanLyKhaoSat/src/Template/Surveys/edit.ctp" beforeDir="false" afterPath="$PROJECT_DIR$/QuanLyKhaoSat/src/Template/Surveys/edit.ctp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/QuanLyKhaoSat/src/Template/Surveys/index.ctp" beforeDir="false" afterPath="$PROJECT_DIR$/QuanLyKhaoSat/src/Template/Surveys/index.ctp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/QuanLyKhaoSat/src/Template/Surveys/quesAdd.ctp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/QuanLyKhaoSat/src/Template/Users/add.ctp" beforeDir="false" afterPath="$PROJECT_DIR$/QuanLyKhaoSat/src/Template/Users/add.ctp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/QuanLyKhaoSat/src/Template/Users/edit.ctp" beforeDir="false" afterPath="$PROJECT_DIR$/QuanLyKhaoSat/src/Template/Users/edit.ctp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/QuanLyKhaoSat/src/Template/Users/index.ctp" beforeDir="false" afterPath="$PROJECT_DIR$/QuanLyKhaoSat/src/Template/Users/index.ctp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/QuanLyKhaoSat/src/Template/Users/login.ctp" beforeDir="false" afterPath="$PROJECT_DIR$/QuanLyKhaoSat/src/Template/Users/login.ctp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/QuanLyKhaoSat/webroot/css/haizzz.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/QuanLyKhaoSat/webroot/css/login.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/QuanLyKhaoSat/webroot/js/validate.js" beforeDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -10,60 +31,75 @@
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="ComposerSettings" synchronizationState="SYNCHRONIZE">
+  <component name="ComposerSettings" doNotAsk="true" synchronizationState="SYNCHRONIZE">
     <pharConfigPath>$PROJECT_DIR$/QuanLyKhaoSat/composer.json</pharConfigPath>
   </component>
   <component name="FileEditorManager">
-    <leaf>
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/QuanLyKhaoSat/src/Controller/SurveysController.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1558">
+              <caret line="82" column="38" selection-start-line="82" selection-start-column="38" selection-end-line="82" selection-end-column="38" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/QuanLyKhaoSat/src/Template/Surveys/edit.ctp">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="76">
+              <caret line="4" column="21" selection-start-line="4" selection-start-column="21" selection-end-line="4" selection-end-column="21" />
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/QuanLyKhaoSat/src/Controller/AdminsController.php">
+        <entry file="file://$PROJECT_DIR$/QuanLyKhaoSat/config/paths.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="391">
-              <caret line="25" column="39" selection-start-line="25" selection-start-column="39" selection-end-line="25" selection-end-column="39" />
+            <state relative-caret-position="756">
+              <caret line="90" selection-start-line="90" selection-end-line="90" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/QuanLyKhaoSat/src/Model/Table/Admin.php">
+        <entry file="file://$PROJECT_DIR$/QuanLyKhaoSat/src/Template/Users/edit.ctp">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="171">
-              <caret line="9" selection-start-line="9" selection-end-line="9" />
+            <state relative-caret-position="1121">
+              <caret line="59" column="67" selection-start-line="59" selection-start-column="67" selection-end-line="59" selection-end-column="67" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/QuanLyKhaoSat/src/Template/Admins/index.ctp">
+        <entry file="file://$PROJECT_DIR$/QuanLyKhaoSat/src/Template/Surveys/add.ctp">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="114">
-              <caret line="6" column="7" selection-start-line="6" selection-start-column="7" selection-end-line="6" selection-end-column="7" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/QuanLyKhaoSat/src/Template/Admins/login.ctp">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="361">
-              <caret line="19" column="11" selection-start-line="19" selection-start-column="11" selection-end-line="19" selection-end-column="11" />
-              <folding>
-                <element signature="n#style#0;n#fieldset#0;n#!!top" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/QuanLyKhaoSat/src/Controller/UsersController.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="323">
-              <caret line="23" column="36" selection-start-line="23" selection-start-column="8" selection-end-line="23" selection-end-column="36" />
+            <state relative-caret-position="418">
+              <caret line="22" column="51" selection-start-line="22" selection-start-column="51" selection-end-line="22" selection-end-column="51" />
             </state>
           </provider>
         </entry>
       </file>
     </leaf>
+  </component>
+  <component name="FindInProjectRecents">
+    <findStrings>
+      <find>users</find>
+      <find>email</find>
+      <find>categories</find>
+      <find>Categories</find>
+      <find>Catalogs</find>
+      <find>Users</find>
+      <find>Question</find>
+    </findStrings>
+    <replaceStrings>
+      <replace>Categories</replace>
+      <replace>categories</replace>
+      <replace>name</replace>
+      <replace>Surveys</replace>
+      <replace>Catalogs</replace>
+    </replaceStrings>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -71,12 +107,46 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/QuanLyKhaoSat/config/routes.php" />
+        <option value="$PROJECT_DIR$/QuanLyKhaoSat/config/paths.php" />
+        <option value="$PROJECT_DIR$/QuanLyKhaoSat/src/Template/Home/index.ctp" />
+        <option value="$PROJECT_DIR$/QuanLyKhaoSat/src/Controller/HomesController.php" />
+        <option value="$PROJECT_DIR$/QuanLyKhaoSat/src/Template/Categories/index.ctp" />
+        <option value="$PROJECT_DIR$/QuanLyKhaoSat/src/Template/Categories/add.ctp" />
+        <option value="$PROJECT_DIR$/QuanLyKhaoSat/src/Template/Categories/edit.ctp" />
+        <option value="$PROJECT_DIR$/QuanLyKhaoSat/src/Controller/CategoriesController.php" />
+        <option value="$PROJECT_DIR$/QuanLyKhaoSat/src/Controller/CreateSurveysController.php" />
+        <option value="$PROJECT_DIR$/QuanLyKhaoSat/src/Template/CreateSurveys/index.ctp" />
+        <option value="$PROJECT_DIR$/QuanLyKhaoSat/src/Template/Surveys/questions.ctp" />
         <option value="$PROJECT_DIR$/QuanLyKhaoSat/src/Controller/UsersController.php" />
-        <option value="$PROJECT_DIR$/QuanLyKhaoSat/src/Template/Admins/login.ctp" />
-        <option value="$PROJECT_DIR$/QuanLyKhaoSat/src/Model/Table/Admin.php" />
-        <option value="$PROJECT_DIR$/QuanLyKhaoSat/src/Template/Admins/index.ctp" />
-        <option value="$PROJECT_DIR$/QuanLyKhaoSat/src/Controller/AdminsController.php" />
+        <option value="$PROJECT_DIR$/QuanLyKhaoSat/src/Template/Catalogs/listSurveys.ctp" />
+        <option value="$PROJECT_DIR$/QuanLyKhaoSat/src/Controller/CatalogsController.php" />
+        <option value="$PROJECT_DIR$/QuanLyKhaoSat/src/Controller/QuestionsController.php" />
+        <option value="$PROJECT_DIR$/QuanLyKhaoSat/src/Template/Surveys/question_add.ctp" />
+        <option value="$PROJECT_DIR$/QuanLyKhaoSat/src/Template/Surveys/quesadd.ctp" />
+        <option value="$PROJECT_DIR$/QuanLyKhaoSat/src/Template/Surveys/questionsAdd.ctp" />
+        <option value="$PROJECT_DIR$/QuanLyKhaoSat/config/routes.php" />
+        <option value="$PROJECT_DIR$/../check.php" />
+        <option value="$PROJECT_DIR$/QuanLyKhaoSat/webroot/css/login.css" />
+        <option value="$PROJECT_DIR$/QuanLyKhaoSat/src/Controller/RegistsController.php" />
+        <option value="$PROJECT_DIR$/QuanLyKhaoSat/src/Template/Regists/index.ctp" />
+        <option value="$PROJECT_DIR$/QuanLyKhaoSat/webroot/css/HNam.css" />
+        <option value="$PROJECT_DIR$/QuanLyKhaoSat/src/Template/Users/login.ctp" />
+        <option value="$PROJECT_DIR$/QuanLyKhaoSat/src/Template/Users/index.ctp" />
+        <option value="$PROJECT_DIR$/QuanLyKhaoSat/src/Template/Surveys/qAdd.ctp" />
+        <option value="$PROJECT_DIR$/QuanLyKhaoSat/src/Template/Catalogs/index.ctp" />
+        <option value="$PROJECT_DIR$/QuanLyKhaoSat/src/Template/Catalogs/listsurveys.ctp" />
+        <option value="$PROJECT_DIR$/QuanLyKhaoSat/src/Template/Catalogs/add.ctp" />
+        <option value="$PROJECT_DIR$/QuanLyKhaoSat/src/Template/Catalogs/edit.ctp" />
+        <option value="$PROJECT_DIR$/QuanLyKhaoSat/src/Template/Regists/regist.ctp" />
+        <option value="$PROJECT_DIR$/QuanLyKhaoSat/src/Template/Users/add.ctp" />
+        <option value="$PROJECT_DIR$/QuanLyKhaoSat/src/Template/Users/edit.ctp" />
+        <option value="$PROJECT_DIR$/QuanLyKhaoSat/src/Template/Layout/default.ctp" />
+        <option value="$PROJECT_DIR$/QuanLyKhaoSat/src/Template/Homes/index.ctp" />
+        <option value="$PROJECT_DIR$/QuanLyKhaoSat/src/Template/Surveys/index.ctp" />
+        <option value="$PROJECT_DIR$/QuanLyKhaoSat/src/Controller/SurveysController.php" />
+        <option value="$PROJECT_DIR$/QuanLyKhaoSat/webroot/css/haizzz.css" />
+        <option value="$PROJECT_DIR$/QuanLyKhaoSat/src/Template/Surveys/add.ctp" />
+        <option value="$PROJECT_DIR$/QuanLyKhaoSat/src/Template/Surveys/edit.ctp" />
       </list>
     </option>
   </component>
@@ -157,26 +227,14 @@
       <path value="$PROJECT_DIR$/QuanLyKhaoSat/vendor/symfony/contracts" />
     </include_path>
   </component>
-  <component name="ProjectConfigurationFiles">
-    <option name="files">
-      <list>
-        <option value="$PROJECT_DIR$/.idea/internship_php_cakephp_namhn_201904.iml" />
-        <option value="$PROJECT_DIR$/.idea/misc.xml" />
-        <option value="$PROJECT_DIR$/.idea/modules.xml" />
-        <option value="$PROJECT_DIR$/.idea/vcs.xml" />
-        <option value="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" />
-        <option value="$PROJECT_DIR$/.idea/php.xml" />
-        <option value="$PROJECT_DIR$/.idea/jsLinters/jshint.xml" />
-      </list>
-    </option>
-  </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="-2" />
-    <option name="width" value="1596" />
+    <option name="x" value="300" />
+    <option name="y" value="26" />
+    <option name="width" value="1378" />
     <option name="height" value="1047" />
   </component>
   <component name="ProjectLevelVcsManager">
-    <ConfirmationsSetting value="1" id="Add" />
+    <ConfirmationsSetting value="2" id="Add" />
   </component>
   <component name="ProjectView">
     <navigator proportions="" version="1">
@@ -200,6 +258,12 @@
               <item name="internship_php_cakephp_namhn_201904" type="b2602c69:ProjectViewProjectNode" />
               <item name="internship_php_cakephp_namhn_201904" type="462c0819:PsiDirectoryNode" />
               <item name="QuanLyKhaoSat" type="462c0819:PsiDirectoryNode" />
+              <item name="config" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="internship_php_cakephp_namhn_201904" type="b2602c69:ProjectViewProjectNode" />
+              <item name="internship_php_cakephp_namhn_201904" type="462c0819:PsiDirectoryNode" />
+              <item name="QuanLyKhaoSat" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -214,21 +278,6 @@
               <item name="internship_php_cakephp_namhn_201904" type="462c0819:PsiDirectoryNode" />
               <item name="QuanLyKhaoSat" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="Model" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="internship_php_cakephp_namhn_201904" type="b2602c69:ProjectViewProjectNode" />
-              <item name="internship_php_cakephp_namhn_201904" type="462c0819:PsiDirectoryNode" />
-              <item name="QuanLyKhaoSat" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="Model" type="462c0819:PsiDirectoryNode" />
-              <item name="Table" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="internship_php_cakephp_namhn_201904" type="b2602c69:ProjectViewProjectNode" />
-              <item name="internship_php_cakephp_namhn_201904" type="462c0819:PsiDirectoryNode" />
-              <item name="QuanLyKhaoSat" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="Template" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -237,7 +286,7 @@
               <item name="QuanLyKhaoSat" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="Template" type="462c0819:PsiDirectoryNode" />
-              <item name="Admins" type="462c0819:PsiDirectoryNode" />
+              <item name="Surveys" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="internship_php_cakephp_namhn_201904" type="b2602c69:ProjectViewProjectNode" />
@@ -247,6 +296,19 @@
               <item name="Template" type="462c0819:PsiDirectoryNode" />
               <item name="Users" type="462c0819:PsiDirectoryNode" />
             </path>
+            <path>
+              <item name="internship_php_cakephp_namhn_201904" type="b2602c69:ProjectViewProjectNode" />
+              <item name="internship_php_cakephp_namhn_201904" type="462c0819:PsiDirectoryNode" />
+              <item name="QuanLyKhaoSat" type="462c0819:PsiDirectoryNode" />
+              <item name="webroot" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="internship_php_cakephp_namhn_201904" type="b2602c69:ProjectViewProjectNode" />
+              <item name="internship_php_cakephp_namhn_201904" type="462c0819:PsiDirectoryNode" />
+              <item name="QuanLyKhaoSat" type="462c0819:PsiDirectoryNode" />
+              <item name="webroot" type="462c0819:PsiDirectoryNode" />
+              <item name="css" type="462c0819:PsiDirectoryNode" />
+            </path>
           </expand>
           <select />
         </subPane>
@@ -254,6 +316,7 @@
     </panes>
   </component>
   <component name="PropertiesComponent">
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/QuanLyKhaoSat" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
@@ -276,52 +339,58 @@
   </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="960a0695-7d1f-48df-917d-7ddfce920d08" name="Default Changelist" comment="" />
-      <created>1555571829500</created>
+      <changelist id="cd5c3869-ea47-44bd-a8b6-800c1abd381c" name="Default Changelist" comment="" />
+      <created>1555982322537</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1555571829500</updated>
-      <workItem from="1555571830623" duration="4103000" />
+      <updated>1555982322537</updated>
+      <workItem from="1555982323694" duration="743000" />
+      <workItem from="1555983089203" duration="27842000" />
+      <workItem from="1556068298654" duration="20361000" />
+      <workItem from="1556093948490" duration="9131000" />
+      <workItem from="1556153938453" duration="20600000" />
+      <workItem from="1556257652268" duration="10642000" />
+      <workItem from="1556758812624" duration="39000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="4103000" />
+    <option name="totallyTimeSpent" value="89358000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-2" y="0" width="1596" height="1047" extended-state="0" />
+    <frame x="300" y="26" width="1378" height="1047" extended-state="0" />
     <layout>
-      <window_info id="Favorites" side_tool="true" />
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.13216145" />
-      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
-      <window_info anchor="bottom" id="Docker" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Database Changes" />
-      <window_info anchor="bottom" id="Version Control" />
-      <window_info anchor="bottom" id="Terminal" />
-      <window_info anchor="bottom" id="Event Log" side_tool="true" />
-      <window_info anchor="bottom" id="Message" order="0" />
-      <window_info anchor="bottom" id="Find" order="1" weight="0.32932165" />
-      <window_info anchor="bottom" id="Run" order="2" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
-      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
-      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
-      <window_info anchor="bottom" id="TODO" order="6" />
-      <window_info anchor="right" id="Database" />
-      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
-      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
-      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info id="Favorites" order="0" side_tool="true" />
+      <window_info active="true" content_ui="combo" id="Project" order="1" visible="true" weight="0.19954476" />
+      <window_info id="Structure" order="2" side_tool="true" weight="0.25" />
+      <window_info anchor="bottom" id="Terminal" order="0" />
+      <window_info anchor="bottom" id="Database Changes" order="1" />
+      <window_info anchor="bottom" id="Event Log" order="2" side_tool="true" />
+      <window_info anchor="bottom" id="Version Control" order="3" />
+      <window_info anchor="bottom" id="Docker" order="4" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Message" order="5" />
+      <window_info anchor="bottom" id="Find" order="6" weight="0.32936078" />
+      <window_info anchor="bottom" id="Run" order="7" />
+      <window_info anchor="bottom" id="Debug" order="8" weight="0.4" />
+      <window_info anchor="bottom" id="Cvs" order="9" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="10" weight="0.4" />
+      <window_info anchor="bottom" id="TODO" order="11" />
+      <window_info anchor="right" id="Database" order="0" />
+      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="1" type="SLIDING" weight="0.4" />
+      <window_info anchor="right" id="Ant Build" order="2" weight="0.25" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="3" weight="0.25" />
     </layout>
     <layout-to-restore>
       <window_info id="Favorites" order="0" side_tool="true" />
-      <window_info content_ui="combo" id="Project" order="1" visible="true" weight="0.17724459" />
+      <window_info active="true" content_ui="combo" id="Project" order="1" visible="true" weight="0.20414938" />
       <window_info id="Structure" order="2" side_tool="true" weight="0.25" />
-      <window_info anchor="bottom" id="Docker" order="0" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Terminal" order="1" />
+      <window_info anchor="bottom" id="Terminal" order="0" />
+      <window_info anchor="bottom" id="Database Changes" order="1" />
       <window_info anchor="bottom" id="Event Log" order="2" side_tool="true" />
-      <window_info anchor="bottom" id="Database Changes" order="3" />
-      <window_info anchor="bottom" id="Version Control" order="4" />
+      <window_info anchor="bottom" id="Version Control" order="3" />
+      <window_info anchor="bottom" id="Docker" order="4" show_stripe_button="false" />
       <window_info anchor="bottom" id="Message" order="5" />
-      <window_info anchor="bottom" id="Find" order="6" weight="0.32932165" />
+      <window_info anchor="bottom" id="Find" order="6" weight="0.32936078" />
       <window_info anchor="bottom" id="Run" order="7" />
       <window_info anchor="bottom" id="Debug" order="8" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="9" weight="0.25" />
@@ -337,74 +406,197 @@
     <option name="version" value="1" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/QuanLyKhaoSat/src/Template/Users/login.ctp">
+    <entry file="file://$PROJECT_DIR$/QuanLyKhaoSat/src/Controller/HomesController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <folding>
-            <element signature="n#style#0;n#fieldset#0;n#!!top" expanded="true" />
-          </folding>
+        <state relative-caret-position="114">
+          <caret line="6" column="11" selection-start-line="6" selection-start-column="11" selection-end-line="6" selection-end-column="11" />
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/QuanLyKhaoSat/webroot/index.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="304">
+          <caret line="30" column="50" lean-forward="true" selection-start-line="30" selection-end-line="30" selection-end-column="50" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/QuanLyKhaoSat/src/Template/Surveys/questions.ctp" />
+    <entry file="file://$PROJECT_DIR$/QuanLyKhaoSat/src/Template/Catalogs/login.ctp" />
+    <entry file="file://$PROJECT_DIR$/QuanLyKhaoSat/src/Controller/CatalogsController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="114">
+          <caret line="6" column="6" selection-end-line="107" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/QuanLyKhaoSat/src/Template/Questions/index.ctp" />
+    <entry file="file://$PROJECT_DIR$/QuanLyKhaoSat/src/Controller/QuestionsController.php" />
+    <entry file="file://$PROJECT_DIR$/QuanLyKhaoSat/src/Template/Surveys/ques.ctp" />
     <entry file="file://$PROJECT_DIR$/QuanLyKhaoSat/config/routes.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="418">
-          <caret line="25" selection-start-line="25" selection-end-line="25" />
+        <state relative-caret-position="657">
+          <caret line="60" column="30" selection-start-line="60" selection-start-column="30" selection-end-line="60" selection-end-column="30" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/QuanLyKhaoSat/src/Template/Admin/login.ctp">
+    <entry file="file://$PROJECT_DIR$/../check.php" />
+    <entry file="file://$PROJECT_DIR$/QuanLyKhaoSat/webroot/css/login.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="285">
-          <caret line="15" column="21" selection-start-line="15" selection-start-column="21" selection-end-line="15" selection-end-column="21" />
-          <folding>
-            <element signature="n#style#0;n#fieldset#0;n#!!top" expanded="true" />
-          </folding>
+        <state relative-caret-position="1307">
+          <caret line="241" column="1" selection-start-line="241" selection-start-column="1" selection-end-line="241" selection-end-column="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/QuanLyKhaoSat/src/Template/Regists/index.ctp" />
+    <entry file="file://$PROJECT_DIR$/QuanLyKhaoSat/webroot/css/HNam.css" />
+    <entry file="file://$PROJECT_DIR$/QuanLyKhaoSat/webroot/css/home.css">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/QuanLyKhaoSat/webroot/css/base.css">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/QuanLyKhaoSat/webroot/css/style.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-171" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/QuanLyKhaoSat/src/Controller/RegistsController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="695">
+          <caret line="52" column="25" selection-start-line="52" selection-start-column="25" selection-end-line="52" selection-end-column="25" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/QuanLyKhaoSat/src/Controller/UsersController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="323">
-          <caret line="23" column="36" selection-start-line="23" selection-start-column="8" selection-end-line="23" selection-end-column="36" />
+        <state relative-caret-position="-95">
+          <caret line="4" column="6" selection-start-line="4" selection-start-column="6" selection-end-line="4" selection-end-column="6" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/QuanLyKhaoSat/src/Model/Table/User.php">
+    <entry file="file://$PROJECT_DIR$/QuanLyKhaoSat/src/Template/Users/index.ctp">
       <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret selection-end-line="8" selection-end-column="1" />
+        <state relative-caret-position="19">
+          <caret line="1" selection-start-line="1" selection-end-line="1" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/QuanLyKhaoSat/src/Model/Table/Admin.php">
+    <entry file="file://$PROJECT_DIR$/QuanLyKhaoSat/src/Template/Catalogs/add.ctp">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="171">
-          <caret line="9" selection-start-line="9" selection-end-line="9" />
+        <state relative-caret-position="475">
+          <caret line="25" column="67" lean-forward="true" selection-start-line="24" selection-start-column="20" selection-end-line="25" selection-end-column="67" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/QuanLyKhaoSat/src/Template/Admins/index.ctp">
+    <entry file="file://$PROJECT_DIR$/QuanLyKhaoSat/src/Template/Catalogs/edit.ctp">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="114">
-          <caret line="6" column="7" selection-start-line="6" selection-start-column="7" selection-end-line="6" selection-end-column="7" />
+        <state relative-caret-position="418">
+          <caret line="22" column="67" selection-start-line="22" selection-start-column="67" selection-end-line="22" selection-end-column="67" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/QuanLyKhaoSat/src/Template/Admins/login.ctp">
+    <entry file="file://$PROJECT_DIR$/QuanLyKhaoSat/src/Template/Users/add.ctp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="619">
+          <caret line="54" column="67" selection-start-line="54" selection-start-column="67" selection-end-line="54" selection-end-column="67" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/QuanLyKhaoSat/src/Template/Users/login.ctp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="342">
+          <caret line="18" column="18" selection-start-line="18" selection-start-column="18" selection-end-line="18" selection-end-column="18" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/QuanLyKhaoSat/src/Template/Catalogs/listsurveys.ctp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="152">
+          <caret line="8" column="73" selection-start-line="8" selection-start-column="73" selection-end-line="8" selection-end-column="73" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/QuanLyKhaoSat/src/Template/Regists/regist.ctp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="562">
+          <caret line="47" column="61" selection-start-line="47" selection-start-column="61" selection-end-line="47" selection-end-column="61" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/QuanLyKhaoSat/src/Template/Surveys/quesAdd.ctp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="19">
+          <caret line="1" selection-start-line="1" selection-end-line="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/QuanLyKhaoSat/src/Template/Catalogs/index.ctp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="258">
+          <caret line="21" column="21" selection-start-line="21" selection-start-column="21" selection-end-line="21" selection-end-column="21" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/QuanLyKhaoSat/src/Template/Homes/index.ctp">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="361">
-          <caret line="19" column="11" selection-start-line="19" selection-start-column="11" selection-end-line="19" selection-end-column="11" />
-          <folding>
-            <element signature="n#style#0;n#fieldset#0;n#!!top" expanded="true" />
-          </folding>
+          <caret line="19" column="11" lean-forward="true" selection-start-line="19" selection-start-column="11" selection-end-line="19" selection-end-column="11" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/QuanLyKhaoSat/src/Controller/AdminsController.php">
+    <entry file="file://$PROJECT_DIR$/QuanLyKhaoSat/src/Template/Surveys/index.ctp">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="391">
-          <caret line="25" column="39" selection-start-line="25" selection-start-column="39" selection-end-line="25" selection-end-column="39" />
+        <state relative-caret-position="524">
+          <caret line="30" column="57" selection-start-line="30" selection-start-column="57" selection-end-line="30" selection-end-column="57" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/QuanLyKhaoSat/webroot/css/haizzz.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="570">
+          <caret line="30" selection-start-line="30" selection-end-line="30" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/QuanLyKhaoSat/src/Template/Layout/default.ctp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="228">
+          <caret line="12" column="106" lean-forward="true" selection-start-line="10" selection-start-column="2" selection-end-line="12" selection-end-column="106" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/QuanLyKhaoSat/src/Controller/SurveysController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1558">
+          <caret line="82" column="38" selection-start-line="82" selection-start-column="38" selection-end-line="82" selection-end-column="38" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/QuanLyKhaoSat/src/Template/Users/edit.ctp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1121">
+          <caret line="59" column="67" selection-start-line="59" selection-start-column="67" selection-end-line="59" selection-end-column="67" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/QuanLyKhaoSat/src/Template/Surveys/add.ctp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="418">
+          <caret line="22" column="51" selection-start-line="22" selection-start-column="51" selection-end-line="22" selection-end-column="51" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/QuanLyKhaoSat/src/Template/Surveys/edit.ctp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="76">
+          <caret line="4" column="21" selection-start-line="4" selection-start-column="21" selection-end-line="4" selection-end-column="21" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/QuanLyKhaoSat/config/paths.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="756">
+          <caret line="90" selection-start-line="90" selection-end-line="90" />
         </state>
       </provider>
     </entry>

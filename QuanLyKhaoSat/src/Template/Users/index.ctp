@@ -2,7 +2,6 @@
     <legend>Danh Sách Users</legend>
     <table class="table table-bordered table-striped">
         <tr style="background-color: #333333;color: white">
-            <th>ID</th>
             <th>Tài Khoản</th>
             <th>Họ và Tên</th>
             <th>Địa Chỉ</th>
@@ -14,16 +13,13 @@
             <th>Khởi Tạo</th>
             <th>Chỉnh Sửa</th>
             <th>
-                <?php if ($HgNam[1] == "Admin") { ?>
-                    <a href="<?php URL ?>users/add" class="btn btn-success">
-                        <i class="fas fa-plus"></i> ADD
-                    </a>
-                <?php } ?>
+                <a href="<?php URL ?>users/add" class="btn btn-success">
+                    <i class="fas fa-plus"></i> ADD
+                </a>
             </th>
         </tr>
-        <?php foreach ($data as $value) { ?>
+        <?php foreach ($dataUser as $value) { ?>
             <tr class="rows<?= $value->id ?> recycleBin<?= $value->id ?>">
-                <td><?php echo $value->id ?></td>
                 <td><?php echo $value->email ?></td>
                 <td><?php echo $value->fullname ?></td>
                 <td><?php echo $value->address ?></td>
@@ -35,16 +31,54 @@
                 <td><?php echo $value->created ?></td>
                 <td><?php echo $value->modified ?></td>
                 <td>
-                    <?php if (($value->level == 'Member') || ($HgNam[1] == 'Admin' && $value->id == $HgNam[2])) { ?>
+                    <?php if ($value->id == $HgNam[2] || $value->level == "Member") { ?>
                         <a href="<?php URL ?>users/edit/<?php echo $value->id ?>" class="btn btn-primary">
                             <i class="fas fa-edit"></i> Edit
                         </a>
                         <button type="button" id="<?= $value->id ?>" class="btn btn-danger click">
                             <i class="far fa-trash-alt"></i> Delete
                         </button><br>
-                        <button style="margin-top: 5px;width: 160px" type="button" id="<?= $value->id ?>" class="btn btn-danger clickDelete">
-                            <i class="far fa-trash-alt"></i> Delete Forever
+                        <style>
+                            .modalButton {
+                                font-size: 17px;
+                                margin-top: 5px;
+                                font-weight: bold;
+                                background-color: #cccccc;
+                                color: black;
+                                width: 100px;
+                                height: 42px;
+                            }
+
+                            .modalButton:hover {
+                                background-color: #1cc7ff;
+                            }.modal-title{
+                                font-weight: bold;
+                                font-size: 25px;
+                                                         }
+                        </style>
+                        <button class="modalButton" onclick="groupUsers('<?= $value->id?>')"  type="button" data-toggle="modal" data-target="#groupUsers<?= $value->id ?>">
+                            <i class="far fa-object-group"></i> Groups
                         </button>
+                        <!-- Modal -->
+                        <div class="modal fade" id="groupUsers<?= $value->id ?>" role="dialog">
+                            <div class="modal-dialog">
+                                <!-- Modal content-->
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                        <h4 class="modal-title"><u>Nhóm Tham Gia</u></h4>
+                                    </div>
+                                    <div class="modal-body">
+                                        <p class="showGroups"></p>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-danger" data-dismiss="modal">Close
+                                        </button>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
                     <?php } ?>
                 </td>
             </tr>
@@ -126,6 +160,16 @@
     <div style="clear: both"></div>
 </fieldset>
 <script type="text/javascript">
+    function groupUsers(id){
+        $.ajax({
+            url: '<?= URL ?>users/groupUsers?id=' + id,
+            type: 'GET',
+            success: function (res) {
+                $('.showGroups').html(res);
+                console.log(res);
+            }
+        });
+    };
     $(document).ready(function () {
         // Đưa bản ghi vào thùng rác
         $(".click").click(function () {
@@ -205,16 +249,6 @@
                                         window.location.replace("<?= URL ?>users");
                                     })
                                 }
-                                // Mình đang xây dựng theo hướng dùng ajax thêm bản ghi vào dòng cuối nhưng sẽ k hợp lý vì nó vướng với phân trang
-                                // $('.recycleBin' + id).remove();
-                                //$.ajax({
-                                //    url: '<?//= URL ?>//users/addrestore?id=' + id,
-                                //    type: 'GET',
-                                //    success: function (res) {
-                                //        $('.addRestore').html(res);
-                                //        console.log(res);
-                                //    }
-                                //});
                             }
                         });
                     }

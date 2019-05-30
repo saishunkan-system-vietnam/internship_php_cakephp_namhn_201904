@@ -105,10 +105,17 @@
         width: 100%;
         text-align: left;
         background: white;
+        border: 3px solid darkred;
+        border-top : none;
+        color: darkblue;
     }
 
+    .catalog table tr:nth-child(1) th a button {
+        border-top: 3px solid darkred;
+    }
     .catalog table tr th a button:hover {
-        background-color: #1cc7ff;
+        background-color: #333333;
+        color: white;
     }
 
     .catalog legend {
@@ -123,17 +130,21 @@
         background-image: url("<?= URL ?>img/index/footer.jpg");
         height: 250px;
     }
+
     .footer div u i {
         font-size: 40px;
         padding-top: 30px;
     }
+
     .icon {
         padding-top: 30px;
     }
+
     .icon i {
         font-size: 30px;
         margin-left: 30px;
     }
+
     .footer .table tr th {
         font-size: 20px;
 
@@ -160,21 +171,15 @@
         </a>
         <?php if (empty($HgNam)) { ?>
             <a href="<?= URL ?>actions/login">
-                <button><i class="fas fa-sign-in-alt"></i>
-                    Đăng Nhập
-                </button>
+                <button><i class="fas fa-sign-in-alt"></i>Đăng Nhập</button>
             </a>
             <a href="<?= URL ?>regists">
-                <button><i class="fas fa-sign-out-alt"></i>
-                    Đăng Ký
-                </button>
+                <button><i class="fas fa-sign-out-alt"></i>Đăng Ký</button>
             </a>
         <?php }
         if ($HgNam[1] == "Admin") { ?>
             <a href="<?= URL ?>users">
-                <button><i
-                            class="fas fa-tasks"></i> Admin
-                </button>
+                <button><i class="fas fa-tasks"></i> Admin</button>
             </a>
         <?php }
         if (!empty($HgNam)) { ?>
@@ -203,20 +208,19 @@
         </fieldset>
         <fieldset class="catalog">
             <legend>[ Khảo Sát Mới ]</legend>
-                        <marquee direction="down" scrolldelay="200" onMouseOver="this.stop()" onMouseOut="this.start()">
-            <table>
+            <table style="width: 100%;max-width: 375px;">
                 <?php foreach ($dataNew as $value) { ?>
                     <tr>
                         <th>
                             <a href="<?= URL ?>actions/survey/<?= $value->id ?>">
                                 <button>
-                                    <i  style="margin-left: 5px;" class="fas fa-poll-h"></i> <?= $value->name ?></button>
+                                    <i style="margin-left: 5px;" class="fas fa-poll-h"></i> <?= $value->name ?>
+                                </button>
                             </a>
                         </th>
                     </tr>
                 <?php } ?>
             </table>
-                        </marquee>
         </fieldset>
         <div class="fb-page facebook"
              data-href="https://www.facebook.com/Kh%E1%BA%A3o-S%C3%A1t-Ho%C3%A0ng-Nam-604295050072854/?modal=admin_todo_tour"

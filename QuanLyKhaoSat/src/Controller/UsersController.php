@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use Cake\Cache\Cache;
+use Cake\Event\Event;
 
 class UsersController extends AppController
 {
@@ -11,6 +12,11 @@ class UsersController extends AppController
         parent::initialize();
 
         $this->loadComponent('Paginator');
+    }
+
+    public function beforeFilter(Event $event)
+    {
+        $this->loadModel('Groups');
     }
 
     public function login()
@@ -55,14 +61,34 @@ class UsersController extends AppController
         if ($HgNam[1] == "Member") {
             return $this->redirect(URL . "actions");
         } else {
+            $dataUser = $this->Users->find();
+            $this->set("dataUser",$dataUser);
+            $details = $this->Users->find('all')
+                ->select([
+                    'id',
+                    'email',
+                    'fullname',
+                    'address',
+                    'phone',
+                    'birth',
+                    'Groups.name',
+                    'level',
+                    'secret_q',
+                    'secret_a',
+                    'created',
+                    'modified'
+                ])->where(['Users.restore' => 1])
+                ->join([
+                    'table' => 'groups',
+                    'alias' => 'Groups',
+                    'type' => 'INNER',
+                    'conditions' => 'users.group_id = Groups.id'
+                ]);
             $this->paginate = array(
                 'limit' => 8,
                 'order' => array('id' => 'asc'),
             );
-            $data = $this->Users->find()
-                ->where(['restore' => 1]);
-            $data = $this->paginate($data);
-            $this->set("data", $data);
+            $this->set("data", $this->paginate($details));
             $this->set("HgNam", $HgNam);
             $recycleBin = $this->Users->find()
                 ->where(['restore' => 0])->toArray();
@@ -73,6 +99,19 @@ class UsersController extends AppController
         }
     }
 
+    public function lists($id = null)
+    {
+        $HgNam = ($this->Auth->user());
+        $this->set("HgNam", $HgNam);
+        $data = $this->Users->find()
+            ->where(['id' => $id])
+            ->first();
+        $this->set('data', $data);
+        $group = $this->Groups->find()
+            ->where(['user_id' => $data->id,]);
+        $this->set('user', $group);
+    }
+
     public function add()
     {
         $HgNam = ($this->Auth->user());
@@ -81,6 +120,8 @@ class UsersController extends AppController
         } else {
             $HgNam = ($this->Auth->user());
             $this->set("HgNam", $HgNam);
+            $dataGroup = $this->Groups->find();
+            $this->set('dataGroup',$dataGroup);
             if ($this->request->is('post')) {
                 $email = htmlentities($this->request->getData('email'));
                 $error = $this->Users->find()
@@ -284,14 +325,29 @@ class UsersController extends AppController
             <td><?php echo $value->modified ?></td>
             <?php if (($value->level == 'Member') || ($value->id == $HgNam[2])) { ?>
                 <td>
-                <a href="<?php URL ?>users/edit/<?php echo $value->id ?>" class="btn btn-primary">
-                    <i class="fas fa-edit"></i> Edit
-                </a>
-                <button type="button" id="<?= $value->id ?>" class="btn btn-danger click">
-                    <i class="far fa-trash-alt"></i> Delete
-                </button>
+                    <a href="<?php URL ?>users/edit/<?php echo $value->id ?>" class="btn btn-primary">
+                        <i class="fas fa-edit"></i> Edit
+                    </a>
+                    <button type="button" id="<?= $value->id ?>" class="btn btn-danger click">
+                        <i class="far fa-trash-alt"></i> Delete
+                    </button>
                 </td>
             <?php } ?>
+        <?php }
+        die;
+    }
+
+    public function groupUsers()
+    {
+        $id = $_GET['id'];
+        $data = $this->Groups->find()
+            ->where(['user_id' => $id,]);
+        foreach ($data as $key => $value) { ?>
+            <table border="1" style="width: 400px;margin: auto">
+                <tr style="height: 45px;">
+                    <th style="width: 50px;"><?= $key + 1?></th><th><?= $value->name ?></th>
+                </tr>
+            </table>
         <?php }
         die;
     }
