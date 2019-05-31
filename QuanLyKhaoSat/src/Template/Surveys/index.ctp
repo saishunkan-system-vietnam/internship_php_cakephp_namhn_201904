@@ -30,7 +30,7 @@
                             <img style="width: 150px;height: 100px;"
                                  src="<?= URL ?>img/survey/<?= $value->img_survey ?>" alt="">
                         <?php } else { ?>
-                            <img style="width: 150px;height: 100px;" src="<?= URL ?>img/survey/no_images.jpg" alt="">
+                            <img style="width: 150px;height: 100px;" src="<?= URL ?>img/survey/noimage.jpg" alt="">
                         <?php } ?>
                     </td>
                     <td><?php echo $value->name ?></td>
@@ -41,7 +41,7 @@
                         <?php if ($value->login_status == 'on') { ?>
                             <i class="glyphicon glyphicon-check" style="font-size: 30px;"></i>
                         <?php } else { ?>
-                            <i class="glyphicon glyphicon-unchecked" style="font-size: 30px;"></i>
+                            <i class="fas fa-window-close" style="font-size: 30px;"></i>
                         <?php } ?>
                     </td>
                     <td><?php echo $value->count ?></td>

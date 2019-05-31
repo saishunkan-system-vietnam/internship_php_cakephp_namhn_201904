@@ -17,7 +17,7 @@
                     <?php if ($value->img_survey != '') {?>
                         <img style="width: 150px;height: 120px;" src="<?= URL ?>img/survey/<?= $value->img_survey ?>" alt="">
                     <?php }else {?>
-                        <img style="width: 150px;height: 120px;" src="<?= URL ?>img/survey/no_images.jpg" alt="">
+                        <img style="width: 150px;height: 120px;" src="<?= URL ?>img/survey/noimage.jpg" alt="">
                     <?php }?>
                 </th>
                 <th  class="col-md-8 rows<?= $value->id ?>" style="text-align: center">

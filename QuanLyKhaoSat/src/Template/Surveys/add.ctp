@@ -10,15 +10,16 @@
             Khảo Sát đã tồn tại, xin vui lòng nhập Khảo Sát khác ^^! Nhớ nha :))
         </div>
     <?php } ?>
-    <?php if (isset($checkImg)) { ?>
+    <?php if (isset($errorTime)) { ?>
         <div class="alert alert-danger">
-            File bạn vừa đăng tải không phải file Ảnh , Xin vui lòng chọn File "jpg" hoặc "png"
+           Thời gian bạn nhập đã lỗi .
         </div>
     <?php } ?>
     <legend>Khởi Tạo Khảo Sát</legend>
-    <table class="table table-hover table-bordered">
-        <form method="post" action="<?= URL ?>surveys/add/<?php echo isset($id) ? $id : ''?>" id="formSurveys" enctype="multipart/form-data">
-        <?php if (isset($catalogID)) { ?>
+    <form method="post" action="<?= URL ?>surveys/add/<?php echo isset($id) ? $id : '' ?>" id="Surveys"
+          enctype="multipart/form-data">
+        <table class="table table-hover table-bordered">
+            <?php if (isset($catalogID)) { ?>
                 <tr>
                     <th>Danh mục khảo sát</th>
                     <th><?php echo $catalogID->name; ?></th>
@@ -44,7 +45,7 @@
             <tr>
                 <th>Tên Khảo Sát</th>
                 <th><input placeholder="Nhập tên khảo sát"
-                            required value="<?php echo isset($result[0]) ? $result[0] : '' ?>"
+                           required value="<?php echo isset($result[0]) ? $result[0] : '' ?>"
                            type="text" name="name" class="form-control"></th>
             </tr>
             <tr>
@@ -52,7 +53,8 @@
                 <th>
                      <span class="button-checkbox">
                             <button type="button" class="btn" data-color="danger">Login</button>
-                            <input type="checkbox" <?php echo isset($result[4]) && $result[4] == 'on' ? "checked" : '' ?> class="hidden" name="login_status"/>
+                            <input type="checkbox" <?php echo isset($result[4]) && $result[4] == 'on' ? "checked" : '' ?> class="hidden"
+                                   name="login_status"/>
                      </span>
                 </th>
             </tr>
@@ -80,7 +82,7 @@
                 </th>
                 <th>
                     <input placeholder="Nhập số khảo sát tối đa"
-                            value="<?php echo isset($result[5]) ? $result[5] : '' ?>"
+                           value="<?php echo isset($result[5]) ? $result[5] : '' ?>"
                            type="number" name="maximum" class="form-control">
                 </th>
             </tr>
@@ -115,20 +117,12 @@
             <tr>
                 <th></th>
                 <th>
-                    <button class="btn btn-primary" id="i_submit" type="submit"><i class="far fa-thumbs-up"></i> Submit</button>
+                    <button class="btn btn-primary" id="i_submit" type="submit"><i class="far fa-thumbs-up"></i> Submit
+                    </button>
                     <button class="btn btn-danger" type="reset"><i class="fas fa-sync-alt"></i> Reset</button>
                 </th>
             </tr>
-        </form>
+        </table>
+    </form>
 </fieldset>
-</table>
-<script>
-    $(document).ready(function () {
-        $('#i_file').mouseout(function () {
-            var regExp = /[^0-9]/;
-            if ($('#tel').val().match(regExp)) {
-                swal("Số điện thoại bạn nhập không hợp lệ ^^!");
-            }
-        });
-    });
-</script>
+<?php echo $this->Html->script('validate/Surveys/add_edit'); ?>

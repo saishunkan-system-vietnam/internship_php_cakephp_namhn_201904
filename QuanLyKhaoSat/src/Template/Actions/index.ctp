@@ -75,7 +75,7 @@
                 <?php if ($value->img_survey != '') { ?>
                     <img src="<?= URL ?>img/survey/<?= $value->img_survey ?>" alt="">
                 <?php } else { ?>
-                    <img src="<?= URL ?>img/survey/no_images.jpg" alt="">
+                    <img src="<?= URL ?>img/survey/noimage.jpg" alt="">
                 <?php } ?>
                 <div class="name"><?= $value->name ?></div>
             </div>

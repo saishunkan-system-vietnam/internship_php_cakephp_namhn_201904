@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use Cake\Cache\Cache;
+use Cake\Event\Event;
 
 class UsersController extends AppController
 {
@@ -11,6 +12,11 @@ class UsersController extends AppController
         parent::initialize();
 
         $this->loadComponent('Paginator');
+    }
+
+    public function beforeFilter(Event $event)
+    {
+        $this->loadModel('Groups');
     }
 
     public function login()
@@ -51,6 +57,7 @@ class UsersController extends AppController
 
     public function index()
     {
+
         $HgNam = ($this->Auth->user());
         if ($HgNam[1] == "Member") {
             return $this->redirect(URL . "actions");
@@ -71,6 +78,19 @@ class UsersController extends AppController
                 ->where(['restore' => 1])->count();
             $this->set("dem", $dem);
         }
+    }
+
+    public function lists($id = null)
+    {
+        $HgNam = ($this->Auth->user());
+        $this->set("HgNam", $HgNam);
+        $data = $this->Users->find()
+            ->where(['id' => $id])
+            ->first();
+        $this->set('data', $data);
+        $group = $this->Groups->find()
+            ->where(['user_id' => $data->id,]);
+        $this->set('user', $group);
     }
 
     public function add()
@@ -284,15 +304,43 @@ class UsersController extends AppController
             <td><?php echo $value->modified ?></td>
             <?php if (($value->level == 'Member') || ($value->id == $HgNam[2])) { ?>
                 <td>
-                <a href="<?php URL ?>users/edit/<?php echo $value->id ?>" class="btn btn-primary">
-                    <i class="fas fa-edit"></i> Edit
-                </a>
-                <button type="button" id="<?= $value->id ?>" class="btn btn-danger click">
-                    <i class="far fa-trash-alt"></i> Delete
-                </button>
+                    <a href="<?php URL ?>users/edit/<?php echo $value->id ?>" class="btn btn-primary">
+                        <i class="fas fa-edit"></i> Edit
+                    </a>
+                    <button type="button" id="<?= $value->id ?>" class="btn btn-danger click">
+                        <i class="far fa-trash-alt"></i> Delete
+                    </button>
                 </td>
             <?php } ?>
         <?php }
         die;
+    }
+
+    public function groupUsers()
+    {
+        $id = $_GET['id'];
+        $data = $this->Groups->find('all')
+            ->select([
+                'Groups.name',
+            ])->where(['Groups.restore' => 1 , 'Users.id' => $id])
+            ->join([
+                'table' => 'details',
+                'alias' => 'Details',
+                'type' => 'INNER',
+                'conditions' => 'Groups.id = Details.group_id'
+            ])->join([
+                'table' => 'users',
+                'alias' => 'Users',
+                'type' => 'INNER',
+                'conditions' => 'Details.user_id = Users.id'
+            ]);
+        foreach ($data as $key => $value) { ?>
+            <table border="1" style="width: 400px;margin: auto">
+                <tr style="height: 45px;">
+                    <th style="width: 50px;"><?= $key + 1 ?></th>
+                    <th><?= $value->name ?></th>
+                </tr>
+            </table>
+        <?php } die;
     }
 }

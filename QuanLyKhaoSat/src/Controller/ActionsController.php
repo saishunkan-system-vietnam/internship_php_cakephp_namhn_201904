@@ -37,7 +37,7 @@ class ActionsController extends AppController
         $HgNam = ($this->Auth->user());
         $this->set('HgNam', $HgNam);
         //====== Danh mục Khảo Sát ========
-        $catalog = $this->Catalogs->find();
+        $catalog = $this->Catalogs->find()->limit(8);
         $this->set('catalog', $catalog);
         //=================================
         $surveyOff = $this->Surveys->find()
@@ -51,25 +51,25 @@ class ActionsController extends AppController
         //==========Lấy 5 Khảo Sát Công Khai Mới Nhất========
         $dem = $this->Surveys->find()->count();
         $dataNew = $this->Surveys->find()
-            ->where(['status' => 'open'])->limit(5)->offset($dem-5);
+            ->where(['status' => 'open','login_status' => ''])->limit(5)->offset($dem-5);
         $this->set('dataNew',$dataNew);
     }
 
     public function catalog($id = null)
     {
         $this->viewBuilder()->setLayout('action');
-        $catalog = $this->Catalogs->find();
+        $catalog = $this->Catalogs->find()->limit(8);
         $this->set('catalog', $catalog);
         //================================
         $catalogID = $this->Catalogs->find()->where(['id' => $id])->first();
         $this->set('catalogID', $catalogID);
         //====== Khảo Sát Công Khai =======
         $dataOff = $this->Surveys->find()
-            ->where(['login_status' => '', 'catalog_id' => $id]);
+            ->where(['login_status' => '', 'catalog_id' => $id])->toArray();
         $this->set('dataOff', $dataOff);
         //====== Khảo Sát Công Khai =======
         $dataOn = $this->Surveys->find()
-            ->where(['login_status' => 'on', 'catalog_id' => $id]);
+            ->where(['login_status' => 'on', 'catalog_id' => $id])->toArray();
         $this->set('dataOn', $dataOn);
         //===============================================
         $this->loadComponent('Auth');
@@ -81,7 +81,7 @@ class ActionsController extends AppController
         Cache::write('linkRegist', URL . 'actions/login');
         $dem = $this->Surveys->find()->count();
         $dataNew = $this->Surveys->find()
-            ->where(['status' => 'open'])->limit(5)->offset($dem-5);
+            ->where(['status' => 'open','login_status' => ''])->limit(6)->offset($dem-6);
         $this->set('dataNew',$dataNew);
     }
 
@@ -143,13 +143,14 @@ class ActionsController extends AppController
                     $answers = str_replace(",", ";", $answers);
                 }
                 $query = $this->Statists->query();
-                $query->insert(['answer', 'type_answer', 'survey_id', 'question_id', 'user_answer', 'created_at'])
+                $query->insert(['answer', 'type_answer', 'survey_id', 'dem','question_id', 'user_answer', 'created_at'])
                     ->values([
                         'answer' => isset($answers) ? $answers : '',
                         'type_answer' => $value->type_answer,
                         'survey_id' => $value->survey_id,
                         'question_id' => $value->id,
                         'user_answer' => isset($HgNam[3]) ? $HgNam[3] : '',
+                        'dem' =>  $dataSurvey->count + 1,
                         'created_at' => date('Y-m-d H:i:s'),
                     ])
                     ->execute();
