@@ -19,6 +19,10 @@ class SurveysController extends AppController
     public function beforeFilter(Event $event)
     {
         $this->loadModel('Catalogs');
+        $this->loadModel('Group_s');
+        $this->loadModel('User_survey');
+        $this->loadModel('Users');
+        $this->loadModel('Groups');
         $this->loadModel('Questions');
         $this->loadModel('Statists');
         $this->loadModel('Surveys');
@@ -103,7 +107,7 @@ class SurveysController extends AppController
             if (isset($error->name)) {
                 $this->set("error", $error);
                 $this->set("result", $result);
-            }else if(strtotime($end_time) < strtotime($start_time)){
+            } else if (strtotime($end_time) < strtotime($start_time)) {
                 $errorTime = "ErrorTime";
                 $this->set("errorTime", $errorTime);
                 $this->set("result", $result);
@@ -138,6 +142,7 @@ class SurveysController extends AppController
 
     public function edit($id = null)
     {
+        $this->set('id', $id);
         $HgNam = ($this->Auth->user());
         $this->set("HgNam", $HgNam);
         $data = $this->Surveys->find()
@@ -158,6 +163,57 @@ class SurveysController extends AppController
         $data2 = $this->Questions->find()
             ->where(['survey_id' => $id]);
         $this->set("data2", $data2);
+        // danh sách nhóm đã được tham gia khảo sát
+        $listGroup = $this->Surveys->find()
+            ->select([
+                'Group_s.id',
+                'Group_s.survey_id',
+                'Groups.id',
+                'Groups.name',
+            ])->where(['Groups.restore' => 1, 'Groups.admin_create' => $HgNam[2]])
+            ->join([
+                'table' => 'group_s',
+                'alias' => 'Group_s',
+                'type' => 'INNER',
+                'conditions' => 'Surveys.id = Group_s.survey_id',
+            ])->join([
+                'table' => 'groups',
+                'alias' => 'Groups',
+                'type' => 'INNER',
+                'conditions' => 'Groups.id = Group_s.group_id',
+            ])->toArray();
+        $this->set('listGroup', $listGroup);
+        // danh sách users đã được tham gia khảo sát
+        $listUser = $this->Surveys->find()
+            ->select([
+                'User_survey.id',
+                'User_survey.survey_id',
+                'Users.id',
+                'Users.email',
+            ])->where(['Users.restore' => 1])
+            ->join([
+                'table' => 'User_survey',
+                'alias' => 'User_survey',
+                'type' => 'INNER',
+                'conditions' => 'Surveys.id = User_survey.survey_id',
+            ])->join([
+                'table' => 'users',
+                'alias' => 'Users',
+                'type' => 'INNER',
+                'conditions' => 'Users.id = User_survey.user_id',
+            ])->toArray();
+        $this->set('listUser', $listUser);
+        // danh sách nhóm chưa được tham gia khảo sát
+        $dataGroup = $this->Groups->find()
+            ->where(['restore' => '1', 'admin_create' => $HgNam[2],
+                'Groups.id NOT IN' => ($this->Group_s->find()->select(['group_id'])->where(['survey_id' => $id]))])
+            ->toArray();
+        $this->set('dataGroup', $dataGroup);
+        $dataUser = $this->Users->find()
+            ->where(['restore' => '1',
+                'Users.id NOT IN' => ($this->User_survey->find()->select(['user_id'])->where(['survey_id' => $id]))])
+            ->toArray();
+        $this->set('dataUser', $dataUser);
         if ($this->request->is('post')) {
             $name = htmlentities($this->request->getData('name'));
             // Ảnh
@@ -188,7 +244,7 @@ class SurveysController extends AppController
             if (isset($error->name) && $error->id != $data->id) {
                 $this->set("error", $error);
                 $this->set("result", $result);
-            }else if(strtotime($end_time) < strtotime($start_time)){
+            } else if (strtotime($end_time) < strtotime($start_time)) {
                 $errorTime = "ErrorTime";
                 $this->set("errorTime", $errorTime);
                 $this->set("result", $result);
@@ -269,7 +325,7 @@ class SurveysController extends AppController
             'Questions.answers',
             'answer' => 'group_concat(answer)',
             'user_answer' => 'group_concat(user_answer)',
-             'dem2'=>"group_concat(Statists.dem)",
+            'dem2' => "group_concat(Statists.dem)",
             'type_answer'])->join([
             'table' => 'questions',
             'alias' => 'Questions',
@@ -287,9 +343,9 @@ class SurveysController extends AppController
         $id = $_GET['id'];
         $query = $this->Surveys->query();
         $query->update([
-                'restore' => 0,
-                'modified' => date('Y-m-d H:i:s')
-            ])
+            'restore' => 0,
+            'modified' => date('Y-m-d H:i:s')
+        ])
             ->where(['id' => $id])
             ->execute();
         echo "ok";
@@ -322,6 +378,61 @@ class SurveysController extends AppController
             ->execute();
         echo "ok";
         die;
+    }
+
+    public function formgroup()
+    {
+        if ($this->request->is('post')) {
+            $id_group = $this->request->getData('group');
+            $id = $this->request->getData('id');
+            foreach ($id_group as $value) {
+                $query = $this->Group_s->query();
+                $query->insert(['survey_id', 'group_id'])
+                    ->values([
+                        'survey_id' => $id,
+                        'group_id' => $value,
+                    ])
+                    ->execute();
+            }
+            return $this->redirect(URL . 'surveys/edit/' . $id);
+        }
+    }
+
+    public function deletegroup()
+    {
+        $id = $_GET['id'];
+        $query = $this->Group_s->query();
+        $query->delete()
+            ->where(['id' => $id])
+            ->execute();
+        echo "ok";die;
+    }
+    public function deleteuser()
+    {
+        $id = $_GET['id'];
+        $query = $this->User_survey->query();
+        $query->delete()
+            ->where(['id' => $id])
+            ->execute();
+        echo "ok";die;
+    }
+
+    public function formuser()
+    {
+        if ($this->request->is('post')) {
+            $id_user = $this->request->getData('user');
+            $id = $this->request->getData('id');
+            foreach ($id_user as $value) {
+                $query = $this->User_survey->query();
+                $query->insert(['survey_id', 'user_id'])
+                    ->values([
+                        'survey_id' => $id,
+                        'user_id' => $value,
+                    ])
+                    ->execute();
+            }
+            return $this->redirect(URL . 'surveys/edit/' . $id);
+        }
     }
 
 }

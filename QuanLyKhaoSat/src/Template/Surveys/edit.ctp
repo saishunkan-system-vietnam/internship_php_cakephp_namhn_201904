@@ -1,4 +1,12 @@
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.9/dist/css/bootstrap-select.min.css">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.9/dist/js/bootstrap-select.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.9/dist/js/i18n/defaults-*.min.js"></script>
 <?php echo $this->Html->css('radio'); ?>
+<style>
+    th {
+        text-align: left;
+    }
+</style>
 <fieldset class="col-lg-8 col-lg-offset-2">
     <?php if (isset($error->name)) { ?>
         <div class="alert alert-danger">
@@ -11,12 +19,13 @@
         </div>
     <?php } ?>
     <legend>Chỉnh Sửa Khảo Sát</legend>
-    <form action="<?= URL ?>surveys/edit/<?php echo $data->id ?>" method="post" id="Surveys" enctype="multipart/form-data">
+    <form action="<?= URL ?>surveys/edit/<?php echo $data->id ?>" method="post" id="Surveys"
+          enctype="multipart/form-data">
         <table class="table table-hover table-bordered">
             <tr>
-                <th class="col-md-4">Danh mục khảo sát</th>
-                <th>
-                    <select class="form-control" name="catalog_id">
+                <th class="col-md-3">Danh mục khảo sát</th>
+                <th colspan="2">
+                    <select class="form-control" name="catalog_id" style="max-width: 500px;width: 500px;">
                         <option value="<?php echo $catalog->id; ?>"><?php echo $catalog->name; ?></option>
                         <?php foreach ($select as $value) { ?>
                             <option value="<?php echo $value->id; ?>"><?php echo $value->name; ?></option>
@@ -25,24 +34,24 @@
                 </th>
             </tr>
             <tr>
-                <th class="col-md-4">Ảnh Khảo Sát</th>
-                <th>
+                <th class="col-md-3">Ảnh Khảo Sát</th>
+                <th colspan="2">
                     <input type="file" name="img">
-                    <?php if (empty($data->img_survey)) {?>
+                    <?php if (empty($data->img_survey)) { ?>
                         <img src="<?= URL ?>img/survey/noimage.jpg" style="height: 120px;width: 150px;">
-                    <?php } else {?>
-                    <img src="<?= URL ?>img/survey/<?= $data->img_survey ?>" style="height: 120px;width: 150px;">
-                    <?php }?>
+                    <?php } else { ?>
+                        <img src="<?= URL ?>img/survey/<?= $data->img_survey ?>" style="height: 120px;width: 150px;">
+                    <?php } ?>
                 </th>
             </tr>
             <tr>
                 <th>Tên Khảo Sát</th>
-                <th><input value="<?php echo isset($result[0]) ? $result[0] : $data->name ?>"
-                           type="text" name="name" class="form-control"></th>
+                <th colspan="2"><input value="<?php echo isset($result[0]) ? $result[0] : $data->name ?>"
+                                       type="text" name="name" class="form-control"></th>
             </tr>
             <tr>
                 <th>Trạng Thái Đăng Nhập</th>
-                <th style="text-align: left">
+                <th colspan="2" style="text-align: left">
                     <?php if ($data->login_status == 'on') { ?>
                         <span class="button-checkbox">
                             <button type="button" class="btn" data-color="danger">Login</button>
@@ -62,7 +71,7 @@
                 <th>
                     <span>Ngày Bắt Đầu Khảo Sát :</span>
                 </th>
-                <th>
+                <th colspan="2">
                     <input class="form-control" type="date" name="start_time" value="<?php echo $data->start_time ?>">
                 </th>
             </tr>
@@ -70,7 +79,7 @@
                 <th>
                     Ngày Kết Thúc Khảo Sát :
                 </th>
-                <th>
+                <th colspan="2">
                     <input class="form-control" name="end_time" value="<?php echo $data->end_time ?>" type="date">
                 </th>
             </tr>
@@ -78,15 +87,15 @@
                 <th>
                     Số Khảo Sát Tối Đa :
                 </th>
-                <th>
+                <th colspan="2">
                     <input type="number" class="form-control" name="maximum"
                            value="<?php echo isset($result[5]) ? $result[5] : $data->maximum ?>">
                 </th>
             </tr>
             <tr>
                 <th>Link Khảo Sát :</th>
-                <th><input style="width: 500px;float: left" type="text" class="form-control" id="myInput"
-                           value="http://nam.com/internship_php_cakephp_namhn_201904/QuanLyKhaoSat/actions/survey/<?= $data->id ?>">
+                <th colspan="2"><input style="width: 500px;float: left" type="text" class="form-control" id="myInput"
+                                       value="http://nam.com/internship_php_cakephp_namhn_201904/QuanLyKhaoSat/actions/survey/<?= $data->id ?>">
                     <i onclick="myFunction()" style="font-size: 18px;color: white;width: 50px;height: 40px;"
                        class="fas fa-copy btn btn-primary"></i>
                     <div style="clear: both"></div>
@@ -94,7 +103,7 @@
             </tr>
             <tr>
                 <th>Trạng Thái :</th>
-                <th style="text-align: left">
+                <th colspan="2" style="text-align: left">
                     <label class="radio" style="float: left;">Mở Khảo Sát
                         <input type="radio" <?php if ($data->status == "open") {
                             echo 'checked';
@@ -111,7 +120,7 @@
             </tr>
             <tr>
                 <th>Hiển Thị :</th>
-                <th style="text-align: left">
+                <th colspan="2" style="text-align: left">
                     <label class="radio" style="float: left;">Hiển Thị
                         <input type="radio" <?php if ($data->hot == 1) {
                             echo 'checked';
@@ -124,6 +133,49 @@
                         } ?> value="0" name="hot">
                         <span class="checkmark"></span>
                     </label>
+                </th>
+            </tr>
+            <tr>
+                <th>Danh Sách Được Khảo Sát :</th>
+                <th style="max-width: 500px;">
+                    <table class="table table-hover table-bordered">
+                        <tr>
+                            <th style="text-align: center"><u>Nhóm Được Khảo Sát</u></th>
+                            <th style="text-align: center">
+                                <button type="button" class="btn btn-success" data-toggle="modal" data-target="#Groups">
+                                    Add
+                                </button>
+                            </th>
+                        </tr>
+                        <?php foreach ($listGroup as $value) { ?>
+                            <tr>
+                                <th><?= $value['Groups']['name'] ?></th>
+                                <th style="text-align: center">
+                                    <button type="button" onclick="deleteGroup('<?= $value['Group_s']['id']?>')" class="btn btn-danger">Delete</button>
+                                </th>
+                            </tr>
+                        <?php } ?>
+                    </table>
+                </th>
+                <th>
+                    <table class="table table-hover table-bordered">
+                        <tr>
+                            <th style="text-align: center"><u>Thành Viên Được Khảo Sát</u></th>
+                            <th style="text-align: center">
+                                <button type="button" data-toggle="modal"
+                                        data-target="#Users" class="btn btn-success">Add
+                                </button>
+                            </th>
+                        </tr>
+                        <?php foreach ($listUser as $value) { ?>
+                            <tr>
+                                <th><?= $value['Users']['email'] ?></th>
+                                <th style="text-align: center">
+                                    <button type="button" onclick="deleteUser('<?= $value['User_survey']['id']?>')" class="btn btn-danger">Delete</button>
+                                </th>
+                            </tr>
+                        <?php } ?>
+                    </table>
                 </th>
             </tr>
         </table>
@@ -182,6 +234,87 @@
             </button>
         </div>
     </form>
+    <!--   Modal Nhóm    -->
+    <form method="post" action="<?= URL ?>surveys/formgroup">
+        <div id="Groups" class="modal fade" role="dialog">
+            <div class="modal-dialog">
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h2 style="font-weight: bold;color: black;text-align: center" class="modal-title">Danh Sách Nhóm</h2>
+                    </div>
+                    <div class="modal-body">
+                        <table class="table table-hover table-bordered">
+                            <?php foreach ($dataGroup as $key => $value) { ?>
+                                <tr>
+                                    <th><?= $key + 1 ?></th>
+                                    <th><?= $value->name ?></th>
+                                    <th>
+                                        <span class="button-checkbox">
+                                            <button type="button" class="btn" data-color="success" style="width: 40px;"></button>
+                                            <input type="checkbox" value="<?= $value->id ?>" class="hidden" name="group[<?= $value->id ?>]"/>
+                                        </span>
+                                    </th>
+                                    <th style="display: none">
+                                        <input type="number" value="<?= $data->id ?>" name="id"/>
+                                    </th>
+                                </tr>
+                            <?php } ?>
+                        </table>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-success"><i class="fas fa-plus"></i> Thêm</button>
+                        <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fas fa-times"></i>
+                            Close
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+    <!--   End Modal Nhóm    -->
+
+    <!-- Modal Thành Viên -->
+    <form method="post" action="<?= URL ?>surveys/formuser">
+        <div id="Users" class="modal fade" role="dialog">
+            <div class="modal-dialog">
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h2 style="font-weight: bold;color: black;text-align: center" class="modal-title">Danh Thành Viên</h2>
+                    </div>
+                    <div class="modal-body">
+                        <table class="table table-hover table-bordered">
+                            <?php foreach ($dataUser as $key => $value) { ?>
+                                <tr>
+                                    <th><?= $key + 1 ?></th>
+                                    <th><?= $value->email ?></th>
+                                    <th>
+                                        <span class="button-checkbox">
+                                            <button type="button" class="btn" data-color="success" style="width: 40px;"></button>
+                                            <input type="checkbox" value="<?= $value->id ?>" class="hidden" name="user[<?= $value->id ?>]"/>
+                                        </span>
+                                    </th>
+                                    <th style="display: none">
+                                        <input type="number" value="<?= $data->id ?>" name="id"/>
+                                    </th>
+                                </tr>
+                            <?php } ?>
+                        </table>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-success"><i class="fas fa-plus"></i> Thêm</button>
+                        <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fas fa-times"></i>
+                            Close
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+    <!--   End Modal Thành Viên    -->
 </fieldset>
 <?php echo $this->Html->script('validate/Surveys/add_edit'); ?>
 <?php echo $this->Html->script('checkbox.js'); ?>
@@ -223,5 +356,59 @@
                 });
         });
     });
+</script>
+<script>
+    function deleteGroup(id) {
+        swal({
+            title: "Bạn Có Chắc Muốn Xóa Không?",
+            text: "Sau khi xóa dữ liệu sẽ không được khôi phục lại!",
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
+        })
+            .then((willDelete) => {
+                if (willDelete) {
+                    $.ajax({
+                        url: '<?= URL ?>surveys/deletegroup?id=' + id,
+                        type: 'GET',
+                        success: function (res) {
+                            if (res == 'ok') {
+                                swal(" Đã Xóa Thành Công !", {
+                                    icon: "success",
+                                }).then(function () {
+                                    location.reload();
+                                });
+                            }
+                        }
+                    });
+                }
+            });
+    }
+    function deleteUser(id) {
+        swal({
+            title: "Bạn Có Chắc Muốn Xóa Không?",
+            text: "Sau khi xóa dữ liệu sẽ không được khôi phục lại!",
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
+        })
+            .then((willDelete) => {
+                if (willDelete) {
+                    $.ajax({
+                        url: '<?= URL ?>surveys/deleteuser?id=' + id,
+                        type: 'GET',
+                        success: function (res) {
+                            if (res == 'ok') {
+                                swal(" Đã Xóa Thành Công !", {
+                                    icon: "success",
+                                }).then(function () {
+                                    location.reload();
+                                });
+                            }
+                        }
+                    });
+                }
+            });
+    }
 </script>
 

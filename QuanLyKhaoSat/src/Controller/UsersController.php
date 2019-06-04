@@ -62,14 +62,12 @@ class UsersController extends AppController
         if ($HgNam[1] == "Member") {
             return $this->redirect(URL . "actions");
         } else {
+            $details = $this->Users->find();
             $this->paginate = array(
                 'limit' => 8,
                 'order' => array('id' => 'asc'),
             );
-            $data = $this->Users->find()
-                ->where(['restore' => 1]);
-            $data = $this->paginate($data);
-            $this->set("data", $data);
+            $this->set("data", $this->paginate($details));
             $this->set("HgNam", $HgNam);
             $recycleBin = $this->Users->find()
                 ->where(['restore' => 0])->toArray();
@@ -101,6 +99,8 @@ class UsersController extends AppController
         } else {
             $HgNam = ($this->Auth->user());
             $this->set("HgNam", $HgNam);
+            $dataGroup = $this->Groups->find();
+            $this->set('dataGroup',$dataGroup);
             if ($this->request->is('post')) {
                 $email = htmlentities($this->request->getData('email'));
                 $error = $this->Users->find()
@@ -342,5 +342,15 @@ class UsersController extends AppController
                 </tr>
             </table>
         <?php } die;
+//        $data = $this->Groups->find()
+//            ->where(['user_id' => $id,]);
+//        foreach ($data as $key => $value) { ?>
+<!--            <table border="1" style="width: 400px;margin: auto">-->
+<!--                <tr style="height: 45px;">-->
+<!--                    <th style="width: 50px;">--><?//= $key + 1?><!--</th><th>--><?//= $value->name ?><!--</th>-->
+<!--                </tr>-->
+<!--            </table>-->
+<!--        --><?php //}
+//        die;
     }
 }

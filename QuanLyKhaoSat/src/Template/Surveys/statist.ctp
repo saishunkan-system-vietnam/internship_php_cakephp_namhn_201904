@@ -54,12 +54,12 @@
         <table class="table">
             <?php if ($value['Questions']['type_question'] == "Text") { ?>
                 <tr>
-                    <th colspan="2">Câu hỏi <?= $key + 1 ?> (" <?= $value->type_answer ?> ")
+                    <th colspan="3">Câu hỏi <?= $key + 1 ?> (" <?= $value->type_answer ?> ")
                         : <?= $value['Questions']['name'] ?></th>
                 </tr>
             <?php } else { ?>
                 <tr>
-                    <th colspan="2">Câu hỏi <?= $key + 1 ?> (<?= $value->type_answer ?>) :
+                    <th colspan="3">Câu hỏi <?= $key + 1 ?> (<?= $value->type_answer ?>) :
                         <img style="width: 200px;height: 100px;"
                              src="<?= URL ?>/img/<?= $value['Questions']['name'] ?>"></th>
                 </tr>
@@ -89,7 +89,6 @@
                         <th style="width: 30%"><?= $userAnswer[$i] ?></th>
                         <th><img style="width: 150px;height: 110px;" src="<?= URL ?>img/answer/<?= $answerI[$i] ?>"
                                  alt=""></th>
-                    </tr>
                 <?php }
             } // Thống Kê Câu Trả Lời Dạng Checkbox , Radio , Select
             else { ?>

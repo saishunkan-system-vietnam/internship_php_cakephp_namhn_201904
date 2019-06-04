@@ -21,6 +21,7 @@ class ActionsController extends AppController
     public function beforeFilter(Event $event)
     {
         $this->loadModel('Users');
+        $this->loadModel('Groups');
         $this->loadModel('Catalogs');
         $this->loadModel('Surveys');
         $this->loadModel('Questions');
@@ -51,8 +52,8 @@ class ActionsController extends AppController
         //==========Lấy 5 Khảo Sát Công Khai Mới Nhất========
         $dem = $this->Surveys->find()->count();
         $dataNew = $this->Surveys->find()
-            ->where(['status' => 'open','login_status' => ''])->limit(5)->offset($dem-5);
-        $this->set('dataNew',$dataNew);
+            ->where(['status' => 'open', 'login_status' => ''])->limit(5)->offset($dem - 5);
+        $this->set('dataNew', $dataNew);
     }
 
     public function catalog($id = null)
@@ -81,8 +82,8 @@ class ActionsController extends AppController
         Cache::write('linkRegist', URL . 'actions/login');
         $dem = $this->Surveys->find()->count();
         $dataNew = $this->Surveys->find()
-            ->where(['status' => 'open','login_status' => ''])->limit(6)->offset($dem-6);
-        $this->set('dataNew',$dataNew);
+            ->where(['status' => 'open', 'login_status' => ''])->limit(6)->offset($dem - 6);
+        $this->set('dataNew', $dataNew);
     }
 
     public function survey($id = null)
@@ -91,6 +92,8 @@ class ActionsController extends AppController
 //        if (!empty($link)) {
 //            $this->set('link',$link);
 //        }
+        $this->loadComponent('Auth');
+        $HgNam = $this->Auth->user();
         $this->viewBuilder()->setLayout('survey');
         // Lấy database của Survey có id = $id
         $dataSurvey = $this->Surveys->find()
@@ -103,7 +106,63 @@ class ActionsController extends AppController
             ->where(['survey_id' => $id])->toArray();
         $this->set('dataQuestion', $dataQuestion);
         $this->set('id', $id);
-        //=====================================
+        //======== Lấy danh sách người được khảo sát ============
+        $detailUsers = $this->Surveys->find()
+            ->select([
+                'Users.id',
+            ])->where(['Users.restore' => 1, 'Surveys.id' => $id])
+            ->join([
+                'table' => 'User_survey',
+                'alias' => 'User_survey',
+                'type' => 'INNER',
+                'conditions' => 'Surveys.id = User_survey.survey_id',
+            ])->join([
+                'table' => 'users',
+                'alias' => 'Users',
+                'type' => 'INNER',
+                'conditions' => 'Users.id = User_survey.user_id',
+            ])->toArray();
+        //=======================================================
+        //======== Lấy danh sách nhóm được khảo sát ============
+        $detailGroup = $this->Groups->find()
+            ->select([
+                'Users.id',
+            ])->where(['Groups.restore' => 1, 'Surveys.id' => $id])
+            ->join([
+                'table' => 'group_s',
+                'alias' => 'Group_s',
+                'type' => 'INNER',
+                'conditions' => 'Groups.id = Group_s.group_id',
+            ])->join([
+                'table' => 'surveys',
+                'alias' => 'Surveys',
+                'type' => 'INNER',
+                'conditions' => 'Surveys.id = Group_s.survey_id',
+            ])->join([
+                'table' => 'details',
+                'alias' => 'Details',
+                'type' => 'INNER',
+                'conditions' => 'Groups.id = Details.group_id'
+            ])->join([
+                'table' => 'users',
+                'alias' => 'Users',
+                'type' => 'INNER',
+                'conditions' => 'Users.id = Details.user_id'
+            ])
+            ->toArray();
+        $result = array_merge($detailUsers, $detailGroup);
+        // Đây là Kết Quả những người được phép tham gia khảo sát này
+        $result = array_unique($result);
+        if (!empty($result)) {
+            foreach ($result as $value) {
+                if ($value["Users"]["id"] == $HgNam[2]) {
+                    $this->set("success", $HgNam[2]);
+                }
+            }
+        }else {
+            $this->set("success", $HgNam[2]);
+        }
+        //=======================================================
         // Lấy dữ liệu trả lời Khảo Sát
         if ($this->request->is('post')) {
             // Lấy Thằng Đã Khảo Sát
@@ -127,7 +186,7 @@ class ActionsController extends AppController
                             $this->set('resultError', $result);
                             $flgU = 1;
                             break;
-                        }else {
+                        } else {
                             $answers = $this->request->getData('answers' . $value->id);
                             $answers = implode(",", $answers);
                             $answers = htmlentities($answers);
@@ -143,14 +202,14 @@ class ActionsController extends AppController
                     $answers = str_replace(",", ";", $answers);
                 }
                 $query = $this->Statists->query();
-                $query->insert(['answer', 'type_answer', 'survey_id', 'dem','question_id', 'user_answer', 'created_at'])
+                $query->insert(['answer', 'type_answer', 'survey_id', 'dem', 'question_id', 'user_answer', 'created_at'])
                     ->values([
                         'answer' => isset($answers) ? $answers : '',
                         'type_answer' => $value->type_answer,
                         'survey_id' => $value->survey_id,
                         'question_id' => $value->id,
                         'user_answer' => isset($HgNam[3]) ? $HgNam[3] : '',
-                        'dem' =>  $dataSurvey->count + 1,
+                        'dem' => $dataSurvey->count + 1,
                         'created_at' => date('Y-m-d H:i:s'),
                     ])
                     ->execute();
@@ -278,17 +337,6 @@ class ActionsController extends AppController
             die();
         }
     }
-
-//    public function regists()
-//    {
-//        $this->viewBuilder()->setLayout('action');
-//        $catalog = $this->Catalogs->find();
-//        $this->set('catalog', $catalog);
-//        //=============================================
-//        $this->loadComponent('Auth');
-//        $HgNam = ($this->Auth->user());
-//        $this->set('HgNam', $HgNam);
-//    }
 
     public function logout()
     {
