@@ -240,7 +240,7 @@
 </div>
 <div class="footer col-md-12">
     <div style="text-align: center;padding-top: 20px">
-        <u><i>Saishunkan System Vietnam</i></u></div>
+        <u><i>Saishunkan System Vietnam23132123</i></u></div>
     <div class="col-md-4 icon col-md-offset-4">
         <i class="fab fa-facebook-square"></i>
         <i class="fab fa-skype"></i>

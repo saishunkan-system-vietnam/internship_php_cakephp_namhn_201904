@@ -18,7 +18,7 @@ $(document).ready(function () {
     jQuery.validator.addMethod("pass", function (value, element) {
         // Kiểm tra định dạng của chuỗi nhập vào bằng biểu thức chính quy
         return this.optional(element) || /^(?=.{5,})(?=.*[a-z]+)(?=.*\d+)(?=.*[A-Z]+)(?=.*[^\w])[ -~]+$/.test(value);
-    }, 'Số điện thoại nhập chưa chính xác');
+    }, "Mật khẩu yêu cầu : 1 chữ số + 1 chữ viết hoa + 1 chữ viết thường + 1 ký tự đặc biệt");
     $("#Users").validate({
         rules: {
             email: {
@@ -54,7 +54,7 @@ $(document).ready(function () {
             },
             password1: {
                 required : "Bạn quên nhập mật khẩu rồi",
-                pass: "Mật khẩu yêu cầu : 1 chữ số + 1 chữ viết hoa + 1 chữ viết thường + 1 ký tự đặc biệt"
+                pass: "Mật khẩu yêu cầu : 1 chữ số + 1 chữ viết hoa + 1 chữ viết thường + 1 ký tự đặc biệt",
             },
             password2: "Bạn quên nhập lại password rồi ^^!",
             address: "Bạn quên nhập địa chỉ kìa ^^!",

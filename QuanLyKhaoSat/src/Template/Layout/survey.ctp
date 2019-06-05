@@ -13,7 +13,7 @@
             src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.13.1/jquery.validate.min.js"></script>
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 </head>
-<body style="height: 1500px;">
+<body style="height: 1500px">
 <style>
     .header {
         font-weight: bold;

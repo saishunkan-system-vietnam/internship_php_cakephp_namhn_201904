@@ -191,8 +191,7 @@
                                     swal(" Đã Xóa Thành Công !", {
                                         icon: "success",
                                     }).then(function () {
-                                        window.location.replace("<?= URL ?>users");
-
+                                        location.reload();
                                     });
                                 }
                             }

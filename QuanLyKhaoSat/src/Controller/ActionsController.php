@@ -248,7 +248,7 @@ class ActionsController extends AppController
         $key = htmlentities($key);
         $data = $this->Catalogs->find()
             ->select(['name', 'id'])
-            ->where(['name LIKE' => $key . '%'])
+            ->where(['name LIKE' => '%' . $key . '%'])
             ->limit(4)
             ->toArray();
         $this->set('dataKey', $data);

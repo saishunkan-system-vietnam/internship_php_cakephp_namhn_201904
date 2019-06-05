@@ -62,7 +62,7 @@ class UsersController extends AppController
         if ($HgNam[1] == "Member") {
             return $this->redirect(URL . "actions");
         } else {
-            $details = $this->Users->find();
+            $details = $this->Users->find()->where(['restore' => 1]);
             $this->paginate = array(
                 'limit' => 8,
                 'order' => array('id' => 'asc'),

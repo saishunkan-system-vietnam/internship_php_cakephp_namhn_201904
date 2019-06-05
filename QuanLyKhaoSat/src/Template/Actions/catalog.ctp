@@ -35,6 +35,7 @@
         color: black;
         margin-bottom: 50px;
     }
+
     .errorT {
         font-size: 30px;
         color: red;
@@ -42,6 +43,7 @@
         margin-top: 30px;
         border-bottom: 1px solid #DDDDDD;
     }
+
     .errorB {
         font-size: 30px;
         color: red;

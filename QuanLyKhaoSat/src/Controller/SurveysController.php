@@ -151,13 +151,13 @@ class SurveysController extends AppController
         $this->set("data", $data);
         // Lấy tên danh mục khảo sát
         $catalog = $this->Catalogs->find()
-            ->where(['id' => $data->catalog_id])
+            ->where(['id' => isset($data->catalog_id) ? $data->catalog_id : null])
             ->first();
         $this->set("catalog", $catalog);
         //==============================
         // Lấy tên danh mục khảo sát khác
         $select = $this->Catalogs->find()
-            ->where(['id !=' => $data->catalog_id]);
+            ->where(['id !=' => isset($data->catalog_id) ? $data->catalog_id : null]);
         $this->set("select", $select);
         //==================================
         $data2 = $this->Questions->find()
@@ -342,10 +342,11 @@ class SurveysController extends AppController
     {
         $id = $_GET['id'];
         $query = $this->Surveys->query();
-        $query->update([
-            'restore' => 0,
-            'modified' => date('Y-m-d H:i:s')
-        ])
+        $query->update()
+            ->set([
+                'restore' => 0,
+                'modified' => date('Y-m-d H:i:s')
+            ])
             ->where(['id' => $id])
             ->execute();
         echo "ok";

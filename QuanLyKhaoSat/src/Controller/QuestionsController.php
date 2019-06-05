@@ -43,8 +43,11 @@ class QuestionsController extends AppController
             ->first();
         $this->set("dataId", $dataId);
         $this->set("id", $id);
+        $this->loadComponent('Auth');
+        $HgNam = $this->Auth->user();
+        $this->set('HgNam',$HgNam);
         // ==============================
-        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+        if ($this->request->is('post')) {
             $type_answer = htmlentities($this->request->getData('type_answer'));
             $type_q = htmlentities($this->request->getData('typeQ'));
             if ($type_q == 'Images') {
@@ -57,6 +60,7 @@ class QuestionsController extends AppController
                 ->where(['name' => $name,])
                 ->first();
             $answers = htmlentities($this->request->getData('answers'));
+            $typeText = htmlentities($this->request->getData('typeText'));
             $answers = trim($answers,' ,.?!@~#$%^&*()_+<>- ');
             $status = htmlentities($this->request->getData('status'));
             $result = array($name, $type_answer, $answers, $status);
@@ -64,6 +68,9 @@ class QuestionsController extends AppController
                 $this->set("error", $error);
                 $this->set("result", $result);
             } else {
+                if (empty($answers)) {
+                    $answers = $typeText;
+                }
                 $query = $this->Questions->query();
                 $query->insert(['name', 'survey_id', 'type_answer', 'answers', 'status', 'created', 'type_question'])
                     ->values([
@@ -84,6 +91,9 @@ class QuestionsController extends AppController
 
     public function edit($id = null)
     {
+        $this->loadComponent('Auth');
+        $HgNam = $this->Auth->user();
+        $this->set('HgNam',$HgNam);
         //== Lấy thông tin ở bảng Questions == id ==||
         $data = $this->Questions->find()
             ->where(['id' => $id])

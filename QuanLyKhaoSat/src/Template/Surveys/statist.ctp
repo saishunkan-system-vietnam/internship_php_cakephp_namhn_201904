@@ -51,7 +51,7 @@
         </a>
     <?php }else { ?>
     <?php foreach ($data as $key => $value) { ?>
-        <table class="table">
+        <table class="table table-hover table-bordered">
             <?php if ($value['Questions']['type_question'] == "Text") { ?>
                 <tr>
                     <th colspan="3">Câu hỏi <?= $key + 1 ?> (" <?= $value->type_answer ?> ")
@@ -66,6 +66,11 @@
             <?php } ?>
             <!--               Thống Kê Câu Trả Lời Dạng Text and TextArea               -->
             <?php if ($value->type_answer == "Text" || $value->type_answer == "TextArea") { ?>
+                <tr>
+                    <th style="text-align: center">Khảo Sát</th>
+                    <th style="text-align: center">Người Khảo Sát</th>
+                    <th style="text-align: center">Đáp Án Trả Lời</th>
+                </tr>
                 <?php $answerT = explode(',', $value->answer);
                 $userAnswer = explode(',', $value->user_answer);
                 $dem = explode(',', $value->dem2);

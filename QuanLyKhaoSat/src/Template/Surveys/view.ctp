@@ -51,7 +51,8 @@
                         <tr>
                             <td>
                                 <label class="radio"><?php echo $answers[$i] ?>
-                                    <input type="radio" value="<?php echo $answers[$i] ?>" name="answers<?php echo $value->id ?>">
+                                    <input type="radio" value="<?php echo $answers[$i] ?>"
+                                           name="answers<?php echo $value->id ?>">
                                     <span class="checkmark"></span>
                                 </label>
                             </td>
@@ -81,7 +82,7 @@
                 <?php if ($value->type_answer == "Select") { ?>
                     <?php $answers = $value->answers;
                     $answers = explode(',', $answers);
-                    $answers = array_unique($answers);?>
+                    $answers = array_unique($answers); ?>
                     <tr>
                         <td>
                             <select name="answers<?php echo $value->id ?>"
@@ -103,7 +104,17 @@
                 <?php if ($value->type_answer == "Text") { ?>
                     <tr>
                         <td>
-                            <input style="width: 100%" type="<?php echo $value->type_answer ?>" class="form-control"
+                            <input type="<?= $value->answers ?>" id="<?= $value->answers ?>"
+                                <?php if ($value->answers == "number") { ?>
+                                    placeholder="Vui Lòng Nhập ' Số ' Bạn Trả Lời"
+                                <?php } ?>
+                                <?php if ($value->answers == "email") { ?>
+                                    placeholder="Vui Lòng Nhập Email Bạn Trả Lời"
+                                <?php } ?>
+                                <?php if ($value->answers == "tel") { ?>
+                                    placeholder="Vui Lòng Nhập Số Điện Thoại Viết Liền Không Khoảng Trống"
+                                <?php } ?>
+                                   style="width: 100%" type="<?php echo $value->type_answer ?>" class="form-control"
                                    name="answers<?php echo $value->id ?>">
                         </td>
                     </tr>

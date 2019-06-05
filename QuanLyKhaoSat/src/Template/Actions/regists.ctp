@@ -148,30 +148,68 @@
     })
 </script>
 <script>
+    jQuery.validator.addMethod("tel", function (value, element) {
+        // Kiểm tra định dạng của chuỗi nhập vào bằng biểu thức chính quy
+        return this.optional(element) || /^[0-9]/.test(value);
+    }, 'Số điện thoại nhập chưa chính xác');
+    jQuery.validator.addMethod("pass", function (value, element) {
+        // Kiểm tra định dạng của chuỗi nhập vào bằng biểu thức chính quy
+        return this.optional(element) || /^(?=.{5,})(?=.*[a-z]+)(?=.*\d+)(?=.*[A-Z]+)(?=.*[^\w])[ -~]+$/.test(value);
+    }, "Mật khẩu yêu cầu : 1 chữ số + 1 chữ viết hoa + 1 chữ viết thường + 1 ký tự đặc biệt");
     $(document).ready(function () {
         $("#formRegisters").validate({
             rules: {
-                email: "required",
-                password1: "required",
+                email: {
+                    required: true,
+                    maxlength: 20,
+                },
+                password1: {
+                    required:true,
+                    pass : true,
+                },
                 password2: "required",
                 address: "required",
-                phone: "required",
+                phone: {
+                    required: true,
+                    tel: true,
+                    number: true,
+                    minlength: 8,
+                    maxlength: 15,
+                },
                 birth: "required",
+                secret_q: "required",
                 secret_a: "required",
                 fullname: {
                     required: true,
+                    minlength: 5,
+                    maxlength:20,
                 }
             },
             messages: {
-                email: "Bạn quên nhập email rồi ^^!",
-                password1: "Bạn quên nhập password rồi ^^!",
-                password2: "Bạn quên nhập password rồi ^^!",
+                email: {
+                    required : "Bạn vui lòng nhập Email ",
+                    maxlength : "Email độ dài tối đa 20 ký tự",
+                },
+                password1: {
+                    required : "Bạn quên nhập mật khẩu rồi",
+                    pass: "Mật khẩu yêu cầu : 1 chữ số + 1 chữ viết hoa + 1 chữ viết thường + 1 ký tự đặc biệt",
+                },
+                password2: "Bạn quên nhập lại password rồi ^^!",
                 address: "Bạn quên nhập địa chỉ kìa ^^!",
-                phone: "Hãy cho tôi biết số điện thoại của bạn ^^!",
+                phone: {
+                    required: "Hãy cho tôi biết số điện thoại của bạn ^^!",
+                    tel: "Số điện thoại nhập chưa chính xác",
+                    number: "Số điện thoại nhập chưa chính xác",
+                    minlength: "Số điện thoại cần ít nhất 8 số",
+                    maxlength: "Số điện thoại nhiều nhất 15 số",
+                },
                 birth: "Ngày tháng năm sinh của bạn là chi ? ^^",
-                secret_a: "Hãy nhập câu trả lời của bạn ^^",
+                secret_q: "Hãy chọn câu hỏi để tăng tính bảo mật",
+                secret_a: "Bạn quên trả lời câu hỏi kìa ^^",
                 fullname: {
                     required: "Bạn ơi Nhập họ tên đầy đủ của mình đi",
+                    minlength: "Họ tên của bạn có vẻ hơi ngắn rồi ^^! ?",
+                    maxlength: "Họ tên phải nhỏ hơn 20 ký tự",
                 }
             }
         });
