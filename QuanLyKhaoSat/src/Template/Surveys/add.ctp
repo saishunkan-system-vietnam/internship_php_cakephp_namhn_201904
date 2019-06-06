@@ -12,7 +12,12 @@
     <?php } ?>
     <?php if (isset($errorTime)) { ?>
         <div class="alert alert-danger">
-           Thời gian bạn nhập đã lỗi .
+            Thời gian bạn nhập đã lỗi .
+        </div>
+    <?php } ?>
+    <?php if (isset($errorImages)) { ?>
+        <div class="alert alert-danger">
+            File bạn tải lên không phải là ảnh ^^!
         </div>
     <?php } ?>
     <legend>Khởi Tạo Khảo Sát</legend>
@@ -39,7 +44,8 @@
             <tr>
                 <th>Ảnh Khảo Sát</th>
                 <th>
-                    <input type="file" id="i_file" name="img">
+                    <input type="file" accept="image/*" id="i_file" name="img">
+                    <p id="checkImage" style="color: red;display: none">File bạn chọn không phải là Ảnh</p>
                 </th>
             </tr>
             <tr>

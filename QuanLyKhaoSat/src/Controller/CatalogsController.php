@@ -113,7 +113,7 @@ class CatalogsController extends AppController
             ->first();
         $this->set('data', $data);
         $survey = $this->Surveys->find()
-            ->where(['catalog_id' => $data->id,
+            ->where(['catalog_id' => isset($data->id) ? $data->id : '',
                 'admin_create' => $HgNam[0]]);
         $this->set('survey', $survey);
     }

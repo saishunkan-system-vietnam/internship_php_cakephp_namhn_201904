@@ -28,6 +28,9 @@
     }
 </style>
 <form>
+    <?php if (!isset($dataS)) {?>
+        <a href="<?= URL ?>surveys"><h1><u style="color: red;font-weight: bold">Đường Link Này Không Tồn Tại</u></h1></a>
+    <?php } else {?>
     <fieldset class="col-md-8 col-md-offset-2">
         <legend><?php echo $dataS->name ?></legend>
         <table class="table table-hover">
@@ -144,5 +147,6 @@
             </tr>
         </table>
     </fieldset>
+    <?php }?>
 </form>
 <?php echo $this->Html->css('radio'); ?>

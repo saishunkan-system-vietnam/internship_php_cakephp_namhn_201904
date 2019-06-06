@@ -3,7 +3,7 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.9/dist/js/i18n/defaults-*.min.js"></script>
 <?php echo $this->Html->css('radio'); ?>
 <?php if (empty($data)) { ?>
-    <div style="color: red;font-weight: bold;font-size: 35px;margin-top: 50px;"><u>Đường Dẫn Này Không Tồn Tại</u></div>
+    <a href="<?= URL ?>surveys"><div style="color: red;font-weight: bold;font-size: 35px;margin-top: 50px;"><u>Đường Dẫn Này Không Tồn Tại</u></div></a>
 <?php } else { ?>
     <style>
         th {
@@ -19,6 +19,11 @@
         <?php if (isset($errorTime)) { ?>
             <div class="alert alert-danger">
                 Thời gian bạn nhập đã lỗi .
+            </div>
+        <?php } ?>
+        <?php if (isset($errorImages)) { ?>
+            <div class="alert alert-danger">
+                File bạn tải lên không phải là ảnh ^^!
             </div>
         <?php } ?>
         <legend>Chỉnh Sửa Khảo Sát</legend>
@@ -210,9 +215,7 @@
                                 <i class="fas fa-plus"></i> Thêm Câu Hỏi</a>
                         </th>
                     </tr>
-                    <?php foreach ($data2
-
-                    as $value) { ?>
+                    <?php foreach ($data2 as $value) { ?>
                     <tr>
                         <td><?php echo $value->type_question ?></td>
                         <?php if ($value->type_question == 'Images') { ?>

@@ -75,7 +75,9 @@ class ActionsController extends AppController
         //===============================================
         $this->loadComponent('Auth');
         if (empty($this->Auth->user())) {
-            Cache::write('link', 'actions/catalog/' . $catalogID->id);
+            if (isset($catalogID->id)) {
+                Cache::write('link', 'actions/catalog/' . $catalogID->id);
+            }
         }
         $HgNam = ($this->Auth->user());
         $this->set('HgNam', $HgNam);
@@ -153,14 +155,18 @@ class ActionsController extends AppController
         $result = array_merge($detailUsers, $detailGroup);
         // Đây là Kết Quả những người được phép tham gia khảo sát này
         $result = array_unique($result);
-        if (!empty($result)) {
-            foreach ($result as $value) {
-                if ($value["Users"]["id"] == $HgNam[2]) {
-                    $this->set("success", $HgNam[2]);
+        if (isset($dataSurvey) && $dataSurvey->status == "closed") {
+            if (!empty($result)) {
+                foreach ($result as $value) {
+                    if ($value["Users"]["id"] == $HgNam[2]) {
+                        $this->set("success", true);
+                    }
                 }
+            } else {
+                $this->set("success", true);
             }
-        }else {
-            $this->set("success", $HgNam[2]);
+        } else {
+            $this->set("success", true);
         }
         //=======================================================
         // Lấy dữ liệu trả lời Khảo Sát
@@ -170,6 +176,7 @@ class ActionsController extends AppController
             $HgNam = $this->Auth->user();
             $flgU = 0;
             foreach ($dataQuestion as $value) {
+                $checkSubmit = true;
                 if ($value->type_answer == 'Checkbox') {
                     $answers = $this->request->getData('answers' . $value->id);
                     if (isset($answers)) {
@@ -185,6 +192,7 @@ class ActionsController extends AppController
                         if (!empty($result) != '') {
                             $this->set('resultError', $result);
                             $flgU = 1;
+                            $checkSubmit = false;
                             break;
                         } else {
                             $answers = $this->request->getData('answers' . $value->id);
@@ -194,25 +202,60 @@ class ActionsController extends AppController
                     } else {
                         $answers = '';
                     }
+                } elseif ($value->type_answer == 'Radio' || $value->type_answer == 'Select') {
+                    $answers = $this->request->getData('answers' . $value->id);
+                    if (isset($answers)) {
+                        $dataId = $this->Questions->find()
+                            ->where(['id' => $value->id])->first();
+                        $T = explode(",", $dataId->answers);
+                        $answers = htmlentities($answers);
+                        $answers = $answers . ',' . $dataId->answers;
+                        $answers = explode(",", $answers);
+                        $answers = array_unique($answers);
+                        $result = array_diff($answers, $T);
+                        if (!empty($result) != '') {
+                            $this->set('resultError', $result);
+                            $flgU = 1;
+                            $checkSubmit = false;
+                            break;
+                        } else {
+                            $answers = $this->request->getData('answers' . $value->id);
+                            $answers = htmlentities($answers);
+                        }
+                    } else {
+                        $answers = '';
+                    }
                 } elseif ($value->type_answer == 'Images') {
                     $answers = $this->request->getData('answers' . $value->id)['name'];
-                    move_uploaded_file($_FILES['answers' . $value->id]["tmp_name"], WWW_ROOT . 'img/answer' . DS . $answers);
+                    $url_file = $_FILES["answers" . $value->id]["tmp_name"];
+                    $checkImages = mime_content_type($url_file);
+                    $checkImages = explode('/', $checkImages);
+                    if ($checkImages[1] == 'jpeg' || $checkImages[1] == 'png') {
+                        move_uploaded_file($_FILES['answers' . $value->id]["tmp_name"], WWW_ROOT . 'img/answer' . DS . $answers);
+                    } else {
+                        $this->set('ErrorImg', "ErrorImg");
+                        $flgU = 1;
+                        $checkSubmit = false;
+                        break;
+                    }
                 } else {
                     $answers = htmlentities($this->request->getData('answers' . $value->id));
                     $answers = str_replace(",", ";", $answers);
                 }
-                $query = $this->Statists->query();
-                $query->insert(['answer', 'type_answer', 'survey_id', 'dem', 'question_id', 'user_answer', 'created_at'])
-                    ->values([
-                        'answer' => isset($answers) ? $answers : '',
-                        'type_answer' => $value->type_answer,
-                        'survey_id' => $value->survey_id,
-                        'question_id' => $value->id,
-                        'user_answer' => isset($HgNam[3]) ? $HgNam[3] : '',
-                        'dem' => $dataSurvey->count + 1,
-                        'created_at' => date('Y-m-d H:i:s'),
-                    ])
-                    ->execute();
+                if ($checkSubmit == true) {
+                    $query = $this->Statists->query();
+                    $query->insert(['answer', 'type_answer', 'survey_id', 'dem', 'question_id', 'user_answer', 'created_at'])
+                        ->values([
+                            'answer' => isset($answers) ? $answers : '',
+                            'type_answer' => $value->type_answer,
+                            'survey_id' => $value->survey_id,
+                            'question_id' => $value->id,
+                            'user_answer' => isset($HgNam[3]) ? $HgNam[3] : '',
+                            'dem' => $dataSurvey->count + 1,
+                            'created_at' => date('Y-m-d H:i:s'),
+                        ])
+                        ->execute();
+                }
             }
             if ($flgU == 0) {
                 $query = $this->Surveys->query();
@@ -300,12 +343,16 @@ class ActionsController extends AppController
     public function login()
     {
         $this->viewBuilder()->setLayout('action');
-        $catalog = $this->Catalogs->find();
-        $this->set('catalog', $catalog);
-        //=============================================
         $this->loadComponent('Auth');
         $HgNam = ($this->Auth->user());
         $this->set('HgNam', $HgNam);
+        if (isset($HgNam)) {
+            return $this->redirect(URL . 'actions');
+        } else {
+            $catalog = $this->Catalogs->find();
+            $this->set('catalog', $catalog);
+            //=============================================
+        }
         //=============================================
     }
 
@@ -357,7 +404,7 @@ class ActionsController extends AppController
         //===========================================
         if ($this->request->is('post')) {
             $users = $this->request->getData('email');
-            $secret_q = htmlentities($this->request->getData('secret_q'));
+            $secret_q = $this->request->getData('secret_q');
             $secret_a = htmlentities($this->request->getData('secret_a'));
             $forgot = $this->Users->find()
                 ->where(['email' => $users])->first();

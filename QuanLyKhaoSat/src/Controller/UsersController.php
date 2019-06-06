@@ -333,7 +333,10 @@ class UsersController extends AppController
                 'alias' => 'Users',
                 'type' => 'INNER',
                 'conditions' => 'Details.user_id = Users.id'
-            ]);
+            ])->toArray();
+        if (empty($data)) {
+            echo "Thành Viên Này Chưa Có Nhóm";die;
+        }else {
         foreach ($data as $key => $value) { ?>
             <table border="1" style="width: 400px;margin: auto">
                 <tr style="height: 45px;">
@@ -341,7 +344,7 @@ class UsersController extends AppController
                     <th><?= $value->name ?></th>
                 </tr>
             </table>
-        <?php } die;
+        <?php } } die;
 //        $data = $this->Groups->find()
 //            ->where(['user_id' => $id,]);
 //        foreach ($data as $key => $value) { ?>

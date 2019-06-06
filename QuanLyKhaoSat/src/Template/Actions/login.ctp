@@ -36,9 +36,9 @@
         <tr>
             <th></th>
             <th>
-                <button type="button" onclick="login()" style="height: 50px;border-radius: 7px;">Đăng Nhập</button>
+                <button type="button" onclick="login()" style="height: 50px;border-radius: 7px;background-color: #222222;color: white;width: 120px;">Đăng Nhập</button>
                 <a href="<?= URL ?>actions/forgotpass">
-                    <button type="button" style="height: 50px;width: 150px;border-radius: 7px">Quên Mật Khẩu</button>
+                    <button type="button" style="height: 50px;width: 150px;border-radius: 7px;background-color: #222222;color: white">Quên Mật Khẩu</button>
                 </a>
             </th>
         </tr>

@@ -1,3 +1,6 @@
+<?php if (empty($data)) {?>
+    <a href="<?= URL ?>catalogs"><h1><u style="color: red;font-weight: bold">Đường Link Này Không Tồn Tại</u></h1></a>
+<?php } else {?>
 <fieldset class="col-md-8 col-md-offset-2">
     <legend>
         <?php echo $data->name ?></legend>
@@ -35,6 +38,7 @@
         <?php } ?>
     </table>
 </fieldset>
+<?php }?>
 <script type="text/javascript">
     $(document).ready(function () {
         $(".click").click(function () {

@@ -15,6 +15,9 @@
 </style>
 <!-- Compiled and minified CSS -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+<?php if (empty($dataSurvey)) {?>
+    <a href="<?= URL ?>actions"><h1 style="color: red"><u>Đường Link Này Không Tồn Tại</u></h1></a>
+<?php } else {?>
 <?php if (($dataSurvey->maximum != '' && $dataSurvey->count >= $dataSurvey->maximum) || $dataSurvey->status == "closed" || ($dataSurvey->end_time != '' && strtotime($dataSurvey->end_time) < strtotime(date('Y-m-d H:i:s')))) { ?>
     <fieldset class="col-lg-6 col-lg-offset-3" style="margin-top: 40px;">
         <legend style="border: none;height: 40px;width: 200px;line-height: 40px;font-weight: bold;font-size: 30px;">
@@ -25,7 +28,7 @@
                 <th style="text-align: center;font-size: 25px;">Khảo Sát <?= $dataSurvey->name; ?> Đã Kết Thúc</th>
             </tr>
             <tr>
-                <th style="text-align: center;font-size: 25px;border-bottom: 1px solid #DDDDDD">Xin Trận Thành
+                <th style="text-align: center;font-size: 25px;border-bottom: 1px solid #DDDDDD">Xin Trân Thành
                     Cảm
                     Ơn ^^!
                 </th>
@@ -77,7 +80,10 @@ if (isset($success)) { ?>
                     </td>
                 </tr>
                 <?php if (isset($resultError)) { ?>
-                    <h1>Error</h1>
+                    <h4 style="color: red;text-align: center"><u>Error ! Bạn đã sửa đáp án của chúng tôi</u></h4>
+                <?php } ?>
+                <?php if (isset($ErrorImg)) { ?>
+                    <h4 style="color: red;text-align: center"><u>Error ! File bạn upload không phải là file Ảnh</u></h4>
                 <?php } ?>
                 <legend><?php echo $dataSurvey->name ?></legend>
                 <table class="table table-hover">
@@ -517,5 +523,5 @@ else { ?>
             </div>
         </fieldset>
     <?php }
-} ?>
+} }?>
 

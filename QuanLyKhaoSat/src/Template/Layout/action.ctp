@@ -27,7 +27,7 @@
     .header {
         background-image: url("<?= URL ?>img/index/header3.jpg");
         height: 280px;
-        color: darkred;
+        color: darkblue;
         text-align: center;
     }
 
@@ -151,7 +151,7 @@
     }
 </style>
 <div class="col-md-12 header">
-    <h1>CHÀO MỪNG BẠN TỚI TRANG KHẢO SÁT CỦA CHÚNG TÔI ^^!</h1>
+    <h1><u>CHÀO MỪNG BẠN TỚI TRANG KHẢO SÁT CỦA CHÚNG TÔI ^^!</u></h1>
 </div>
 <div class="col-md-12 menu">
     <div class="col-md-4">
@@ -162,7 +162,7 @@
     </div>
     <div class="col-md-3">
         <?php if (isset($HgNam)) { ?>
-            <u>Xin Chào : <?= $HgNam[3] ?></u>
+            <u style="font-weight: bold;font-size: 28px;color: darkblue">Xin Chào : <?= $HgNam[3] ?></u>
         <?php } ?>
     </div>
     <div class="col-md-5">
@@ -238,8 +238,8 @@
         <?= $this->Fetch('content') ?>
     </div>
 </div>
-<div class="footer col-md-12">
-    <div style="text-align: center;padding-top: 20px">
+<div class="footer col-md-12" style="color: darkblue">
+    <div style="text-align: center;padding-top: 50px">
         <u><i>Saishunkan System Vietnam23132123</i></u></div>
     <div class="col-md-4 icon col-md-offset-4">
         <i class="fab fa-facebook-square"></i>

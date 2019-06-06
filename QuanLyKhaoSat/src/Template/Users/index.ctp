@@ -38,26 +38,8 @@
                         <button type="button" id="<?= $value->id ?>" class="btn btn-danger click">
                             <i class="far fa-trash-alt"></i> Delete
                         </button><br>
-                        <style>
-                            .modalButton {
-                                font-size: 17px;
-                                margin-top: 5px;
-                                font-weight: bold;
-                                background-color: #cccccc;
-                                color: black;
-                                width: 100px;
-                                height: 42px;
-                            }
-
-                            .modalButton:hover {
-                                background-color: #1cc7ff;
-                            }.modal-title{
-                                font-weight: bold;
-                                font-size: 25px;
-                                                         }
-                        </style>
-                        <button class="modalButton" onclick="groupUsers('<?= $value->id?>')"  type="button" data-toggle="modal" data-target="#groupUsers<?= $value->id ?>">
-                            <i class="far fa-object-group"></i> Groups
+                        <button class="btn btn-info" onclick="groupUsers('<?= $value->id?>')"  type="button" data-toggle="modal" data-target="#groupUsers<?= $value->id ?>">
+                            <i class="far fa-object-group"></i> Group
                         </button>
                         <!-- Modal -->
                         <div class="modal fade" id="groupUsers<?= $value->id ?>" role="dialog">

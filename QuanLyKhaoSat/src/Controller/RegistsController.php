@@ -84,7 +84,7 @@ class RegistsController extends AppController
         $this->viewBuilder()->setLayout('regists');
         if ($this->request->is('post')) {
             $users = $this->request->getData('email');
-            $secret_q = htmlentities($this->request->getData('secret_q'));
+            $secret_q = $this->request->getData('secret_q');
             $secret_a = htmlentities($this->request->getData('secret_a'));
             $forgot = $this->Users->find()
                 ->where(['email' => $users])->first();
@@ -96,7 +96,14 @@ class RegistsController extends AppController
                     ->send('Mời Bạn Click đường link để lấy lại mật khẩu : ' . URL . 'regists/updatepass/' . $users);
                 $success = "success";
                 $this->set('success', $success);
-
+                $query = $this->Users->query();
+                $query->update()
+                    ->set([
+                        'token' => md5(date('Y-m-d H:i:s')),
+                        'modified' => date('Y-m-d H:i:s')
+                    ])
+                    ->where(['email' => $users])
+                    ->execute();
             } else {
                 $error = "error";
                 $this->set('error', $error);
