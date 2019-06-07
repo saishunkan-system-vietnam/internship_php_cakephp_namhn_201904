@@ -127,8 +127,11 @@
                                     swal(" Đã Xóa Thành Công !", {
                                         icon: "success",
                                     }).then(function () {
-                                        window.location.replace("<?= URL ?>groups");
-
+                                        <?php if ($dem % 8 == 1 && $page == $total) {?>
+                                        window.location.replace("<?= URL ?>catalogs?page=<?= $page - 1?>");
+                                        <?php } else {?>
+                                        location.reload();
+                                        <?php }?>
                                     });
                                 }
                             }

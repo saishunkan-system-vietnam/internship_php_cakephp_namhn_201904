@@ -13,17 +13,17 @@
                 </tr>
             <?php } ?>
             <tr>
-                <th>Nhập Mật Khẩu Mới</th>
+                <th>Nhập Mật Khẩu Mới <span style="color: red">( * )</span></th>
                 <th><input type="password" class="form-control" style="color: black" name="password1"></th>
             </tr>
             <tr>
-                <th>Nhập Lại Mật Khẩu</th>
+                <th>Nhập Lại Mật Khẩu <span style="color: red">( * )</span></th>
                 <th><input type="password" class="form-control" style="color: black" name="password2"></th>
             </tr>
             <tr>
                 <th style="background-color: white;border: none"></th>
-                <th style="background-color: white;border: none">
-                    <button type="submit" class="btn btn-primary">Đồng ý</button>
+                <th>
+                    <button style="height: 40px;width: 120px;font-size: 25px;" type="submit" class="btn btn-primary">Đồng ý</button>
                 </th>
             </tr>
         </table>

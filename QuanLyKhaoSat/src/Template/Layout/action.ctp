@@ -9,7 +9,8 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
-</head>
+    <script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.13.1/jquery.validate.min.js"></script>
+    </head>
 <body class="container-fluid">
 <style>
     * {
@@ -106,13 +107,14 @@
         text-align: left;
         background: white;
         border: 3px solid darkred;
-        border-top : none;
+        border-top: none;
         color: darkblue;
     }
 
     .catalog table tr:nth-child(1) th a button {
         border-top: 3px solid darkred;
     }
+
     .catalog table tr th a button:hover {
         background-color: #333333;
         color: white;
@@ -162,19 +164,21 @@
     </div>
     <div class="col-md-3">
         <?php if (isset($HgNam)) { ?>
-            <u style="font-weight: bold;font-size: 28px;color: darkblue">Xin Chào : <?= $HgNam[3] ?></u>
+            <a href="<?= URL ?>actions/info/<?= $HgNam[2]?>">
+                <u style="font-weight: bold;font-size: 22px;color: darkblue">Xin Chào : <?= $HgNam[3] ?></u>
+            </a>
         <?php } ?>
     </div>
     <div class="col-md-5">
         <a href="<?= URL ?>actions">
-            <button><i class="fas fa-house-damage"></i> Home</button>
+            <button type="button"><i class="fas fa-house-damage"></i> Home</button>
         </a>
         <?php if (empty($HgNam)) { ?>
             <a href="<?= URL ?>actions/login">
-                <button><i class="fas fa-sign-in-alt"></i>Đăng Nhập</button>
+                <button type="button"><i class="fas fa-sign-in-alt"></i> Đăng Nhập</button>
             </a>
             <a href="<?= URL ?>regists">
-                <button><i class="fas fa-sign-out-alt"></i>Đăng Ký</button>
+                <button type="button"><i class="fas fa-sign-out-alt"></i> Đăng Ký</button>
             </a>
         <?php }
         if ($HgNam[1] == "Admin") { ?>
@@ -184,7 +188,7 @@
         <?php }
         if (!empty($HgNam)) { ?>
             <a href="<?= URL ?>actions/logout">
-                <button><i class="fas fa-lock"></i> Đăng Xuất</button>
+                <button type="button"><i class="fas fa-lock"></i> Đăng Xuất</button>
             </a>
         <?php } ?>
 
@@ -192,7 +196,7 @@
 </div>
 <div class="col-md-12 main">
     <div class="col-md-4 menu-left">
-        <div class="noName" style="height: 180px;"></div>
+        <!--        <div class="noName" style="height: 180px;"></div>-->
         <fieldset class="catalog">
             <legend>[ Danh Mục Khảo Sát ]</legend>
             <table style="width: 100%;max-width: 375px;">

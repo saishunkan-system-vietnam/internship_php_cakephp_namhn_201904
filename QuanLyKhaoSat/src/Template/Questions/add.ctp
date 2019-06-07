@@ -1,3 +1,22 @@
+<style>
+    tr {
+        height: 60px;
+    }
+
+    th {
+        text-align: left;
+        font-size: 20px;
+    }
+
+    td {
+        font-size: 20px;
+    }
+</style>
+<?php if (empty($dataId)) { ?>
+    <a href="<?= URL ?>surveys">
+        <h1><u style="color: red">Đường Link Này Không Tồn Tại</u></h1>
+    </a>
+<?php } else { ?>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
 <fieldset class="col-md-6 col-md-offset-3">
     <?php if (isset($error->name)) { ?>
@@ -12,34 +31,34 @@
           enctype="multipart/form-data">
         <table class="table table-hover table-bordered" id="formQuestions">
             <tr>
-                <th>Kiểu Câu Hỏi</th>
+                <th>Kiểu Câu Hỏi <span style="color: red">( * )</span></th>
                 <td style="text-align: left">
                     <label>
                         <input name="typeQ" type="radio" checked value="Text"/>
-                        <span style="color: black;font-weight: bold">Text</span>
+                        <span style="font-size: 20px;color: black;font-weight: bold">Text</span>
                     </label>
                     <label>
                         <input name="typeQ" type="radio" value="Images"/>
-                        <span style="color: black;font-weight: bold">Images</span>
+                        <span style="font-size: 20px;color: black;font-weight: bold">Images</span>
                     </label>
                 </td>
             </tr>
             <tr id="file">
-                <th>File Ảnh</th>
+                <th>File Ảnh <span style="color: red">( * )</span></th>
                 <td><input type="file" name="fileImg" required></td>
             </tr>
             <tr id="name">
-                <th>Tên Câu Hỏi</th>
+                <th>Tên Câu Hỏi <span style="color: red">( * )</span></th>
                 <td>
-                    <input placeholder="Nhập tên khảo sát"
+                    <input placeholder="Nhập tên khảo sát" style="font-size: 20px;color: black;font-weight: bold"
                             value="<?php echo isset($result[0]) ? $result[0] : '' ?>"
                            type="text" name="name" class="form-control">
                 </td>
             </tr>
             <tr>
-                <th>Kiểu Đáp Án</th>
+                <th>Kiểu Đáp Án <span style="color: red">( * )</span></th>
                 <td>
-                    <select style="font-weight: bold;color: black" class="form-control" name="type_answer" id="type_answer">
+                    <select style="font-size: 18px;color: black;font-weight: bold;height: 40px; " style="font-weight: bold;color: black" class="form-control" name="type_answer" id="type_answer">
                         <option value="Radio">Radio</option>
                         <option value="Checkbox">Checkbox</option>
                         <option value="Text">Text</option>
@@ -50,46 +69,47 @@
                 </td>
             </tr>
             <tr id="typeText">
-                 <th>Định Dạng Text</th>
+                 <th>Định Dạng Text <span style="color: red">( * )</span></th>
                 <td>
                     <label>
                         <input name="typeText" type="radio" value="date"/>
-                        <span style="color: black;font-weight: bold">Date</span>
+                        <span style="font-size: 20px;color: black;font-weight: bold">Date</span>
                     </label>
                     <label>
                         <input name="typeText" type="radio" value="text"/>
-                        <span style="color: black;font-weight: bold">Text</span>
+                        <span style="font-size: 20px;color: black;font-weight: bold">Text</span>
                     </label>
                     <label>
                         <input name="typeText" type="radio" value="number"/>
-                        <span style="color: black;font-weight: bold">Number</span>
+                        <span style="font-size: 20px;color: black;font-weight: bold">Number</span>
                     </label>
                     <label>
                         <input name="typeText" type="radio" value="tel"/>
-                        <span style="color: black;font-weight: bold">Tel</span>
+                        <span style="font-size: 20px;color: black;font-weight: bold">Tel</span>
                     </label>
                     <label>
                         <input name="typeText" type="radio" value="email"/>
-                        <span style="color: black;font-weight: bold">Email</span>
+                        <span style="font-size: 20px;color: black;font-weight: bold">Email</span>
                     </label>
                 </td>
             </tr>
             <tr id="answer">
-                <th>Đáp Án</th>
-                <td><input placeholder="Nhập đáp án được cách nhau bởi dấu ',' "
+                <th>Đáp Án <span style="color: red">( * )</span></th>
+                <td><input style="font-size: 20px;color: black;font-weight: bold"
+                            placeholder="Nhập đáp án được cách nhau bởi dấu ',' "
                             value="<?php echo isset($result[3]) ? $result[3] : '' ?>"
                            type="text" name="answers" class="form-control"></td>
             </tr>
             <tr>
-                <th>Trạng Thái</th>
+                <th>Trạng Thái <span style="color: red">( * )</span></th>
                 <td style="text-align: left">
                     <label>
                         <input name="status" type="radio" checked value="yes"/>
-                        <span style="color: black;font-weight: bold">Bắt Buộc Trả Lời</span>
+                        <span style="font-size: 20px;color: black;font-weight: bold">Bắt Buộc Trả Lời</span>
                     </label>
                     <label>
                         <input name="status" type="radio" value="no"/>
-                        <span style="color: black;font-weight: bold">Không Bắt Buộc</span>
+                        <span style="font-size: 20px;color: black;font-weight: bold">Không Bắt Buộc</span>
                     </label>
                 </td>
             </tr>
@@ -142,3 +162,4 @@
         });
     });
 </script>
+<?php }?>

@@ -105,7 +105,7 @@ class QuestionsController extends AppController
         $this->set("data2", $data2);
         //== Lấy "name" ở bảng Surveys ==||
         $dataS = $this->Surveys->find()
-            ->where(['id' => $data->survey_id])
+            ->where(['id' => isset($data->survey_id) ? $data->survey_id : ''])
             ->first();
         $this->set("dataS", $dataS);
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {

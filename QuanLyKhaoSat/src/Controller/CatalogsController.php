@@ -39,6 +39,10 @@ class CatalogsController extends AppController
             $dem = $this->Catalogs->find()
                 ->where(['restore' => 1])->count();
             $this->set("dem", $dem);
+            $page = isset($_GET['page']) ? $_GET['page'] : 1;
+            $total = ceil($dem/8);
+            $this->set("page", $page);
+            $this->set("total", $total);
         }
     }
 

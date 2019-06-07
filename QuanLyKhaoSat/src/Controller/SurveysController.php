@@ -44,6 +44,7 @@ class SurveysController extends AppController
                     'admin_create',
                     'status',
                     'Catalogs.name',
+                    'Catalogs.restore',
                     'start_time',
                     'end_time',
                     'login_status',
@@ -51,11 +52,11 @@ class SurveysController extends AppController
                     'count',
                     'created',
                     'modified'
-                ])->where(['admin_create' => $HgNam[0], 'Surveys.restore' => 1,])
+                ])->where(['admin_create' => $HgNam[0], 'Surveys.restore' => 1])
                 ->join([
                     'table' => 'catalogs',
                     'alias' => 'Catalogs',
-                    'type' => 'INNER',
+                    'type' => 'LEFT',
                     'conditions' => 'Surveys.catalog_id = Catalogs.id'
                 ]);
             $this->paginate = array(
@@ -70,6 +71,10 @@ class SurveysController extends AppController
             $dem = $this->Surveys->find()
                 ->where(['restore' => 1, 'admin_create' => $HgNam[0]])->count();
             $this->set("dem", $dem);
+            $page = isset($_GET['page']) ? $_GET['page'] : 1;
+            $total = ceil($dem/8);
+            $this->set("page", $page);
+            $this->set("total", $total);
         }
     }
 
@@ -83,11 +88,12 @@ class SurveysController extends AppController
         $this->set("catalogID", $catalogID);
         //================================
         $catalog = $this->Catalogs->find()
-            ->select(['id', 'name']);
+            ->select(['id', 'name'])->where(['restore' => 1]);
         $this->set("catalog", $catalog);
         if ($this->request->is('post')) {
             $name = htmlentities($this->request->getData('name'));
             $img = $this->request->getData('img')['name'];
+            $tmp_name = $this->request->getData('img')['tmp_name'];
             if (!empty($img)) {
                 $url_file = $_FILES["img"]["tmp_name"];
                 $checkImages = mime_content_type($url_file);
@@ -149,6 +155,13 @@ class SurveysController extends AppController
 
     }
 
+    public function test(){
+        if ($this->request->is('post')) {
+          $name = $this->request->getData('name');
+          dd($name);
+        }
+    }
+
     public function edit($id = null)
     {
         $this->set('id', $id);
@@ -160,13 +173,13 @@ class SurveysController extends AppController
         $this->set("data", $data);
         // Lấy tên danh mục khảo sát
         $catalog = $this->Catalogs->find()
-            ->where(['id' => isset($data->catalog_id) ? $data->catalog_id : null])
+            ->where(['id' => isset($data->catalog_id) ? $data->catalog_id : null , 'restore' => 1])
             ->first();
         $this->set("catalog", $catalog);
         //==============================
         // Lấy tên danh mục khảo sát khác
         $select = $this->Catalogs->find()
-            ->where(['id !=' => isset($data->catalog_id) ? $data->catalog_id : null]);
+            ->where(['id !=' => isset($data->catalog_id) ? $data->catalog_id : null , 'restore' => 1]);
         $this->set("select", $select);
         //==================================
         $data2 = $this->Questions->find()
@@ -205,7 +218,8 @@ class SurveysController extends AppController
                 'alias' => 'User_survey',
                 'type' => 'INNER',
                 'conditions' => 'Surveys.id = User_survey.survey_id',
-            ])->join([
+            ])
+            ->join([
                 'table' => 'users',
                 'alias' => 'Users',
                 'type' => 'INNER',
@@ -228,8 +242,8 @@ class SurveysController extends AppController
             // Ảnh
             $img = $this->request->getData('img')['name'];
             if ($img != '') {
-                $url_file = $_FILES["img"]["tmp_name"];
-                $checkImages = mime_content_type($url_file);
+                $tmp_name = $this->request->getData('img')['tmp_name'];
+                $checkImages = mime_content_type($tmp_name);
                 $checkImages = explode('/', $checkImages);
                 if ($checkImages[1] == 'jpeg' || $checkImages[1] == 'png') {
                     @unlink(WWW_ROOT . "img/survey" . DS . $data->img_survey);
@@ -262,7 +276,7 @@ class SurveysController extends AppController
                 $errorTime = "ErrorTime";
                 $this->set("errorTime", $errorTime);
                 $this->set("result", $result);
-            } else if ($checkImages[1] != 'jpeg' && $checkImages[1] != 'png') {
+            } else if (isset($checkImages) && $checkImages[1] != 'jpeg' && $checkImages[1] != 'png') {
                 $errorImages = "ErrorImages";
                 $this->set("errorImages", $errorImages);
                 $this->set("result", $result);

@@ -36,13 +36,12 @@
 
     legend {
         text-align: center;
-        font-size: 20px;
+        font-size: 25px;
         font-weight: bold;
         width: 500px;
         height: 40px;
         line-height: 40px;
         border: 2px solid #222222;
-        border-radius: 10px;
         border-bottom: none;
         border-top: none;
     }

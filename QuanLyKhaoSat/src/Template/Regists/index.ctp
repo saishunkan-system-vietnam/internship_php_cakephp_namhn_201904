@@ -67,7 +67,7 @@
     <form action="" method="post" id="formRegisters">
         <table class="table table-hover table-bordered ">
             <tr>
-                <th class="col-md-4">Tài Khoản</th>
+                <th class="col-md-4">Tài Khoản <span style="color: red">( * )</span></th>
                 <td><input placeholder="Nhập tài khoản"
                            value="<?php echo isset($result[0]) ? $result[0] : '' ?>"
                            type="email" name="email" id="email" class="form-control email"></td>
@@ -77,43 +77,43 @@
                 <th style="font-weight: bold" class="dataShow"></th>
             </tr>
             <tr>
-                <th>Mật Khẩu</th>
+                <th>Mật Khẩu <span style="color: red">( * )</span></th>
                 <td><input placeholder="Nhập mật khẩu"
                            value="<?php echo isset($result[1]) ? $result[1] : '' ?>"
                            type="password" id="pass1" name="password1" class="form-control"></td>
             </tr>
             <tr id="pass2">
-                <th>Nhập Lại Mật Khẩu</th>
+                <th>Nhập Lại Mật Khẩu <span style="color: red">( * )</span></th>
                 <td><input placeholder="Nhập lại mật khẩu"
                            value="<?php echo isset($result[2]) ? $result[2] : '' ?>"
                            type="password" name="password2" class="form-control"></td>
             </tr>
             <tr>
-                <th>Họ và Tên</th>
+                <th>Họ và Tên <span style="color: red">( * )</span></th>
                 <td><input placeholder="Nhập họ và tên của bạn"
                            value="<?php echo isset($result[3]) ? $result[3] : '' ?>"
                            type="text" name="fullname" class="form-control"></td>
             </tr>
             <tr>
-                <th>Địa Chỉ</th>
+                <th>Địa Chỉ <span style="color: red">( * )</span></th>
                 <td><input placeholder="Nhập địa chỉ"
                            value="<?php echo isset($result[4]) ? $result[4] : '' ?>"
                            type="text" name="address" class="form-control"></td>
             </tr>
             <tr>
-                <th>Số Điện Thoại</th>
+                <th>Số Điện Thoại <span style="color: red">( * )</span></th>
                 <td><input placeholder="Nhập số điện thoại viết liền"
                            value="<?php echo isset($result[5]) ? $result[5] : '' ?>"
                            type="text" id="tel" name="phone" class="form-control"></td>
             </tr>
             <tr>
-                <th>Ngày/Tháng/Năm Sinh</th>
+                <th>Ngày/Tháng/Năm Sinh <span style="color: red">( * )</span></th>
                 <td><input placeholder="Nhập Ngày / Tháng / Năm Sinh"
                            value="<?php echo isset($result[6]) ? $result[6] : '' ?>"
                            type="date" name="birth" class="form-control"></td>
             </tr>
             <tr>
-                <th>Câu Hỏi Bí Mật</th>
+                <th>Câu Hỏi Bí Mật </th>
                 <td><select name="secret_q" class="form-control">
                         <?php if (isset($result[7]) && $result[7] == "Trường Đại Học Của Bạn Là Gì ?" || !isset($result[7])) { ?>
                             <option value="Trường Đại Học Của Bạn Là Gì ?">Trường Đại Học Của Bạn Là Gì ?</option>
@@ -133,7 +133,7 @@
                     </select></td>
             </tr>
             <tr>
-                <th>Câu Trả Lời</th>
+                <th>Câu Trả Lời <span style="color: red">( * )</span></th>
                 <td><input placeholder="Nhập câu trả lời cho câu hỏi bí mật"
                            value="<?php echo isset($result[8]) ? $result[8] : '' ?>"
                            type="text" name="secret_a" class="form-control"></td>

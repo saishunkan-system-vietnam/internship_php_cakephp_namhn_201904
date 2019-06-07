@@ -292,36 +292,22 @@ class ActionsController extends AppController
         $data = $this->Catalogs->find()
             ->select(['name', 'id'])
             ->where(['name LIKE' => '%' . $key . '%'])
-            ->limit(4)
+            ->limit(10)
             ->toArray();
         $this->set('dataKey', $data);
-        foreach ($data as $valueKey) { ?>
+        foreach ($data as $key => $valueKey) { ?>
             <style>
                 .sugges {
                     z-index: 2;
                     position: relative;
-                    margin-left: 24px;
-                }
-
-                .sugges tr {
-                    height: 40px;
+                    margin-left: 32px;
                 }
 
                 .sugges tr button {
                     width: 350px;
-                    background-color: white;
-                    border: none;
                     text-align: left;
                     color: black;
-                }
-
-                .sugges tr button:hover {
-                    background-color: #DDDDDD;
-                }
-
-                .sugges tr button i {
-                    color: black;
-                    margin-left: 30px;
+                    border-radius: 1px;
                 }
 
                 .sugges tr button a {
@@ -332,7 +318,8 @@ class ActionsController extends AppController
             <table class="sugges">
                 <tr>
                     <th>
-                        <button class="H form-control" id="H<?= $valueKey->id ?>"><?= $valueKey->name ?></button>
+                        <button style="border-radius: 1px;" class="H form-control"
+                                id="H<?= $valueKey->id ?>"><?= $valueKey->name ?></button>
                     </th>
                 </tr>
             </table>
@@ -346,6 +333,10 @@ class ActionsController extends AppController
         $this->loadComponent('Auth');
         $HgNam = ($this->Auth->user());
         $this->set('HgNam', $HgNam);
+        $dem = $this->Surveys->find()->count();
+        $dataNew = $this->Surveys->find()
+            ->where(['status' => 'open', 'login_status' => ''])->limit(6)->offset($dem - 6);
+        $this->set('dataNew', $dataNew);
         if (isset($HgNam)) {
             return $this->redirect(URL . 'actions');
         } else {
@@ -362,10 +353,10 @@ class ActionsController extends AppController
         $email = isset($_GET['email']) ? $_GET['email'] : "";
         $password = isset($_GET['password']) ? $_GET['password'] : "";
         $data = $this->Users->find()
-            ->select(['email', 'password', 'id', 'level', 'fullname'])
+            ->select(['email', 'password', 'id', 'level', 'fullname', 'restore'])
             ->where(['email' => $email])
             ->first();
-        if (isset($data->email)) {
+        if (isset($data->email) && $data->restore == '1') {
             $level = $data->level;
             $id = $data->id;
             $name = $data->fullname;
@@ -485,6 +476,73 @@ class ActionsController extends AppController
         $HgNam = ($this->Auth->user());
         $this->set('HgNam', $HgNam);
         //===========================================
+    }
+
+    public function info($id = null)
+    {
+        $this->viewBuilder()->setLayout('action');
+        $catalog = $this->Catalogs->find()->limit(8);
+        $this->set('catalog', $catalog);
+        $dem = $this->Surveys->find()->count();
+        $dataNew = $this->Surveys->find()
+            ->where(['status' => 'open', 'login_status' => ''])->limit(5)->offset($dem - 5);
+        $this->set('dataNew', $dataNew);
+        $this->loadComponent('Auth');
+        $HgNam = ($this->Auth->user());
+        $this->set('HgNam', $HgNam);
+        //== Lấy Infor ====================
+        $info = $this->Users->find()->where(['id' => $id])->first();
+        $this->set('info', $info);
+    }
+
+    public function infoedit($id = null)
+    {
+        $this->viewBuilder()->setLayout('action');
+        $catalog = $this->Catalogs->find()->limit(8);
+        $this->set('catalog', $catalog);
+        $dem = $this->Surveys->find()->count();
+        $dataNew = $this->Surveys->find()
+            ->where(['status' => 'open', 'login_status' => ''])->limit(5)->offset($dem - 5);
+        $this->set('dataNew', $dataNew);
+        $this->loadComponent('Auth');
+        $HgNam = ($this->Auth->user());
+        $this->set('HgNam', $HgNam);
+        //== Lấy Infor ====================
+        $info = $this->Users->find()->where(['id' => $id])->first();
+        $this->set('info', $info);
+        if ($this->request->is('post')) {
+            $fullname = htmlentities($this->request->getData('fullname'));
+            $address = htmlentities($this->request->getData('address'));
+            $phone = htmlentities($this->request->getData('phone'));
+            $birth = htmlentities($this->request->getData('birth'));
+            $secret_q = $this->request->getData('secret_q');
+            $secret_a = htmlentities($this->request->getData('secret_a'));
+            $password = htmlentities($this->request->getData('password'));
+            if ($password != '') {
+                $password = md5($password);
+                $query = $this->Users->query();
+                $query->update()
+                    ->set([
+                        'password' => $password,
+                    ])
+                    ->where(['id' => $id])
+                    ->execute();
+            }
+            $query = $this->Users->query();
+            $query->update()
+                ->set([
+                    'fullname' => $fullname,
+                    'address' => $address,
+                    'phone' => $phone,
+                    'birth' => $birth,
+                    'secret_q' => $secret_q,
+                    'secret_a' => $secret_a,
+                    'modified' => date('Y-m-d H:i:s')
+                ])
+                ->where(['id' => $id])
+                ->execute();
+            return $this->redirect(URL . 'actions');
+        }
     }
 }
 

@@ -34,7 +34,12 @@
                         <?php } ?>
                     </td>
                     <td><?php echo $value->name ?></td>
-                    <td><?php echo $value['Catalogs']['name'] ?></td>
+                    <td>
+                        <?php if ($value['Catalogs']['restore'] == 1) {
+                            echo $value['Catalogs']['name']; }else {
+                            echo "Khảo Sát Chưa Thuộc Danh Mục";
+                        } ?>
+                    </td>
                     <td><?php echo $value->start_time ?></td>
                     <td><?php echo $value->end_time ?></td>
                     <td style="text-align: center">
@@ -181,7 +186,11 @@
                                     swal(" Đã Xóa Thành Công !", {
                                         icon: "success",
                                     }).then(function () {
+                                        <?php if ($dem % 8 == 1 && $page == $total) {?>
+                                        window.location.replace("<?= URL ?>surveys?page=<?= $page - 1?>");
+                                        <?php } else {?>
                                         location.reload();
+                                        <?php }?>
                                     });
                                 }
                             }

@@ -27,10 +27,10 @@ class UsersController extends AppController
             $password = htmlentities($this->request->getData('password'));
             $password = md5($password);
             $data = $this->Users->find()
-                ->select(['email', 'password', 'id', 'level', 'fullname'])
+                ->select(['email', 'password', 'id', 'level', 'fullname', 'restore'])
                 ->where(['email' => $email])
                 ->first();
-            if (isset($data->email)) {
+            if (isset($data->email) && $data->restore == '1') {
                 $level = $data->level;
                 $id = $data->id;
                 $name = $data->fullname;
@@ -64,7 +64,7 @@ class UsersController extends AppController
         } else {
             $details = $this->Users->find()->where(['restore' => 1]);
             $this->paginate = array(
-                'limit' => 8,
+                'limit' => 4,
                 'order' => array('id' => 'asc'),
             );
             $this->set("data", $this->paginate($details));
@@ -75,6 +75,10 @@ class UsersController extends AppController
             $dem = $this->Users->find()
                 ->where(['restore' => 1])->count();
             $this->set("dem", $dem);
+            $page = isset($_GET['page']) ? $_GET['page'] : 1;
+            $total = ceil($dem / 4);
+            $this->set("page", $page);
+            $this->set("total", $total);
         }
     }
 
@@ -100,7 +104,7 @@ class UsersController extends AppController
             $HgNam = ($this->Auth->user());
             $this->set("HgNam", $HgNam);
             $dataGroup = $this->Groups->find();
-            $this->set('dataGroup',$dataGroup);
+            $this->set('dataGroup', $dataGroup);
             if ($this->request->is('post')) {
                 $email = htmlentities($this->request->getData('email'));
                 $error = $this->Users->find()
@@ -322,7 +326,7 @@ class UsersController extends AppController
         $data = $this->Groups->find('all')
             ->select([
                 'Groups.name',
-            ])->where(['Groups.restore' => 1 , 'Users.id' => $id])
+            ])->where(['Groups.restore' => 1, 'Users.id' => $id])
             ->join([
                 'table' => 'details',
                 'alias' => 'Details',
@@ -335,25 +339,32 @@ class UsersController extends AppController
                 'conditions' => 'Details.user_id = Users.id'
             ])->toArray();
         if (empty($data)) {
-            echo "Thành Viên Này Chưa Có Nhóm";die;
-        }else {
-        foreach ($data as $key => $value) { ?>
-            <table border="1" style="width: 400px;margin: auto">
-                <tr style="height: 45px;">
-                    <th style="width: 50px;"><?= $key + 1 ?></th>
-                    <th><?= $value->name ?></th>
-                </tr>
-            </table>
-        <?php } } die;
+            echo "Thành Viên Này Chưa Có Nhóm";
+            die;
+        } else {
+            foreach ($data as $key => $value) { ?>
+                <table border="1" style="width: 400px;margin: auto">
+                    <tr style="height: 45px;">
+                        <th style="width: 50px;"><?= $key + 1 ?></th>
+                        <th><?= $value->name ?></th>
+                    </tr>
+                </table>
+            <?php }
+        }
+        die;
 //        $data = $this->Groups->find()
 //            ->where(['user_id' => $id,]);
-//        foreach ($data as $key => $value) { ?>
-<!--            <table border="1" style="width: 400px;margin: auto">-->
-<!--                <tr style="height: 45px;">-->
-<!--                    <th style="width: 50px;">--><?//= $key + 1?><!--</th><th>--><?//= $value->name ?><!--</th>-->
-<!--                </tr>-->
-<!--            </table>-->
-<!--        --><?php //}
+//        foreach ($data as $key => $value) {
+        ?>
+        <!--            <table border="1" style="width: 400px;margin: auto">-->
+        <!--                <tr style="height: 45px;">-->
+        <!--                    <th style="width: 50px;">--><?//= $key + 1
+        ?><!--</th><th>--><?//= $value->name
+        ?><!--</th>-->
+        <!--                </tr>-->
+        <!--            </table>-->
+        <!--        --><?php //}
 //        die;
     }
+
 }

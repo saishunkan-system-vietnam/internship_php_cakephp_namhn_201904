@@ -12,6 +12,12 @@
     button:hover {
         background-color: #0071BC;
     }
+    .error {
+        color: red;
+        font-size: 18px;
+        border-bottom: 1px solid red;
+        width: 500px;
+    }
 </style>
 <!-- Compiled and minified CSS -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
@@ -138,7 +144,7 @@ if (isset($success)) { ?>
                                 </tr>
                             <?php } ?>
                             <tr>
-                                <th><span id="err<?= $value->id ?>"></span></th>
+                                <th style="color: red;" id="err<?= $value->id ?>"></th>
                             </tr>
                         <?php } ?>
                         <!--=============End type_answer = Radio =====================-->
@@ -165,7 +171,7 @@ if (isset($success)) { ?>
                                 </td>
                             </tr>
                             <tr>
-                                <th><span id="err<?= $value->id ?>"></span></th>
+                                <th id="err<?= $value->id ?>"></th>
                             </tr>
                         <?php } ?>
                         <!--=================End type_answer = Select ======================-->
@@ -188,7 +194,7 @@ if (isset($success)) { ?>
                                 </td>
                             </tr>
                             <tr>
-                                <th><span id="err<?= $value->id ?>"></span></th>
+                                <th id="err<?= $value->id ?>"></th>
                             </tr>
                         <?php } ?>
                         <!--=================End type_answer = Text ======================-->
@@ -201,7 +207,7 @@ if (isset($success)) { ?>
                                 </td>
                             </tr>
                             <tr>
-                                <th><span id="err<?= $value->id ?>"></span></th>
+                                <th id="err<?= $value->id ?>"></th>
                             </tr>
                         <?php } ?>
                         <!--=================End type_answer = select ======================-->

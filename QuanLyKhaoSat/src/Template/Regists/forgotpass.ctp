@@ -12,7 +12,7 @@
     <form action="" id="formForgot" method="post">
         <table class="table table-bordered">
             <tr>
-                <th>Nhập Tài Khoản</th>
+                <th>Nhập Tài Khoản <span style="color: red">( * )</span></th>
                 <th><input style="height: 40px;" type="email"  name="email"
                            placeholder="Nhập Tài Khoản" class="form-control"></th>
             </tr>
@@ -28,7 +28,7 @@
                 </th>
             </tr>
             <tr>
-                <th>Nhập Đáp Án</th>
+                <th>Nhập Đáp Án <span style="color: red">( * )</span></th>
                 <th>
                     <input name="secret_a" style="height: 40px;" type="text" placeholder="Nhập Đáp Án" class="form-control">
                 </th>

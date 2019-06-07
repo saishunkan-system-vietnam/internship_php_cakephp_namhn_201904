@@ -1,3 +1,11 @@
+<style>
+    th {
+        text-align: left;
+    }
+    td {
+        font-weight: bold;
+    }
+</style>
 <?php if (empty($data)) { ?>
     <a href="<?= URL ?>users"><h1><u style="color: red;font-weight: bold">Đường Dẫn Này Không Tồn Tại</u></h1></a>
 <?php } else { ?>
@@ -16,9 +24,9 @@
             Edit Users
         </legend>
         <form action="<?= URL ?>users/edit/<?php echo $data->id ?>" id="Users" method="post">
-            <table class="table table-hover">
+            <table class="table table-hover table-bordered">
                 <tr>
-                    <th class="col-md-4">Tài Khoản</th>
+                    <th class="col-md-4">Tài Khoản <span style="color: red">( * )</span></th>
                     <td><input value="<?php echo isset($result[0]) ? $result[0] : $data->email ?>"
                                type="email" name="email" onchange="checkEmail()" class="form-control email"></td>
                 </tr>
@@ -27,32 +35,32 @@
                     <td class="dataShow"></td>
                 </tr>
                 <tr>
-                    <th>Mật Khẩu</th>
+                    <th>Mật Khẩu <span style="color: red">( * )</span></th>
                     <td><input placeholder="Nhập Mật Khẩu Mới Nếu Bạn Muốn Đổi"
                                type="password" name="password1" class="form-control" id="pass1"></td>
                 </tr>
                 <tr id="pass2">
-                    <th>Nhập Lại Mật Khẩu</th>
+                    <th>Nhập Lại Mật Khẩu <span style="color: red">( * )</span></th>
                     <td><input placeholder="Nhập Lại Mật Khẩu Bạn Vừa Nhập"
                                type="password" name="password2" class="form-control"></td>
                 </tr>
                 <tr>
-                    <th>Họ và Tên</th>
+                    <th>Họ và Tên <span style="color: red">( * )</span></th>
                     <td><input value="<?php echo isset($result[3]) ? $result[3] : $data->fullname ?>"
                                type="text" name="fullname" class="form-control"></td>
                 </tr>
                 <tr>
-                    <th>Địa Chỉ</th>
+                    <th>Địa Chỉ <span style="color: red">( * )</span></th>
                     <td><input value="<?php echo isset($result[4]) ? $result[4] : $data->address ?>"
                                type="text" name="address" class="form-control"></td>
                 </tr>
                 <tr>
-                    <th>Số Điện Thoại</th>
+                    <th>Số Điện Thoại <span style="color: red">( * )</span></th>
                     <td><input value="<?php echo isset($result[5]) ? $result[5] : $data->phone ?>"
                                type="text" id="tel" name="phone" class="form-control"></td>
                 </tr>
                 <tr>
-                    <th>Ngày/Tháng/Năm Sinh</th>
+                    <th>Ngày/Tháng/Năm Sinh <span style="color: red">( * )</span></th>
                     <td><input value="<?php echo isset($result[6]) ? $result[6] : $data->birth ?>"
                                type="date" name="birth" class="form-control"></td>
                 </tr>
@@ -103,7 +111,7 @@
                     </td>
                 </tr>
                 <tr>
-                    <th>Câu Trả Lời</th>
+                    <th>Câu Trả Lời <span style="color: red">( * )</span></th>
                     <td><input value="<?php echo isset($result[9]) ? $result[9] : $data->secret_a ?>"
                                class="form-control" name="secret_a" type="text" id="secret_a"></td>
                 </tr>

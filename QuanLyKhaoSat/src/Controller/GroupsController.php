@@ -31,7 +31,7 @@ class GroupsController extends AppController
                 'order' => array('id' => 'asc'),
             );
             $data = $this->Groups->find()
-                ->where(['restore' => 1, 'admin_create' => $HgNam[2]]);
+                ->where(['restore' => 1]);
             $data = $this->paginate($data);
             $this->set("data", $data);
             $this->set("HgNam", $HgNam);
@@ -41,6 +41,10 @@ class GroupsController extends AppController
             $dem = $this->Groups->find()
                 ->where(['restore' => 1])->count();
             $this->set("dem", $dem);
+            $page = isset($_GET['page']) ? $_GET['page'] : 1;
+            $total = ceil($dem/8);
+            $this->set("page", $page);
+            $this->set("total", $total);
         }
     }
 
@@ -51,7 +55,7 @@ class GroupsController extends AppController
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $name = htmlentities($this->request->getData('name'));
             $error = $this->Groups->find()
-                ->where(['name' => $name, 'admin_create' => $HgNam[2]])
+                ->where(['name' => $name,])
                 ->first();
             $result = array($name);
             if (isset($error->name)) {

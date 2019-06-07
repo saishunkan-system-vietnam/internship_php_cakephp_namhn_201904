@@ -1,7 +1,7 @@
 <fieldset class="col-md-10 col-md-offset-1" style="margin-top: 80px;" id="Forgot">
     <legend>Quên Mật Khẩu</legend>
     <?php if (!empty($error)) {?>
-        <div class="col-md-12" style="margin-bottom:20px;font-weight: bold;text-align: center;color: white; background: #222222;height: 50px;line-height: 50px;font-size: 16px;text-align: center">
+        <div class="col-md-12" style="  margin-bottom:20px;font-weight: bold;text-align: center;color: white; background: #222222;height: 50px;line-height: 50px;font-size: 16px;text-align: center">
             Thông Tin Bạn Nhập Không Chính Xác ^^!
         </div>
     <?php } if (!empty($success)) { ?>
@@ -34,8 +34,8 @@
                 </th>
             </tr>
             <tr>
-                <th style="background-color: white;border: none"></th>
-                <th><button type="submit" id="success">Đồng ý</button></th>
+                <th></th>
+                <th><button style="width: 110px;height: 45px;font-size: 19px;background-color: #333333;color: white" type="submit" id="success">Đồng ý</button></th>
             </tr>
         </table>
     </form>

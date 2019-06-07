@@ -32,12 +32,14 @@
                 <td><?php echo $value->modified ?></td>
                 <td>
                     <?php if ($value->id == $HgNam[2] || $value->level == "Member") { ?>
+                        <?php if ($value->id == $HgNam[2]) {?>
                         <a href="<?php URL ?>users/edit/<?php echo $value->id ?>" class="btn btn-primary">
                             <i class="fas fa-edit"></i> Edit
                         </a>
+                        <?php } ?>
                         <button type="button" id="<?= $value->id ?>" class="btn btn-danger click">
                             <i class="far fa-trash-alt"></i> Delete
-                        </button><br>
+                        </button>
                         <button class="btn btn-info" onclick="groupUsers('<?= $value->id?>')"  type="button" data-toggle="modal" data-target="#groupUsers<?= $value->id ?>">
                             <i class="far fa-object-group"></i> Group
                         </button>
@@ -173,7 +175,11 @@
                                     swal(" Đã Xóa Thành Công !", {
                                         icon: "success",
                                     }).then(function () {
+                                        <?php if ($dem % 4 == 1 && $page == $total) { ?>
+                                        window.location.replace("<?= URL ?>users?page=<?= ($page - 1)?>");
+                                        <?php } else {?>
                                         location.reload();
+                                        <?php }?>
                                     });
                                 }
                             }

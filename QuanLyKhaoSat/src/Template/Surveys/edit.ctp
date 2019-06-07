@@ -1,7 +1,7 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.9/dist/css/bootstrap-select.min.css">
 <script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.9/dist/js/bootstrap-select.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.9/dist/js/i18n/defaults-*.min.js"></script>
-<?php echo $this->Html->css('radio'); ?>
+<?php  echo $this->Html->css('radio'); ?>
 <?php if (empty($data)) { ?>
     <a href="<?= URL ?>surveys"><div style="color: red;font-weight: bold;font-size: 35px;margin-top: 50px;"><u>Đường Dẫn Này Không Tồn Tại</u></div></a>
 <?php } else { ?>
@@ -29,12 +29,12 @@
         <legend>Chỉnh Sửa Khảo Sát</legend>
         <form action="<?= URL ?>surveys/edit/<?php echo $data->id ?>" method="post" id="Surveys"
               enctype="multipart/form-data">
-            <table class="table table-hover table-bordered">
+            <table class="table table-bordered">
                 <tr>
                     <th class="col-md-3">Danh mục khảo sát</th>
                     <th colspan="2">
                         <select class="form-control" name="catalog_id" style="max-width: 500px;width: 500px;">
-                            <option value="<?php echo $catalog->id; ?>"><?php echo $catalog->name; ?></option>
+                            <option value="<?php echo isset($catalog->id) ? $catalog->id : ''; ?>"><?php echo isset($catalog->name)? $catalog->name : 'Please Choose'; ?></option>
                             <?php foreach ($select as $value) { ?>
                                 <option value="<?php echo $value->id; ?>"><?php echo $value->name; ?></option>
                             <?php } ?>
@@ -43,18 +43,34 @@
                 </tr>
                 <tr>
                     <th class="col-md-3">Ảnh Khảo Sát</th>
-                    <th colspan="2">
-                        <input type="file" name="img">
+                    <th  colspan="2">
+                        <input type="file" accept="image/*" name="img" id="i_file" style="display: none">
+                        <button class="fileImage" type="button" style="background-color: darkred;border-radius: 7px;color: white;height: 40px;width: 110px;">Chọn Ảnh</button>
+                        <input type="text" id="image" value="" style="border-radius: 7px;background-color: white;border: none;height: 38px;width: 60%;" disabled>
+                        <div style="margin-top: 10px; margin-bottom: 10px;margin-left: 200px;border: 5px solid darkblue;width: 160px;height: 130px;">
                         <?php if (empty($data->img_survey)) { ?>
                             <img src="<?= URL ?>img/survey/noimage.jpg" style="height: 120px;width: 150px;">
                         <?php } else { ?>
                             <img src="<?= URL ?>img/survey/<?= $data->img_survey ?>"
                                  style="height: 120px;width: 150px;">
                         <?php } ?>
+                        </div>
+                        <p id="checkImage" style="color: red;display: none">File bạn chọn không phải là Ảnh</p>
                     </th>
+                    <script>
+                        $(document).on("click", ".fileImage", function() {
+                            $("#i_file").trigger("click");
+                        });
+                        $('input[type="file"]').change(function(e) {
+                            if (e.target.files[0] != undefined) {
+                                let fileName = e.target.files[0].name;
+                                $('#image').val(fileName);
+                            }
+                        });
+                    </script>
                 </tr>
                 <tr>
-                    <th>Tên Khảo Sát</th>
+                    <th>Tên Khảo Sát <span style="color: red">( * )</span></th>
                     <th colspan="2"><input value="<?php echo isset($result[0]) ? $result[0] : $data->name ?>"
                                            type="text" name="name" class="form-control"></th>
                 </tr>
