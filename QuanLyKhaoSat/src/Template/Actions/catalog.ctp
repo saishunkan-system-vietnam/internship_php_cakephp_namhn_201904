@@ -7,6 +7,7 @@
         background-color: #DDDDDD;
         margin-left: 40px;
         margin-bottom: 40px;
+        overflow: hidden;
     }
 
     img {

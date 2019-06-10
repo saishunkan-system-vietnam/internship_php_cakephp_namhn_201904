@@ -2,7 +2,7 @@
     <a href="<?= URL ?>catalogs"><h1><u style="color: red;font-weight: bold">Đường Link Này Không Tồn Tại</u></h1></a>
 <?php } else {?>
 <fieldset class="col-md-8 col-md-offset-2">
-    <legend>
+    <legend style="overflow: hidden;">
         <?php echo $data->name ?></legend>
     <table class="table table-striped table-bordered">
         <tr  style="background-color: #333333;color: white">

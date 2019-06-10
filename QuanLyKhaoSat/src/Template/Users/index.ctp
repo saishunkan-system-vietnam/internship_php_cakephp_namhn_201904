@@ -1,7 +1,12 @@
+<style>
+    tr {
+        height: 50px;
+    }
+</style>
 <fieldset class="col-md-12">
     <legend>Danh Sách Users</legend>
     <table class="table table-bordered table-striped">
-        <tr style="background-color: #333333;color: white">
+        <tr style="background-color: #333333;color: white;">
             <th>Tài Khoản</th>
             <th>Họ và Tên</th>
             <th>Địa Chỉ</th>
@@ -69,7 +74,7 @@
         <?php } ?>
         <tr class="addRestore"></tr>
     </table>
-    <?php if ($dem > 8) { ?>
+    <?php if ($dem > 6) { ?>
         <ul class="pagination" style="float: left">
             <?php
             echo $this->Paginator->prev('« Previous ');
@@ -175,7 +180,7 @@
                                     swal(" Đã Xóa Thành Công !", {
                                         icon: "success",
                                     }).then(function () {
-                                        <?php if ($dem % 4 == 1 && $page == $total) { ?>
+                                        <?php if ($dem % 6 == 1 && $page == $total) { ?>
                                         window.location.replace("<?= URL ?>users?page=<?= ($page - 1)?>");
                                         <?php } else {?>
                                         location.reload();

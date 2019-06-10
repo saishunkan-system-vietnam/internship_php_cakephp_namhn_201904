@@ -1,6 +1,6 @@
 <?php if ($HgNam[1] == "Admin") { ?>
     <fieldset class="col-md-10 col-md-offset-1">
-        <legend>
+        <legend style="overflow: hidden;">
             Danh Sách Nhóm Users
         </legend>
         <table class="table table-bordered table-striped">

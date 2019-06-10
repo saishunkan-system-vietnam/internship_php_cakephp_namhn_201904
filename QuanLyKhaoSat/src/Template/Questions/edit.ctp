@@ -6,10 +6,17 @@
     th {
         text-align: left;
         font-size: 20px;
+        width: 30%;
     }
 
     td {
         font-size: 20px;
+        width: 70%;
+    }
+
+    .error {
+        font-size: 20px;
+        color: red;
     }
 </style>
 <?php if (empty($data)) { ?>
@@ -38,7 +45,7 @@
                                 echo 'checked';
                             } ?> />
                             <span style="color: black;font-weight: bold;font-size: 20px">Text</span>
-                        </label>
+                        </label><br>
                         <label>
                             <input name="typeQ" type="radio"
                                    value="Images" <?php if ($data->type_question == 'Images') {
@@ -80,11 +87,51 @@
                         </select>
                     </td>
                 </tr>
+                <tr id="typeText">
+                    <th>Định Dạng Text <span style="color: red">( * )</span></th>
+                    <td>
+                        <label>
+                            <input name="typeText" type="radio" value="date" <?php if ($data->answers == 'date') {
+                                echo 'checked';
+                            } ?>/>
+                            <span style="font-size: 20px;color: black;font-weight: bold">Date</span>
+                        </label>
+                        <label>
+                            <input name="typeText" type="radio" value="text" <?php if ($data->answers == 'text') {
+                                echo 'checked';
+                            } ?>/>
+                            <span style="font-size: 20px;color: black;font-weight: bold">Text</span>
+                        </label>
+                        <label>
+                            <input name="typeText" type="radio" value="number" <?php if ($data->answers == 'number') {
+                                echo 'checked';
+                            } ?>/>
+                            <span style="font-size: 20px;color: black;font-weight: bold">Number</span>
+                        </label>
+                        <label>
+                            <input name="typeText" type="radio" value="tel" <?php if ($data->answers == 'tel') {
+                                echo 'checked';
+                            } ?>/>
+                            <span style="font-size: 20px;color: black;font-weight: bold">Tel</span>
+                        </label>
+                        <label>
+                            <input name="typeText" type="radio" value="email" <?php if ($data->answers == 'email') {
+                                echo 'checked';
+                            } ?>/>
+                            <span style="font-size: 20px;color: black;font-weight: bold">Email</span>
+                        </label>
+                    </td>
+                </tr>
                 <tr id="answer">
                     <th>Đán Án <span style="color: red">( * )</span></th>
                     <td><input style="font-size: 20px;height: 40px;font-weight: bold"
                                value="<?php echo isset($result[3]) ? $result[3] : $data->answers ?>"
                                type="text" name="answers" class="form-control"></td>
+                </tr>
+                <tr id="length">
+                    <th>Validate</th>
+                    <th>MinLength | <input type="number" value="<?php echo isset($result[5]) ? $result[5] : $data->min ?>"  name="min" style="width: 150px;">&nbsp&nbsp
+                        MaxLength | <input type="number" value="<?php echo isset($result[6]) ? $result[6] : $data->max ?>" name="max" style="width: 150px;"></th>
                 </tr>
                 <tr>
                     <th>Trạng Thái <span style="color: red">( * )</span></th>
@@ -94,7 +141,7 @@
                                 echo 'checked';
                             } ?> value="yes"/>
                             <span style="color: black;font-weight: bold;font-size: 20px">Bắt Buộc Trả Lời</span>
-                        </label>
+                        </label><br>
                         <label>
                             <input name="status" type="radio" <?php if ($data->status == 'no') {
                                 echo 'checked';
@@ -109,9 +156,12 @@
                         <button style="width: 138px;height: 45px;font-size: 20px;" class="btn btn-primary"
                                 type="submit"><i class="far fa-thumbs-up"></i> Submit
                         </button>
-                        <button style="width: 138px;height: 45px;font-size: 20px;" class="btn btn-danger" type="reset">
-                            <i class="fas fa-sync-alt"></i> Reset
-                        </button>
+                        <a href="<?= URL ?>surveys/edit/<?= $dataS->id ?>">
+                            <button style="width: 138px;height: 45px;font-size: 20px;" class="btn btn-danger"
+                                    type="button">
+                                <i class="fas fa-undo"></i> Back
+                            </button>
+                        </a>
                     </td>
                 </tr>
             </table>
@@ -135,13 +185,56 @@
 
                 }
             });
+            $('#formQuestions input').on('change', function() {
+                var typeText = $('input[name=typeText]:checked', '#formQuestions').val();
+                if (typeText == 'date') {
+                    $("#length").hide();
+                } else {
+                    $("#length").show();
+                }
+            });
 
         });
     </script>
-    <?php if ($data->type_answer == "Text" || $data->type_answer == "TextArea") { ?>
+    <?php if ($data->type_answer == "Text") { ?>
+        <script>
+            $(document).ready(function () {
+                $("#length").show();
+                $("#answer").hide();
+                $("#typeText").show();
+                var typeText = $('input[name=typeText]:checked', '#formQuestions').val();
+                if (typeText == 'date') {
+                    $("#length").hide();
+                } else {
+                    $("#length").show();
+                }
+            });
+        </script>
+    <?php } ?>
+    <?php if ($data->type_answer == "TextArea") { ?>
         <script>
             $(document).ready(function () {
                 $("#answer").hide();
+                $("#typeText").hide();
+                $("#length").show();
+            });
+        </script>
+    <?php } ?>
+    <?php if ($data->type_answer == "Images") { ?>
+        <script>
+            $(document).ready(function () {
+                $("#answer").hide();
+                $("#typeText").hide();
+                $("#length").hide();
+            });
+        </script>
+    <?php } ?>
+    <?php if ($data->type_answer == "Select" || $data->type_answer == "Radio" || $data->type_answer == "Checkbox") { ?>
+        <script>
+            $(document).ready(function () {
+                $("#answer").show();
+                $("#typeText").hide();
+                $("#length").hide();
             });
         </script>
     <?php } ?>
@@ -162,12 +255,21 @@
     <script>
         $('select').on('change', function () {
             var x = $(this).val();
-            if (x == 'Text' || x == 'TextArea') {
+            if (x == 'Text') {
                 $("#answer").hide();
+                $("#typeText").show();
+                $("#length").show();
             }
             if (x == 'Radio' || x == 'Checkbox' || x == 'Select') {
                 $("#answer").show();
+                $("#typeText").hide();
+                $("#length").hide();
+            }
+            if (x == 'TextArea') {
+                $("#answer").hide();
+                $("#typeText").hide();
+                $("#length").show();
             }
         });
     </script>
-<?php }  ?>
+<?php } ?>

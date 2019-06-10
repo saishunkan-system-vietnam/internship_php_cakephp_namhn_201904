@@ -72,7 +72,7 @@ class SurveysController extends AppController
                 ->where(['restore' => 1, 'admin_create' => $HgNam[0]])->count();
             $this->set("dem", $dem);
             $page = isset($_GET['page']) ? $_GET['page'] : 1;
-            $total = ceil($dem/8);
+            $total = ceil($dem / 8);
             $this->set("page", $page);
             $this->set("total", $total);
         }
@@ -155,10 +155,11 @@ class SurveysController extends AppController
 
     }
 
-    public function test(){
+    public function test()
+    {
         if ($this->request->is('post')) {
-          $name = $this->request->getData('name');
-          dd($name);
+            $name = $this->request->getData('name');
+            dd($name);
         }
     }
 
@@ -173,13 +174,13 @@ class SurveysController extends AppController
         $this->set("data", $data);
         // Lấy tên danh mục khảo sát
         $catalog = $this->Catalogs->find()
-            ->where(['id' => isset($data->catalog_id) ? $data->catalog_id : null , 'restore' => 1])
+            ->where(['id' => isset($data->catalog_id) ? $data->catalog_id : null, 'restore' => 1])
             ->first();
         $this->set("catalog", $catalog);
         //==============================
         // Lấy tên danh mục khảo sát khác
         $select = $this->Catalogs->find()
-            ->where(['id !=' => isset($data->catalog_id) ? $data->catalog_id : null , 'restore' => 1]);
+            ->where(['id !=' => isset($data->catalog_id) ? $data->catalog_id : null, 'restore' => 1]);
         $this->set("select", $select);
         //==================================
         $data2 = $this->Questions->find()
@@ -323,9 +324,15 @@ class SurveysController extends AppController
         $conn = ConnectionManager::get('default');
         $data = $conn->execute("SELECT * FROM statists WHERE question_id = $quest_id HAVING answer LIKE '%$answer%'")->fetchAll('obj');
         foreach ($data as $value) {
-            $dataUsers = $value->user_answer;
-            echo $dataUsers;
-            echo "<br>";
+            $dataUsers = $value->user_answer;?>
+            <table class="table table-bordered">
+                <tr>
+                    <th style="width: 30%">Khảo Sát Lần <?= $value->dem; ?></th>
+                    <th style="width: 30%"><?php echo $dataUsers; ?></th>
+                    <th><?= $value->created_at; ?></th>
+                </tr>
+            </table>
+            <?php
         }
         die;
     }

@@ -1,10 +1,10 @@
 <?php if ($HgNam[1] == "Admin") { ?>
     <fieldset class="col-md-10 col-md-offset-1">
-        <legend>
+        <legend style="overflow: hidden;">
             Danh Sách Danh Mục Khảo Sát
         </legend>
         <table class="table table-bordered table-striped">
-            <tr  style="background-color: #333333;color: white">
+            <tr style="background-color: #333333;color: white">
                 <th>ID</th>
                 <th>Tên Danh Mục</th>
                 <th>Thời Gian Khởi Tạo</th>
@@ -36,15 +36,15 @@
                 </tr>
             <?php } ?>
         </table>
-        <?php if ($dem > 8) {?>
-        <ul class="pagination">
-            <?php
-            echo $this->Paginator->prev('« Previous ');
-            echo $this->Paginator->numbers();
-            echo $this->Paginator->next(' Next »');
-            ?>
-        </ul>
-        <?php }?>
+        <?php if ($dem > 8) { ?>
+            <ul class="pagination">
+                <?php
+                echo $this->Paginator->prev('« Previous ');
+                echo $this->Paginator->numbers();
+                echo $this->Paginator->next(' Next »');
+                ?>
+            </ul>
+        <?php } ?>
         <style>
             #recycleBin {
                 float: left;
@@ -52,18 +52,22 @@
                 line-height: 45px;
                 width: 140px;
                 font-size: 18px;
-                background-color: #00868B;color: white;
+                background-color: #00868B;
+                color: white;
                 font-weight: bold;
-            } #recycleBin:hover{
-                  background-color: #cccccc;color: black;
-              }
+            }
+
+            #recycleBin:hover {
+                background-color: #cccccc;
+                color: black;
+            }
         </style>
-        <?php if (!empty($recycleBin)) {?>
-        <button class="pull-right" id="recycleBin"
-                type="button" data-toggle="modal" data-target="#myModal">
-            <i class="fas fa-trash-alt"></i> Recycle Bin
-        </button>
-        <?php }?>
+        <?php if (!empty($recycleBin)) { ?>
+            <button class="pull-right" id="recycleBin"
+                    type="button" data-toggle="modal" data-target="#myModal">
+                <i class="fas fa-trash-alt"></i> Recycle Bin
+            </button>
+        <?php } ?>
         <div id="myModal" class="modal fade" role="dialog">
             <div class="modal-dialog">
                 <!-- Modal content-->
@@ -84,10 +88,12 @@
                                     <th><?= $value->name ?></th>
                                     <th>
                                         <button class="btn btn-primary restore" id="<?= $value->id ?>"
-                                                style="width: 90px;height: 40px;"><i class="fas fa-undo-alt"></i> Restore
+                                                style="width: 90px;height: 40px;"><i class="fas fa-undo-alt"></i>
+                                            Restore
                                         </button>
                                         <button class="btn btn-danger clickDelete" id="<?= $value->id ?>"
-                                                style="width: 90px;height: 40px;"><i class="fas fa-user-minus"></i> Delete
+                                                style="width: 90px;height: 40px;"><i class="fas fa-user-minus"></i>
+                                            Delete
                                         </button>
                                     </th>
                                 </tr>

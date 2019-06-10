@@ -2,6 +2,7 @@
     th {
         text-align: left;
     }
+
     td {
         font-weight: bold;
     }
@@ -118,8 +119,14 @@
                 <tr>
                     <th></th>
                     <td>
-                        <button class="btn btn-primary" type="submit"><i class="far fa-thumbs-up"></i> Submit</button>
-                        <button class="btn btn-danger" type="reset"><i class="fas fa-sync-alt"></i> Reset</button>
+                        <button onclick="confirm()" style="width: 120px;font-size: 22px;height: 45px;" class="btn btn-primary"
+                                type="submit"><i class="far fa-thumbs-up"></i> Submit
+                        </button>
+                        <a href="<?= URL ?>">
+                            <button style="width: 120px;font-size: 22px;height: 45px;" class="btn btn-danger"
+                                    type="button"><i class="fas fa-undo"></i> Back
+                            </button>
+                        </a>
                     </td>
                 </tr>
             </table>

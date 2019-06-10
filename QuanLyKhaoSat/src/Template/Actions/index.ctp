@@ -7,6 +7,7 @@
         background-color: #DDDDDD;
         margin-left: 55px;
         margin-bottom: 40px;
+        overflow: hidden;
     }
 
     .survey img {

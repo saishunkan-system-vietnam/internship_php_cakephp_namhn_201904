@@ -155,7 +155,7 @@ class ActionsController extends AppController
         $result = array_merge($detailUsers, $detailGroup);
         // Đây là Kết Quả những người được phép tham gia khảo sát này
         $result = array_unique($result);
-        if (isset($dataSurvey) && $dataSurvey->status == "closed") {
+        if (isset($dataSurvey) && $dataSurvey->status != "closed") {
             if (!empty($result)) {
                 foreach ($result as $value) {
                     if ($value["Users"]["id"] == $HgNam[2]) {

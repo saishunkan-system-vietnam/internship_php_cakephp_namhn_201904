@@ -213,9 +213,6 @@
             <fieldset class="col-lg-10 col-lg-offset-1">
                 <legend>
                     Danh Sách Câu Hỏi
-                    <a style="width: 100px" href="<?= URL ?>surveys/view/<?php echo $data->id ?>"
-                       class="btn btn-warning">
-                        <i class="far fa-eye"></i></i> View</a>
                 </legend>
                 <table class="table table-bordered table-hover">
                     <tr style="background-color: #333333;color: white">
@@ -225,10 +222,10 @@
                         <th>Type Answ</th>
                         <th>Status</th>
                         <th style="width: 200px;">
-                            <a style="width: 130px"
-                               href="<?= URL ?>questions/add/<?php echo $data->id ?>"
-                               class="btn btn-success">
-                                <i class="fas fa-plus"></i> Thêm Câu Hỏi</a>
+                            <a href="<?= URL ?>surveys/view/<?php echo $data->id ?>">
+                                <button type="button" style="width: 100%;height: 45px;background-color: #003399;color: white">
+                                    <i class="far fa-eye"></i> View Questions
+                                </button></a>
                         </th>
                     </tr>
                     <?php foreach ($data2 as $value) { ?>

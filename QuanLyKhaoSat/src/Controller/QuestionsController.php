@@ -63,7 +63,9 @@ class QuestionsController extends AppController
             $typeText = htmlentities($this->request->getData('typeText'));
             $answers = trim($answers,' ,.?!@~#$%^&*()_+<>- ');
             $status = htmlentities($this->request->getData('status'));
-            $result = array($name, $type_answer, $answers, $status);
+            $min = $this->request->getData('min');
+            $max = $this->request->getData('max');
+            $result = array($name, $type_answer, $answers, $status,$min,$max);
             if (isset($error->name)) {
                 $this->set("error", $error);
                 $this->set("result", $result);
@@ -72,18 +74,20 @@ class QuestionsController extends AppController
                     $answers = $typeText;
                 }
                 $query = $this->Questions->query();
-                $query->insert(['name', 'survey_id', 'type_answer', 'answers', 'status', 'created', 'type_question'])
+                $query->insert(['name', 'survey_id', 'type_answer', 'answers','min','max', 'status', 'created', 'type_question'])
                     ->values([
                         'name' => $name,
                         'survey_id' => $id,
                         'type_answer' => $type_answer,
                         'answers' => $answers,
+                        'min' => !empty($min) ? $min : 0,
+                        'max' => !empty($max) ? $max : 0,
                         'status' => $status,
                         'created' => date('Y-m-d H:i:s'),
                         'type_question' => $type_q
                     ])
                     ->execute();
-                return $this->redirect(URL . "Surveys/edit/" .$id);
+                return $this->redirect(URL . "Surveys/view/" .$id);
             }
         }
 
@@ -133,7 +137,9 @@ class QuestionsController extends AppController
                 ->first();
             $answers = htmlentities($this->request->getData('answers'));
             $status = htmlentities($this->request->getData('status'));
-            $result = array($name, $survey_id, $type_answer, $answers, $status);
+            $min = $this->request->getData('min');
+            $max = $this->request->getData('max');
+            $result = array($name, $survey_id, $type_answer, $answers, $status,$min,$max);
             if (isset($error->name) && $error->id != $data->id) {
                 $this->set("error", $error);
                 $this->set("result", $result);
@@ -142,6 +148,8 @@ class QuestionsController extends AppController
                 $query->update()
                     ->set([
                         'name' => $name,
+                        'min' => !empty($min) ? $min : 0,
+                        'max' => !empty($max) ? $max : 0,
                         'survey_id' => $survey_id,
                         'type_answer' => $type_answer,
                         'answers' => $answers,

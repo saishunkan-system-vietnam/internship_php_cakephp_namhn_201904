@@ -69,34 +69,53 @@
                 <?php } ?>
                 <!--               Thống Kê Câu Trả Lời Dạng Text and TextArea               -->
                 <?php if ($value->type_answer == "Text" || $value->type_answer == "TextArea") { ?>
+
+                    <?php $answerT = explode(',', $value->answer);
+                    $userAnswer = explode(',', $value->user_answer);
+                    $dem = explode(',', $value->dem2);
+                    for ($i = 0; $i < count($dem); $i++) {
+                        for ($j = $i + 1; $j < count($dem); $j++) {
+                            if ($dem[$i] > $dem[$j]) {
+                                $temp = $dem[$i];
+                                $temp2 = $userAnswer[$i];
+                                $temp3 = $answerT[$i];
+                                $userAnswer[$i] = $userAnswer[$j];
+                                $answerT[$i] = $answerT[$j];
+                                $userAnswer[$j] = $temp2;
+                                $answerT[$j] = $temp3;
+                                $dem[$i] = $dem[$j];
+                                $dem[$j] = $temp;
+                            }
+                        }
+                    };
+                    ?>
                     <tr>
                         <th style="text-align: center">Khảo Sát</th>
                         <th style="text-align: center">Người Khảo Sát</th>
                         <th style="text-align: center">Đáp Án Trả Lời</th>
                     </tr>
-                    <?php $answerT = explode(',', $value->answer);
-                    $userAnswer = explode(',', $value->user_answer);
-                    $dem = explode(',', $value->dem2);
-                    for ($i = 0; $i < count($userAnswer); $i++) {
-                        ?>
-                        <tr>
-                            <th style="width: 20%;">Khảo Sát Lần <?= $dem[$i] ?></th>
-                            <th style="width: 30%"><?= $userAnswer[$i] ?></th>
-                            <th><?= $answerT[$i] ?></th>
-                        </tr>
-                    <?php } ?>
+                    <?php for ($i = 0; $i < count($dem) ; $i++) {?>
+                    <tr>
+                        <th style="width: 20%;">Khảo Sát Lần <?= $dem[$i] ?></th>
+                        <th style="width: 30%"><?= $userAnswer[$i] ?></th>
+                        <th><?= $answerT[$i] ?></th>
+                    </tr>
+                    <?php }      ?>
                     <!-- ==  End Text and TextArea  == -->
                     <!-- Thống kê câu trả lời dạng Images -->
                 <?php } elseif ($value->type_answer == "Images") {
                     $answerI = explode(',', $value->answer);
                     $userAnswer = explode(',', $value->user_answer);
                     $dem = explode(',', $value->dem2);
+                    asort($dem);
+                    $dem = array_values($dem);
                     for ($i = 0; $i < count($userAnswer); $i++) { ?>
                         <tr>
-                        <th style="width: 20%;">Khảo Sát Lần <?= $dem[$i] ?></th>
-                        <th style="width: 30%"><?= $userAnswer[$i] ?></th>
-                        <th><img style="width: 150px;height: 110px;" src="<?= URL ?>img/answer/<?= $answerI[$i] ?>"
-                                 alt=""></th>
+                            <th style="width: 20%;">Khảo Sát Lần <?= $dem[$i] ?></th>
+                            <th style="width: 30%"><?= $userAnswer[$i] ?></th>
+                            <th><img style="width: 150px;height: 110px;" src="<?= URL ?>img/answer/<?= $answerI[$i] ?>"
+                                     alt=""></th>
+                        </tr>
                     <?php }
                 } // Thống Kê Câu Trả Lời Dạng Checkbox , Radio , Select
                 else { ?>
@@ -183,4 +202,4 @@
             }
         });
     }
-</script>
+</script>>

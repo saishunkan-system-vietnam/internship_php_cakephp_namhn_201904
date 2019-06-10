@@ -57,14 +57,13 @@ class UsersController extends AppController
 
     public function index()
     {
-
         $HgNam = ($this->Auth->user());
         if ($HgNam[1] == "Member") {
             return $this->redirect(URL . "actions");
         } else {
             $details = $this->Users->find()->where(['restore' => 1]);
             $this->paginate = array(
-                'limit' => 4,
+                'limit' => 6,
                 'order' => array('id' => 'asc'),
             );
             $this->set("data", $this->paginate($details));
@@ -76,9 +75,16 @@ class UsersController extends AppController
                 ->where(['restore' => 1])->count();
             $this->set("dem", $dem);
             $page = isset($_GET['page']) ? $_GET['page'] : 1;
-            $total = ceil($dem / 4);
+            $total = ceil($dem / 6);
             $this->set("page", $page);
             $this->set("total", $total);
+            // Kiểm tra Users còn tồn tại trong database hay không
+            $checkUser = $this->Users->find()
+                ->where(['email' => $HgNam[0],'restore' => 1])->first();
+            if (empty($checkUser)) {
+                $this->Auth->logout();
+                return $this->redirect(URL . 'users/login');
+            }
         }
     }
 
